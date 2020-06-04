@@ -1,0 +1,1517 @@
+[Child 24213, MediaDecoderStateMachine #1] WARNING: Decoder=7f43b9e30800 Decode error: NS_ERROR_DOM_MEDIA_FATAL_ERR (0x806e0005) - RefPtr<MediaSourceTrackDemuxer::SamplesPromise> mozilla::MediaSourceTrackDemuxer::DoGetSamples(int32_t): manager is detached.: file /build/firefox-CTCO4D/firefox-73.0.1+build1/dom/media/MediaDecoderStateMachine.cpp, line 3358
+[Child 24213, MediaDecoderStateMachine #1] WARNING: Decoder=7f43b9e30800 Decode error: NS_ERROR_DOM_MEDIA_FATAL_ERR (0x806e0005) - RefPtr<MediaSourceTrackDemuxer::SamplesPromise> mozilla::MediaSourceTrackDemuxer::DoGetSamples(int32_t): manager is detached.: file /build/firefox-CTCO4D/firefox-73.0.1+build1/dom/media/MediaDecoderStateMachine.cpp, line 3358
+[Child 24213, MediaDecoderStateMachine #1] WARNING: Decoder=7f43b9e30800 Decode error: NS_ERROR_DOM_MEDIA_FATAL_ERR (0x806e0005) - RefPtr<MediaSourceTrackDemuxer::SamplesPromise> mozilla::MediaSourceTrackDemuxer::DoGetSamples(int32_t): manager is detached.: file /build/firefox-CTCO4D/firefox-73.0.1+build1/dom/media/MediaDecoderStateMachine.cpp, line 3358
+[Child 24213, MediaDecoderStateMachine #1] WARNING: Decoder=7f43b9e30800 Decode error: NS_ERROR_DOM_MEDIA_FATAL_ERR (0x806e0005) - RefPtr<MediaSourceTrackDemuxer::SamplesPromise> mozilla::MediaSourceTrackDemuxer::DoGetSamples(int32_t): manager is detached.: file /build/firefox-CTCO4D/firefox-73.0.1+build1/dom/media/MediaDecoderStateMachine.cpp, line 3358
+
+(acroread:25678): Gtk-WARNING **: 18:32:22.746: /usr/lib/gtk-2.0/2.10.0/engines/libnodoka.so: wrong ELF class: ELFCLASS64
+
+(acroread:25678): Gtk-WARNING **: 18:32:22.746: /usr/lib/gtk-2.0/2.10.0/engines/libnodoka.so: wrong ELF class: ELFCLASS64
+[Child 24213, MediaDecoderStateMachine #1] WARNING: Decoder=7f43c2aa4800 Decode error: NS_ERROR_DOM_MEDIA_FATAL_ERR (0x806e0005) - RefPtr<MediaSourceTrackDemuxer::SamplesPromise> mozilla::MediaSourceTrackDemuxer::DoGetSamples(int32_t): manager is detached.: file /build/firefox-CTCO4D/firefox-73.0.1+build1/dom/media/MediaDecoderStateMachine.cpp, line 3358
+[Child 24213, MediaDecoderStateMachine #1] WARNING: Decoder=7f43c5e09400 Decode error: NS_ERROR_DOM_MEDIA_FATAL_ERR (0x806e0005) - RefPtr<MediaSourceTrackDemuxer::SamplesPromise> mozilla::MediaSourceTrackDemuxer::DoGetSamples(int32_t): manager is detached.: file /build/firefox-CTCO4D/firefox-73.0.1+build1/dom/media/MediaDecoderStateMachine.cpp, line 3358
+[Child 24213, MediaDecoderStateMachine #1] WARNING: Decoder=7f43c5e09400 Decode error: NS_ERROR_DOM_MEDIA_FATAL_ERR (0x806e0005) - RefPtr<MediaSourceTrackDemuxer::SamplesPromise> mozilla::MediaSourceTrackDemuxer::DoGetSamples(int32_t): manager is detached.: file /build/firefox-CTCO4D/firefox-73.0.1+build1/dom/media/MediaDecoderStateMachine.cpp, line 3358
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[Child 24213, MediaDecoderStateMachine #1] WARNING: Decoder=7f439381c800 Decode error: NS_ERROR_DOM_MEDIA_FATAL_ERR (0x806e0005) - RefPtr<MediaSourceTrackDemuxer::SamplesPromise> mozilla::MediaSourceTrackDemuxer::DoGetSamples(int32_t): manager is detached.: file /build/firefox-CTCO4D/firefox-73.0.1+build1/dom/media/MediaDecoderStateMachine.cpp, line 3358
+[Child 24213, MediaDecoderStateMachine #1] WARNING: Decoder=7f439381c800 Decode error: NS_ERROR_DOM_MEDIA_FATAL_ERR (0x806e0005) - RefPtr<MediaSourceTrackDemuxer::SamplesPromise> mozilla::MediaSourceTrackDemuxer::DoGetSamples(int32_t): manager is detached.: file /build/firefox-CTCO4D/firefox-73.0.1+build1/dom/media/MediaDecoderStateMachine.cpp, line 3358
+[Child 24213, MediaDecoderStateMachine #1] WARNING: Decoder=7f439381c800 Decode error: NS_ERROR_DOM_MEDIA_FATAL_ERR (0x806e0005) - RefPtr<MediaSourceTrackDemuxer::SamplesPromise> mozilla::MediaSourceTrackDemuxer::DoGetSamples(int32_t): manager is detached.: file /build/firefox-CTCO4D/firefox-73.0.1+build1/dom/media/MediaDecoderStateMachine.cpp, line 3358
+[Child 24213, MediaDecoderStateMachine #1] WARNING: Decoder=7f439381c800 Decode error: NS_ERROR_DOM_MEDIA_FATAL_ERR (0x806e0005) - RefPtr<MediaSourceTrackDemuxer::SamplesPromise> mozilla::MediaSourceTrackDemuxer::DoGetSamples(int32_t): manager is detached.: file /build/firefox-CTCO4D/firefox-73.0.1+build1/dom/media/MediaDecoderStateMachine.cpp, line 3358
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+(acroread:6909): Gtk-WARNING **: 18:24:25.606: /usr/lib/gtk-2.0/2.10.0/engines/libnodoka.so: wrong ELF class: ELFCLASS64
+
+(acroread:6909): Gtk-WARNING **: 18:24:25.607: /usr/lib/gtk-2.0/2.10.0/engines/libnodoka.so: wrong ELF class: ELFCLASS64
+
+(acroread:7592): Gtk-WARNING **: 18:34:47.410: /usr/lib/gtk-2.0/2.10.0/engines/libnodoka.so: wrong ELF class: ELFCLASS64
+
+(acroread:7592): Gtk-WARNING **: 18:34:47.411: /usr/lib/gtk-2.0/2.10.0/engines/libnodoka.so: wrong ELF class: ELFCLASS64
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+(mousepad:25735): Gtk-WARNING **: 14:52:32.558: Theme parsing error: <data>:2:29: The style property GtkButton:default-border is deprecated and shouldn't be used anymore. It will be removed in a future version
+
+(mousepad:25735): Gtk-WARNING **: 14:52:32.559: Theme parsing error: <data>:3:37: The style property GtkButton:default-outside-border is deprecated and shouldn't be used anymore. It will be removed in a future version
+
+(mousepad:25735): Gtk-WARNING **: 14:52:32.559: Theme parsing error: <data>:4:27: The style property GtkButton:inner-border is deprecated and shouldn't be used anymore. It will be removed in a future version
+
+(mousepad:25735): Gtk-WARNING **: 14:52:32.559: Theme parsing error: <data>:5:31: The style property GtkWidget:focus-line-width is deprecated and shouldn't be used anymore. It will be removed in a future version
+
+(mousepad:25735): Gtk-WARNING **: 14:52:32.559: Theme parsing error: <data>:6:28: The style property GtkWidget:focus-padding is deprecated and shouldn't be used anymore. It will be removed in a future version
+
+(mousepad:25735): GLib-GObject-CRITICAL **: 15:11:27.423: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(mousepad:25735): GLib-GObject-CRITICAL **: 15:11:27.423: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(mousepad:25735): GLib-GObject-CRITICAL **: 15:11:27.423: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(acroread:21376): Gtk-WARNING **: 18:43:32.355: /usr/lib/gtk-2.0/2.10.0/engines/libnodoka.so: wrong ELF class: ELFCLASS64
+
+(acroread:21376): Gtk-WARNING **: 18:43:32.356: /usr/lib/gtk-2.0/2.10.0/engines/libnodoka.so: wrong ELF class: ELFCLASS64
+ZoomLauncher started.
+CreateReportChannel bp_server_fd=4
+cmd line: zoommtg://zoom.us/join?action=join&confid=dXNzPTBiOGVlZDc3LkFnWUJYdDBnYTBFVFoyV1FrWERZeEsyeHNQU2RuOEhNUzZzWGdxLWNMVzNocDV5NzUzWTZ5UGp2YW04b2FsX1JzU245LTZLVGNDellOOE1LNkZqQ253JTNEJTNEJnRpZD1hN2YyYjNjZmNkMjg0NzI3YjlhOWI2MGQ0NGQxOWMyMQ%3D%3D&confno=884753499&zc=0&pwd=MkYvYUpSYUNZMlJIOHpjOXVOREtVUT09&pk=&mcv=0.92.11227.0929&browser=firefox 
+$HOME = /home/edo 
+export SSB_HOME=/home/edo/.zoom; export QSG_INFO=1; export LD_LIBRARY_PATH=/opt/zoom; export BREAKPAD_CLIENT_FD=3; /opt/zoom/zoom "zoommtg://zoom.us/join?action=join&confid=dXNzPTBiOGVlZDc3LkFnWUJYdDBnYTBFVFoyV1FrWERZeEsyeHNQU2RuOEhNUzZzWGdxLWNMVzNocDV5NzUzWTZ5UGp2YW04b2FsX1JzU245LTZLVGNDellOOE1LNkZqQ253JTNEJTNEJnRpZD1hN2YyYjNjZmNkMjg0NzI3YjlhOWI2MGQ0NGQxOWMyMQ%3D%3D&confno=884753499&zc=0&pwd=MkYvYUpSYUNZMlJIOHpjOXVOREtVUT09&pk=&mcv=0.92.11227.0929&browser=firefox " 
+zoom started.
+[CZPClientLogMgr::LogClientEnvironment] [MacAddr: 54:BF:64:9E:6D:3F][client: Linux][OS: Ubuntu 18.04.4 LTS][Hardware: CPU Core:4 Frenquency:2.9 G Memory size:31845MB CPU Brand:Intel(R) Xeon(R) W-2102 CPU @ 2.90GHz GPU Brand:][Req ID: ]
+Linux Client Version is 3.0.291715.0908
+QSG_RENDER_LOOP is 
+XDG_CURRENT_DESKTOP = XFCE;   GDMSESSION = xubuntu
+Graphics Card Info:: 65:00.0 VGA compatible controller: NVIDIA Corporation GP106GL [Quadro P2000] (rev a1)
+Zoom package arch is 64bit, runing OS arch is x86_64
+Client: Breakpad is using Client-Server Mode! client fd = 3
+Error: Send error, 22 Invalid argument
+Error: Send error, 22 Invalid argument
+Error: Send error, 22 Invalid argument
+qt.scenegraph.general: threaded render loop
+qt.scenegraph.general: Using sg animation driver
+qt.scenegraph.general: Animation Driver: using vsync: 16.67 ms
+read pipe thread,open response fifo success!write pipe thread,open request fifo success!qt.scenegraph.general: Using sg animation driver
+qt.scenegraph.general: Animation Driver: using vsync: 16.67 ms
+qt.scenegraph.general: texture atlas dimensions: 1024x512
+qt.scenegraph.general: R/G/B/A Buffers:    8 8 8 8
+qt.scenegraph.general: Depth Buffer:       24
+qt.scenegraph.general: Stencil Buffer:     8
+qt.scenegraph.general: Samples:            -1
+qt.scenegraph.general: GL_VENDOR:          NVIDIA Corporation
+qt.scenegraph.general: GL_RENDERER:        Quadro P2000/PCIe/SSE2
+qt.scenegraph.general: GL_VERSION:         4.6.0 NVIDIA 440.33.01
+qt.scenegraph.general: GL_EXTENSIONS:      GL_ARB_texture_compression GL_NV_deep_texture3D GL_EXT_texture_compression_dxt1 GL_EXT_packed_float GL_EXT_transform_feedback2 GL_ARB_compute_shader GL_NV_sample_locations GL_ARB_texture_view GL_ARB_texture_rgb10_a2ui GL_ARB_shader_storage_buffer_object GL_ARB_multi_draw_indirect GL_ARB_shadow GL_ARB_shader_draw_parameters GL_ARB_texture_non_power_of_two GL_EXT_texture_filter_minmax GL_EXT_draw_instanced GL_ARB_texture_query_lod GL_NV_shader_thread_group GL_EXT_vertex_array GL_NV_shader_buffer_load GL_NV_draw_texture GL_NV_gpu_program4_1 GL_NV_query_resource GL_ARB_cull_distance GL_EXT_timer_query GL_ARB_seamless_cubemap_per_texture GL_ATI_texture_float GL_EXT_gpu_program_parameters GL_EXT_shader_image_load_store GL_NV_draw_vulkan_image GL_NV_multisample_filter_hint GL_ARB_sample_shading GL_NV_depth_buffer_float GL_ARB_sparse_buffer GL_NV_path_rendering GL_EXT_texture_swizzle GL_NV_bindless_multi_draw_indirect_count GL_NVX_blend_equation_advanced_multi_draw_buffers GL_ARB_texture_buffer_object GL_NV_transform_feedback2 GL_ARB_vertex_shader GL_ARB_fragment_shader_interlock GL_ARB_shader_texture_image_samples GL_NV_ES3_1_compatibility GL_ARB_texture_rectangle GL_ARB_gpu_shader_int64 GL_ARB_direct_state_access GL_EXT_shadow_funcs GL_KTX_buffer_region GL_ARB_depth_texture GL_ARB_texture_stencil8 GL_ARB_enhanced_layouts GL_EXT_multiview_tessellation_geometry_shader GL_EXT_post_depth_coverage GL_ARB_vertex_program GL_NV_explicit_multisample GL_ARB_clip_control GL_ARB_multi_bind GL_NV_framebuffer_multisample_coverage GL_EXT_import_sync_object GL_ARB_point_sprite GL_NV_bindless_texture GL_ARB_transpose_matrix GL_EXT_window_rectangles GL_EXT_geometry_shader4 GL_ARB_explicit_attrib_location GL_ARB_debug_output GL_NV_shader_thread_shuffle GL_ARB_map_buffer_range GL_ARB_stencil_texturing GL_ARB_post_depth_coverage GL_NV_vdpau_interop2 GL_ARB_geometry_shader4 GL_NV_vertex_array_range2 GL_ARB_shading_language_packing GL_ARB_shader_viewport_layer_array GL_ARB_internalformat_query GL_NV_texture_shader3 GL_NV_geometry_shader_passthrough GL_NV_point_sprite GL_ATI_texture_mirror_once GL_ARB_ES3_1_compatibility GL_EXT_gpu_shader4 GL_ARB_ES2_compatibility GL_ARB_compatibility GL_ARB_fragment_program GL_EXT_semaphore_fd GL_ARB_texture_filter_minmax GL_ARB_vertex_array_bgra GL_ARB_vertex_attrib_binding GL_NV_gpu_program5 GL_NV_shader_atomic_counters GL_NV_fog_distance GL_ARB_occlusion_query GL_EXT_multiview_texture_multisample GL_ARB_vertex_type_10f_11f_11f_rev GL_NV_texture_rectangle GL_ARB_polygon_offset_clamp GL_EXT_depth_bounds_test GL_ARB_shader_clock GL_NV_blend_equation_advanced_coherent GL_NV_command_list GL_NV_shader_subgroup_partitioned GL_EXT_abgr GL_ARB_draw_buffers_blend GL_EXT_texture_array GL_EXT_packed_depth_stencil GL_EXT_texture_integer GL_ARB_vertex_type_2_10_10_10_rev GL_ARB_transform_feedback_instanced GL_NV_compute_program5 GL_EXT_raster_multisample GL_AMD_seamless_cubemap_per_texture GL_NV_stereo_view_rendering GL_ARB_sample_locations GL_KHR_robust_buffer_access_behavior GL_ARB_query_buffer_object GL_ARB_conservative_depth GL_NV_viewport_swizzle GL_NV_shader_atomic_fp16_vector GL_NV_texture_compression_vtc GL_ARB_tessellation_shader GL_EXT_secondary_color GL_NV_register_combiners2 GL_NV_vertex_program2_option GL_EXT_separate_shader_objects GL_ARB_framebuffer_sRGB GL_ARB_texture_compression_rgtc GL_EXT_blend_subtract GL_EXT_framebuffer_multisample_blit_scaled GL_ARB_color_buffer_float GL_ARB_conditional_render_inverted GL_EXT_texture_sRGB_R8 GL_EXT_memory_object GL_NV_feature_query GL_AMD_vertex_shader_viewport_index GL_NV_texture_shader GL_EXT_texture_cube_map GL_ARB_texture_rg GL_NV_gpu_program5_mem_extended GL_KHR_blend_equation_advanced GL_EXT_texture_compression_latc GL_KHR_no_error GL_NV_occlusion_query GL_ARB_provoking_vertex GL_ARB_shader_bit_encoding GL_NV_parameter_buffer_object2 GL_ARB_texture_env_crossbar GL_NV_query_resource_tag GL_OVR_multiview2 GL_EXT_draw_buffers2 GL_EXT_draw_range_elements GL_ARB_texture_storage GL_ARB_get_texture_sub_image GL_EXT_texture_compression_rgtc GL_ARB_transform_feedback_overflow_query GL_NV_path_rendering_shared_edge GL_ARB_multisample GL_ARB_sparse_texture GL_EXT_provoking_vertex GL_ARB_draw_indirect GL_AMD_vertex_shader_layer GL_ARB_base_instance GL_KHR_parallel_shader_compile GL_NV_vertex_program GL_NV_texture_multisample GL_SUN_slice_accum GL_NV_pixel_data_range GL_ARB_fragment_shader GL_EXT_fog_coord GL_ARB_clear_buffer_object GL_ARB_vertex_array_object GL_NV_framebuffer_mixed_samples GL_ARB_transform_feedback3 GL_ARB_gpu_shader_fp64 GL_NV_parameter_buffer_object GL_ARB_internalformat_query2 GL_EXT_Cg_shader GL_NV_depth_clamp GL_ARB_shader_group_vote GL_ARB_viewport_array GL_ARB_spirv_extensions GL_ARB_draw_instanced GL_ARB_draw_buffers GL_NV_fragment_program GL_EXT_texture_object GL_NV_geometry_shader4 GL_EXT_texture_sRGB_decode GL_NV_robustness_video_memory_purge GL_NV_clip_space_w_scaling GL_NV_fragment_coverage_to_color GL_EXT_texture_env_combine GL_ARB_invalidate_subdata GL_EXT_framebuffer_object GL_EXTX_framebuffer_mixed_formats GL_ARB_shading_language_include GL_ARB_compute_variable_group_size GL_ARB_instanced_arrays GL_EXT_framebuffer_blit GL_EXT_texture_filter_anisotropic GL_EXT_point_parameters GL_ARB_seamless_cube_map GL_NV_texture_barrier GL_ARB_derivative_control GL_EXT_vertex_array_bgra GL_EXT_memory_object_fd GL_EXT_texture_env_dot3 GL_EXT_polygon_offset_clamp GL_NVX_conditional_render GL_OVR_multiview GL_EXT_vertex_attrib_64bit GL_ARB_timer_query GL_ARB_shader_texture_lod GL_ARB_clear_texture GL_NV_primitive_restart GL_NV_vdpau_interop GL_ARB_transform_feedback2 GL_EXT_stencil_wrap GL_EXT_bindable_uniform GL_ARB_fragment_coord_conventions GL_ARB_vertex_attrib_64bit GL_NV_memory_attachment GL_ARB_texture_env_dot3 GL_ARB_texture_cube_map_array GL_NVX_gpu_memory_info GL_KHR_shader_subgroup GL_EXT_texture_compression_s3tc GL_ARB_texture_multisample GL_ARB_point_parameters GL_EXT_sparse_texture2 GL_NV_vertex_array_range GL_KHR_debug GL_ARB_texture_env_combine GL_NV_packed_depth_stencil GL_ARB_half_float_pixel GL_ARB_shading_language_420pack GL_EXT_direct_state_access GL_NV_blend_square GL_EXT_texture_mirror_clamp GL_NV_vertex_program3 GL_EXT_compiled_vertex_array GL_EXT_stencil_two_side GL_EXT_texture_edge_clamp GL_KHR_robustness GL_NV_float_buffer GL_ARB_get_program_binary GL_KHR_context_flush_control GL_NV_blend_equation_advanced GL_EXT_texture_env_add GL_EXT_framebuffer_sRGB GL_NV_vertex_buffer_unified_memory GL_NV_viewport_array2 GL_ARB_texture_buffer_object_rgb32 GL_KHR_blend_equation_advanced_coherent GL_IBM_texture_mirrored_repeat GL_NV_sample_mask_override_coverage GL_ARB_window_pos GL_NV_texture_rectangle_compressed GL_ARB_framebuffer_no_attachments GL_NV_half_float GL_EXT_texture_shared_exponent GL_EXT_framebuffer_multisample GL_NV_texture_shader2 GL_NV_register_combiners GL_ARB_shader_atomic_counter_ops GL_ARB_imaging GL_EXT_pixel_buffer_object GL_ARB_shader_image_load_store GL_NV_bindless_multi_draw_indirect GL_SGIX_depth_texture GL_ARB_occlusion_query2 GL_EXT_blend_func_separate GL_ARB_copy_buffer GL_ARB_texture_cube_map GL_NV_multisample_coverage GL_NV_internalformat_sample_query GL_NVX_nvenc_interop GL_ARB_texture_query_levels GL_NV_conditional_render GL_ARB_shader_precision GL_ARB_sparse_texture2 GL_ARB_depth_buffer_float GL_ARB_texture_buffer_range GL_ARB_sync GL_EXT_multi_draw_arrays GL_NV_vertex_program2 GL_ARB_pixel_buffer_object GL_ARB_ES3_2_compatibility GL_NV_fragment_program_option GL_ARB_separate_shader_objects GL_EXT_rescale_normal GL_ARB_texture_mirror_clamp_to_edge GL_EXT_separate_specular_color GL_ARB_blend_func_extended GL_ARB_ES3_compatibility GL_EXT_texture_storage GL_ARB_texture_storage_multisample GL_NV_alpha_to_coverage_dither_control GL_NV_transform_feedback GL_NV_shader_storage_buffer_object GL_ARB_texture_border_clamp GL_NV_copy_image GL_ARB_sampler_objects GL_ARB_program_interface_query GL_ARB_cl_event GL_ARB_texture_float GL_NV_texgen_reflection GL_NV_conservative_raster_pre_snap_triangles GL_NV_shader_atomic_int64 GL_ARB_texture_barrier GL_NV_fragment_program2 GL_SGIX_shadow GL_NV_gpu_program4 GL_EXT_texture_sRGB GL_ARB_shader_objects GL_ARB_bindless_texture GL_AMD_multi_draw_indirect GL_NV_shader_atomic_float GL_ARB_depth_clamp GL_EXT_packed_pixels GL_EXT_semaphore GL_NV_uniform_buffer_unified_memory GL_NV_gpu_multicast GL_EXT_multiview_timer_query GL_ARB_sparse_texture_clamp GL_ARB_texture_mirrored_repeat GL_ARB_texture_swizzle GL_EXT_texture_lod_bias GL_EXT_shader_integer_mix GL_ARB_compressed_texture_pixel_storage GL_EXT_shader_image_load_formatted GL_ARB_arrays_of_arrays GL_ARB_shader_atomic_counters GL_EXT_texture_buffer_object GL_NV_fragment_shader_interlock GL_EXT_texture_shadow_lod GL_NV_conservative_raster_dilate GL_ARB_parallel_shader_compile GL_ARB_shader_subroutine GL_ARB_uniform_buffer_object GL_ARB_shading_language_100 GL_ARB_texture_filter_anisotropic GL_NV_texture_env_combine4 GL_NV_copy_depth_to_color GL_EXT_blend_minmax GL_SGIS_generate_mipmap GL_NV_vertex_attrib_integer_64bit GL_EXT_x11_sync_object GL_S3_s3tc GL_ARB_fragment_program_shadow GL_NV_gpu_shader5 GL_ARB_texture_compression_bptc GL_NV_blend_minmax_factor GL_NVX_progress_fence GL_ARB_multitexture GL_ARB_explicit_uniform_location GL_ARB_vertex_buffer_object GL_NV_light_max_exponent GL_NV_vertex_program1_1 GL_EXT_blend_color GL_NV_fill_rectangle GL_ARB_robustness GL_ARB_robust_buffer_access_behavior GL_EXT_texture_lod GL_ARB_buffer_storage GL_EXT_bgra GL_ATI_draw_buffers GL_NV_ES1_1_compatibility GL_ARB_draw_elements_base_vertex GL_EXT_blend_equation_separate GL_ARB_half_float_vertex GL_ARB_indirect_parameters GL_ARB_shader_ballot GL_NV_fence GL_ARB_texture_gather GL_IBM_rasterpos_clip GL_ARB_gpu_shader5 GL_SGIS_texture_lod GL_ARB_pipeline_statistics_query GL_NV_shader_atomic_float64 GL_ARB_fragment_layer_viewport GL_NV_gpu_program_fp64 GL_ARB_gl_spirv GL_ARB_copy_image GL_ARB_map_buffer_alignment GL_ARB_texture_env_add GL_ARB_shader_image_size GL_EXT_texture3D GL_ARB_framebuffer_object GL_NV_conservative_raster
+qt.scenegraph.general: Max Texture Size:  32768
+qt.scenegraph.general: Debug context:     false
+qt.scenegraph.general: Using sg animation driver
+qt.scenegraph.general: Animation Driver: using vsync: 16.67 ms
+qt.scenegraph.general: texture atlas dimensions: 512x512
+CSBConfUI::OnConfStatusChanged  UI_CMD_SHARE_READYQString::arg: Argument missing: Stop Share (%s), Alt+S
+qt.scenegraph.general: Using sg animation driver
+qt.scenegraph.general: Animation Driver: using vsync: 16.67 ms
+qt.scenegraph.general: texture atlas dimensions: 2048x2048
+qt.scenegraph.general: Using sg animation driver
+qt.scenegraph.general: Animation Driver: using vsync: 16.67 ms
+qt.scenegraph.general: texture atlas dimensions: 512x512
+qt.scenegraph.general: Using sg animation driver
+qt.scenegraph.general: Animation Driver: using vsync: 16.67 ms
+qt.scenegraph.general: texture atlas dimensions: 512x512
+QCoreApplication::postEvent: Unexpected null receiver
+QCoreApplication::postEvent: Unexpected null receiver
+qt.scenegraph.general: animation driver switched to timer mode
+qt.scenegraph.general: Using sg animation driver
+qt.scenegraph.general: animation driver switched to vsync mode
+qt.scenegraph.general: Using sg animation driver
+qt.scenegraph.general: Animation Driver: using vsync: 16.67 ms
+qt.scenegraph.general: texture atlas dimensions: 1024x512
+WorkerBase::loop() normal exit, fds[0].revents & POLLIN = trueWorkerBase::loop() normal exit, fds[0].revents & POLLIN = trueAppIconMgr::systemDesktopName log Desktop Name: xubuntu 
+success to create child process,status is 0.
+zoom exited normally.
+run zoom successfully,exit code is 0.
+ZoomLauncher exit.
+ZoomLauncher started.
+CreateReportChannel bp_server_fd=4
+cmd line: zoommtg://zoom.us/join?action=join&confid=dXNzPTM1OTIzODdjLnB6NWF1R2Z5MFVKWUl6YmdNaUo1YmkyR1I3OWtXZjB0ZnFyNmhBOHJHbWVDdU1FYnRHWUtYYUJ5SUNYMnR2OHhyNEtDbXQ5ZEN0WjdEZE5WOGxWY0t3JTNEJTNEJnRpZD1hN2YyYjNjZmNkMjg0NzI3YjlhOWI2MGQ0NGQxOWMyMQ%3D%3D&confno=884753499&zc=0&pwd=MkYvYUpSYUNZMlJIOHpjOXVOREtVUT09&pk=&mcv=0.92.11227.0929&browser=firefox 
+$HOME = /home/edo 
+export SSB_HOME=/home/edo/.zoom; export QSG_INFO=1; export LD_LIBRARY_PATH=/opt/zoom; export BREAKPAD_CLIENT_FD=3; /opt/zoom/zoom "zoommtg://zoom.us/join?action=join&confid=dXNzPTM1OTIzODdjLnB6NWF1R2Z5MFVKWUl6YmdNaUo1YmkyR1I3OWtXZjB0ZnFyNmhBOHJHbWVDdU1FYnRHWUtYYUJ5SUNYMnR2OHhyNEtDbXQ5ZEN0WjdEZE5WOGxWY0t3JTNEJTNEJnRpZD1hN2YyYjNjZmNkMjg0NzI3YjlhOWI2MGQ0NGQxOWMyMQ%3D%3D&confno=884753499&zc=0&pwd=MkYvYUpSYUNZMlJIOHpjOXVOREtVUT09&pk=&mcv=0.92.11227.0929&browser=firefox " 
+zoom started.
+[CZPClientLogMgr::LogClientEnvironment] [MacAddr: 54:BF:64:9E:6D:3F][client: Linux][OS: Ubuntu 18.04.4 LTS][Hardware: CPU Core:4 Frenquency:2.9 G Memory size:31845MB CPU Brand:Intel(R) Xeon(R) W-2102 CPU @ 2.90GHz GPU Brand:][Req ID: ]
+Linux Client Version is 3.0.291715.0908
+QSG_RENDER_LOOP is 
+XDG_CURRENT_DESKTOP = XFCE;   GDMSESSION = xubuntu
+Graphics Card Info:: 65:00.0 VGA compatible controller: NVIDIA Corporation GP106GL [Quadro P2000] (rev a1)
+Zoom package arch is 64bit, runing OS arch is x86_64
+Client: Breakpad is using Client-Server Mode! client fd = 3
+AppIconMgr::systemDesktopName log Desktop Name: xubuntu 
+Error: Send error, 22 Invalid argument
+Error: Send error, 22 Invalid argument
+Error: Send error, 22 Invalid argument
+qt.scenegraph.general: threaded render loop
+qt.scenegraph.general: Using sg animation driver
+qt.scenegraph.general: Animation Driver: using vsync: 16.67 ms
+read pipe thread,open response fifo success!write pipe thread,open request fifo success!qt.scenegraph.general: Using sg animation driver
+qt.scenegraph.general: Animation Driver: using vsync: 16.67 ms
+qt.scenegraph.general: texture atlas dimensions: 1024x512
+qt.scenegraph.general: R/G/B/A Buffers:    8 8 8 8
+qt.scenegraph.general: Depth Buffer:       24
+qt.scenegraph.general: Stencil Buffer:     8
+qt.scenegraph.general: Samples:            -1
+qt.scenegraph.general: GL_VENDOR:          NVIDIA Corporation
+qt.scenegraph.general: GL_RENDERER:        Quadro P2000/PCIe/SSE2
+qt.scenegraph.general: GL_VERSION:         4.6.0 NVIDIA 440.33.01
+qt.scenegraph.general: GL_EXTENSIONS:      GL_KHR_shader_subgroup GL_ARB_indirect_parameters GL_EXT_timer_query GL_EXT_direct_state_access GL_ARB_pixel_buffer_object GL_NV_conservative_raster_dilate GL_ARB_vertex_type_2_10_10_10_rev GL_EXT_secondary_color GL_ARB_cull_distance GL_NV_blend_equation_advanced_coherent GL_NV_feature_query GL_EXT_blend_equation_separate GL_ARB_sparse_buffer GL_ARB_texture_cube_map_array GL_NV_parameter_buffer_object GL_ARB_texture_non_power_of_two GL_ARB_conservative_depth GL_NV_shader_thread_group GL_EXT_texture_sRGB GL_ARB_shading_language_100 GL_EXT_packed_pixels GL_ARB_cl_event GL_EXTX_framebuffer_mixed_formats GL_SGIS_texture_lod GL_ARB_gpu_shader5 GL_ATI_draw_buffers GL_EXT_memory_object GL_NV_texture_compression_vtc GL_ARB_vertex_program GL_ARB_depth_texture GL_NVX_progress_fence GL_ARB_framebuffer_object GL_ARB_enhanced_layouts GL_EXT_texture_cube_map GL_NV_blend_square GL_ARB_internalformat_query2 GL_ARB_gl_spirv GL_EXT_fog_coord GL_ARB_post_depth_coverage GL_ARB_window_pos GL_ARB_query_buffer_object GL_NV_shader_storage_buffer_object GL_NV_shader_buffer_load GL_NV_vertex_array_range GL_ARB_draw_buffers_blend GL_ARB_multi_draw_indirect GL_NV_path_rendering GL_NV_vertex_attrib_integer_64bit GL_EXT_texture_env_add GL_AMD_vertex_shader_layer GL_ARB_derivative_control GL_ARB_texture_mirror_clamp_to_edge GL_ARB_timer_query GL_ARB_texture_view GL_EXT_blend_func_separate GL_NV_packed_depth_stencil GL_EXT_polygon_offset_clamp GL_ARB_texture_query_levels GL_NV_copy_depth_to_color GL_NV_depth_buffer_float GL_NV_gpu_program4 GL_KHR_debug GL_EXT_framebuffer_multisample GL_ARB_occlusion_query2 GL_SGIX_shadow GL_ARB_sample_locations GL_EXT_memory_object_fd GL_ATI_texture_float GL_EXT_texture_compression_s3tc GL_KHR_no_error GL_ARB_separate_shader_objects GL_KHR_robustness GL_ARB_texture_storage GL_AMD_multi_draw_indirect GL_ARB_tessellation_shader GL_EXT_point_parameters GL_ARB_texture_border_clamp GL_ARB_shader_image_load_store GL_ARB_shader_subroutine GL_NV_conditional_render GL_EXT_packed_float GL_NVX_gpu_memory_info GL_ARB_arrays_of_arrays GL_EXT_texture_compression_rgtc GL_NV_fragment_program_option GL_ARB_draw_buffers GL_NV_compute_program5 GL_ARB_shader_bit_encoding GL_ARB_shader_draw_parameters GL_ARB_framebuffer_sRGB GL_NV_sample_locations GL_ARB_conditional_render_inverted GL_NV_primitive_restart GL_NV_stereo_view_rendering GL_ARB_texture_env_combine GL_EXT_raster_multisample GL_ARB_transform_feedback_instanced GL_ARB_texture_env_dot3 GL_NV_shader_atomic_int64 GL_ARB_shader_texture_image_samples GL_AMD_seamless_cubemap_per_texture GL_ARB_program_interface_query GL_KTX_buffer_region GL_ARB_texture_cube_map GL_ARB_draw_elements_base_vertex GL_ARB_shader_viewport_layer_array GL_EXT_vertex_array_bgra GL_EXT_framebuffer_multisample_blit_scaled GL_ARB_texture_buffer_object_rgb32 GL_NV_query_resource GL_NVX_conditional_render GL_ARB_get_texture_sub_image GL_KHR_robust_buffer_access_behavior GL_ARB_sample_shading GL_EXT_texture_lod_bias GL_ARB_occlusion_query GL_EXT_texture_lod GL_EXT_stencil_two_side GL_NV_float_buffer GL_EXT_vertex_array GL_EXT_pixel_buffer_object GL_ARB_ES3_2_compatibility GL_KHR_parallel_shader_compile GL_NV_gpu_shader5 GL_ARB_invalidate_subdata GL_ARB_clear_texture GL_NV_robustness_video_memory_purge GL_NV_register_combiners GL_ARB_transform_feedback3 GL_ARB_transform_feedback_overflow_query GL_NV_light_max_exponent GL_ARB_sparse_texture_clamp GL_NV_vertex_program2 GL_NV_vertex_buffer_unified_memory GL_ARB_texture_env_crossbar GL_EXT_geometry_shader4 GL_NV_vdpau_interop GL_ARB_texture_storage_multisample GL_NV_point_sprite GL_ARB_buffer_storage GL_NV_transform_feedback2 GL_AMD_vertex_shader_viewport_index GL_NV_framebuffer_multisample_coverage GL_EXT_texture3D GL_NV_uniform_buffer_unified_memory GL_NV_command_list GL_NV_viewport_array2 GL_NV_fill_rectangle GL_ATI_texture_mirror_once GL_OVR_multiview GL_ARB_provoking_vertex GL_EXT_rescale_normal GL_ARB_multitexture GL_ARB_debug_output GL_ARB_polygon_offset_clamp GL_NV_texture_rectangle GL_ARB_texture_compression_rgtc GL_ARB_shader_storage_buffer_object GL_EXT_texture_swizzle GL_NV_gpu_multicast GL_SUN_slice_accum GL_EXT_texture_shadow_lod GL_EXT_texture_shared_exponent GL_NV_fragment_coverage_to_color GL_NV_texture_barrier GL_EXT_framebuffer_object GL_NV_shader_thread_shuffle GL_ARB_clip_control GL_NV_bindless_texture GL_NV_sample_mask_override_coverage GL_EXT_texture_array GL_ARB_texture_rectangle GL_ARB_fragment_shader_interlock GL_NV_fence GL_NV_texture_shader3 GL_EXT_texture_sRGB_decode GL_ARB_shadow GL_NV_shader_atomic_float64 GL_EXT_texture_sRGB_R8 GL_NV_register_combiners2 GL_NV_texture_rectangle_compressed GL_NV_clip_space_w_scaling GL_ARB_texture_gather GL_EXT_framebuffer_blit GL_EXT_draw_range_elements GL_NV_bindless_multi_draw_indirect_count GL_EXT_separate_specular_color GL_ARB_compute_variable_group_size GL_EXT_multiview_texture_multisample GL_ARB_shading_language_420pack GL_NV_gpu_program4_1 GL_ARB_fragment_program GL_ARB_point_sprite GL_NV_alpha_to_coverage_dither_control GL_NV_explicit_multisample GL_NV_deep_texture3D GL_ARB_texture_env_add GL_EXT_separate_shader_objects GL_ARB_pipeline_statistics_query GL_EXT_texture_compression_dxt1 GL_EXT_x11_sync_object GL_ARB_texture_rg GL_ARB_texture_compression_bptc GL_ARB_vertex_shader GL_ARB_draw_indirect GL_ARB_framebuffer_no_attachments GL_ARB_map_buffer_range GL_NV_depth_clamp GL_ARB_imaging GL_EXT_depth_bounds_test GL_EXT_semaphore_fd GL_ARB_explicit_uniform_location GL_ARB_robustness GL_ARB_vertex_attrib_binding GL_ARB_instanced_arrays GL_ARB_ES2_compatibility GL_NV_draw_texture GL_NV_multisample_coverage GL_NV_vertex_array_range2 GL_EXT_blend_color GL_NV_transform_feedback GL_NV_texgen_reflection GL_EXT_multi_draw_arrays GL_ARB_base_instance GL_ARB_stencil_texturing GL_EXT_blend_minmax GL_ARB_seamless_cubemap_per_texture GL_EXT_texture_compression_latc GL_ARB_explicit_attrib_location GL_EXT_texture_filter_minmax GL_ARB_sparse_texture2 GL_ARB_shader_texture_lod GL_EXT_abgr GL_ARB_geometry_shader4 GL_EXT_multiview_timer_query GL_EXT_packed_depth_stencil GL_KHR_context_flush_control GL_EXT_texture_env_combine GL_ARB_texture_buffer_range GL_ARB_texture_float GL_NV_vertex_program2_option GL_EXT_compiled_vertex_array GL_ARB_depth_buffer_float GL_ARB_texture_rgb10_a2ui GL_EXT_texture_filter_anisotropic GL_ARB_texture_filter_anisotropic GL_ARB_viewport_array GL_NV_shader_atomic_counters GL_NV_shader_atomic_fp16_vector GL_ARB_depth_clamp GL_ARB_vertex_buffer_object GL_ARB_compute_shader GL_NV_texture_env_combine4 GL_EXT_texture_storage GL_ARB_compressed_texture_pixel_storage GL_NV_blend_minmax_factor GL_ARB_multisample GL_NV_half_float GL_EXT_framebuffer_sRGB GL_ARB_shader_objects GL_EXT_provoking_vertex GL_ARB_shading_language_packing GL_ARB_ES3_compatibility GL_NV_fog_distance GL_ARB_gpu_shader_int64 GL_NV_blend_equation_advanced GL_NV_vertex_program GL_NV_internalformat_sample_query GL_NV_memory_attachment GL_EXT_draw_instanced GL_NV_draw_vulkan_image GL_ARB_texture_stencil8 GL_EXT_Cg_shader GL_EXT_texture_env_dot3 GL_EXT_blend_subtract GL_ARB_texture_buffer_object GL_EXT_window_rectangles GL_NV_geometry_shader_passthrough GL_NV_fragment_program2 GL_NV_multisample_filter_hint GL_ARB_texture_query_lod GL_ARB_fragment_layer_viewport GL_NV_path_rendering_shared_edge GL_ARB_get_program_binary GL_ARB_shader_precision GL_ARB_fragment_shader GL_NV_gpu_program_fp64 GL_NV_gpu_program5_mem_extended GL_NV_vdpau_interop2 GL_NV_ES3_1_compatibility GL_ARB_fragment_coord_conventions GL_EXT_transform_feedback2 GL_EXT_shader_image_load_formatted GL_ARB_copy_buffer GL_IBM_rasterpos_clip GL_ARB_uniform_buffer_object GL_SGIX_depth_texture GL_ARB_shader_atomic_counters GL_ARB_shader_atomic_counter_ops GL_NV_fragment_program GL_ARB_texture_mirrored_repeat GL_KHR_blend_equation_advanced GL_EXT_import_sync_object GL_EXT_texture_edge_clamp GL_EXT_texture_mirror_clamp GL_NV_fragment_shader_interlock GL_EXT_bindable_uniform GL_ARB_ES3_1_compatibility GL_NV_conservative_raster_pre_snap_triangles GL_ARB_transpose_matrix GL_ARB_seamless_cube_map GL_NV_query_resource_tag GL_ARB_vertex_array_object GL_S3_s3tc GL_ARB_transform_feedback2 GL_NV_conservative_raster GL_NV_parameter_buffer_object2 GL_ARB_sampler_objects GL_ARB_shader_image_size GL_NV_bindless_multi_draw_indirect GL_NV_ES1_1_compatibility GL_OVR_multiview2 GL_NV_copy_image GL_NV_shader_subgroup_partitioned GL_EXT_gpu_program_parameters GL_NV_texture_shader2 GL_ARB_multi_bind GL_ARB_vertex_attrib_64bit GL_SGIS_generate_mipmap GL_NV_vertex_program1_1 GL_EXT_multiview_tessellation_geometry_shader GL_EXT_bgra GL_EXT_shader_image_load_store GL_ARB_gpu_shader_fp64 GL_EXT_texture_object GL_ARB_shading_language_include GL_ARB_color_buffer_float GL_ARB_half_float_pixel GL_EXT_stencil_wrap GL_NV_framebuffer_mixed_samples GL_EXT_semaphore GL_EXT_texture_buffer_object GL_ARB_texture_compression GL_NV_texture_multisample GL_ARB_blend_func_extended GL_NVX_blend_equation_advanced_multi_draw_buffers GL_NV_gpu_program5 GL_NVX_nvenc_interop GL_NV_pixel_data_range GL_NV_vertex_program3 GL_ARB_texture_filter_minmax GL_IBM_texture_mirrored_repeat GL_NV_viewport_swizzle GL_ARB_map_buffer_alignment GL_ARB_shader_ballot GL_NV_shader_atomic_float GL_EXT_texture_integer GL_ARB_vertex_array_bgra GL_ARB_draw_instanced GL_EXT_gpu_shader4 GL_ARB_parallel_shader_compile GL_ARB_vertex_type_10f_11f_11f_rev GL_ARB_bindless_texture GL_ARB_texture_barrier GL_ARB_half_float_vertex GL_ARB_shader_clock GL_ARB_compatibility GL_EXT_sparse_texture2 GL_ARB_texture_multisample GL_ARB_texture_swizzle GL_ARB_fragment_program_shadow GL_NV_texture_shader GL_ARB_direct_state_access GL_ARB_copy_image GL_KHR_blend_equation_advanced_coherent GL_ARB_shader_group_vote GL_ARB_robust_buffer_access_behavior GL_EXT_vertex_attrib_64bit GL_EXT_post_depth_coverage GL_ARB_sync GL_ARB_internalformat_query GL_ARB_sparse_texture GL_EXT_draw_buffers2 GL_ARB_spirv_extensions GL_NV_geometry_shader4 GL_ARB_clear_buffer_object GL_ARB_point_parameters GL_NV_occlusion_query GL_EXT_shadow_funcs GL_EXT_shader_integer_mix
+qt.scenegraph.general: Max Texture Size:  32768
+qt.scenegraph.general: Debug context:     false
+qt.scenegraph.general: Using sg animation driver
+qt.scenegraph.general: Animation Driver: using vsync: 16.67 ms
+qt.scenegraph.general: texture atlas dimensions: 512x512
+CSBConfUI::OnConfStatusChanged  UI_CMD_SHARE_READYqt.scenegraph.general: Using sg animation driver
+qt.scenegraph.general: Animation Driver: using vsync: 16.67 ms
+qt.scenegraph.general: texture atlas dimensions: 2048x1024
+qt.scenegraph.general: Using sg animation driver
+qt.scenegraph.general: Animation Driver: using vsync: 16.67 ms
+qt.scenegraph.general: texture atlas dimensions: 512x512
+qt.scenegraph.general: Using sg animation driver
+qt.scenegraph.general: Animation Driver: using vsync: 16.67 ms
+qt.scenegraph.general: texture atlas dimensions: 1024x512
+qt.scenegraph.general: Using sg animation driver
+qt.scenegraph.general: Animation Driver: using vsync: 16.67 ms
+qt.scenegraph.general: texture atlas dimensions: 512x512
+qt.scenegraph.general: Using sg animation driver
+qt.scenegraph.general: Animation Driver: using vsync: 16.67 ms
+qt.scenegraph.general: texture atlas dimensions: 1024x512
+QCoreApplication::postEvent: Unexpected null receiver
+QCoreApplication::postEvent: Unexpected null receiver
+qt.scenegraph.general: animation driver switched to timer mode
+qt.scenegraph.general: Using sg animation driver
+qt.scenegraph.general: animation driver switched to vsync mode
+WorkerBase::loop() normal exit, fds[0].revents & POLLIN = trueWorkerBase::loop() normal exit, fds[0].revents & POLLIN = truesuccess to create child process,status is 0.
+zoom exited normally.
+run zoom successfully,exit code is 0.
+ZoomLauncher exit.
+WebGL(0x7f07d1671000)::ForceLoseContext
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PMessagePort::Msg_PostMessages Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PMessagePort::Msg_PostMessages Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PMessagePort::Msg_PostMessages Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PMessagePort::Msg_PostMessages Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PMessagePort::Msg_PostMessages Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PMessagePort::Msg_PostMessages Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PMessagePort::Msg_PostMessages Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PMessagePort::Msg_PostMessages Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PMessagePort::Msg_PostMessages Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PMessagePort::Msg_PostMessages Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PMessagePort::Msg_PostMessages Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PMessagePort::Msg_PostMessages Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PMessagePort::Msg_PostMessages Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PMessagePort::Msg_PostMessages Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PMessagePort::Msg_PostMessages Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+(acroread:21452): Gtk-WARNING **: 13:54:22.238: /usr/lib/gtk-2.0/2.10.0/engines/libnodoka.so: wrong ELF class: ELFCLASS64
+
+(acroread:21452): Gtk-WARNING **: 13:54:22.239: /usr/lib/gtk-2.0/2.10.0/engines/libnodoka.so: wrong ELF class: ELFCLASS64
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+(acroread:25108): Gtk-WARNING **: 17:55:18.054: /usr/lib/gtk-2.0/2.10.0/engines/libnodoka.so: wrong ELF class: ELFCLASS64
+
+(acroread:25108): Gtk-WARNING **: 17:55:18.054: /usr/lib/gtk-2.0/2.10.0/engines/libnodoka.so: wrong ELF class: ELFCLASS64
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[Child 24213, MediaDecoderStateMachine #2] WARNING: Decoder=7f432cb37000 Decode error: NS_ERROR_DOM_MEDIA_FATAL_ERR (0x806e0005) - RefPtr<MediaSourceTrackDemuxer::SamplesPromise> mozilla::MediaSourceTrackDemuxer::DoGetSamples(int32_t): manager is detached.: file /build/firefox-CTCO4D/firefox-73.0.1+build1/dom/media/MediaDecoderStateMachine.cpp, line 3358
+[Child 24213, MediaDecoderStateMachine #2] WARNING: Decoder=7f432cb37000 Decode error: NS_ERROR_DOM_MEDIA_FATAL_ERR (0x806e0005) - RefPtr<MediaSourceTrackDemuxer::SamplesPromise> mozilla::MediaSourceTrackDemuxer::DoGetSamples(int32_t): manager is detached.: file /build/firefox-CTCO4D/firefox-73.0.1+build1/dom/media/MediaDecoderStateMachine.cpp, line 3358
+[Child 24213, MediaDecoderStateMachine #2] WARNING: Decoder=7f432cb37000 Decode error: NS_ERROR_DOM_MEDIA_FATAL_ERR (0x806e0005) - RefPtr<MediaSourceTrackDemuxer::SamplesPromise> mozilla::MediaSourceTrackDemuxer::DoGetSamples(int32_t): manager is detached.: file /build/firefox-CTCO4D/firefox-73.0.1+build1/dom/media/MediaDecoderStateMachine.cpp, line 3358
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x840001,name=PRemoteSpellcheckEngine::Msg___delete__) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+

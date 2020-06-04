@@ -1,0 +1,5987 @@
+  <page>
+    <title>P2/m</title>
+    <id>481</id>
+    <revision>
+      <id>3264</id>
+      <timestamp>2011-03-18T00:01:32Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <text xml:space="preserve"> group number                 = 10
+ group name                   =       P2/m
+ crystal system               = Monoclinic
+ setting number               = 1
+ number of symmetry operators = 4
+ 
+ +x,+y,+z
+ -x,+y,-z
+ -x,-y,-z
+ +x,-y,+z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 3 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 4 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+
+ group number                 = 10
+ group name                   =       P2/m
+ crystal system               = Monoclinic
+ setting number               = 2
+ number of symmetry operators = 4
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -x,-y,-z
+ +x,+y,-z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 4 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0</text>
+    </revision>
+  </page>
+  <page>
+    <title>P2 1/m</title>
+    <id>482</id>
+    <revision>
+      <id>3265</id>
+      <timestamp>2011-03-18T00:02:54Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <text xml:space="preserve"> group number                 = 11
+ group name                   =     P2_1/m
+ crystal system               = Monoclinic
+ setting number               = 1
+ number of symmetry operators = 4
+ 
+ +x,+y,+z
+ -x,+y+1/2,-z
+ -x,-y,-z
+ +x,-y+1/2,+z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 3 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 4 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+
+ group number                 = 11
+ group name                   =     P2_1/m
+ crystal system               = Monoclinic
+ setting number               = 2
+ number of symmetry operators = 4
+ 
+ +x,+y,+z
+ -x,-y,+z+1/2
+ -x,-y,-z
+ +x,+y,-z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 3 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 4 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5</text>
+    </revision>
+  </page>
+  <page>
+    <title>C2/m</title>
+    <id>483</id>
+    <revision>
+      <id>3266</id>
+      <timestamp>2011-03-18T00:04:09Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <text xml:space="preserve"> group number                 = 12
+ group name                   =       C2/m
+ crystal system               = Monoclinic
+ setting number               = 1
+ number of symmetry operators = 8
+ 
+ +x,+y,+z
+ -x,+y,-z
+ -x,-y,-z
+ +x,-y,+z
+ +x+1/2,+y+1/2,+z
+ -x+1/2,+y+1/2,-z
+ -x+1/2,-y+1/2,-z
+ +x+1/2,-y+1/2,+z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 3 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 4 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 6 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+
+ group number                 = 12
+ group name                   =       C2/m
+ crystal system               = Monoclinic
+ setting number               = 2
+ number of symmetry operators = 8
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -x,-y,-z
+ +x,+y,-z
+ +x,+y+1/2,+z+1/2
+ -x,-y+1/2,+z+1/2
+ -x,-y+1/2,-z+1/2
+ +x,+y+1/2,-z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 4 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 5 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 6 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 7 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 8 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5</text>
+    </revision>
+  </page>
+  <page>
+    <title>P2/c</title>
+    <id>484</id>
+    <revision>
+      <id>3267</id>
+      <timestamp>2011-03-18T00:05:25Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <text xml:space="preserve"> group number                 = 13
+ group name                   =       P2/c
+ crystal system               = Monoclinic
+ setting number               = 1
+ number of symmetry operators = 4
+ 
+ +x,+y,+z
+ -x,+y,-z+1/2
+ -x,-y,-z
+ +x,-y,+z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 3 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 4 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+
+ group number                 = 13
+ group name                   =       P2/c
+ crystal system               = Monoclinic
+ setting number               = 2
+ number of symmetry operators = 4
+ 
+ +x,+y,+z
+ -x+1/2,-y,+z
+ -x,-y,-z
+ +x+1/2,+y,-z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 4 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0</text>
+    </revision>
+  </page>
+  <page>
+    <title>P2 1/c</title>
+    <id>485</id>
+    <revision>
+      <id>3268</id>
+      <timestamp>2011-03-18T00:06:38Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <text xml:space="preserve"> group number                 = 14
+ group name                   =     P2_1/c
+ crystal system               = Monoclinic
+ setting number               = 1
+ number of symmetry operators = 4
+ 
+ +x,+y,+z
+ -x,+y+1/2,-z+1/2
+ -x,-y,-z
+ +x,-y+1/2,+z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 3 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 4 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+
+ group number                 = 14
+ group name                   =     P2_1/c
+ crystal system               = Monoclinic
+ setting number               = 2
+ number of symmetry operators = 4
+ 
+ +x,+y,+z
+ -x+1/2,-y,+z+1/2
+ -x,-y,-z
+ +x+1/2,+y,-z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 3 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 4 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5</text>
+    </revision>
+  </page>
+  <page>
+    <title>C2/c</title>
+    <id>486</id>
+    <revision>
+      <id>3269</id>
+      <timestamp>2011-03-18T00:07:52Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <text xml:space="preserve"> group number                 = 15
+ group name                   =       C2/c
+ crystal system               = Monoclinic
+ setting number               = 1
+ number of symmetry operators = 8
+ 
+ +x,+y,+z
+ -x,+y,-z+1/2
+ -x,-y,-z
+ +x,-y,+z+1/2
+ +x+1/2,+y+1/2,+z
+ -x+1/2,+y+1/2,-z+1/2
+ -x+1/2,-y+1/2,-z
+ +x+1/2,-y+1/2,+z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 3 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 4 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 5 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 6 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 7 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+
+ group number                 = 15
+ group name                   =       C2/c
+ crystal system               = Monoclinic
+ setting number               = 2
+ number of symmetry operators = 8
+ 
+ +x,+y,+z
+ -x+1/2,-y,+z
+ -x,-y,-z
+ +x+1/2,+y,-z
+ +x,+y+1/2,+z+1/2
+ -x+1/2,-y+1/2,+z+1/2
+ -x,-y+1/2,-z+1/2
+ +x+1/2,+y+1/2,-z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 4 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 5 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 6 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 7 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 8 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5</text>
+    </revision>
+  </page>
+  <page>
+    <title>P4/m</title>
+    <id>626</id>
+    <revision>
+      <id>3354</id>
+      <timestamp>2011-03-18T01:57:42Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 83  group name                   =       P4/m  crystal system               = Tetragonal  setting number               = 1  number of symmetry ope…'</comment>
+      <text xml:space="preserve"> group number                 = 83
+ group name                   =       P4/m
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 8
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y,+x,+z
+ +y,-x,+z
+ -x,-y,-z
+ +x,+y,-z
+ +y,-x,-z
+ -y,+x,-z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0</text>
+    </revision>
+  </page>
+  <page>
+    <title>P4 2/m</title>
+    <id>631</id>
+    <revision>
+      <id>3359</id>
+      <timestamp>2011-03-18T02:06:35Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 84  group name                   =     P4_2/m  crystal system               = Tetragonal  setting number               = 1  number of symmetry ope…'</comment>
+      <text xml:space="preserve"> group number                 = 84
+ group name                   =     P4_2/m
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 8
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y,+x,+z+1/2
+ +y,-x,+z+1/2
+ -x,-y,-z
+ +x,+y,-z
+ +y,-x,-z+1/2
+ -y,+x,-z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5</text>
+    </revision>
+  </page>
+  <page>
+    <title>P4/n</title>
+    <id>617</id>
+    <revision>
+      <id>3344</id>
+      <timestamp>2011-03-18T01:35:15Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 85  group name                   =       P4/n  crystal system               = Tetragonal  setting number               = 1  number of symmetry ope…'</comment>
+      <text xml:space="preserve"> group number                 = 85
+ group name                   =       P4/n
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 8
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y+1/2,+x+1/2,+z
+ +y+1/2,-x+1/2,+z
+ -x+1/2,-y+1/2,-z
+ +x+1/2,+y+1/2,-z
+ +y,-x,-z
+ -y,+x,-z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+
+ group number                 = 85
+ group name                   =       P4/n
+ crystal system               = Tetragonal
+ setting number               = 2
+ number of symmetry operators = 8
+ 
+ +x,+y,+z
+ -x+1/2,-y+1/2,+z
+ -y+1/2,+x,+z
+ +y,-x+1/2,+z
+ -x,-y,-z
+ +x+1/2,+y+1/2,-z
+ +y+1/2,-x,-z
+ -y,+x+1/2,-z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.0</text>
+    </revision>
+  </page>
+  <page>
+    <title>P4 2/n</title>
+    <id>633</id>
+    <revision>
+      <id>3361</id>
+      <timestamp>2011-03-18T02:08:15Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 86  group name                   =     P4_2/n  crystal system               = Tetragonal  setting number               = 1  number of symmetry ope…'</comment>
+      <text xml:space="preserve"> group number                 = 86
+ group name                   =     P4_2/n
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 8
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y+1/2,+x+1/2,+z+1/2
+ +y+1/2,-x+1/2,+z+1/2
+ -x+1/2,-y+1/2,-z+1/2
+ +x+1/2,+y+1/2,-z+1/2
+ +y,-x,-z
+ -y,+x,-z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+
+ group number                 = 86
+ group name                   =     P4_2/n
+ crystal system               = Tetragonal
+ setting number               = 2
+ number of symmetry operators = 8
+ 
+ +x,+y,+z
+ -x+1/2,-y+1/2,+z
+ -y,+x+1/2,+z+1/2
+ +y+1/2,-x,+z+1/2
+ -x,-y,-z
+ +x+1/2,+y+1/2,-z
+ +y,-x+1/2,-z+1/2
+ -y+1/2,+x,-z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5</text>
+    </revision>
+  </page>
+  <page>
+    <title>I4/m</title>
+    <id>632</id>
+    <revision>
+      <id>3360</id>
+      <timestamp>2011-03-18T02:07:16Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 87  group name                   =       I4/m  crystal system               = Tetragonal  setting number               = 1  number of symmetry ope…'</comment>
+      <text xml:space="preserve"> group number                 = 87
+ group name                   =       I4/m
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y,+x,+z
+ +y,-x,+z
+ -x,-y,-z
+ +x,+y,-z
+ +y,-x,-z
+ -y,+x,-z
+ +x+1/2,+y+1/2,+z+1/2
+ -x+1/2,-y+1/2,+z+1/2
+ -y+1/2,+x+1/2,+z+1/2
+ +y+1/2,-x+1/2,+z+1/2
+ -x+1/2,-y+1/2,-z+1/2
+ +x+1/2,+y+1/2,-z+1/2
+ +y+1/2,-x+1/2,-z+1/2
+ -y+1/2,+x+1/2,-z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 9 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 10 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 11 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 12 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 13 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 14 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 15 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 16 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5</text>
+    </revision>
+  </page>
+  <page>
+    <title>I4 1/a</title>
+    <id>634</id>
+    <revision>
+      <id>3362</id>
+      <timestamp>2011-03-18T02:09:26Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 88  group name                   =     I4_1/a  crystal system               = Tetragonal  setting number               = 1  number of symmetry ope…'</comment>
+      <text xml:space="preserve"> group number                 = 88
+ group name                   =     I4_1/a
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x+1/2,-y+1/2,+z+1/2
+ -y,+x+1/2,+z+1/4
+ +y+1/2,-x,+z+3/4
+ -x,-y+1/2,-z+1/4
+ +x+1/2,+y,-z+3/4
+ +y,-x,-z
+ -y+1/2,+x+1/2,-z+1/2
+ +x+1/2,+y+1/2,+z+1/2
+ -x+1,-y+1,+z+1
+ -y+1/2,+x+1,+z+3/4
+ +y+1,-x+1/2,+z+5/4
+ -x+1/2,-y+1,-z+3/4
+ +x+1,+y+1/2,-z+5/4
+ +y+1/2,-x+1/2,-z+1/2
+ -y+1,+x+1,-z+1
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.25
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.75
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.25
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.75
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 9 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 10 =
+  -1.0 0.0 0.0 1.0
+  0.0 -1.0 0.0 1.0
+  0.0 0.0 1.0 1.0
+ 
+ = operator 11 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 1.0
+  0.0 0.0 1.0 0.75
+ 
+ = operator 12 =
+  0.0 1.0 0.0 1.0
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 1.25
+ 
+ = operator 13 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 1.0
+  0.0 0.0 -1.0 0.75
+ 
+ = operator 14 =
+  1.0 0.0 0.0 1.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 1.25
+ 
+ = operator 15 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 16 =
+  0.0 -1.0 0.0 1.0
+  1.0 0.0 0.0 1.0
+  0.0 0.0 -1.0 1.0
+
+ group number                 = 88
+ group name                   =     I4_1/a
+ crystal system               = Tetragonal
+ setting number               = 2
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x+1/2,-y,+z+1/2
+ -y+3/4,+x+1/4,+z+1/4
+ +y+3/4,-x+3/4,+z+3/4
+ -x,-y,-z
+ +x+1/2,+y,-z+1/2
+ +y+1/4,-x+3/4,-z+3/4
+ -y+1/4,+x+1/4,-z+1/4
+ +x+1/2,+y+1/2,+z+1/2
+ -x+1,-y+1/2,+z+1
+ -y+5/4,+x+3/4,+z+3/4
+ +y+5/4,-x+5/4,+z+5/4
+ -x+1/2,-y+1/2,-z+1/2
+ +x+1,+y+1/2,-z+1
+ +y+3/4,-x+5/4,-z+5/4
+ -y+3/4,+x+3/4,-z+3/4
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.75
+  1.0 0.0 0.0 0.25
+  0.0 0.0 1.0 0.25
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.75
+  -1.0 0.0 0.0 0.75
+  0.0 0.0 1.0 0.75
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.25
+  -1.0 0.0 0.0 0.75
+  0.0 0.0 -1.0 0.75
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.25
+  1.0 0.0 0.0 0.25
+  0.0 0.0 -1.0 0.25
+ 
+ = operator 9 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 10 =
+  -1.0 0.0 0.0 1.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 1.0
+ 
+ = operator 11 =
+  0.0 -1.0 0.0 1.25
+  1.0 0.0 0.0 0.75
+  0.0 0.0 1.0 0.75
+ 
+ = operator 12 =
+  0.0 1.0 0.0 1.25
+  -1.0 0.0 0.0 1.25
+  0.0 0.0 1.0 1.25
+ 
+ = operator 13 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 14 =
+  1.0 0.0 0.0 1.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 1.0
+ 
+ = operator 15 =
+  0.0 1.0 0.0 0.75
+  -1.0 0.0 0.0 1.25
+  0.0 0.0 -1.0 1.25
+ 
+ = operator 16 =
+  0.0 -1.0 0.0 0.75
+  1.0 0.0 0.0 0.75
+  0.0 0.0 -1.0 0.75</text>
+    </revision>
+  </page>
+  <page>
+    <title>P4/mmm</title>
+    <id>665</id>
+    <revision>
+      <id>3396</id>
+      <timestamp>2011-03-20T15:59:23Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 123  group name                   =     P4/mmm  crystal system               = Tetragonal  setting number               = 1  number of symmetry op…'</comment>
+      <text xml:space="preserve"> group number                 = 123
+ group name                   =     P4/mmm
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y,+x,+z
+ +y,-x,+z
+ -x,+y,-z
+ +x,-y,-z
+ +y,+x,-z
+ -y,-x,-z
+ -x,-y,-z
+ +x,+y,-z
+ +y,-x,-z
+ -y,+x,-z
+ +x,-y,+z
+ -x,+y,+z
+ -y,-x,+z
+ +y,+x,+z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0</text>
+    </revision>
+  </page>
+  <page>
+    <title>P4/mcc</title>
+    <id>619</id>
+    <revision>
+      <id>3346</id>
+      <timestamp>2011-03-18T01:37:52Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 124  group name                   =     P4/mcc  crystal system               = Tetragonal  setting number               = 1  number of symmetry op…'</comment>
+      <text xml:space="preserve"> group number                 = 124
+ group name                   =     P4/mcc
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y,+x,+z
+ +y,-x,+z
+ -x,+y,-z+1/2
+ +x,-y,-z+1/2
+ +y,+x,-z+1/2
+ -y,-x,-z+1/2
+ -x,-y,-z
+ +x,+y,-z
+ +y,-x,-z
+ -y,+x,-z
+ +x,-y,+z+1/2
+ -x,+y,+z+1/2
+ -y,-x,+z+1/2
+ +y,+x,+z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5</text>
+    </revision>
+  </page>
+  <page>
+    <title>P4/nbm</title>
+    <id>666</id>
+    <revision>
+      <id>3397</id>
+      <timestamp>2011-03-20T16:00:58Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 125  group name                   =     P4/nbm  crystal system               = Tetragonal  setting number               = 1  number of symmetry op…'</comment>
+      <text xml:space="preserve"> group number                 = 125
+ group name                   =     P4/nbm
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y,+x,+z
+ +y,-x,+z
+ -x,+y,-z
+ +x,-y,-z
+ +y,+x,-z
+ -y,-x,-z
+ -x+1/2,-y+1/2,-z
+ +x+1/2,+y+1/2,-z
+ +y+1/2,-x+1/2,-z
+ -y+1/2,+x+1/2,-z
+ +x+1/2,-y+1/2,+z
+ -x+1/2,+y+1/2,+z
+ -y+1/2,-x+1/2,+z
+ +y+1/2,+x+1/2,+z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+
+ group number                 = 125
+ group name                   =     P4/nbm
+ crystal system               = Tetragonal
+ setting number               = 2
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x+1/2,-y+1/2,+z
+ -y+1/2,+x,+z
+ +y,-x+1/2,+z
+ -x+1/2,+y,-z
+ +x,-y+1/2,-z
+ +y,+x,-z
+ -y+1/2,-x+1/2,-z
+ -x,-y,-z
+ +x+1/2,+y+1/2,-z
+ +y+1/2,-x,-z
+ -y,+x+1/2,-z
+ +x+1/2,-y,+z
+ -x,+y+1/2,+z
+ -y,-x,+z
+ +y+1/2,+x+1/2,+z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0</text>
+    </revision>
+  </page>
+  <page>
+    <title>P4/nnc</title>
+    <id>650</id>
+    <revision>
+      <id>3378</id>
+      <timestamp>2011-03-19T02:28:37Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 126  group name                   =     P4/nnc  crystal system               = Tetragonal  setting number               = 1  number of symmetry op…'</comment>
+      <text xml:space="preserve"> group number                 = 126
+ group name                   =     P4/nnc
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y,+x,+z
+ +y,-x,+z
+ -x,+y,-z
+ +x,-y,-z
+ +y,+x,-z
+ -y,-x,-z
+ -x+1/2,-y+1/2,-z+1/2
+ +x+1/2,+y+1/2,-z+1/2
+ +y+1/2,-x+1/2,-z+1/2
+ -y+1/2,+x+1/2,-z+1/2
+ +x+1/2,-y+1/2,+z+1/2
+ -x+1/2,+y+1/2,+z+1/2
+ -y+1/2,-x+1/2,+z+1/2
+ +y+1/2,+x+1/2,+z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+
+ group number                 = 126
+ group name                   =     P4/nnc
+ crystal system               = Tetragonal
+ setting number               = 2
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x+1/2,-y+1/2,+z
+ -y+1/2,+x,+z
+ +y,-x+1/2,+z
+ -x+1/2,+y,-z+1/2
+ +x,-y+1/2,-z+1/2
+ +y,+x,-z+1/2
+ -y+1/2,-x+1/2,-z+1/2
+ -x,-y,-z
+ +x+1/2,+y+1/2,-z
+ +y+1/2,-x,-z
+ -y,+x+1/2,-z
+ +x+1/2,-y,+z+1/2
+ -x,+y+1/2,+z+1/2
+ -y,-x,+z+1/2
+ +y+1/2,+x+1/2,+z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5</text>
+    </revision>
+  </page>
+  <page>
+    <title>P4/mbm</title>
+    <id>667</id>
+    <revision>
+      <id>3398</id>
+      <timestamp>2011-03-20T16:02:44Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <minor/>
+      <comment>Created page with ' group number                 = 127  group name                   =     P4/mbm  crystal system               = Tetragonal  setting number               = 1  number of symmetry op…'</comment>
+      <text xml:space="preserve"> group number                 = 127
+ group name                   =     P4/mbm
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y,+x,+z
+ +y,-x,+z
+ -x+1/2,+y+1/2,-z
+ +x+1/2,-y+1/2,-z
+ +y+1/2,+x+1/2,-z
+ -y+1/2,-x+1/2,-z
+ -x,-y,-z
+ +x,+y,-z
+ +y,-x,-z
+ -y,+x,-z
+ +x+1/2,-y+1/2,+z
+ -x+1/2,+y+1/2,+z
+ -y+1/2,-x+1/2,+z
+ +y+1/2,+x+1/2,+z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0</text>
+    </revision>
+  </page>
+  <page>
+    <title>P4/mnc</title>
+    <id>668</id>
+    <revision>
+      <id>3399</id>
+      <timestamp>2011-03-20T16:03:52Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 128  group name                   =     P4/mnc  crystal system               = Tetragonal  setting number               = 1  number of symmetry op…'</comment>
+      <text xml:space="preserve"> group number                 = 128
+ group name                   =     P4/mnc
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y,+x,+z
+ +y,-x,+z
+ -x+1/2,+y+1/2,-z+1/2
+ +x+1/2,-y+1/2,-z+1/2
+ +y+1/2,+x+1/2,-z+1/2
+ -y+1/2,-x+1/2,-z+1/2
+ -x,-y,-z
+ +x,+y,-z
+ +y,-x,-z
+ -y,+x,-z
+ +x+1/2,-y+1/2,+z+1/2
+ -x+1/2,+y+1/2,+z+1/2
+ -y+1/2,-x+1/2,+z+1/2
+ +y+1/2,+x+1/2,+z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5</text>
+    </revision>
+  </page>
+  <page>
+    <title>P4/nmm</title>
+    <id>669</id>
+    <revision>
+      <id>3400</id>
+      <timestamp>2011-03-20T16:05:12Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 129  group name                   =     P4/nmm  crystal system               = Tetragonal  setting number               = 1  number of symmetry op…'</comment>
+      <text xml:space="preserve"> group number                 = 129
+ group name                   =     P4/nmm
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y+1/2,+x+1/2,+z
+ +y+1/2,-x+1/2,+z
+ -x+1/2,+y+1/2,-z
+ +x+1/2,-y+1/2,-z
+ +y,+x,-z
+ -y,-x,-z
+ -x+1/2,-y+1/2,-z
+ +x+1/2,+y+1/2,-z
+ +y,-x,-z
+ -y,+x,-z
+ +x,-y,+z
+ -x,+y,+z
+ -y+1/2,-x+1/2,+z
+ +y+1/2,+x+1/2,+z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+
+ group number                 = 129
+ group name                   =     P4/nmm
+ crystal system               = Tetragonal
+ setting number               = 2
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x+1/2,-y+1/2,+z
+ -y+1/2,+x,+z
+ +y,-x+1/2,+z
+ -x,+y+1/2,-z
+ +x+1/2,-y,-z
+ +y+1/2,+x+1/2,-z
+ -y,-x,-z
+ -x,-y,-z
+ +x+1/2,+y+1/2,-z
+ +y+1/2,-x,-z
+ -y,+x+1/2,-z
+ +x,-y+1/2,+z
+ -x+1/2,+y,+z
+ -y+1/2,-x+1/2,+z
+ +y,+x,+z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0</text>
+    </revision>
+  </page>
+  <page>
+    <title>P4/ncc</title>
+    <id>670</id>
+    <revision>
+      <id>3401</id>
+      <timestamp>2011-03-20T16:06:12Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 130  group name                   =     P4/ncc  crystal system               = Tetragonal  setting number               = 1  number of symmetry op…'</comment>
+      <text xml:space="preserve"> group number                 = 130
+ group name                   =     P4/ncc
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y+1/2,+x+1/2,+z
+ +y+1/2,-x+1/2,+z
+ -x+1/2,+y+1/2,-z+1/2
+ +x+1/2,-y+1/2,-z+1/2
+ +y,+x,-z+1/2
+ -y,-x,-z+1/2
+ -x+1/2,-y+1/2,-z
+ +x+1/2,+y+1/2,-z
+ +y,-x,-z
+ -y,+x,-z
+ +x,-y,+z+1/2
+ -x,+y,+z+1/2
+ -y+1/2,-x+1/2,+z+1/2
+ +y+1/2,+x+1/2,+z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+
+ group number                 = 130
+ group name                   =     P4/ncc
+ crystal system               = Tetragonal
+ setting number               = 2
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x+1/2,-y+1/2,+z
+ -y+1/2,+x,+z
+ +y,-x+1/2,+z
+ -x,+y+1/2,-z+1/2
+ +x+1/2,-y,-z+1/2
+ +y+1/2,+x+1/2,-z+1/2
+ -y,-x,-z+1/2
+ -x,-y,-z
+ +x+1/2,+y+1/2,-z
+ +y+1/2,-x,-z
+ -y,+x+1/2,-z
+ +x,-y+1/2,+z+1/2
+ -x+1/2,+y,+z+1/2
+ -y+1/2,-x+1/2,+z+1/2
+ +y,+x,+z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5</text>
+    </revision>
+  </page>
+  <page>
+    <title>P4 2/mmc</title>
+    <id>651</id>
+    <revision>
+      <id>3379</id>
+      <timestamp>2011-03-19T02:29:46Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 131  group name                   =   P4_2/mmc  crystal system               = Tetragonal  setting number               = 1  number of symmetry op…'</comment>
+      <text xml:space="preserve"> group number                 = 131
+ group name                   =   P4_2/mmc
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y,+x,+z+1/2
+ +y,-x,+z+1/2
+ -x,+y,-z
+ +x,-y,-z
+ +y,+x,-z+1/2
+ -y,-x,-z+1/2
+ -x,-y,-z
+ +x,+y,-z
+ +y,-x,-z+1/2
+ -y,+x,-z+1/2
+ +x,-y,+z
+ -x,+y,+z
+ -y,-x,+z+1/2
+ +y,+x,+z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5</text>
+    </revision>
+  </page>
+  <page>
+    <title>P4 2/mcm</title>
+    <id>671</id>
+    <revision>
+      <id>3402</id>
+      <timestamp>2011-03-20T16:07:24Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 132  group name                   =   P4_2/mcm  crystal system               = Tetragonal  setting number               = 1  number of symmetry op…'</comment>
+      <text xml:space="preserve"> group number                 = 132
+ group name                   =   P4_2/mcm
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y,+x,+z+1/2
+ +y,-x,+z+1/2
+ -x,+y,-z+1/2
+ +x,-y,-z+1/2
+ +y,+x,-z
+ -y,-x,-z
+ -x,-y,-z
+ +x,+y,-z
+ +y,-x,-z+1/2
+ -y,+x,-z+1/2
+ +x,-y,+z+1/2
+ -x,+y,+z+1/2
+ -y,-x,+z
+ +y,+x,+z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0</text>
+    </revision>
+  </page>
+  <page>
+    <title>P4 2/nbc</title>
+    <id>672</id>
+    <revision>
+      <id>3403</id>
+      <timestamp>2011-03-20T16:08:20Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 133  group name                   =   P4_2/nbc  crystal system               = Tetragonal  setting number               = 1  number of symmetry op…'</comment>
+      <text xml:space="preserve"> group number                 = 133
+ group name                   =   P4_2/nbc
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y+1/2,+x+1/2,+z+1/2
+ +y+1/2,-x+1/2,+z+1/2
+ -x,+y,-z+1/2
+ +x,-y,-z+1/2
+ +y+1/2,+x+1/2,-z
+ -y+1/2,-x+1/2,-z
+ -x+1/2,-y+1/2,-z+1/2
+ +x+1/2,+y+1/2,-z+1/2
+ +y,-x,-z
+ -y,+x,-z
+ +x+1/2,-y+1/2,+z
+ -x+1/2,+y+1/2,+z
+ -y,-x,+z+1/2
+ +y,+x,+z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+
+ group number                 = 133
+ group name                   =   P4_2/nbc
+ crystal system               = Tetragonal
+ setting number               = 2
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x+1/2,-y+1/2,+z
+ -y+1/2,+x,+z+1/2
+ +y,-x+1/2,+z+1/2
+ -x+1/2,+y,-z
+ +x,-y+1/2,-z
+ +y,+x,-z+1/2
+ -y+1/2,-x+1/2,-z+1/2
+ -x,-y,-z
+ +x+1/2,+y+1/2,-z
+ +y+1/2,-x,-z+1/2
+ -y,+x+1/2,-z+1/2
+ +x+1/2,-y,+z
+ -x,+y+1/2,+z
+ -y,-x,+z+1/2
+ +y+1/2,+x+1/2,+z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5</text>
+    </revision>
+  </page>
+  <page>
+    <title>P4 2/nnm</title>
+    <id>673</id>
+    <revision>
+      <id>3404</id>
+      <timestamp>2011-03-20T16:09:16Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 134  group name                   =   P4_2/nnm  crystal system               = Tetragonal  setting number               = 1  number of symmetry op…'</comment>
+      <text xml:space="preserve"> group number                 = 134
+ group name                   =   P4_2/nnm
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y+1/2,+x+1/2,+z+1/2
+ +y+1/2,-x+1/2,+z+1/2
+ -x,+y,-z
+ +x,-y,-z
+ +y+1/2,+x+1/2,-z+1/2
+ -y+1/2,-x+1/2,-z+1/2
+ -x+1/2,-y+1/2,-z+1/2
+ +x+1/2,+y+1/2,-z+1/2
+ +y,-x,-z
+ -y,+x,-z
+ +x+1/2,-y+1/2,+z+1/2
+ -x+1/2,+y+1/2,+z+1/2
+ -y,-x,+z
+ +y,+x,+z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+
+ group number                 = 134
+ group name                   =   P4_2/nnm
+ crystal system               = Tetragonal
+ setting number               = 2
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x+1/2,-y+1/2,+z
+ -y+1/2,+x,+z+1/2
+ +y,-x+1/2,+z+1/2
+ -x+1/2,+y,-z+1/2
+ +x,-y+1/2,-z+1/2
+ +y,+x,-z
+ -y+1/2,-x+1/2,-z
+ -x,-y,-z
+ +x+1/2,+y+1/2,-z
+ +y+1/2,-x,-z+1/2
+ -y,+x+1/2,-z+1/2
+ +x+1/2,-y,+z+1/2
+ -x,+y+1/2,+z+1/2
+ -y,-x,+z
+ +y+1/2,+x+1/2,+z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0</text>
+    </revision>
+  </page>
+  <page>
+    <title>P4 2/mbc</title>
+    <id>674</id>
+    <revision>
+      <id>3405</id>
+      <timestamp>2011-03-20T16:10:08Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 135  group name                   =   P4_2/mbc  crystal system               = Tetragonal  setting number               = 1  number of symmetry op…'</comment>
+      <text xml:space="preserve"> group number                 = 135
+ group name                   =   P4_2/mbc
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y,+x,+z+1/2
+ +y,-x,+z+1/2
+ -x+1/2,+y+1/2,-z
+ +x+1/2,-y+1/2,-z
+ +y+1/2,+x+1/2,-z+1/2
+ -y+1/2,-x+1/2,-z+1/2
+ -x,-y,-z
+ +x,+y,-z
+ +y,-x,-z+1/2
+ -y,+x,-z+1/2
+ +x+1/2,-y+1/2,+z
+ -x+1/2,+y+1/2,+z
+ -y+1/2,-x+1/2,+z+1/2
+ +y+1/2,+x+1/2,+z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5</text>
+    </revision>
+  </page>
+  <page>
+    <title>P4 2/mnm</title>
+    <id>652</id>
+    <revision>
+      <id>3380</id>
+      <timestamp>2011-03-19T02:30:26Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 136  group name                   =   P4_2/mnm  crystal system               = Tetragonal  setting number               = 1  number of symmetry op…'</comment>
+      <text xml:space="preserve"> group number                 = 136
+ group name                   =   P4_2/mnm
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y+1/2,+x+1/2,+z+1/2
+ +y+1/2,-x+1/2,+z+1/2
+ -x+1/2,+y+1/2,-z+1/2
+ +x+1/2,-y+1/2,-z+1/2
+ +y,+x,-z
+ -y,-x,-z
+ -x,-y,-z
+ +x,+y,-z
+ +y+1/2,-x+1/2,-z+1/2
+ -y+1/2,+x+1/2,-z+1/2
+ +x+1/2,-y+1/2,+z+1/2
+ -x+1/2,+y+1/2,+z+1/2
+ -y,-x,+z
+ +y,+x,+z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0</text>
+    </revision>
+  </page>
+  <page>
+    <title>P4 2/nmc</title>
+    <id>675</id>
+    <revision>
+      <id>3406</id>
+      <timestamp>2011-03-20T16:11:26Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 137  group name                   =   P4_2/nmc  crystal system               = Tetragonal  setting number               = 1  number of symmetry op…'</comment>
+      <text xml:space="preserve"> group number                 = 137
+ group name                   =   P4_2/nmc
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y+1/2,+x+1/2,+z+1/2
+ +y+1/2,-x+1/2,+z+1/2
+ -x+1/2,+y+1/2,-z+1/2
+ +x+1/2,-y+1/2,-z+1/2
+ +y,+x,-z
+ -y,-x,-z
+ -x+1/2,-y+1/2,-z+1/2
+ +x+1/2,+y+1/2,-z+1/2
+ +y,-x,-z
+ -y,+x,-z
+ +x,-y,+z
+ -x,+y,+z
+ -y+1/2,-x+1/2,+z+1/2
+ +y+1/2,+x+1/2,+z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+
+ group number                 = 137
+ group name                   =   P4_2/nmc
+ crystal system               = Tetragonal
+ setting number               = 2
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x+1/2,-y+1/2,+z
+ -y+1/2,+x,+z+1/2
+ +y,-x+1/2,+z+1/2
+ -x,+y+1/2,-z
+ +x+1/2,-y,-z
+ +y+1/2,+x+1/2,-z+1/2
+ -y,-x,-z+1/2
+ -x,-y,-z
+ +x+1/2,+y+1/2,-z
+ +y+1/2,-x,-z+1/2
+ -y,+x+1/2,-z+1/2
+ +x,-y+1/2,+z
+ -x+1/2,+y,+z
+ -y+1/2,-x+1/2,+z+1/2
+ +y,+x,+z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5</text>
+    </revision>
+  </page>
+  <page>
+    <title>P4 2/ncm</title>
+    <id>676</id>
+    <revision>
+      <id>3407</id>
+      <timestamp>2011-03-20T16:12:28Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 138  group name                   =   P4_2/ncm  crystal system               = Tetragonal  setting number               = 1  number of symmetry op…'</comment>
+      <text xml:space="preserve"> group number                 = 138
+ group name                   =   P4_2/ncm
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y+1/2,+x+1/2,+z+1/2
+ +y+1/2,-x+1/2,+z+1/2
+ -x+1/2,+y+1/2,-z
+ +x+1/2,-y+1/2,-z
+ +y,+x,-z+1/2
+ -y,-x,-z+1/2
+ -x+1/2,-y+1/2,-z+1/2
+ +x+1/2,+y+1/2,-z+1/2
+ +y,-x,-z
+ -y,+x,-z
+ +x,-y,+z+1/2
+ -x,+y,+z+1/2
+ -y+1/2,-x+1/2,+z
+ +y+1/2,+x+1/2,+z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+
+ group number                 = 138
+ group name                   =   P4_2/ncm
+ crystal system               = Tetragonal
+ setting number               = 2
+ number of symmetry operators = 16
+ 
+ +x,+y,+z
+ -x+1/2,-y+1/2,+z
+ -y+1/2,+x,+z+1/2
+ +y,-x+1/2,+z+1/2
+ -x,+y+1/2,-z+1/2
+ +x+1/2,-y,-z+1/2
+ +y+1/2,+x+1/2,-z
+ -y,-x,-z
+ -x,-y,-z
+ +x+1/2,+y+1/2,-z
+ +y+1/2,-x,-z+1/2
+ -y,+x+1/2,-z+1/2
+ +x,-y+1/2,+z+1/2
+ -x+1/2,+y,+z+1/2
+ -y+1/2,-x+1/2,+z
+ +y,+x,+z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0</text>
+    </revision>
+  </page>
+  <page>
+    <title>I4/mmm</title>
+    <id>654</id>
+    <revision>
+      <id>3382</id>
+      <timestamp>2011-03-19T02:32:21Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 139  group name                   =     I4/mmm  crystal system               = Tetragonal  setting number               = 1  number of symmetry op…'</comment>
+      <text xml:space="preserve"> group number                 = 139
+ group name                   =     I4/mmm
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 32
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y,+x,+z
+ +y,-x,+z
+ -x,+y,-z
+ +x,-y,-z
+ +y,+x,-z
+ -y,-x,-z
+ -x,-y,-z
+ +x,+y,-z
+ +y,-x,-z
+ -y,+x,-z
+ +x,-y,+z
+ -x,+y,+z
+ -y,-x,+z
+ +y,+x,+z
+ +x+1/2,+y+1/2,+z+1/2
+ -x+1/2,-y+1/2,+z+1/2
+ -y+1/2,+x+1/2,+z+1/2
+ +y+1/2,-x+1/2,+z+1/2
+ -x+1/2,+y+1/2,-z+1/2
+ +x+1/2,-y+1/2,-z+1/2
+ +y+1/2,+x+1/2,-z+1/2
+ -y+1/2,-x+1/2,-z+1/2
+ -x+1/2,-y+1/2,-z+1/2
+ +x+1/2,+y+1/2,-z+1/2
+ +y+1/2,-x+1/2,-z+1/2
+ -y+1/2,+x+1/2,-z+1/2
+ +x+1/2,-y+1/2,+z+1/2
+ -x+1/2,+y+1/2,+z+1/2
+ -y+1/2,-x+1/2,+z+1/2
+ +y+1/2,+x+1/2,+z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 17 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 18 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 19 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 20 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 21 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 22 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 23 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 24 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 25 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 26 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 27 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 28 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 29 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 30 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 31 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 32 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5</text>
+    </revision>
+  </page>
+  <page>
+    <title>I4/mcm</title>
+    <id>653</id>
+    <revision>
+      <id>3381</id>
+      <timestamp>2011-03-19T02:31:26Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 140  group name                   =     I4/mcm  crystal system               = Tetragonal  setting number               = 1  number of symmetry op…'</comment>
+      <text xml:space="preserve"> group number                 = 140
+ group name                   =     I4/mcm
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 32
+ 
+ +x,+y,+z
+ -x,-y,+z
+ -y,+x,+z
+ +y,-x,+z
+ -x,+y,-z+1/2
+ +x,-y,-z+1/2
+ +y,+x,-z+1/2
+ -y,-x,-z+1/2
+ -x,-y,-z
+ +x,+y,-z
+ +y,-x,-z
+ -y,+x,-z
+ +x,-y,+z+1/2
+ -x,+y,+z+1/2
+ -y,-x,+z+1/2
+ +y,+x,+z+1/2
+ +x+1/2,+y+1/2,+z+1/2
+ -x+1/2,-y+1/2,+z+1/2
+ -y+1/2,+x+1/2,+z+1/2
+ +y+1/2,-x+1/2,+z+1/2
+ -x+1/2,+y+1/2,-z+1
+ +x+1/2,-y+1/2,-z+1
+ +y+1/2,+x+1/2,-z+1
+ -y+1/2,-x+1/2,-z+1
+ -x+1/2,-y+1/2,-z+1/2
+ +x+1/2,+y+1/2,-z+1/2
+ +y+1/2,-x+1/2,-z+1/2
+ -y+1/2,+x+1/2,-z+1/2
+ +x+1/2,-y+1/2,+z+1
+ -x+1/2,+y+1/2,+z+1
+ -y+1/2,-x+1/2,+z+1
+ +y+1/2,+x+1/2,+z+1
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 17 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 18 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 19 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 20 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 21 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 1.0
+ 
+ = operator 22 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 1.0
+ 
+ = operator 23 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 1.0
+ 
+ = operator 24 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 1.0
+ 
+ = operator 25 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 26 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 27 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 28 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 29 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 1.0
+ 
+ = operator 30 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 1.0
+ 
+ = operator 31 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 1.0
+ 
+ = operator 32 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 1.0</text>
+    </revision>
+  </page>
+  <page>
+    <title>I4 1/amd</title>
+    <id>616</id>
+    <revision>
+      <id>3343</id>
+      <timestamp>2011-03-18T01:23:18Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 141  group name                   =   I4_1/amd  crystal system               = Tetragonal  setting number               = 1  number of symmetry op…'</comment>
+      <text xml:space="preserve"> group number                 = 141
+ group name                   =   I4_1/amd
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 32
+ 
+ +x,+y,+z
+ -x+1/2,-y+1/2,+z+1/2
+ -y,+x+1/2,+z+1/4
+ +y+1/2,-x,+z+3/4
+ -x+1/2,+y,-z+3/4
+ +x,-y+1/2,-z+1/4
+ +y+1/2,+x+1/2,-z+1/2
+ -y,-x,-z
+ -x,-y+1/2,-z+1/4
+ +x+1/2,+y,-z+3/4
+ +y,-x,-z
+ -y+1/2,+x+1/2,-z+1/2
+ +x+1/2,-y+1/2,+z+1/2
+ -x,+y,+z
+ -y+1/2,-x,+z+3/4
+ +y,+x+1/2,+z+1/4
+ +x+1/2,+y+1/2,+z+1/2
+ -x+1,-y+1,+z+1
+ -y+1/2,+x+1,+z+3/4
+ +y+1,-x+1/2,+z+5/4
+ -x+1,+y+1/2,-z+5/4
+ +x+1/2,-y+1,-z+3/4
+ +y+1,+x+1,-z+1
+ -y+1/2,-x+1/2,-z+1/2
+ -x+1/2,-y+1,-z+3/4
+ +x+1,+y+1/2,-z+5/4
+ +y+1/2,-x+1/2,-z+1/2
+ -y+1,+x+1,-z+1
+ +x+1,-y+1,+z+1
+ -x+1/2,+y+1/2,+z+1/2
+ -y+1,-x+1/2,+z+5/4
+ +y+1/2,+x+1,+z+3/4
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.25
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.75
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.75
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.25
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.25
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.75
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.75
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.25
+ 
+ = operator 17 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 18 =
+  -1.0 0.0 0.0 1.0
+  0.0 -1.0 0.0 1.0
+  0.0 0.0 1.0 1.0
+ 
+ = operator 19 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 1.0
+  0.0 0.0 1.0 0.75
+ 
+ = operator 20 =
+  0.0 1.0 0.0 1.0
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 1.25
+ 
+ = operator 21 =
+  -1.0 0.0 0.0 1.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 1.25
+ 
+ = operator 22 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 1.0
+  0.0 0.0 -1.0 0.75
+ 
+ = operator 23 =
+  0.0 1.0 0.0 1.0
+  1.0 0.0 0.0 1.0
+  0.0 0.0 -1.0 1.0
+ 
+ = operator 24 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 25 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 1.0
+  0.0 0.0 -1.0 0.75
+ 
+ = operator 26 =
+  1.0 0.0 0.0 1.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 1.25
+ 
+ = operator 27 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 28 =
+  0.0 -1.0 0.0 1.0
+  1.0 0.0 0.0 1.0
+  0.0 0.0 -1.0 1.0
+ 
+ = operator 29 =
+  1.0 0.0 0.0 1.0
+  0.0 -1.0 0.0 1.0
+  0.0 0.0 1.0 1.0
+ 
+ = operator 30 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 31 =
+  0.0 -1.0 0.0 1.0
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 1.25
+ 
+ = operator 32 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 1.0
+  0.0 0.0 1.0 0.75
+
+ group number                 = 141
+ group name                   =   I4_1/amd
+ crystal system               = Tetragonal
+ setting number               = 2
+ number of symmetry operators = 32
+ 
+ +x,+y,+z
+ -x+1/2,-y,+z+1/2
+ -y+1/4,+x+3/4,+z+1/4
+ +y+1/4,-x+1/4,+z+3/4
+ -x+1/2,+y,-z+1/2
+ +x,-y,-z
+ +y+1/4,+x+3/4,-z+1/4
+ -y+1/4,-x+1/4,-z+3/4
+ -x,-y,-z
+ +x+1/2,+y,-z+1/2
+ +y+3/4,-x+1/4,-z+3/4
+ -y+3/4,+x+3/4,-z+1/4
+ +x+1/2,-y,+z+1/2
+ -x,+y,+z
+ -y+3/4,-x+1/4,+z+3/4
+ +y+3/4,+x+3/4,+z+1/4
+ +x+1/2,+y+1/2,+z+1/2
+ -x+1,-y+1/2,+z+1
+ -y+3/4,+x+5/4,+z+3/4
+ +y+3/4,-x+3/4,+z+5/4
+ -x+1,+y+1/2,-z+1
+ +x+1/2,-y+1/2,-z+1/2
+ +y+3/4,+x+5/4,-z+3/4
+ -y+3/4,-x+3/4,-z+5/4
+ -x+1/2,-y+1/2,-z+1/2
+ +x+1,+y+1/2,-z+1
+ +y+5/4,-x+3/4,-z+5/4
+ -y+5/4,+x+5/4,-z+3/4
+ +x+1,-y+1/2,+z+1
+ -x+1/2,+y+1/2,+z+1/2
+ -y+5/4,-x+3/4,+z+5/4
+ +y+5/4,+x+5/4,+z+3/4
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.25
+  1.0 0.0 0.0 0.75
+  0.0 0.0 1.0 0.25
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.25
+  -1.0 0.0 0.0 0.25
+  0.0 0.0 1.0 0.75
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.25
+  1.0 0.0 0.0 0.75
+  0.0 0.0 -1.0 0.25
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.25
+  -1.0 0.0 0.0 0.25
+  0.0 0.0 -1.0 0.75
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.75
+  -1.0 0.0 0.0 0.25
+  0.0 0.0 -1.0 0.75
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.75
+  1.0 0.0 0.0 0.75
+  0.0 0.0 -1.0 0.25
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.75
+  -1.0 0.0 0.0 0.25
+  0.0 0.0 1.0 0.75
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.75
+  1.0 0.0 0.0 0.75
+  0.0 0.0 1.0 0.25
+ 
+ = operator 17 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 18 =
+  -1.0 0.0 0.0 1.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 1.0
+ 
+ = operator 19 =
+  0.0 -1.0 0.0 0.75
+  1.0 0.0 0.0 1.25
+  0.0 0.0 1.0 0.75
+ 
+ = operator 20 =
+  0.0 1.0 0.0 0.75
+  -1.0 0.0 0.0 0.75
+  0.0 0.0 1.0 1.25
+ 
+ = operator 21 =
+  -1.0 0.0 0.0 1.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 1.0
+ 
+ = operator 22 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 23 =
+  0.0 1.0 0.0 0.75
+  1.0 0.0 0.0 1.25
+  0.0 0.0 -1.0 0.75
+ 
+ = operator 24 =
+  0.0 -1.0 0.0 0.75
+  -1.0 0.0 0.0 0.75
+  0.0 0.0 -1.0 1.25
+ 
+ = operator 25 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 26 =
+  1.0 0.0 0.0 1.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 1.0
+ 
+ = operator 27 =
+  0.0 1.0 0.0 1.25
+  -1.0 0.0 0.0 0.75
+  0.0 0.0 -1.0 1.25
+ 
+ = operator 28 =
+  0.0 -1.0 0.0 1.25
+  1.0 0.0 0.0 1.25
+  0.0 0.0 -1.0 0.75
+ 
+ = operator 29 =
+  1.0 0.0 0.0 1.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 1.0
+ 
+ = operator 30 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 31 =
+  0.0 -1.0 0.0 1.25
+  -1.0 0.0 0.0 0.75
+  0.0 0.0 1.0 1.25
+ 
+ = operator 32 =
+  0.0 1.0 0.0 1.25
+  1.0 0.0 0.0 1.25
+  0.0 0.0 1.0 0.75</text>
+    </revision>
+  </page>
+  <page>
+    <title>I4 1/acd</title>
+    <id>589</id>
+    <revision>
+      <id>3316</id>
+      <timestamp>2011-03-18T00:47:10Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 142  group name                   =   I4_1/acd  crystal system               = Tetragonal  setting number               = 1  number of symmetry op…'</comment>
+      <text xml:space="preserve"> group number                 = 142
+ group name                   =   I4_1/acd
+ crystal system               = Tetragonal
+ setting number               = 1
+ number of symmetry operators = 32
+ 
+ +x,+y,+z
+ -x+1/2,-y+1/2,+z+1/2
+ -y,+x+1/2,+z+1/4
+ +y+1/2,-x,+z+3/4
+ -x+1/2,+y,-z+1/4
+ +x,-y+1/2,-z+3/4
+ +y+1/2,+x+1/2,-z
+ -y,-x,-z+1/2
+ -x,-y+1/2,-z+1/4
+ +x+1/2,+y,-z+3/4
+ +y,-x,-z
+ -y+1/2,+x+1/2,-z+1/2
+ +x+1/2,-y+1/2,+z
+ -x,+y,+z+1/2
+ -y+1/2,-x,+z+1/4
+ +y,+x+1/2,+z+3/4
+ +x+1/2,+y+1/2,+z+1/2
+ -x+1,-y+1,+z+1
+ -y+1/2,+x+1,+z+3/4
+ +y+1,-x+1/2,+z+5/4
+ -x+1,+y+1/2,-z+3/4
+ +x+1/2,-y+1,-z+5/4
+ +y+1,+x+1,-z+1/2
+ -y+1/2,-x+1/2,-z+1
+ -x+1/2,-y+1,-z+3/4
+ +x+1,+y+1/2,-z+5/4
+ +y+1/2,-x+1/2,-z+1/2
+ -y+1,+x+1,-z+1
+ +x+1,-y+1,+z+1/2
+ -x+1/2,+y+1/2,+z+1
+ -y+1,-x+1/2,+z+3/4
+ +y+1/2,+x+1,+z+5/4
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.25
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.75
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.25
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.75
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.25
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.75
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.0
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.25
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.75
+ 
+ = operator 17 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 18 =
+  -1.0 0.0 0.0 1.0
+  0.0 -1.0 0.0 1.0
+  0.0 0.0 1.0 1.0
+ 
+ = operator 19 =
+  0.0 -1.0 0.0 0.5
+  1.0 0.0 0.0 1.0
+  0.0 0.0 1.0 0.75
+ 
+ = operator 20 =
+  0.0 1.0 0.0 1.0
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 1.25
+ 
+ = operator 21 =
+  -1.0 0.0 0.0 1.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.75
+ 
+ = operator 22 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 1.0
+  0.0 0.0 -1.0 1.25
+ 
+ = operator 23 =
+  0.0 1.0 0.0 1.0
+  1.0 0.0 0.0 1.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 24 =
+  0.0 -1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 1.0
+ 
+ = operator 25 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 1.0
+  0.0 0.0 -1.0 0.75
+ 
+ = operator 26 =
+  1.0 0.0 0.0 1.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 1.25
+ 
+ = operator 27 =
+  0.0 1.0 0.0 0.5
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 28 =
+  0.0 -1.0 0.0 1.0
+  1.0 0.0 0.0 1.0
+  0.0 0.0 -1.0 1.0
+ 
+ = operator 29 =
+  1.0 0.0 0.0 1.0
+  0.0 -1.0 0.0 1.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 30 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 1.0
+ 
+ = operator 31 =
+  0.0 -1.0 0.0 1.0
+  -1.0 0.0 0.0 0.5
+  0.0 0.0 1.0 0.75
+ 
+ = operator 32 =
+  0.0 1.0 0.0 0.5
+  1.0 0.0 0.0 1.0
+  0.0 0.0 1.0 1.25
+
+ group number                 = 142
+ group name                   =   I4_1/acd
+ crystal system               = Tetragonal
+ setting number               = 2
+ number of symmetry operators = 32
+ 
+ +x,+y,+z
+ -x+1/2,-y,+z+1/2
+ -y+1/4,+x+3/4,+z+1/4
+ +y+1/4,-x+1/4,+z+3/4
+ -x+1/2,+y,-z
+ +x,-y,-z+1/2
+ +y+1/4,+x+3/4,-z+3/4
+ -y+1/4,-x+1/4,-z+1/4
+ -x,-y,-z
+ +x+1/2,+y,-z+1/2
+ +y+3/4,-x+1/4,-z+3/4
+ -y+3/4,+x+3/4,-z+1/4
+ +x+1/2,-y,+z
+ -x,+y,+z+1/2
+ -y+3/4,-x+1/4,+z+1/4
+ +y+3/4,+x+3/4,+z+3/4
+ +x+1/2,+y+1/2,+z+1/2
+ -x+1,-y+1/2,+z+1
+ -y+3/4,+x+5/4,+z+3/4
+ +y+3/4,-x+3/4,+z+5/4
+ -x+1,+y+1/2,-z+1/2
+ +x+1/2,-y+1/2,-z+1
+ +y+3/4,+x+5/4,-z+5/4
+ -y+3/4,-x+3/4,-z+3/4
+ -x+1/2,-y+1/2,-z+1/2
+ +x+1,+y+1/2,-z+1
+ +y+5/4,-x+3/4,-z+5/4
+ -y+5/4,+x+5/4,-z+3/4
+ +x+1,-y+1/2,+z+1/2
+ -x+1/2,+y+1/2,+z+1
+ -y+5/4,-x+3/4,+z+3/4
+ +y+5/4,+x+5/4,+z+5/4
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 3 =
+  0.0 -1.0 0.0 0.25
+  1.0 0.0 0.0 0.75
+  0.0 0.0 1.0 0.25
+ 
+ = operator 4 =
+  0.0 1.0 0.0 0.25
+  -1.0 0.0 0.0 0.25
+  0.0 0.0 1.0 0.75
+ 
+ = operator 5 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 6 =
+  1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.25
+  1.0 0.0 0.0 0.75
+  0.0 0.0 -1.0 0.75
+ 
+ = operator 8 =
+  0.0 -1.0 0.0 0.25
+  -1.0 0.0 0.0 0.25
+  0.0 0.0 -1.0 0.25
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 11 =
+  0.0 1.0 0.0 0.75
+  -1.0 0.0 0.0 0.25
+  0.0 0.0 -1.0 0.75
+ 
+ = operator 12 =
+  0.0 -1.0 0.0 0.75
+  1.0 0.0 0.0 0.75
+  0.0 0.0 -1.0 0.25
+ 
+ = operator 13 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 14 =
+  -1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 15 =
+  0.0 -1.0 0.0 0.75
+  -1.0 0.0 0.0 0.25
+  0.0 0.0 1.0 0.25
+ 
+ = operator 16 =
+  0.0 1.0 0.0 0.75
+  1.0 0.0 0.0 0.75
+  0.0 0.0 1.0 0.75
+ 
+ = operator 17 =
+  1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 18 =
+  -1.0 0.0 0.0 1.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 1.0
+ 
+ = operator 19 =
+  0.0 -1.0 0.0 0.75
+  1.0 0.0 0.0 1.25
+  0.0 0.0 1.0 0.75
+ 
+ = operator 20 =
+  0.0 1.0 0.0 0.75
+  -1.0 0.0 0.0 0.75
+  0.0 0.0 1.0 1.25
+ 
+ = operator 21 =
+  -1.0 0.0 0.0 1.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 22 =
+  1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 1.0
+ 
+ = operator 23 =
+  0.0 1.0 0.0 0.75
+  1.0 0.0 0.0 1.25
+  0.0 0.0 -1.0 1.25
+ 
+ = operator 24 =
+  0.0 -1.0 0.0 0.75
+  -1.0 0.0 0.0 0.75
+  0.0 0.0 -1.0 0.75
+ 
+ = operator 25 =
+  -1.0 0.0 0.0 0.5
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 26 =
+  1.0 0.0 0.0 1.0
+  0.0 1.0 0.0 0.5
+  0.0 0.0 -1.0 1.0
+ 
+ = operator 27 =
+  0.0 1.0 0.0 1.25
+  -1.0 0.0 0.0 0.75
+  0.0 0.0 -1.0 1.25
+ 
+ = operator 28 =
+  0.0 -1.0 0.0 1.25
+  1.0 0.0 0.0 1.25
+  0.0 0.0 -1.0 0.75
+ 
+ = operator 29 =
+  1.0 0.0 0.0 1.0
+  0.0 -1.0 0.0 0.5
+  0.0 0.0 1.0 0.5
+ 
+ = operator 30 =
+  -1.0 0.0 0.0 0.5
+  0.0 1.0 0.0 0.5
+  0.0 0.0 1.0 1.0
+ 
+ = operator 31 =
+  0.0 -1.0 0.0 1.25
+  -1.0 0.0 0.0 0.75
+  0.0 0.0 1.0 0.75
+ 
+ = operator 32 =
+  0.0 1.0 0.0 1.25
+  1.0 0.0 0.0 1.25
+  0.0 0.0 1.0 1.25</text>
+    </revision>
+  </page>
+  <page>
+    <title>P6/m</title>
+    <id>695</id>
+    <revision>
+      <id>3429</id>
+      <timestamp>2011-03-20T17:00:00Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 175  group name                   =       P6/m  crystal system               = Hexagonal  setting number               = 1  number of symmetry ope…'</comment>
+      <text xml:space="preserve"> group number                 = 175
+ group name                   =       P6/m
+ crystal system               = Hexagonal
+ setting number               = 1
+ number of symmetry operators = 12
+ 
+ +x,+y,+z
+ -y,+x-y,+z
+ -x+y,-x,+z
+ -x,-y,+z
+ +y,-x+y,+z
+ +x-y,+x,+z
+ -x,-y,-z
+ +y,-x+y,-z
+ +x-y,+x,-z
+ +x,+y,-z
+ -y,+x-y,-z
+ -x+y,-x,-z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  0.0 -1.0 0.0 0.0
+  1.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  -1.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  0.0 1.0 0.0 0.0
+  -1.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 6 =
+  1.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 7 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 1.0 0.0 0.0
+  -1.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 9 =
+  1.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  0.0 -1.0 0.0 0.0
+  1.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  -1.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0</text>
+    </revision>
+  </page>
+  <page>
+    <title>P6 3/m</title>
+    <id>681</id>
+    <revision>
+      <id>3415</id>
+      <timestamp>2011-03-20T16:47:32Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 176  group name                   =     P6_3/m  crystal system               = Hexagonal  setting number               = 1  number of symmetry ope…'</comment>
+      <text xml:space="preserve"> group number                 = 176
+ group name                   =     P6_3/m
+ crystal system               = Hexagonal
+ setting number               = 1
+ number of symmetry operators = 12
+ 
+ +x,+y,+z
+ -y,+x-y,+z
+ -x+y,-x,+z
+ -x,-y,+z+1/2
+ +y,-x+y,+z+1/2
+ +x-y,+x,+z+1/2
+ -x,-y,-z
+ +y,-x+y,-z
+ +x-y,+x,-z
+ +x,+y,-z+1/2
+ -y,+x-y,-z+1/2
+ -x+y,-x,-z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  0.0 -1.0 0.0 0.0
+  1.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  -1.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 5 =
+  0.0 1.0 0.0 0.0
+  -1.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 6 =
+  1.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 7 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  0.0 1.0 0.0 0.0
+  -1.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 9 =
+  1.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 11 =
+  0.0 -1.0 0.0 0.0
+  1.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 12 =
+  -1.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5</text>
+    </revision>
+  </page>
+  <page>
+    <title>P6/mmm</title>
+    <id>696</id>
+    <revision>
+      <id>3430</id>
+      <timestamp>2011-03-20T17:02:45Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 191  group name                   =     P6/mmm  crystal system               = Hexagonal  setting number               = 1  number of symmetry ope…'</comment>
+      <text xml:space="preserve"> group number                 = 191
+ group name                   =     P6/mmm
+ crystal system               = Hexagonal
+ setting number               = 1
+ number of symmetry operators = 24
+ 
+ +x,+y,+z
+ -y,+x-y,+z
+ -x+y,-x,+z
+ -x,-y,+z
+ +y,-x+y,+z
+ +x-y,+x,+z
+ +y,+x,-z
+ +x-y,-y,-z
+ -x,-x+y,-z
+ -y,-x,-z
+ -x+y,+y,-z
+ +x,+x-y,-z
+ -x,-y,-z
+ +y,-x+y,-z
+ +x-y,+x,-z
+ +x,+y,-z
+ -y,+x-y,-z
+ -x+y,-x,-z
+ -y,-x,+z
+ -x+y,+y,+z
+ +x,+x-y,+z
+ +y,+x,+z
+ +x-y,-y,+z
+ -x,-x+y,+z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  0.0 -1.0 0.0 0.0
+  1.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  -1.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  0.0 1.0 0.0 0.0
+  -1.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 6 =
+  1.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  1.0 -1.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  -1.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  -1.0 1.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  1.0 0.0 0.0 0.0
+  1.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 13 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 14 =
+  0.0 1.0 0.0 0.0
+  -1.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 15 =
+  1.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 16 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 17 =
+  0.0 -1.0 0.0 0.0
+  1.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 18 =
+  -1.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 19 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 20 =
+  -1.0 1.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 21 =
+  1.0 0.0 0.0 0.0
+  1.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 22 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 23 =
+  1.0 -1.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 24 =
+  -1.0 0.0 0.0 0.0
+  -1.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0</text>
+    </revision>
+  </page>
+  <page>
+    <title>P6/mcc</title>
+    <id>697</id>
+    <revision>
+      <id>3431</id>
+      <timestamp>2011-03-20T17:03:29Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 192  group name                   =     P6/mcc  crystal system               = Hexagonal  setting number               = 1  number of symmetry ope…'</comment>
+      <text xml:space="preserve"> group number                 = 192
+ group name                   =     P6/mcc
+ crystal system               = Hexagonal
+ setting number               = 1
+ number of symmetry operators = 24
+ 
+ +x,+y,+z
+ -y,+x-y,+z
+ -x+y,-x,+z
+ -x,-y,+z
+ +y,-x+y,+z
+ +x-y,+x,+z
+ +y,+x,-z+1/2
+ +x-y,-y,-z+1/2
+ -x,-x+y,-z+1/2
+ -y,-x,-z+1/2
+ -x+y,+y,-z+1/2
+ +x,+x-y,-z+1/2
+ -x,-y,-z
+ +y,-x+y,-z
+ +x-y,+x,-z
+ +x,+y,-z
+ -y,+x-y,-z
+ -x+y,-x,-z
+ -y,-x,+z+1/2
+ -x+y,+y,+z+1/2
+ +x,+x-y,+z+1/2
+ +y,+x,+z+1/2
+ +x-y,-y,+z+1/2
+ -x,-x+y,+z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  0.0 -1.0 0.0 0.0
+  1.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  -1.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 5 =
+  0.0 1.0 0.0 0.0
+  -1.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 6 =
+  1.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 8 =
+  1.0 -1.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  -1.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 10 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 11 =
+  -1.0 1.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 12 =
+  1.0 0.0 0.0 0.0
+  1.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 13 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 14 =
+  0.0 1.0 0.0 0.0
+  -1.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 15 =
+  1.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 16 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 17 =
+  0.0 -1.0 0.0 0.0
+  1.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 18 =
+  -1.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 19 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 20 =
+  -1.0 1.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 21 =
+  1.0 0.0 0.0 0.0
+  1.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 22 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 23 =
+  1.0 -1.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 24 =
+  -1.0 0.0 0.0 0.0
+  -1.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.5</text>
+    </revision>
+  </page>
+  <page>
+    <title>P6 3/mcm</title>
+    <id>689</id>
+    <revision>
+      <id>3423</id>
+      <timestamp>2011-03-20T16:54:28Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 193  group name                   =   P6_3/mcm  crystal system               = Hexagonal  setting number               = 1  number of symmetry ope…'</comment>
+      <text xml:space="preserve"> group number                 = 193
+ group name                   =   P6_3/mcm
+ crystal system               = Hexagonal
+ setting number               = 1
+ number of symmetry operators = 24
+ 
+ +x,+y,+z
+ -y,+x-y,+z
+ -x+y,-x,+z
+ -x,-y,+z+1/2
+ +y,-x+y,+z+1/2
+ +x-y,+x,+z+1/2
+ +y,+x,-z+1/2
+ +x-y,-y,-z+1/2
+ -x,-x+y,-z+1/2
+ -y,-x,-z
+ -x+y,+y,-z
+ +x,+x-y,-z
+ -x,-y,-z
+ +y,-x+y,-z
+ +x-y,+x,-z
+ +x,+y,-z+1/2
+ -y,+x-y,-z+1/2
+ -x+y,-x,-z+1/2
+ -y,-x,+z+1/2
+ -x+y,+y,+z+1/2
+ +x,+x-y,+z+1/2
+ +y,+x,+z
+ +x-y,-y,+z
+ -x,-x+y,+z
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  0.0 -1.0 0.0 0.0
+  1.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  -1.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 5 =
+  0.0 1.0 0.0 0.0
+  -1.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 6 =
+  1.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 8 =
+  1.0 -1.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  -1.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 10 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 11 =
+  -1.0 1.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 12 =
+  1.0 0.0 0.0 0.0
+  1.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 13 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 14 =
+  0.0 1.0 0.0 0.0
+  -1.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 15 =
+  1.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 16 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 17 =
+  0.0 -1.0 0.0 0.0
+  1.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 18 =
+  -1.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 19 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 20 =
+  -1.0 1.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 21 =
+  1.0 0.0 0.0 0.0
+  1.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 22 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 23 =
+  1.0 -1.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 24 =
+  -1.0 0.0 0.0 0.0
+  -1.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0</text>
+    </revision>
+  </page>
+  <page>
+    <title>P6 3/mmc</title>
+    <id>690</id>
+    <revision>
+      <id>3424</id>
+      <timestamp>2011-03-20T16:55:14Z</timestamp>
+      <contributor>
+        <username>Bylaska</username>
+        <id>10</id>
+      </contributor>
+      <comment>Created page with ' group number                 = 194  group name                   =   P6_3/mmc  crystal system               = Hexagonal  setting number               = 1  number of symmetry ope…'</comment>
+      <text xml:space="preserve"> group number                 = 194
+ group name                   =   P6_3/mmc
+ crystal system               = Hexagonal
+ setting number               = 1
+ number of symmetry operators = 24
+ 
+ +x,+y,+z
+ -y,+x-y,+z
+ -x+y,-x,+z
+ -x,-y,+z+1/2
+ +y,-x+y,+z+1/2
+ +x-y,+x,+z+1/2
+ +y,+x,-z
+ +x-y,-y,-z
+ -x,-x+y,-z
+ -y,-x,-z+1/2
+ -x+y,+y,-z+1/2
+ +x,+x-y,-z+1/2
+ -x,-y,-z
+ +y,-x+y,-z
+ +x-y,+x,-z
+ +x,+y,-z+1/2
+ -y,+x-y,-z+1/2
+ -x+y,-x,-z+1/2
+ -y,-x,+z
+ -x+y,+y,+z
+ +x,+x-y,+z
+ +y,+x,+z+1/2
+ +x-y,-y,+z+1/2
+ -x,-x+y,+z+1/2
+ 
+ = operator 1 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 2 =
+  0.0 -1.0 0.0 0.0
+  1.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 3 =
+  -1.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 4 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 5 =
+  0.0 1.0 0.0 0.0
+  -1.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 6 =
+  1.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 7 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 8 =
+  1.0 -1.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 9 =
+  -1.0 0.0 0.0 0.0
+  -1.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 10 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 11 =
+  -1.0 1.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 12 =
+  1.0 0.0 0.0 0.0
+  1.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 13 =
+  -1.0 0.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 14 =
+  0.0 1.0 0.0 0.0
+  -1.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 15 =
+  1.0 -1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.0
+ 
+ = operator 16 =
+  1.0 0.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 17 =
+  0.0 -1.0 0.0 0.0
+  1.0 -1.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 18 =
+  -1.0 1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 -1.0 0.5
+ 
+ = operator 19 =
+  0.0 -1.0 0.0 0.0
+  -1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 20 =
+  -1.0 1.0 0.0 0.0
+  0.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 21 =
+  1.0 0.0 0.0 0.0
+  1.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.0
+ 
+ = operator 22 =
+  0.0 1.0 0.0 0.0
+  1.0 0.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 23 =
+  1.0 -1.0 0.0 0.0
+  0.0 -1.0 0.0 0.0
+  0.0 0.0 1.0 0.5
+ 
+ = operator 24 =
+  -1.0 0.0 0.0 0.0
+  -1.0 1.0 0.0 0.0
+  0.0 0.0 1.0 0.5</text>
+    </revision>
+  </page>
+</mediawiki>
