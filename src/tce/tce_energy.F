@@ -737,12 +737,13 @@ cold        rec_mem=1
 !QuantumComputing qrotation
        if (.not.rtdb_get(rtdb,'tce:qrotation',
      4  mt_log,1,qrotation)) qrotation=.false.
-      if(qrotation) then
        nacto=0
+       nrotv=0
+       nrot=0
+      if(qrotation) then
         if (.not.rtdb_get(rtdb,'tce:nacto',mt_int,1,nacto))
      1    call errquit('tce_energy:nacto=0 while qrotation T',0,
      2      RTDB_ERR)
-       nrotv=0
         if (.not.rtdb_get(rtdb,'tce:nrotv',mt_int,1,nrotv))
      1    call errquit('tce_energy:nrotv=0 while qrotation T',0,
      2      RTDB_ERR)
@@ -830,19 +831,12 @@ c
         write_in3=res_log
        end if
 !
-       res_log=.false.
-       if (.not.rtdb_get(rtdb,'tce:nts',mt_log,1,res_log)) then
-         continue 
-       else
-         ccsd_var='ic'
-       end if
+       if (.not.rtdb_get(rtdb,'tce:nts',mt_log,1,res_log)) 
+     c      res_log=.true.
+       if(res_log) ccsd_var='ic'
 !
        slice=.false.
-       if (.not.rtdb_get(rtdb,'tce:xmem',mt_int,1,xmem)) then
-         continue
-       else
-         slice=.true. 
-       end if
+       if (rtdb_get(rtdb,'tce:xmem',mt_int,1,xmem))slice=.true. 
 !
        d4d5=.false.
        if (.not.rtdb_get(rtdb,'tce:d4d5',mt_log,1,d4d5)) then
@@ -1638,7 +1632,7 @@ c          call util_file_name('v2int',.false.,.true.,filename)
 ! === jaguar ===
          if(read_int)  then
 c          call util_file_name('v2int',.false.,.true.,filename)
-          call util_file_name0('v2int',.false.,.true.,5)
+          call util_file_name0('v2int',.false.,.true.,filename,fldgts)
           unitn=78
           call read_tensor(filename,d_v2,size_2e,unitn)
 !     re-split the int files?
@@ -1946,7 +1940,7 @@ c
 ! === jaguar ===
          if(read_int)  then
 c          call util_file_name('v2int',.false.,.true.,filename)
-          call util_file_name0('v2int',.false.,.true.,5)
+          call util_file_name0('v2int',.false.,.true.,filename,fldgts)
           unitn=78
           call read_tensor(filename,d_v2,size_2e,unitn)
 !     re-split the int files?

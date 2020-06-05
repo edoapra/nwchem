@@ -981,6 +981,8 @@ c     &       MA_ERR)
       real*8   c_rho_1exc,c_rho_1pxc,lattice_unitg,lattice_omega
       external control_gga
       external c_rho_1exc,c_rho_1pxc,lattice_unitg,lattice_omega
+      logical  control_only_lda
+      external control_only_lda
 
 *     *** define hm ****
       pi   = 4.0d0*datan(1.0d0)
@@ -1002,7 +1004,8 @@ c     &       MA_ERR)
 
 *     **** PBE96 GGA part ****
       gga = control_gga()
-      if ((gga.ge.10).and.(gga.lt.100)) then
+      !if ((gga.ge.10).and.(gga.lt.100)) then
+      if (.not.control_only_lda()) then
          call D3dB_n2ft3d(1,n2ft3d)
          if (.not.
      >      BA_push_get(mt_dbl,(ispin*n2ft3d),'trho',trho(2),trho(1)))
@@ -1425,6 +1428,12 @@ c     &       MA_ERR)
                    smearcorrection 
      >                 = smearcorrection 
      >                 - kT*wb*dexp(-x*x)/(4.0d0*dsqrt(pi))
+                 else if (smeartype.eq.4) then
+                   smearcorrection
+     >                 = smearcorrection
+     >                 - kT*wb*dexp(-(x+dsqrt(0.5d0))*(x+dsqrt(0.5d0)))
+     >                 * (1.0d0 + dsqrt(2.0d0) * x)
+     >                 / (2.0d0 * dsqrt(pi))
                  end if
                  shift1  = shift1 + 1
                  shift2  = shift2 + 1
@@ -1442,6 +1451,7 @@ c     &       MA_ERR)
 
 
 c  set nwpw:fractional_smeartype 1 #0-none, 1-Fermi-Dirac, 2-Gaussian, 3-Hermite
+c                                   4-Marzari-Vanderbilt
 
       real*8 function cpsi_occ_distribution(smeartype,e)
       implicit none
@@ -1463,6 +1473,10 @@ c  set nwpw:fractional_smeartype 1 #0-none, 1-Fermi-Dirac, 2-Gaussian, 3-Hermite
          end if
       else if (smeartype.eq.2) then
          f = 0.5d0*util_erfc(e)
+      else if (smeartype.eq.4) then
+         f = dexp(-(e + dsqrt(0.5d0)) * (e + dsqrt(0.5d0)))
+     >     * dsqrt(0.125d0 / datan(1.0d0))
+     >     + 0.5d0 * util_erfc(e + dsqrt(0.5d0))
       else 
          if (e.gt.0.0d0) then
            f = 0.0d0
@@ -2123,9 +2137,10 @@ c     *****  read initial wavefunctions into psi1  ****
           write(*,*) "set nwpw:psi_nogrid .false."
           write(*,*)
           value = c_wvfnc_expander(rtdb)
-          expand_psi = .true.
+          !expand_psi = .true.
 
         end if
+        expand_psi = .true.
         value = btdb_parallel(.true.)
 
         end if

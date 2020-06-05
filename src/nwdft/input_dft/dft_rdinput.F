@@ -1206,6 +1206,7 @@ c
       if (movecs_out.eq.' ')then
          if (movecs_in.eq.'atomic' .or. movecs_in.eq.'hcore' .or. 
      $        movecs_in.eq.'project' .or. movecs_in.eq.'fragment'.or.
+     $        movecs_in.eq.'molden'.or.
      $        movecs_in.eq.'rotate')then
             call util_file_name('movecs', .false.,.false.,movecs_out)
          else
@@ -1229,7 +1230,7 @@ c     permanent directory
 c
       if (movecs_in.eq.'atomic' .or. movecs_in.eq.'hcore' .or. 
      $        movecs_in.eq.'project' .or. movecs_in.eq.'fragment'.or.
-     $        movecs_in.eq.'rotate')then
+     $        movecs_in.eq.'rotate'.or.movecs_in.eq.'molden')then
          movecs_guess = movecs_in
       else
          call util_file_name_resolve(movecs_in, .false.)

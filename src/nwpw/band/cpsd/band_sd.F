@@ -190,8 +190,8 @@
       external      cpsp_comment
       integer  ion_nconstraints,ion_ndof
       external ion_nconstraints,ion_ndof
-      logical  ion_makehmass2
-      external ion_makehmass2
+      logical  ion_makehmass2,control_only_lda
+      external ion_makehmass2,control_only_lda
 
 
 
@@ -203,7 +203,7 @@
       pi = 4.0d0*datan(1.0d0)
 
       call nwpw_timing_init()
-      call dcopy(30,0.0d0,0,E,1)
+      call dcopy(50,0.0d0,0,E,1)
 
 
 *     **** get parallel variables ****
@@ -274,7 +274,8 @@
       call C3dB_pfft_init()
 
 *     ***** Initialize double D3dB data structure ****
-      if ((control_gga().ge.10).and.(control_gga().le.200)) then
+      !if ((control_gga().ge.10).and.(control_gga().le.200)) then
+      if (.not.control_only_lda()) then
          call D3dB_Init(1,ngrid(1),ngrid(2),ngrid(3),mapping)
          call G_init()
          call mask_init()
@@ -435,6 +436,9 @@ c     **** allocate other variables ****
 *     **** initialize SIC and HFX  ****
 c      call pspw_init_SIC(rtdb,ne)
        call band_init_HFX(rtdb,nbrillioun,ispin,ne)
+
+*     **** initialize rho_symmetry  ****
+      call c_rho_symmetrizer_init()
 
 *     **** initialize QM/MM ****
 c      call pspw_init_APC(rtdb)
@@ -627,6 +631,9 @@ c     **** print brillioun zone - extra logic for distributed kpoints ****
 
 
       if (mprint) then
+
+
+         call c_rho_symmetrizer_print(luout)
          
          write(luout,1270)
          if (.not.control_translation()) write(luout,1271)
@@ -692,7 +699,7 @@ c
       if (icount.lt.it_out) go to 1
       if (mprint) 
      > write(luout,*) 
-     > '*** arived at the Maximum iiteration.   terminated.'
+     > '*** arrived at the Maximum iteration.   terminated.'
 
 *::::::::::::::::::::  end of iteration loop  :::::::::::::::::::::::::
 
@@ -956,6 +963,7 @@ c      end if
 
       call ion_end()
       call ion_end_FixIon()
+      call c_rho_symmetrizer_end()
 c      call pspw_end_SIC()
       call band_end_HFX()
 c      call pspw_end_APC()
@@ -981,7 +989,8 @@ c
       call C3dB_pfft_end()
       call cpsi_data_end()
       call C3dB_end(1)
-      if ((control_gga().ge.10).and.(control_gga().le.200)) then
+      !if ((control_gga().ge.10).and.(control_gga().le.200)) then
+      if (.not.control_only_lda()) then
          call mask_end()
          call G_end()
          call D3dB_end(1)

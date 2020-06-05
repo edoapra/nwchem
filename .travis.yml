@@ -74,7 +74,7 @@ cache:
     os: linux
     arch: arm64
 
-matrix:
+jobs:
   include:
     - stage: compile
       <<: *compile-template-ompi-x86
@@ -151,6 +151,9 @@ matrix:
     - os: osx
       arch: amd64
       env: NWCHEM_MODULES=qmandpw ARMCI_NETWORK=MPI-PR
+    - os: linux
+      arch: amd64
+      env: NWCHEM_MODULES=qmandpw ARMCI_NETWORK=MPI-PR
     - os: osx
       arch: amd64
       env: NWCHEM_MODULES=tinyqmpw ARMCI_NETWORK=MPI-PT USE_SIMINT=1 SIMINT_MAXAM=3
@@ -158,7 +161,7 @@ matrix:
 compiler:
   - gcc
 dist: bionic
-osx_image: xcode10.3
+osx_image: xcode11.3
 git:
   depth: 32
 

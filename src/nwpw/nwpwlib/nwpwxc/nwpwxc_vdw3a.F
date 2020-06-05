@@ -26,9 +26,6 @@ C GNU General Public License for more details.
 C For the GNU General Public License, see <http://www.gnu.org/licenses/>
 
       subroutine  nwpwxc_vdw3_dftd3(options,n,iz,xyz,lat,eout,g,g_lat)
-#if defined(__FLANG)
-      use ieee_arithmetic
-#endif
       implicit none
       character*(*) options
 c number of atoms
@@ -125,6 +122,10 @@ c local and dummy variables
       real*8  x,y,dispr,displ,gdsp,dum,xx(10),dum6(86)
       real*8  dum1,dum2,dum3(3)
       logical ex,pot,fdum
+#if defined(__FLANG) || defined(XLFLINUX)
+      logical util_isnan
+      external util_isnan
+#endif
       logical minc6list(max_elem),maxc6list(max_elem),minc6,maxc6
 
 c PBE0/def2-QZVP atomic values 
@@ -821,8 +822,8 @@ c     .           numgrad,version,echo,g,gdsp,x,rthr2,fix)
 c check if nwpwxc_gdisp yields same energy as nwpwxc_edisp
       dum=abs((disp-gdsp)/disp)
 !if this check gives compiler errors, replace is with a different NaN check
-#if defined(__FLANG)
-      if (ieee_support_nan(dum)) call
+#if defined(__FLANG) || defined(XLFLINUX)
+      if (util_isnan(dum)) call
      c     nwpwxc_stoprun('internal NaN-error')
 #else
       if (ISNAN(dum)) call nwpwxc_stoprun('internal NaN-error')
@@ -907,13 +908,13 @@ c gradient test 6-7 digits should be the same
         IF (echo) write(*,*)'Doing numerical stresstensor...'
       allocate(abc(3,n))
 
-        call xyz_to_abc(xyz,abc,lat,n)
+        call nwpwxc_xyz_to_abc(xyz,abc,lat,n)
         dum1=1.d-5
         if (echo) write(*,*)'step: ',dum1
         do i=1,3
           do j=1,3
             lat(j,i)=lat(j,i)+dum1
-            call nwpw_abc_to_xyz(abc,xyz,lat,n)
+            call nwpwxc_abc_to_xyz(abc,xyz,lat,n)
             !call nwpwxc_edisp...dum1
        call nwpwxc_pbcedisp(max_elem,maxc,n,xyz,iz,c6ab,mxc,r2r4,r0ab,
      .           rcov,rs6,rs8,rs10,alp6,alp8,alp10,version,noabc,
@@ -935,7 +936,7 @@ c gradient test 6-7 digits should be the same
             lat(j,i)=lat(j,i)+dum1
             call nwpwxc_abc_to_xyz(abc,xyz,lat,n)
 
-            write(*,'("L"2i1,2E14.6)'),i,j,dum,g_lat(j,i)
+            write(*,'("L"2i1,2E14.6)') i,j,dum,g_lat(j,i)
           enddo !j
         enddo !i
 
@@ -2036,7 +2037,7 @@ c Implemented display of atom ranges instead of whole list of atoms
         write(*,'(i4)',advance='no') grplist(j-1,i)
         dash=0
        endif
-      write(*,*)''
+      write(*,*)' '
       enddo
 
 c old display list code

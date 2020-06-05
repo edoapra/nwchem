@@ -2,6 +2,9 @@
 #
 # $Id$
 #
+function get_limit () {
+    echo $(($1 < $2 ? $1 : $2))
+}
 let np=1
 if [ -n "$1" ]; then
    np="$1"
@@ -36,7 +39,9 @@ PERMANENT_DIR=`pwd`/testoutputs ./runtests.mpi.unix procs $np dft_hess_start dft
 ./runtests.mpi.unix procs $np disp_dimer_ch4 disp_dimer_ch4_cgmin h2o-b3lyp-disp
 ./runtests.mpi.unix procs $np cosmo_h2cco2 cosmo_h2cco2mg cosmo_h2cco2mg_ecp
 ./runtests.mpi.unix procs $np cosmo_h3co cosmo_h3co_ecp cosmo_h2cco2na cosmo_h3co_gp
-./runtests.mpi.unix procs $np dplot dft_meta dft_mpwb1khf dft_m05nh2ch3 prop_uhf_h2o
+np_small=$(get_limit $np 16)
+./runtests.mpi.unix procs $np_small dplot 
+./runtests.mpi.unix procs $np dft_meta dft_mpwb1khf dft_m05nh2ch3 prop_uhf_h2o
 ./runtests.mpi.unix procs $np et_zn_dimer vectors_rotate sad_ch3hf
 ./runtests.mpi.unix procs $np h2o_diag_to_cg h2o_cg_to_diag 
 ./runtests.mpi.unix procs $np h2o_diag_opt h2o_cg_opt h2o_diag_opt_ub3lyp h2o_cg_opt_ub3lyp h2o_cg_opt_rob3lyp
@@ -71,13 +76,37 @@ echo 'Please check the final values for the last optimized structure.'
 ./runtests.mpi.unix procs $np uo2_sodft
 ./runtests.mpi.unix procs $np uo2_sodft_grad
 ./runtests.mpi.unix procs $np si2cl6_gc
-./runtests.mpi.unix procs $np pspw
+np_small=$(get_limit $np 32)
+./runtests.mpi.unix procs $np_small pspw
 ./runtests.mpi.unix procs $np pspw_SiC
-./runtests.mpi.unix procs $np pspw_md
-./runtests.mpi.unix procs $np paw
-./runtests.mpi.unix procs $np pspw_polarizability
+./runtests.mpi.unix procs $np pspw_blyp_h2o
+./runtests.mpi.unix procs $np pspw_vs98_h2o
+./runtests.mpi.unix procs $np pspw_revpbe_h2o
+./runtests.mpi.unix procs $np pspw_pbesol_h2o
+./runtests.mpi.unix procs $np pspw_pbe0_h2o
+./runtests.mpi.unix procs $np pspw_hse_h2o
+./runtests.mpi.unix procs $np pspw_tpss03_h2o
+./runtests.mpi.unix procs $np pspw_scan_h2o
+./runtests.mpi.unix procs $np pspw_acm_h2o
+./runtests.mpi.unix procs $np pspw_becke97_h2o
+./runtests.mpi.unix procs $np pspw_becke98_h2o
+./runtests.mpi.unix procs $np pspw_hcth120_h2o
+./runtests.mpi.unix procs $np pspw_hcth147_h2o
+./runtests.mpi.unix procs $np pspw_hcth407_h2o
+./runtests.mpi.unix procs $np pspw_hcth_h2o  
+./runtests.mpi.unix procs $np pspw_mpw1k_h2o 
+./runtests.mpi.unix procs $np pspw_sogga_h2o
+./runtests.mpi.unix procs $np pspw_sogga11-x_h2o
+./runtests.mpi.unix procs $np pspw_b3lyp_h2o
+./runtests.mpi.unix procs $np pspw_beef_h2o
+np_small=$(get_limit $np 64)
+./runtests.mpi.unix procs $np_small pspw_md
+./runtests.mpi.unix procs $np_small paw
+np_small=$(get_limit $np 16)
+./runtests.mpi.unix procs $np_small pspw_polarizability
 ./runtests.mpi.unix procs $np pspw_stress
-./runtests.mpi.unix procs $np band
+np_small=$(get_limit $np 64)
+./runtests.mpi.unix procs $np_small band
 ./runtests.mpi.unix procs $np tddft_h2o
 ./runtests.mpi.unix procs $np tddft_h2o_uhf
 ./runtests.mpi.unix procs $np tddft_h2o_mxvc20
@@ -126,7 +155,8 @@ fi
 ./runtests.mpi.unix procs $np oniom1
 ./runtests.mpi.unix procs $np oniom2
 ./runtests.mpi.unix procs $np oniom3
-./runtests.mpi.unix procs $np oniom4
+np_small=$(get_limit $np 32)
+./runtests.mpi.unix procs $np_small oniom4
 ./runtests.mpi.unix procs $np c60_ecp
 ./runtests.mpi.unix procs $np h2o_vscf
 #
@@ -139,9 +169,10 @@ fi
 #
 # qmmm tests
 #./runtests.mpi.unix procs $np asa_qmmm
-./runtests.mpi.unix procs $np qmmm_grad0
-./runtests.mpi.unix procs $np lys_qmmm
-./runtests.mpi.unix procs $np ethane_qmmm
+np_small=$(get_limit $np 8)
+./runtests.mpi.unix procs $np_small qmmm_grad0
+./runtests.mpi.unix procs $np_small lys_qmmm
+./runtests.mpi.unix procs $np_small ethane_qmmm
 ./runtests.mpi.unix procs $np qmmm_opt0
 echo "qmmm frequency  test  may  fail"
 ./runtests.mpi.unix procs $np qmmm_freq
@@ -237,7 +268,8 @@ echo "qmmm frequency  test  may  fail"
 ./runtests.mpi.unix procs $np mep-test
 ./runtests.mpi.unix procs $np pkzb
 ./runtests.mpi.unix procs $np k6h2o
-./runtests.mpi.unix procs $np mcscf_ch2 mcscf_ozone
+np_small=$(get_limit $np 16)
+./runtests.mpi.unix procs $np_small mcscf_ch2 mcscf_ozone
 ./runtests.mpi.unix procs $np h2o_raman_3
 ./runtests.mpi.unix procs $np h2o_raman_4
 ./runtests.mpi.unix procs $np tropt-ch3nh2
@@ -275,6 +307,7 @@ echo "qmmm frequency  test  may  fail"
 # new xc functionals for 7.0.0
 ./runtests.mpi.unix procs $np dft_rscan
 ./runtests.mpi.unix procs $np dft_scan
+./runtests.mpi.unix procs $np rt_tddft_dimer_charge
 #
 #--- if we only want quick tests get out now!
 if [[ "$what" == "fast" ]]; then
@@ -320,3 +353,5 @@ echo 'Please check the final gradient values for correctness.'
 
 ./runtests.mpi.unix procs $np tddftgrad_pyridine_opt 
 ./runtests.mpi.unix procs $np tddftgrad_phenoxy_radical
+
+./runtests.mpi.unix procs $np  qmd_props

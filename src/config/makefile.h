@@ -104,15 +104,18 @@ endif
        endif
 #check if f77 was enabled
        GA_HAS_F77 = $(shell ${EXTERNAL_GA_PATH}/bin/ga-config --enable-f77 | awk '/yes/ {print "Y"}')
-       ifndef GA_HAS_F77
-          $(info NWChem requires Global Arrays built with Fortran support)
+       ifneq ($(GA_HAS_F77),Y)
+       $(info NWChem requires Global Arrays built with Fortran support)
           $(error )
        endif
 #check peigs interface       
-       GA_HAS_PEIGS = $(shell ${EXTERNAL_GA_PATH}/bin/ga-config --enable-peigs | awk '/yes/ {print "Y"}')
-       ifndef GA_HAS_PEIGS
-          $(info NWChem requires Global Arrays built with Peigs support)
+       GA_HAS_PEIGS = $(shell ${EXTERNAL_GA_PATH}/bin/ga-config --use_peigs | awk '/1/ {print "Y"}')
+       GA_HAS_SCALAPACK = $(shell ${EXTERNAL_GA_PATH}/bin/ga-config --use_scalapack | awk '/1/ {print "Y"}')
+       ifneq ($(GA_HAS_PEIGS),Y)
+       ifneq ($(GA_HAS_SCALAPACK),Y)
+       $(info NWChem requires Global Arrays built with either Peigs or Scalapack support)
           $(error )
+       endif
        endif
 #check blas size
        GA_BLAS_SIZE = $(shell ${EXTERNAL_GA_PATH}/bin/ga-config --blas_size)
@@ -130,6 +133,9 @@ endif
        GA_PATH=$(EXTERNAL_GA_PATH)
      else
        GA_PATH=$(NWCHEM_TOP)/src/tools/install
+     endif
+     ifeq ($(BLAS_SIZE),4)
+	 USE_64TO32=y
      endif
       
 #
@@ -201,6 +207,13 @@ endif
 ifdef BUILD_SCALAPACK
 NW_CORE_SUBDIRS += libext
       SCALAPACK=-L$(NWCHEM_TOP)/src/libext/lib -lscalapack
+endif      
+ifdef BUILD_MPICH
+NW_CORE_SUBDIRS += libext
+      PATH := $(NWCHEM_TOP)/src/libext/bin:$(PATH)
+      MPI_INCLUDE = $(shell PATH=$(NWCHEM_TOP)/src/libext/bin:$(PATH) $(NWCHEM_TOP)/src/tools/guess-mpidefs --mpi_include)
+      MPI_LIB     = $(shell PATH=$(NWCHEM_TOP)/src/libext/bin:$(PATH)  $(NWCHEM_TOP)/src/tools/guess-mpidefs --mpi_lib)
+      LIBMPI      = $(shell PATH=$(NWCHEM_TOP)/src/libext/bin:$(PATH) $(NWCHEM_TOP)/src/tools/guess-mpidefs --libmpi)
 endif      
 ifndef EXTERNAL_GA_PATH
 NW_CORE_SUBDIRS += tools
@@ -990,8 +1003,8 @@ ifeq ($(TARGET),MACX)
         GNUMAJOR=$(shell $(_FC) -dM -E - < /dev/null 2> /dev/null | grep __GNUC__ |cut -c18-)
         ifdef GNUMAJOR
         GNUMINOR=$(shell $(_FC) -dM -E - < /dev/null 2> /dev/null | egrep __GNUC_MINOR | cut -c24)
-        GNU_GE_4_6 = $(shell [ $(GNUMAJOR) -gt 4 -o \( $(GNUMAJOR) -eq 4 -a $(GNUMINOR) -ge 6 \) ] && echo true)
-        GNU_GE_4_8 = $(shell [ $(GNUMAJOR) -gt 4 -o \( $(GNUMAJOR) -eq 4 -a $(GNUMINOR) -ge 8 \) ] && echo true)
+        GNU_GE_4_6 = $(shell [ $(GNUMAJOR) -gt 4 ] || [ $(GNUMAJOR) -eq 4 -a $(GNUMINOR) -ge 6 ] && echo true)
+        GNU_GE_4_8 = $(shell [ $(GNUMAJOR) -gt 4 ] || [ $(GNUMAJOR) -eq 4 -a $(GNUMINOR) -ge 8 ] && echo true)
         GNU_GE_6 = $(shell [ $(GNUMAJOR) -ge 6  ] && echo true)
         endif
         ifeq ($(GNU_GE_4_6),true)
@@ -1108,7 +1121,7 @@ ifeq ($(TARGET),MACX64)
      FC = gfortran
      _FC = gfortran
    endif
-   ifeq ($(FC),$(findstring $(FC),gfortran gfortran-4 gfortran-5 gfortran-6 gfortran-7 gfortran-8 gfortran-9))
+   ifeq ($(FC),$(findstring $(FC),gfortran gfortran-4 gfortran-5 gfortran-6 gfortran-7 gfortran-8 gfortran-9 gfortran-10 gfortran-11 gfortran-12))
      _FC = gfortran
    endif
 #
@@ -1305,10 +1318,10 @@ ifeq ($(TARGET),$(findstring $(TARGET),LINUX CYGNUS CYGWIN))
      FC = gfortran
      _FC = gfortran
    endif
-   ifeq ($(FC),$(findstring $(FC),gfortran gfortran-4 gfortran-5 gfortran-6 gfortran-7 gfortran-8 gfortran-9 i686-w64-mingw32.static-gfortran))
+   ifeq ($(FC),$(findstring $(FC),gfortran gfortran-4 gfortran-5 gfortran-6 gfortran-7 gfortran-8 gfortran-9 gfortran-10 gfortran-11 gfortran-12 i686-w64-mingw32.static-gfortran))
      _FC = gfortran
    endif
-   ifeq ($(CC),$(findstring $(CC),gcc gcc-4 gcc-5 gcc-6 gcc-7 gcc-8 gcc-9 i686-w64-mingw32.static-gcc))
+   ifeq ($(CC),$(findstring $(CC),gcc gcc-4 gcc-5 gcc-6 gcc-7 gcc-8 gcc-9 gcc-10 gcc-11 gcc-12 i686-w64-mingw32.static-gcc))
    ifneq ($(CC),cc)
      _CC = gcc
    endif
@@ -1341,8 +1354,8 @@ ifeq ($(TARGET),$(findstring $(TARGET),LINUX CYGNUS CYGWIN))
         GNUMAJOR=$(shell $(_FC) -dM -E - < /dev/null 2> /dev/null | grep __GNUC__ |cut -c18-)
         ifdef GNUMAJOR
           GNUMINOR=$(shell $(FC) -dM -E - < /dev/null 2> /dev/null | egrep __VERS | cut -c24)
-          GNU_GE_4_6 = $(shell [ $(GNUMAJOR) -gt 4 -o \( $(GNUMAJOR) -eq 4 -a $(GNUMINOR) -ge 6 \) ] && echo true)
-          GNU_GE_4_8 = $(shell [ $(GNUMAJOR) -gt 4 -o \( $(GNUMAJOR) -eq 4 -a $(GNUMINOR) -ge 8 \) ] && echo true)
+          GNU_GE_4_6 = $(shell [ $(GNUMAJOR) -gt 4 ] || [ $(GNUMAJOR) -eq 4 -a $(GNUMINOR) -ge 6 ] && echo true)
+          GNU_GE_4_8 = $(shell [ $(GNUMAJOR) -gt 4 ] || [ $(GNUMAJOR) -eq 4 -a $(GNUMINOR) -ge 8 ] && echo true)
         GNU_GE_6 = $(shell [ $(GNUMAJOR) -ge 6  ] && echo true)
         GNU_GE_8 = $(shell [ $(GNUMAJOR) -ge 8  ] && echo true)
         ifeq ($(GNU_GE_4_6),true)
@@ -1688,10 +1701,13 @@ endif
       ifeq ($(FC),ifort)
        _FC=ifort
       endif
-     ifeq ($(FC),$(findstring $(FC),gfortran gfortran-4 gfortran-5 gfortran6 gfortran-6 gfortran-7 gfortran7 gfortran-8 gfortran8 gfortran-9 gfortran9 i686-w64-mingw32.static-gfortran))
+      ifeq ($(FC),ifx)
+       _FC=ifort
+      endif
+     ifeq ($(FC),$(findstring $(FC),gfortran gfortran-4 gfortran-5 gfortran6 gfortran-6 gfortran-7 gfortran7 gfortran-8 gfortran8 gfortran-9 gfortran9 gfortran-10 gfortran10 gfortran-11 gfortran-12 i686-w64-mingw32.static-gfortran))
        _FC= gfortran
      endif
-     ifeq ($(CC),$(findstring $(CC),gcc gcc-4 gcc-5 gcc6 gcc-6 gcc-7 gcc7 gcc-8 gcc8 gcc-9 gcc9 i686-w64-mingw32.static-gcc))
+     ifeq ($(CC),$(findstring $(CC),gcc gcc-4 gcc-5 gcc6 gcc-6 gcc-7 gcc7 gcc-8 gcc8 gcc-9 gcc9 gcc-10 gcc10 gcc-11 gcc-12 i686-w64-mingw32.static-gcc))
      ifneq ($(CC),cc)
        _CC= gcc
      endif
@@ -1708,6 +1724,9 @@ endif
        USE_FLANG=1
       endif
       ifeq ($(CC),clang)
+       _CC=gcc
+      endif
+      ifeq ($(CC),icx)
        _CC=gcc
       endif
      ifeq ($(FC),$(findstring $(FC),xlf2008_r xlf_r xlf xlf90 xlf90_r))
@@ -1767,11 +1786,11 @@ endif
          CFLAGS_FORGA = -mcmodel=medium
          FFLAGS_FORGA = -mcmodel=medium
         else
-        GNUMAJOR=$(shell $(_FC) -dM -E - < /dev/null 2> /dev/null | grep __GNUC__ |cut -c18-)
+        GNUMAJOR=$(shell $(FC) -dM -E - < /dev/null 2> /dev/null | grep __GNUC__ |cut -c18-)
         ifdef GNUMAJOR
-        GNUMINOR=$(shell $(_FC) -dM -E - < /dev/null 2> /dev/null | egrep __GNUC_MINOR | cut -c24)
-        GNU_GE_4_6 = $(shell [ $(GNUMAJOR) -gt 4 -o \( $(GNUMAJOR) -eq 4 -a $(GNUMINOR) -ge 6 \) ] && echo true)
-        GNU_GE_4_8 = $(shell [ $(GNUMAJOR) -gt 4 -o \( $(GNUMAJOR) -eq 4 -a $(GNUMINOR) -ge 8 \) ] && echo true)
+        GNUMINOR=$(shell $(FC) -dM -E - < /dev/null 2> /dev/null | egrep __GNUC_MINOR | cut -c24)
+        GNU_GE_4_6 = $(shell [ $(GNUMAJOR) -gt 4 ] || [ $(GNUMAJOR) -eq 4 -a $(GNUMINOR) -ge 6 ] && echo true)
+        GNU_GE_4_8 = $(shell [ $(GNUMAJOR) -gt 4 ] || [ $(GNUMAJOR) -eq 4 -a $(GNUMINOR) -ge 8 ] && echo true)
         endif
         GNU_GE_6 = $(shell [ $(GNUMAJOR) -ge 6  ] && echo true)
         GNU_GE_8 = $(shell [ $(GNUMAJOR) -ge 8  ] && echo true)
@@ -1781,7 +1800,12 @@ endif
           DEFINES  += -DGCC46
         endif
         ifeq ($(GNU_GE_4_8),true)
-          FDEBUG =-O2 -g -fno-aggressive-loop-optimizations
+          ifeq ($(_CPU),ppc64le)
+          FDEBUG =-O0 -g 
+          else
+          FDEBUG =-O2 -g 
+          endif
+          FDEBUG +=-fno-aggressive-loop-optimizations
           FOPTIMIZE +=-fno-aggressive-loop-optimizations
           FFLAGS_FORGA += -fno-aggressive-loop-optimizations
           FOPTIONS += -Warray-bounds
@@ -1955,11 +1979,11 @@ endif
            @exit 1
        endif
        FDEBUG= -O2 -g
-       FOPTIMIZE = -O3  -unroll  -ip
+       FOPTIMIZE = -O3  -unroll
+       ifneq ($(FC),ifx)
+         FOPTIMIZE += -ip
+       endif
        FOPTIONS += -align -fpp
-           ifdef USE_OFFLOAD
-               EXPLICITF = TRUE
-           endif
            CPP=fpp -P 
            ifeq ($(_IFCV15ORNEWER), Y)
 # fpp seems to get lost with ifort 15 in the offload bit
@@ -2010,15 +2034,6 @@ endif
          LDOPTIONS += -L$(VTUNE_AMPLIFIER_XE_DIR)/lib64 
          EXTRA_LIBS += -littnotify
        endif
-       ifdef USE_OPENMP
-         ifeq ($(_IFCV15ORNEWER), Y)
-           FOPTIONS += -qno-openmp-offload
-         else
-           ifeq ($(_IFCV14), Y)
-             FOPTIONS += -no-openmp-offload
-           endif
-         endif
-       endif
        DEFINES+= -DIFCV8 -DIFCLINUX
        ifeq ($(FC),ifc)
          FOPTIONS += -quiet
@@ -2040,24 +2055,28 @@ endif
          else
 #           FOPTIMIZE += -xHost
 #crazy simd options
-	   ifeq ($(_IFCV17), Y)
-	     ifeq ($(_GOTAVX512F),Y)
-	       FOPTIMIZE += -axCORE-AVX512
-	     else ifeq ($(_GOTAVX2),Y)
-	       FOPTIMIZE += -axCORE-AVX2
-	     else ifeq ($(_GOTAVX),Y)
-	         FOPTIMIZE += -axAVX
-	     else ifeq ($(_GOTSSE42),Y)
-                FOPTIMIZE += -axSSE4.2 
+           ifneq ($(FC),ifx)
+	     ifeq ($(_IFCV17), Y)
+	       ifeq ($(_GOTAVX512F),Y)
+	         FOPTIMIZE += -axCORE-AVX512
+	       else ifeq ($(_GOTAVX2),Y)
+	         FOPTIMIZE += -axCORE-AVX2
+	       else ifeq ($(_GOTAVX),Y)
+	           FOPTIMIZE += -axAVX
+	       else ifeq ($(_GOTSSE42),Y)
+                  FOPTIMIZE += -axSSE4.2
+	       endif
 	     endif
+             FOPTIONS += -finline-limit=250
+           else
+             FOPTIONS += -what # for debugging, remove later
 	   endif
          endif
-         FOPTIONS += -finline-limit=250
        else
          ifeq ($(_GOTSSE3),Y) 
            FOPTIMIZE += -xP -no-prec-div
          else
-           FOPTIMIZE +=  -tpp7 -ip 
+           FOPTIMIZE +=  -tpp7 -ip
            FOPTIMIZE += -xW
          endif
        endif
@@ -2844,9 +2863,9 @@ ifndef SIMINT_HOME
 SIMINT_HOME=$(NWCHEM_TOP)/src/NWints/simint/libsimint_source/simint_install
 endif
   ifdef SIMINT_LIB64
-    EXTRA_LIBS += -L$(SIMINT_HOME)/lib64 -lsimint
+    EXTRA_LIBS += -L$(SIMINT_HOME)/lib64 -lnwc_simint
   else
-    EXTRA_LIBS += -L$(SIMINT_HOME)/lib -lsimint
+    EXTRA_LIBS += -L$(SIMINT_HOME)/lib -lnwc_simint
   endif
 endif
 

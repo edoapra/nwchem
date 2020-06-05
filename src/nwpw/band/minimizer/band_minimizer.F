@@ -40,7 +40,7 @@
 *     ***** energy variables ****
       logical spin_orbit
       integer ispin,ne(2)
-      real*8  E(10)
+      real*8  E(50)
       real*8  dipole(3)
       real*8  stress(3,3),lstress(6)
 
@@ -132,8 +132,8 @@
       external pspw_reformat_c_wvfnc,control_check_charge_multiplicity
       integer  control_mapping,control_minimizer,control_np_dimensions
       external control_mapping,control_minimizer,control_np_dimensions
-      integer  control_scf_algorithm
-      external control_scf_algorithm
+      integer  control_scf_algorithm,control_ks_algorithm
+      external control_scf_algorithm,control_ks_algorithm
       real*8   control_ks_alpha,control_kerker_g0
       external control_ks_alpha,control_kerker_g0
       integer  control_ks_maxit_orb,control_ks_maxit_orbs
@@ -156,6 +156,8 @@ c      external      cpsp_comment
       external control_smooth_cutoff
       real*8   control_smooth_cutoff_values
       external control_smooth_cutoff_values
+      logical  nwpwxc_is_on,control_only_lda,control_precondition
+      external nwpwxc_is_on,control_only_lda,control_precondition
 
 
 *****************************|  PROLOGUE  |****************************
@@ -164,7 +166,7 @@ c      external      cpsp_comment
       pi = 4.0d0*datan(1.0d0)
 
       call nwpw_timing_init()
-      call dcopy(10,0.0d0,0,E,1)
+      call dcopy(50,0.0d0,0,E,1)
 
 
 *     **** get parallel variables ****
@@ -240,10 +242,12 @@ c      external      cpsp_comment
       call C3dB_pfft_init()
 
 *     **** initialize D3dB data structure and mask for GGA ****
-      if ((control_gga().ge.10).and.(control_gga().le.200)) THEN
-      call D3dB_Init(1,ngrid(1),ngrid(2),ngrid(3),mapping)
-      call G_init()
-      call mask_init()
+c      if (((control_gga().ge.10).and.(control_gga().le.200))
+c     >     .or.nwpwxc_is_on()) THEN
+      if (.not.control_only_lda()) then
+         call D3dB_Init(1,ngrid(1),ngrid(2),ngrid(3),mapping)
+         call G_init()
+         call mask_init()
       end if
 
 c*     **** read ions ****
@@ -373,8 +377,8 @@ c      call center_mass(gx,gy,gz)
      >                    cpsp_zv(ia),cpsp_lmax(ia)
            comment = cpsp_comment(ia)
            i = inp_strlen(comment)
-           write(6,1157) comment(1:i)
-           write(6,1158) cpsp_psp_type(ia)
+           write(luout,1157) comment(1:i)
+           write(luout,1158) cpsp_psp_type(ia)
            write(luout,1152) cpsp_lmax(ia)
            write(luout,1153) cpsp_locp(ia)
 c           write(luout,1154) cpsp_lmmax(ia)
@@ -483,6 +487,8 @@ c     **** print brillioun zone - extra logic for distributed kpoints ****
      >      control_smooth_cutoff_values(1)*lattice_wcut(),
      >      control_smooth_cutoff_values(2)
 
+         call c_rho_symmetrizer_print(luout)
+
          write(luout,1270)
          write(luout,1280) control_time_step(),control_fake_mass()
          write(luout,1290) control_tole(),control_tolc()
@@ -490,32 +496,40 @@ c     **** print brillioun zone - extra logic for distributed kpoints ****
      >                 control_it_in(),control_it_out()
 
          if ((minimizer.eq.5).or.(minimizer.eq.8)) then
-           write(6,1291)
-           write(6,1292)
+           write(luout,1291)
+           if (control_ks_algorithm().eq.0)  then
+              if (control_precondition()) then
+                 write(luout,1292) "preconditioned conjugate gradient"
+              else
+                 write(luout,1292) "conjugate gradient"
+              end if
+           end if
+           if (control_ks_algorithm().eq.1) write(luout,1292) "rmm-diis"
            write(luout,1295) control_ks_maxit_orb(),
      >                       control_ks_maxit_orbs()
            if (control_scf_algorithm().eq.0)
-     >       write(6,1293) "simple mixing"
+     >       write(luout,1293) "simple mixing"
            if (control_scf_algorithm().eq.1)
-     >       write(6,1293) "Anderson potential mixing"
+     >       write(luout,1293) "Anderson potential mixing"
            if (control_scf_algorithm().eq.2)
-     >       write(6,1293) "Johnson-Pulay mixing"
+     >       write(luout,1293) "Johnson-Pulay mixing"
            if (control_scf_algorithm().eq.3)
-     >       write(6,1293) "Anderson density mixing"
+     >       write(luout,1293) "Anderson density mixing"
            if (minimizer.eq.5) write(luout,1296) "potential"
            if (minimizer.eq.8) write(luout,1296) "density"
-           write(6,1294) control_ks_alpha()
-           write(6,1301) control_kerker_g0()
+           write(luout,1294) control_ks_alpha()
          end if
          if (control_fractional()) then
-           write(6,1297)
+           write(luout,1297)
            if (control_fractional_smeartype().eq.0)
-     >       write(6,1298) "step function"
+     >       write(luout,1298) "step function"
            if (control_fractional_smeartype().eq.1)
-     >       write(6,1298) "Fermi-Dirac"
+     >       write(luout,1298) "Fermi-Dirac"
            if (control_fractional_smeartype().eq.2)
-     >       write(6,1298) "Gaussian"
-           write(6,1299) control_fractional_kT(),
+     >       write(luout,1298) "Gaussian"
+           if (control_fractional_smeartype().eq.4)
+     >       write(luout,1298) "Marzari-Vanderbilt"
+           write(luout,1299) control_fractional_kT(),
      >                   control_fractional_temperature(),
      >                   control_fractional_alpha()
          end if
@@ -652,10 +666,12 @@ cc      call band_kp_structure(rtdb)
       call cpsi_data_end()
       call C3dB_pfft_end()
       call C3dB_end(1)
-      IF ((control_gga().ge.10).and.(control_gga().le.200)) THEN
-      call mask_end()
-      call G_end()
-      call D3dB_end(1)
+c      IF (((control_gga().ge.10).and.(control_gga().le.200)) 
+c     >     .or.nwpwxc_is_on()) THEN
+      if (.not.control_only_lda()) then
+         call mask_end()
+         call G_end()
+         call D3dB_end(1)
       end if
 
 *                |***************************|
@@ -787,7 +803,7 @@ cc      call band_kp_structure(rtdb)
  1290 FORMAT(5X, ' tolerance=',E8.3,' (energy)',E12.3,
      &        ' (density)')
  1291 FORMAT(/' Kohn-Sham scf parameters:')
- 1292 FORMAT(5X, ' Kohn-Sham algorithm  = conjugate gradient')
+ 1292 FORMAT(5X, ' Kohn-Sham algorithm  = ',A)
  1293 FORMAT(5X, ' scf algorithm        = ',A)
  1294 FORMAT(5X, ' scf mixing parameter =',F7.4)
  1295 FORMAT(5X, ' Kohn-Sham iterations = ',I3,
@@ -840,7 +856,7 @@ cc      call band_kp_structure(rtdb)
 
  9010 FORMAT(//' >> job terminated due to code =',I3,' <<')
 
- 9000 if (taskid.eq.MASTER) write(6,9010) ierr
+ 9000 if (taskid.eq.MASTER) write(luout,9010) ierr
       call Parallel_Finalize()
 
       band_minimizer = value

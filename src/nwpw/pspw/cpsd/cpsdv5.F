@@ -195,6 +195,8 @@ c#include "Parallel.fh"
 
       logical  control_mparallelized
       external control_mparallelized
+      logical  nwpw_cosmo_on
+      external nwpw_cosmo_on
 
 *                            |************|
 *****************************|  PROLOGUE  |****************************
@@ -494,6 +496,7 @@ c         end if
 *     **** initialize QM/MM ****
       call pspw_init_APC(rtdb)
       call pspw_qmmm_init(rtdb)
+      !call pspw_cdft_init(rtdb)
 
 *     **** initialize frac_occ data structure ****
 c      call frac_occ_init(rtdb,ispin,ne)
@@ -727,7 +730,7 @@ c           write(luout,1151) (psp_rc(i,ia),i=0,psp_lmax(ia))
       if (icount.lt.it_out) go to 1
       if (oprint) 
      > write(luout,*) 
-     > '*** arived at the Maximum iiteration.   terminated.'
+     > '*** arrived at the Maximum iteration.   terminated.'
 
 *::::::::::::::::::::  end of iteration loop  :::::::::::::::::::::::::
 
@@ -1039,6 +1042,17 @@ c            write(luout,1706) E(18)
          end if
          end if
 
+*      **** write out COSMO energies ****
+       if (nwpw_cosmo_on()) then
+            write(luout,1730) 
+            write(luout,1731) 
+            write(luout,1732) E(46)
+            write(luout,1733) E(47)
+            write(luout,1734) E(48)
+            write(luout,1735) E(46)+E(47)+E(48),
+     >                        (E(46)+E(47)+E(48))*27.2116d0*23.06d0
+       end if
+
       end if
 
       if (mparallelized) then
@@ -1345,6 +1359,14 @@ c      call frac_occ_end()
  1706 FORMAT( ' (QM+MM)/Cavity energy  :',E19.10)
 
  1720 FORMAT(/' Dispersion energy   :',E19.10)
+
+ 1730 FORMAT(/' COSMO energies:')
+ 1731 FORMAT(5x,' screen=(epsilon-1)/(epsilon+1/2)')
+ 1732 FORMAT(5x,' screen*Qelc*B*q energy  :',E19.10)
+ 1733 FORMAT(5x,' screen*Qion*B*q energy  :',E19.10)
+ 1734 FORMAT(5x,' screen*0.5*q*A*q energy :',E19.10)
+ 1735 FORMAT(5x,' solvation energy (w/o QM polarization) :',E19.10,
+     >   /45x,' (',F8.3,' kcal/mol)')
 
  9010 FORMAT(//' >> job terminated due to code =',I3,' <<')
 

@@ -26,6 +26,8 @@ c
 
 #include "bafdecls.fh"
 #include "btdb.fh"
+#include "util.fh"
+#include "stdio.fh"
 #include "errquit.fh"
 #include "pspw_APC.fh"
 
@@ -33,7 +35,7 @@ c
       integer taskid,MASTER
       parameter (MASTER=0)
 
-      logical value,doapc
+      logical value,doapc,oprint
       integer i,j,k,n,npack0,nfft3d
       integer nx,ny,nxh
       integer zero,pzero,qzero
@@ -41,15 +43,20 @@ c
       real*8  coef,x,gg,fourpi
 
 *     **** external functions ****
-      logical  control_Mulliken
-      integer  ion_nion_qm, G_indx
+      logical  control_Mulliken,control_print
+      logical  nwpw_born_on,nwpw_cosmo2_on,nwpw_cdft_on
+      integer  ion_nion_qm,G_indx
       real*8   lattice_omega
-      external control_Mulliken
-      external ion_nion_qm, G_indx
+      external control_Mulliken,control_print
+      external nwpw_born_on,nwpw_cosmo2_on,nwpw_cdft_on
+      external ion_nion_qm,G_indx
       external lattice_omega
 
       if (.not.btdb_get(rtdb,'nwpw:APC',mt_log,1,doapc))
-     >  doapc = control_Mulliken()
+     >  doapc = control_Mulliken().or.
+     >          nwpw_born_on().or.
+     >          nwpw_cosmo2_on().or.
+     >          nwpw_cdft_on()
 
 *     **** read in nga from rtdb ***
       value = btdb_get(rtdb,'nwpw_APC:nga',mt_int,1,nga)
@@ -65,8 +72,9 @@ c
       end if
       ngs = nga*ion_nion_qm()
       call Parallel_taskid(taskid)
-      call Pack_npack(0,npack0)
+      oprint = (taskid.eq.MASTER).and.control_print(print_debug)
 
+      call Pack_npack(0,npack0)
 
 *     **** Allocate memory needed for pspw_APC ****
       value = BA_alloc_get(mt_dbl,ngs*ngs,'AAPC',A(2),A(1))
@@ -171,14 +179,14 @@ c    >     + i+1
       if (.not. value) call errquit('popping of stack memory',0, MA_ERR)
 
 *     **** DEBUG - write out information *****
-      if (taskid.eq.MASTER) then
-         write(*,*) 
-         write(*,*) 'initializing pspw_APC data structure'
-         write(*,*) '------------------------------------'
-         write(*,*) 'nga, ngs:',nga,ngs
-         write(*,*) 'Gc      :',Gc
+      if (oprint) then
+         write(luout,*) 
+         write(luout,*) 'initializing pspw_APC data structure'
+         write(luout,*) '------------------------------------'
+         write(luout,*) 'nga, ngs:',nga,ngs
+         write(luout,*) 'Gc      :',Gc
          do i=1,nga
-           write(*,*) 'APC gamma:',i, dbl_mb(gamma(1)+i-1)
+           write(luout,*) 'APC gamma:',i, dbl_mb(gamma(1)+i-1)
          end do
       end if
 
@@ -491,6 +499,558 @@ c      call D3dB_r_SMul(1,scal1,dcpl_mb(tmp(1)),dcpl_mb(tmp(1)))
       return
       end
 
+
+
+*     ***********************************
+*     *                                 *
+*     *         pspw_sumAm_APC          *
+*     *                                 *
+*     ***********************************
+      real*8 function pspw_sumAm_APC(ngs,Am)
+      implicit none
+      integer ngs
+      real*8 Am(ngs,ngs)
+
+*     **** local variables ***
+      integer i,j
+      real*8  sum0
+
+      sum0 = 0.0d0
+      do i=1,ngs
+         do j=1,ngs
+            sum0 = sum0 + Am(i,j)
+         end do
+      end do
+
+      pspw_sumAm_APC = sum0
+      return
+      end
+
+*     ***********************************
+*     *                                 *
+*     *         pspw_Amtimesu_APC       *
+*     *                                 *
+*     ***********************************
+      real*8 function pspw_Amtimesu_APC(ngs,Am,u)
+      implicit none
+      integer ngs
+      real*8 Am(ngs,ngs)
+      real*8 u(ngs)
+
+*     **** local variables ***
+      integer i,j
+      real*8  sum0
+
+      sum0 = 0.0d0
+      do i=1,ngs
+         do j=1,ngs
+            sum0 = sum0 + Am(i,j)*u(j)
+         end do
+      end do
+
+      pspw_Amtimesu_APC = sum0
+      return
+      end
+
+*     ***********************************
+*     *                                 *
+*     *         pspw_Vfac_APC           *
+*     *                                 *
+*     ***********************************
+      real*8 function pspw_Vfac_APC(ngs,Am,u,i)
+      implicit none
+      integer ngs
+      real*8 Am(ngs,ngs)
+      real*8 u(ngs)
+      integer i
+
+*     **** local variables ****
+      integer j
+      real*8 sum0
+
+      sum0 = 0.0d0
+      do j=1,ngs
+         sum0 = sum0 + Am(i,j)*u(j)
+      end do
+
+      pspw_Vfac_APC = sum0
+      return
+      end
+
+
+*     ***********************************
+*     *					*
+*     *		pspw_VQ_APC		*
+*     *					*
+*     ***********************************
+*
+*   This routine calculates dE/drho(G) where E is a function of model q. In order 
+* to use this routine Am = inverse A must be calculated
+* for the current geometry.
+*
+*   Entry - nion: number of qm atoms
+*         - u: dE/dq(ii) - derivative of E wrt to model charges q(ii)
+*   Exit - VQ(G) = dE/dq(ii)*dq(ii)/drho(G)
+*
+*   Note - pspw_gen_APC needs to be called to Am=inv(A) before 
+*          this routine is called.
+*
+      subroutine pspw_VQ_APC(nion,u,VQ)
+      implicit none
+      integer    nion
+      real*8     u(*)
+      complex*16 VQ(*)
+
+#include "bafdecls.fh"
+#include "errquit.fh"
+#include "pspw_APC.fh"
+
+*     ***** local variables ****
+      integer taskid,MASTER
+      parameter (MASTER=0)
+
+      logical value
+      integer i,j,iii,ii
+      integer npack0
+      real*8  sumAm,afac,sumAmU,omega
+
+      integer exi(2)
+      integer gaus_i(2)
+
+*     ***** external functions ****
+      real*8   lattice_omega,pspw_Vfac_APC
+      external lattice_omega,pspw_Vfac_APC
+      real*8   pspw_sumAm_APC,pspw_Amtimesu_APC
+      external pspw_sumAm_APC,pspw_Amtimesu_APC
+
+      if (nga.gt.0) then
+         omega = lattice_omega()
+         call Parallel_taskid(taskid)
+         call Pack_npack(0,npack0)
+
+*        **** get memory from stack ****
+         value = BA_push_get(mt_dcpl,npack0,'ttexi',exi(2),exi(1))
+         value = value.and.
+     >           BA_push_get(mt_dcpl,npack0,'ghaus_i1',
+     >                       gaus_i(2),gaus_i(1))
+         if (.not. value) 
+     >      call errquit('pspw_VQ_APC:push stack',0, MA_ERR)
+
+         sumAm  = pspw_sumAm_APC(ngs,dbl_mb(Am(1)))
+         sumAmU = pspw_Amtimesu_APC(ngs,dbl_mb(Am(1)),u)
+         do i=1,ngs
+            u(i) = u(i) - (sumAmU/SumAm)
+         end do
+
+
+*        ***** calculate VQ(G) ****
+         !***call Parallel_shared_vector_zero(.true.,2*npack0,VQ)
+         do ii=1,nion
+
+*           **** structure factor  ****
+            call strfac_pack(0,ii,dcpl_mb(exi(1)))
+
+            do iii=1,nga
+               i = iii + (ii-1)*nga
+
+               afac = omega*pspw_Vfac_APC(ngs,dbl_mb(Am(1)),u,i)
+
+*              *** gaus_i(G))***
+               call Pack_tc_Mul(0,dbl_mb(gaus(1)+npack0*(iii-1)),
+     >                       dcpl_mb(exi(1)),
+     >                       dcpl_mb(gaus_i(1)))
+
+*              *** VQ(G) += afac*w(G)*gaus_i(G))***
+               call Pack_tc_aMulAdd(0,afac,
+     >                              dbl_mb(w(1)),
+     >                              dcpl_mb(gaus_i(1)),
+     >                              VQ)
+            end do
+         end do
+         call Pack_c_addzero(0,omega*sumAmU/sumAm,VQ)
+
+         value =           BA_pop_stack(gaus_i(2))
+         value = value.and.BA_pop_stack(exi(2))
+         if (.not. value) 
+     >      call errquit('pspw_VQ_APC:pop stack',0,MA_ERR)
+
+
+      end if
+      return
+      end
+
+
+*     ***********************************
+*     *					*
+*     *		pspw_cosmo_V0_APC	*
+*     *					*
+*     ***********************************
+*
+      subroutine pspw_cosmo_V0_APC(vcosmo)
+      implicit none
+      complex*16 vcosmo(*)
+
+#include "bafdecls.fh"
+#include "pspw_APC.fh"
+#include "errquit.fh"
+
+*     **** local variables ****
+      logical value
+      integer taskid,np,tid,nthreads
+      integer j,ii,k,nion,nion_q
+      real*8 sb,qj,x,y,z,r
+      integer u(2),qcoord_ptr
+
+*     **** external functions ****
+      integer  Parallel_threadid,Parallel_nthreads
+      external Parallel_threadid,Parallel_nthreads
+      integer  ion_nion_qm,nwpw_cosmo_nq
+      external ion_nion_qm,nwpw_cosmo_nq
+      integer  nwpw_cosmo_qcoord_ptr
+      external nwpw_cosmo_qcoord_ptr
+      real*8   nwpw_cosmo_screen_qc0,ion_rion
+      external nwpw_cosmo_screen_qc0,ion_rion
+
+      call Parallel_taskid(taskid)
+      call Parallel_np(np)
+      tid = Parallel_threadid()
+      nthreads = Parallel_nthreads()
+      nion     = ion_nion_qm()
+      nion_q   = nwpw_cosmo_nq()
+      qcoord_ptr = nwpw_cosmo_qcoord_ptr()
+
+*     **** get memory from stack ****
+      value = BA_push_get(mt_dbl,ngs,'u',u(2),u(1))
+      if (.not.value) 
+     >   call errquit('pspw_cosmo_V_APC:push stack',0, MA_ERR)
+
+*     **** calculate u = dEQelcq/dq ****
+      call Parallel_shared_vector_zero(.true.,ngs,dbl_mb(u(1)))
+      do j=tid+1,nion_q,nthreads
+         qj = nwpw_cosmo_screen_qc0(j)
+         do ii=taskid+1,nion,np
+            x = dbl_mb(qcoord_ptr+3*(j-1))  -ion_rion(1,ii)
+            y = dbl_mb(qcoord_ptr+3*(j-1)+1)-ion_rion(2,ii)
+            z = dbl_mb(qcoord_ptr+3*(j-1)+2)-ion_rion(3,ii)
+            r = dsqrt(x*x + y*y + z*z)
+            sb = -qj/r
+            do k=1,nga
+                 dbl_mb(u(1)+(ii-1)*nga+k-1)
+     >         = dbl_mb(u(1)+(ii-1)*nga+k-1) + sb
+            end do
+         end do
+      end do
+      call Parallel_Vector_SumAll(ngs,dbl_mb(u(1)))
+
+      call pspw_VQ_APC(nion,dbl_mb(u(1)),vcosmo)
+
+      value = BA_pop_stack(u(2))
+      if (.not.value)
+     >   call errquit('pspw_cosmo_V0_APC:pop stack',0, MA_ERR)
+
+      return
+      end 
+
+
+*     ***********************************
+*     *					*
+*     *		pspw_cosmo_V_APC	*
+*     *					*
+*     ***********************************
+*
+      subroutine pspw_cosmo_V_APC(ispin,ne,dng,vcosmo)
+      implicit none
+      integer ispin,ne(2)
+      complex*16 dng(*), vcosmo(*)
+
+#include "bafdecls.fh"
+#include "pspw_APC.fh"
+#include "errquit.fh"
+
+*     **** local variables ****
+      logical value
+      integer nthreads,tid,np,taskid
+      integer j,ii,ia,k
+      integer nion_q,nion
+      real*8 x,y,z,r,sb,qj
+      real*8 suma,sumb
+
+      integer BQ_ptr,u(2),qcoord_ptr
+      
+*     **** external functions ****
+      integer  Parallel_nthreads,Parallel_threadid
+      external Parallel_nthreads,Parallel_threadid
+      integer  nwpw_cosmo_BQ_ptr,nwpw_cosmo_nq,ion_nion_qm,ion_katm
+      external nwpw_cosmo_BQ_ptr,nwpw_cosmo_nq,ion_nion_qm,ion_katm
+      real*8   pspw_getQtot_APC,ion_rion,psp_zv,pspw_getQ_APC
+      external pspw_getQtot_APC,ion_rion,psp_zv,pspw_getQ_APC
+      integer  nwpw_cosmo_qcoord_ptr
+      external nwpw_cosmo_qcoord_ptr
+      real*8   nwpw_cosmo_screen_qc0
+      external nwpw_cosmo_screen_qc0
+
+      call Parallel_taskid(taskid)
+      call Parallel_np(np)
+      tid = Parallel_threadid()
+      nthreads = Parallel_nthreads()
+      nion     = ion_nion_qm()
+      nion_q   = nwpw_cosmo_nq()
+
+*     **** generate APC charges ****
+      call pspw_gen_APC(ispin,ne,dng)
+
+      qcoord_ptr = nwpw_cosmo_qcoord_ptr()
+      BQ_ptr     = nwpw_cosmo_BQ_ptr()
+      call Parallel_shared_vector_zero(.true.,nion_q,dbl_mb(BQ_ptr))
+      
+      write(*,*) "pspw_cosmo_V_APC HERA"
+      do ii=1,nion
+         write(*,*) "ii,Q=",ii,pspw_getQtot_APC(ii)
+      end do
+      write(*,*)
+
+      !**** q-Qion + q-Qelc BQ contributions ****
+      do j=tid+1,nion_q,nthreads
+         do ii=taskid+1,nion,np
+            ia=ion_katm(ii)
+            x = dbl_mb(qcoord_ptr+3*(j-1))  -ion_rion(1,ii)
+            y = dbl_mb(qcoord_ptr+3*(j-1)+1)-ion_rion(2,ii)
+            z = dbl_mb(qcoord_ptr+3*(j-1)+2)-ion_rion(3,ii)
+            r = dsqrt(x*x + y*y +z*z)
+            sb = (psp_zv(ia)+pspw_getQtot_APC(ii))/r
+            dbl_mb(BQ_ptr+j-1)= dbl_mb(BQ_ptr+j-1) + sb
+         end do
+      end do
+      call Parallel_Vector_SumAll(nion_q,dbl_mb(BQ_ptr))
+
+*     **** solve for cosmo q charges ****
+      call nwpw_cosmo_solve_q()
+
+
+*     **** generate cosmo potential using current APC charges ****
+      call pspw_cosmo_V0_APC(vcosmo)
+
+      return
+      end
+
+
+*     ***********************************
+*     *					*
+*     *		pspw_born_V0_APC	*
+*     *					*
+*     ***********************************
+*
+      subroutine pspw_born_V0_APC(vborn)
+      implicit none
+      complex*16 vborn(*)
+
+#include "bafdecls.fh"
+#include "pspw_APC.fh"
+#include "errquit.fh"
+
+*     **** local variables ****
+      logical value
+      integer taskid,np,tid,nthreads
+      integer j,ii,k,nion,nion_q
+      real*8 sb,qj,x,y,z,r
+      integer u(2),uion(2),qion(2)
+
+*     **** external functions ****
+      integer  Parallel_threadid,Parallel_nthreads
+      external Parallel_threadid,Parallel_nthreads
+      integer  ion_nion
+      external ion_nion
+      real*8   pspw_getQtot_APC
+      external pspw_getQtot_APC
+
+      call Parallel_taskid(taskid)
+      call Parallel_np(np)
+      tid = Parallel_threadid()
+      nthreads = Parallel_nthreads()
+      nion     = ion_nion()
+
+*     **** get memory from stack ****
+      value = BA_push_get(mt_dbl,nion,'qion',qion(2),qion(1))
+      value = value.and.
+     >        BA_push_get(mt_dbl,nion,'uion',uion(2),uion(1))
+      value = value.and.
+     >        BA_push_get(mt_dbl,ngs,'u',u(2),u(1))
+      if (.not.value) 
+     >   call errquit('pspw_born_V_APC:push stack',0, MA_ERR)
+
+      do ii=tid+1,nion,nthreads
+         dbl_mb(qion(1)+ii-1) = pspw_getQtot_APC(ii)
+      end do
+
+*     **** calculate u = dEQelcq/dq ****
+      call nwpw_born_dVdq(nion,dbl_mb(qion(1)),
+     >                         dbl_mb(uion(1)))
+      call Parallel_shared_vector_zero(.true.,ngs,dbl_mb(u(1)))
+      do ii=tid+1,nion,nthreads
+         do k=1,nga
+              dbl_mb(u(1)+(ii-1)*nga+k-1)
+     >      = dbl_mb(u(1)+(ii-1)*nga+k-1) + dbl_mb(uion(1)+ii-1)
+         end do
+      end do
+
+      call pspw_VQ_APC(nion,dbl_mb(u(1)),vborn)
+
+      value = BA_pop_stack(u(2))
+      value = value.and.BA_pop_stack(uion(2))
+      value = value.and.BA_pop_stack(qion(2))
+      if (.not.value)
+     >   call errquit('pspw_born_V0_APC:pop stack',0, MA_ERR)
+
+      return
+      end 
+
+
+*     ***********************************
+*     *                                 *
+*     *         pspw_born_V_APC         *
+*     *                                 *
+*     ***********************************
+*
+      subroutine pspw_born_V_APC(ispin,ne,dng,vborn)
+      implicit none
+      integer ispin,ne(2)
+      complex*16 dng(*), vborn(*)
+
+#include "bafdecls.fh"
+#include "pspw_APC.fh"
+#include "errquit.fh"
+
+*     **** generate APC charges ****
+      call pspw_gen_APC(ispin,ne,dng)
+
+*     **** generate APC potential ****
+      call pspw_born_V0_APC(vborn)
+      return
+      end 
+
+
+*     ***********************************
+*     *                                 *
+*     *         pspw_cdft_V_APC         *
+*     *                                 *
+*     ***********************************
+*
+      subroutine pspw_cdft_V_APC(ispin,ne,dng,vcdft)
+      implicit none
+      integer ispin,ne(2)
+      complex*16 dng(*), vcdft(*)
+
+#include "bafdecls.fh"
+#include "pspw_APC.fh"
+#include "errquit.fh"
+
+*     **** local variables ****
+      logical value
+      integer taskid,np,tid,nthreads
+      integer nion,i,k,ii
+      integer u(2)
+
+*     **** external functions ****
+      integer  Parallel_threadid,Parallel_nthreads
+      external Parallel_threadid,Parallel_nthreads
+      integer  nwpw_cdft_u_ptr,nwpw_cdft_q_ptr
+      external nwpw_cdft_u_ptr,nwpw_cdft_q_ptr
+      integer  ion_nion,ion_katm_qm
+      external ion_nion,ion_katm_qm
+      real*8   pspw_getQtot_APC,psp_zv,nwpw_cdft_energy
+      external pspw_getQtot_APC,psp_zv,nwpw_cdft_energy
+
+      call Parallel_taskid(taskid)
+      call Parallel_np(np)
+      tid = Parallel_threadid()
+      nthreads = Parallel_nthreads()
+      nion     = ion_nion()
+
+*     **** get memory from stack ****
+      value = BA_push_get(mt_dbl,ngs,'u',u(2),u(1))
+      if (.not.value)
+     >   call errquit('pspw_cdft_V_APC:push stack',0, MA_ERR)
+
+      call Parallel_shared_vector_zero(.true.,ngs,dbl_mb(u(1)))
+      do ii=tid+1,nion,nthreads
+         do k=1,nga
+            dbl_mb(u(1)+(ii-1)*nga+k-1) = dbl_mb(u(1)+(ii-1)*nga+k-1)
+     >                                  + dbl_mb(nwpw_cdft_u_ptr()+ii-1)
+         end do
+      end do
+
+*     **** generate APC charges ****
+      call pspw_gen_APC(ispin,ne,dng)
+      do ii=1,nion
+         dbl_mb(nwpw_cdft_q_ptr()+ii-1) = pspw_getQtot_APC(ii) 
+     >                                  + psp_zv(ion_katm_qm(ii))
+      end do
+      write(*,*) "ECDFT = ",nwpw_cdft_energy()
+
+
+*     **** generate APC potential ****
+      call pspw_VQ_APC(nion,dbl_mb(u(1)),vcdft)
+
+
+*     **** pop stack ****
+      value = BA_pop_stack(u(2))
+      if (.not.value)
+     >   call errquit('pspw_cdft_V_APC:pop stack',0, MA_ERR)
+
+      return
+      end
+
+
+*     ***********************************
+*     *					*
+*     *		pspw_V_APC_on	        *
+*     *					*
+*     ***********************************
+      logical function pspw_V_APC_on()
+      implicit none
+
+*     **** external functions ****
+      logical  nwpw_cosmo2_on,nwpw_born_on,nwpw_cdft_on
+      external nwpw_cosmo2_on,nwpw_born_on,nwpw_cdft_on
+
+      pspw_V_APC_on =  nwpw_cosmo2_on().or.
+     >                 nwpw_born_on().or.
+     >                 nwpw_cdft_on()
+      return
+      end
+
+
+*     ***********************************
+*     *					*
+*     *		pspw_V_APC	        *
+*     *					*
+*     ***********************************
+      subroutine pspw_V_APC(ispin,ne,dng,vapc)
+      implicit none
+      integer ispin,ne(2)
+      complex*16 dng(*), vapc(*)
+      
+*     **** external functions ****
+      logical  nwpw_cosmo2_on,nwpw_born_on,nwpw_cdft_on
+      external nwpw_cosmo2_on,nwpw_born_on,nwpw_cdft_on
+
+      if (nwpw_cosmo2_on()) then
+         call pspw_cosmo_V_APC(ispin,ne,dng,vapc)
+      else if (nwpw_born_on()) then
+         call pspw_born_V_APC(ispin,ne,dng,vapc)
+      else if (nwpw_cdft_on()) then
+         call pspw_cdft_V_APC(ispin,ne,dng,vapc)
+      end if
+
+      return
+      end
+
+
+
+
+
+
+
 *     ***********************************
 *     *					*
 *     *		pspw_getQ_APC		*
@@ -518,6 +1078,34 @@ c      call D3dB_r_SMul(1,scal1,dcpl_mb(tmp(1)),dcpl_mb(tmp(1)))
       return
       end
 
+*     ***********************************
+*     *					*
+*     *		pspw_getQtot_APC	*
+*     *					*
+*     ***********************************
+      real*8 function pspw_getQtot_APC(ii)
+      implicit none
+      integer ii
+
+#include "bafdecls.fh"
+#include "pspw_APC.fh"
+
+*     **** local variables ****
+      integer i,n
+      real*8 qq
+
+      qq = 0.0d0
+
+      if (nga.gt.0) then
+         do n=1,nga
+            i = n + (ii-1)*nga
+            qq = qq - dbl_mb(q(1)+i-1)
+         end do
+      end if
+      pspw_getQtot_APC = qq
+      return
+      end
+
 
 
 *     ***********************************
@@ -531,12 +1119,14 @@ c      call D3dB_r_SMul(1,scal1,dcpl_mb(tmp(1)),dcpl_mb(tmp(1)))
 
 #include "bafdecls.fh"
 #include "pspw_APC.fh"
+#include "util.fh"
 
 *     **** local variables ****
       integer taskid,MASTER
       parameter (MASTER=0)
       integer i,j,indx
       real*8 sum,sumi,sume
+      logical oprint
 
 *     **** external functions ****
       character*4  ion_atom
@@ -545,11 +1135,14 @@ c      call D3dB_r_SMul(1,scal1,dcpl_mb(tmp(1)),dcpl_mb(tmp(1)))
       external     ion_atom
       external     ion_nion_qm,ion_katm_qm
       external     psp_zv
+      logical      control_print
+      external     control_print
       
       if (nga.gt.0) then
       call Parallel_taskid(taskid)
+      oprint = (taskid.eq.MASTER).and.control_print(print_medium)
 
-      if (taskid.eq.MASTER) then
+      if (oprint) then
 
          WRITE(unit,*)
          WRITE(unit,*)
@@ -618,6 +1211,8 @@ c      call D3dB_r_SMul(1,scal1,dcpl_mb(tmp(1)),dcpl_mb(tmp(1)))
 
 
       end if
+
+      call nwpw_born_print(nga,ion_nion_qm(),dbl_mb(q(1)))
 
       end if
       return

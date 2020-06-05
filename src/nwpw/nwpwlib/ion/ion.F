@@ -16,6 +16,8 @@
 
       logical value
 
+      if (.not.periodic) call nwpw_cdft_end()
+      if (.not.periodic) call nwpw_born_end()
       if (.not.periodic) call nwpw_cosmo_end()
       call FMM_end()
       call ion_scaling_atoms_end()
@@ -254,8 +256,8 @@
       external ion_atn
       logical  control_is_grimme2
       external control_is_grimme2
-      logical  nwpw_cosmo_on
-      external nwpw_cosmo_on
+      logical  nwpw_cosmo1_on
+      external nwpw_cosmo1_on
       integer  nwpw_cosmo_nq
       external nwpw_cosmo_nq
       logical  control_incell
@@ -482,15 +484,17 @@ c         eki1=0.5d0*eki1
          end if
       end if
 
-*     ***** try to initialize COSMO if aperiodic *****
+*     ***** try to initialize Born and COSMO and CDFT if aperiodic *****
       nion_q = 0
-      cosmo_on = .false.
+      cosmo1_on = .false.
       if  (.not.periodic) then
+         call nwpw_cdft_init(rtdb)
+         call nwpw_born_init(rtdb)
          call nwpw_cosmo_init(rtdb,geom)
-         cosmo_on = nwpw_cosmo_on()
+         cosmo1_on = nwpw_cosmo1_on()
       end if
      
-      if (cosmo_on) then
+      if (cosmo1_on) then
          nion_q    = nwpw_cosmo_nq()
          nkatm_old = nkatm
          nkatm     = nkatm + 2
@@ -1679,7 +1683,7 @@ c      end if
 
 #include "ion.fh"
 
-      if (cosmo_on) then
+      if (cosmo1_on) then
          ion_nkatm0 = nkatm-2
       else
          ion_nkatm0 = nkatm
@@ -1704,15 +1708,15 @@ c      end if
 
 *     ***************************
 *     *                         *
-*     *         ion_cosmo_on    *
+*     *         ion_cosmo1_on   *
 *     *                         *
 *     ***************************
-      logical function ion_cosmo_on()
+      logical function ion_cosmo1_on()
       implicit none
 
 #include "ion.fh"
 
-      ion_cosmo_on = cosmo_on
+      ion_cosmo1_on = cosmo1_on
       return
       end 
 

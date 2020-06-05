@@ -116,8 +116,8 @@
       external psi_ispin,psi_ne,psi_neq,electron_count,linesearch_count
       real*8   cgsd_energy,cgsd_noit_energy
       external cgsd_energy,cgsd_noit_energy
-      logical  control_Mulliken,control_DOS
-      external control_Mulliken,control_DOS
+      logical  control_Mulliken,control_DOS,nwpw_born_on
+      external control_Mulliken,control_DOS,nwpw_born_on
       real*8   ion_TotalCharge,psi_occupation
       external ion_TotalCharge,psi_occupation
       logical   control_check_charge_multiplicity
@@ -171,8 +171,8 @@
       external lattice_omega_small
       integer  ion_rion_ptr
       external ion_rion_ptr
-      logical  control_runsocket
-      external control_runsocket
+      logical  control_runsocket,control_precondition
+      external control_runsocket,control_precondition
 
 
 *                            |************|
@@ -366,6 +366,7 @@
 ******************   summary of input data  **********************
 *                |**************************|
 
+
       if (oprint) then
          write(luout,1111) np
          write(luout,1117) np_i,np_j
@@ -549,8 +550,13 @@ c           call psp_check_print(ia)
      >                 control_it_in(),control_it_out()
          if ((minimizer.eq.5).or.(minimizer.eq.8)) then
            write(luout,1291)
-           if (control_ks_algorithm().eq.0) 
-     >       write(luout,1292) "conjugate gradient"
+           if (control_ks_algorithm().eq.0)  then
+             if (control_precondition()) then
+                write(luout,1292) "preconditioned conjugate gradient"
+             else
+                write(luout,1292) "conjugate gradient"
+             end if
+           end if
            if (control_ks_algorithm().eq.1) 
      >       write(luout,1292) "rmm-diis"
            write(luout,1295) control_ks_maxit_orb(),
@@ -578,6 +584,8 @@ c           call psp_check_print(ia)
      >       write(6,1298) "Fermi-Dirac"
            if (control_fractional_smeartype().eq.2)
      >       write(6,1298) "Gaussian"
+           if (control_fractional_smeartype().eq.4)
+     >       write(6,1298) "Marzari-Vanderbilt"
            if (control_fractional_smeartype().ge.0)
      >       write(6,1299) control_fractional_kT(),
      >                     control_fractional_temperature(),
@@ -706,6 +714,8 @@ c     end if
          call psi_Mulliken(rtdb)
          i = control_excited_ne(1)+control_excited_ne(2)
          if (i.eq.0) call kp_structure(rtdb)
+      else if (nwpw_born_on()) then
+         call psi_Born()
       end if
 
 

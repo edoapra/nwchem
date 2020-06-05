@@ -518,6 +518,9 @@ c        call nwpwxc_print()
       if (.not.btdb_get(rtdb,'nwpw:kerker_g0',
      >                  mt_dbl,1,kerker_g0))
      >   kerker_g0 = 0.0d0
+      if (.not.btdb_get(rtdb,'nwpw:precondition',
+     >                  mt_log,1,precondition))
+     >   precondition = .false.
 
 *     **** set maxit_orb maxit_orbs ***
       if (.not.btdb_get(rtdb,
@@ -770,6 +773,9 @@ c        call nwpwxc_print()
       if (.not.btdb_get(rtdb,'nwpw:kerker_g0',
      >                  mt_dbl,1,kerker_g0))
      >   kerker_g0 = 0.0d0
+      if (.not.btdb_get(rtdb,'nwpw:precondition',
+     >                  mt_log,1,precondition))
+     >   precondition = .false.
 
 
 *     **** set maxit_orb maxit_orbs ***
@@ -2346,7 +2352,7 @@ c      write(*,*) "L3=",L3
 
 *     ***********************************
 *     *                                 *
-*     *         control_ks_algorithm   *
+*     *         control_ks_algorithm    *
 *     *                                 *
 *     ***********************************
       integer function control_ks_algorithm()
@@ -2960,6 +2966,26 @@ c      end
       return 
       end
 
+*     ***********************************
+*     *					*
+*     *		control_only_lda	*
+*     *					*
+*     ***********************************
+      logical function control_only_lda()
+      implicit none
+
+#include "control.fh"
+
+*     **** external functions ****
+      logical  nwpwxc_is_on,nwpwxc_is_lda
+      external nwpwxc_is_on,nwpwxc_is_lda
+
+      control_only_lda = (.not.nwpwxc_is_on().and.gga.eq.0).or.
+     >                   (nwpwxc_is_on().and.nwpwxc_is_lda())
+      return 
+      end
+
+
 
 *     ***********************************
 *     *                                 *
@@ -3090,6 +3116,8 @@ c      end
       !external control_frac_occ_extra_orbitals
       integer  control_fractional_orbitals
       external control_fractional_orbitals
+      logical  control_mult_fixed
+      external control_mult_fixed
 
 
 
@@ -3126,41 +3154,47 @@ c            mult0 = 1
          t = icharge - tcharge       !** total number of electrons **
          x = int(NINT(t))
 
+         if (.not.control_mult_fixed()) then
 
-*        **** reassign spin to agree with total number of electrons ****
-         if ((mod(x,2).ne.0).and.(ispin.eq.1)) then !** odd number of electrons **
-            ispin = 2
-         end if
+*           **** reassign spin to agree with total number of electrons ****
+            if ((mod(x,2).ne.0).and.(ispin.eq.1)) then !** odd number of electrons **
+               ispin = 2
+            end if
 
-*        **** reassign multiplicity to agree with total number of electrons ****
-*        *** odd number of electrons and mult odd ***
-         if ((mod(x,2).ne.0) .and.(mod(multiplicity,2).ne.0)) then 
-            multiplicity = multiplicity - 1
-            do while (multiplicity.gt.(x+1))
-               multiplicity = multiplicity - 2
-            end do
-            if (multiplicity.lt.1) multiplicity = 2
-         end if
-*        *** even number of electrons and mult even ***
-         if ((mod(x,2).eq.0) .and.(mod(multiplicity,2).eq.0)) then 
-            multiplicity = multiplicity - 1
-            do while (multiplicity.gt.(x+1))
-               multiplicity = multiplicity - 2
-            end do
-            if (multiplicity.lt.1) multiplicity = 1
-         end if
+*           **** reassign multiplicity to agree with total number of electrons ****
+*           *** odd number of electrons and mult odd ***
+            if ((mod(x,2).ne.0) .and.(mod(multiplicity,2).ne.0)) then 
+               multiplicity = multiplicity - 1
+               do while (multiplicity.gt.(x+1))
+                  multiplicity = multiplicity - 2
+               end do
+               if (multiplicity.lt.1) multiplicity = 2
+            end if
+*           *** even number of electrons and mult even ***
+            if ((mod(x,2).eq.0) .and.(mod(multiplicity,2).eq.0)) then 
+               multiplicity = multiplicity - 1
+               do while (multiplicity.gt.(x+1))
+                  multiplicity = multiplicity - 2
+               end do
+               if (multiplicity.lt.1) multiplicity = 1
+            end if
 
 
-*        **** compare multiplicity, charge, and ispin ****
-c         check = ( (((mult.eq.multiplicity).and.(x_wf.eq.x))  .or.
-c     >             ((mult0.eq.multiplicity).and.(x_wf0.eq.x))).and.
-c     >            (ispin.eq.ispin_wf))
-         check = ( (mult.eq.multiplicity).and.(x_wf.eq.x).and.
-     >            (ispin.eq.ispin_wf))
+*           **** compare multiplicity, charge, and ispin ****
+c            check = ( (((mult.eq.multiplicity).and.(x_wf.eq.x))  .or.
+c     >                ((mult0.eq.multiplicity).and.(x_wf0.eq.x))).and.
+c     >               (ispin.eq.ispin_wf))
+            check = ( (mult.eq.multiplicity).and.(x_wf.eq.x).and.
+     >               (ispin.eq.ispin_wf))
 
-         if (ispin_wf.eq.3) then
-            check=((ne_wf(1).eq.ne_wf(2)).and.
-     >             (x.eq.ne_wf(1) ) )
+            if (ispin_wf.eq.3) then
+               check=((ne_wf(1).eq.ne_wf(2)).and.
+     >                (x.eq.ne_wf(1) ) )
+            end if
+
+         else
+*           **** compare multiplicity, and ispin ****
+            check = ((mult.eq.multiplicity).and.(ispin.eq.ispin_wf))
          end if
 *     **** no wavefunction file ***
       else
@@ -3960,27 +3994,29 @@ c     >            (ispin.eq.ispin_wf))
       end
 
 *     *****************************
-*     *                	 		  *
-*     *    	control_precondition  *
-*     *                 	 	  *
+*     *                		  *
+*     *    control_precondition   *
+*     *                  	  *
 *     *****************************
       logical function control_precondition()
       implicit none
 
-#include "bafdecls.fh"
-#include "btdb.fh"
+#include "control.fh"
 
-*     **** control_rtdb common block ****
-      integer rtdb
-      common / control_rtdb1 / rtdb
-
-      logical precondition
-
-      if (.not.btdb_get(rtdb,'nwpw:precondition',
-     >                  mt_log,1,precondition)) 
-     >  then
-         precondition = .false.
-      end if
+c#include "bafdecls.fh"
+c#include "btdb.fh"
+c
+c*     **** control_rtdb common block ****
+c      integer rtdb
+c      common / control_rtdb1 / rtdb
+c
+c      logical precondition
+c
+c      if (.not.btdb_get(rtdb,'nwpw:precondition',
+c     >                  mt_log,1,precondition)) 
+c     >  then
+c         precondition = .false.
+c      end if
 
       control_precondition = precondition
       return
@@ -5571,7 +5607,7 @@ c     >            (ispin.eq.ispin_wf))
       integer fac
               
       fac = 19
-      if (.not.btdb_get(rtdb,'nwpw:gradient_virtual_fac',mt_log,1,fac))
+      if (.not.btdb_get(rtdb,'nwpw:gradient_virtual_fac',mt_int,1,fac))
      >   fac = 19
             
       control_gradient_virtual_fac = fac
@@ -5603,6 +5639,123 @@ c     >            (ispin.eq.ispin_wf))
       control_bound_virtual = value
       return
       end   
+
+*     ***********************************
+*     *                                 *
+*     *       control_2x2_virtual       *
+*     *                                 *
+*     ***********************************
+      logical function control_2x2_virtual()
+      implicit none
+      
+#include "bafdecls.fh"
+#include "btdb.fh"
+
+*     **** control_rtdb common block ****
+      integer rtdb
+      common / control_rtdb1 / rtdb
+            
+      logical value
+      
+      value = .false.
+      if (.not.btdb_get(rtdb,'nwpw:2x2_virtual',mt_log,1,value))
+     >   value = .false.
+      
+      control_2x2_virtual = value
+      return
+      end
+
+*     ***********************************
+*     *                                 *
+*     *       control_3x3_virtual       *
+*     *                                 *
+*     ***********************************
+      logical function control_3x3_virtual()
+      implicit none
+
+#include "bafdecls.fh"
+#include "btdb.fh"
+
+*     **** control_rtdb common block ****
+      integer rtdb
+      common / control_rtdb1 / rtdb
+
+      logical value
+
+      value = .false.
+      if (.not.btdb_get(rtdb,'nwpw:3x3_virtual',mt_log,1,value))
+     >   value = .false.
+
+      control_3x3_virtual = value
+      return
+      end
+
+*     ***********************************
+*     *                                 *
+*     *       control_4x4_virtual       *
+*     *                                 *
+*     ***********************************
+      logical function control_4x4_virtual()
+      implicit none
+      
+#include "bafdecls.fh"
+#include "btdb.fh"
+
+*     **** control_rtdb common block ****
+      integer rtdb
+      common / control_rtdb1 / rtdb
+            
+      logical value
+      
+      value = .false.
+      if (.not.btdb_get(rtdb,'nwpw:4x4_virtual',mt_log,1,value))
+     >   value = .false.
+      
+      control_4x4_virtual = value
+      return
+      end
+
+
+*     ***********************************
+*     *                                 *
+*     *       control_CI_virtual        *
+*     *                                 *
+*     ***********************************
+      integer function control_CI_virtual()
+      implicit none
+      
+#include "bafdecls.fh"
+#include "btdb.fh"
+
+*     **** control_rtdb common block ****
+      integer rtdb
+      common / control_rtdb1 / rtdb
+            
+      integer ivalue
+
+      logical  control_2x2_virtual,control_3x3_virtual
+      external control_2x2_virtual,control_3x3_virtual
+      logical  control_4x4_virtual
+      external control_4x4_virtual
+      
+      ivalue = 0
+      if (.not.btdb_get(rtdb,'nwpw:CI_virtual',mt_int,1,ivalue)) then
+         if (control_2x2_virtual()) then
+            ivalue = 2
+         else if (control_3x3_virtual()) then
+            ivalue = 3
+         else if (control_4x4_virtual()) then
+            ivalue = 4
+         end if
+      end if
+      
+      control_CI_virtual = ivalue
+      return
+      end
+
+
+
+
 
 *     ***********************************
 *     *                                 *
@@ -6790,6 +6943,60 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
             socket_ip = "127.0.0.1:31415"
          end if
       end if
+      return
+      end
+
+
+
+*     ************************************
+*     *                                  *
+*     *      control_vfield_filenames    *
+*     *                                  *
+*     ************************************
+      logical function control_vfield_filenames(filenames)
+      implicit none
+      character*(*) filenames
+
+#include "control.fh"
+#include "btdb.fh"
+
+*     **** control_rtdb common block ****
+      integer rtdb
+      common / control_rtdb1 / rtdb
+
+      logical found
+
+      found = .false.
+      if (btdb_cget(rtdb,'nwpw:vfield_filenames',1,filenames)) then
+         found = .true.
+      end if
+
+      control_vfield_filenames = found
+      return
+      end
+
+*     ***********************************
+*     *                                 *
+*     *        control_mult_fixed       *
+*     *                                 *
+*     ***********************************
+      logical function control_mult_fixed()
+      implicit none
+
+#include "bafdecls.fh"
+#include "btdb.fh"
+
+*     **** control_rtdb common block ****
+      integer rtdb
+      common / control_rtdb1 / rtdb
+
+      logical value
+
+      value = .true.
+      if (.not.btdb_get(rtdb,'nwpw:mult_fixed',mt_log,1,value))
+     >   value = .false.
+
+      control_mult_fixed = value
       return
       end
 

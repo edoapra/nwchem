@@ -924,7 +924,8 @@ c     May not want levelshifting initially until sure that the
 c     transformed Fock matrix will be diagonally dominant, or
 c     alternatively shift the piss out of it.
 c     
-      if (movecs_guess.eq.'restart'.or.ncanorg.eq.1)then
+      if (movecs_guess.eq.'restart'.or.ncanorg.eq.1.or.
+     A     movecs_guess.eq.'fragment')then
          levelshifting = .not.gotsmear(ssmear)
       else
          levelshifting = .false.
@@ -1997,10 +1998,12 @@ c        Tally up last energy
 c
          if (nExc.eq.1)then
 c  jbecca START: adding in eelec here
-              Etnew = Ecore + Ecoul + Exc(1) + Edisp + eelec
+              Etnew = Ecore + Ecoul + Exc(1) + Edisp + eelec +
+     T           tdots
          else
 c  jbecca START: adding in eelec here
-              Etnew = Ecore + Ecoul + Exc(1) + Exc(2) + Edisp + eelec
+              Etnew = Ecore + Ecoul + Exc(1) + Exc(2) + Edisp +
+     E           eelec + tdots
          endif
 c
 c        Add in cosmo contributions
@@ -2166,7 +2169,7 @@ c
      O     dbl_mb(k_occ),
      I     int_mb(k_ir),
      N     nbf_ao, nmo,
-     I     g_movecs,scftype)
+     I     g_movecs,scftype,'write')
 
       if (oprint_final_vecs) then
          if (me .eq. 0) then
