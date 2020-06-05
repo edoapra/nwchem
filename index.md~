@@ -1,1 +1,67 @@
 # NWChem: Open Source High-Performance Computational Chemistry
+
+
+![caption](Bylaska-Figure3.PNG) NWChem aims to provide its
+users with computational chemistry tools that are scalable both in their
+ability to treat large scientific computational chemistry problems
+efficiently, and in their use of available parallel computing resources
+from high-performance parallel supercomputers to conventional
+workstation clusters.
+
+NWChem software can handle:
+
+  - Biomolecules, nanostructures, and solid-state
+  - From quantum to classical, and all combinations
+  - Ground and excited-states
+  - Gaussian basis functions or plane-waves
+  - Scaling from one to thousands of processors
+  - Properties and relativistic effects
+
+NWChem is actively developed by a consortium of developers and
+maintained by the [EMSL](http://www.emsl.pnl.gov) located at the Pacific
+Northwest National Laboratory ([PNNL](http://www.pnl.gov)) in Washington
+State. Researchers interested in contributing to NWChem should review
+the [Developers page](http://www.nwchem-sw.org/index.php/Developer). The
+code is distributed as open-source under the terms of the [Educational
+Community License
+version 2.0](http://www.opensource.org/licenses/ecl2.php) (ECL 2.0).
+
+The NWChem development strategy is focused on providing new and
+essential scientific capabilities to its users in the areas of kinetics
+and dynamics of chemical transformations, chemistry at interfaces and in
+the condensed phase, and enabling innovative and integrated research at
+EMSL. At the same time continued development is needed to enable NWChem
+to effectively utilize architectures of tens of petaflops and beyond.
+
+## *NWChem version 7.0.0 can be downloaded from this* [https://github.com/nwchemgit/nwchem/releases/tag/v7.0.0-release ''link''](https://github.com/nwchemgit/nwchem/releases/tag/v7.0.0-release_''link'')
+
+## EMSL Arrows
+
+[right|200px|caption](file:myarrowmovie.gif) Are you just
+learning NWChem and would like to have an easy way to generate input
+decks, check your output decks against a large database of calculations,
+perform simple thermochemistry calculations, calculate the NMR and IR
+spectra of a modest size molecule, or just try out NWChem before
+installing it? EMSL Arrows scientific service can help. A Web API to
+EMSL Arrows is now available for Alpha testing.
+
+For more information see
+\[[http://www.nwchem-sw.org/index.php/NWChem:Current\_events\#"EMSL\_Arrows\_-\_An\_Easier\_Way\_to\_Use\_NWChem](http://www.nwchem-sw.org/index.php/NWChem:Current_events#%22EMSL_Arrows_-_An_Easier_Way_to_Use_NWChem)"\]
+and [Arrows"](http://www.nwchem-sw.org/index.php/EMSL_Arrows#%22EMSL)
+
+<span style="background: #82BA57; border: solid 1px #a9a9a9; padding: 8px">
+[*' EMSL Arrows API*'](https://arrows.emsl.pnnl.gov/api) </span>
+
+## NWChem Citation
+
+Please cite the following reference when publishing results obtained
+with NWChem:
+
+M. Valiev, E.J. Bylaska, N. Govind, K. Kowalski, T.P. Straatsma, H.J.J.
+van Dam, D. Wang, J. Nieplocha, E. Apra, T.L. Windus, W.A. de Jong,
+"NWChem: a comprehensive and scalable open-source solution for large
+scale molecular simulations" [Comput. Phys. Commun. 181, 1477
+(2010)](http://dx.doi.org/doi:10.1016/j.cpc.2010.04.018)
+
+[Documentation](Home)
+
