@@ -4,12 +4,6 @@
 #include "mafdecls.fh"
 #include "global.fh"
 #include "rtdb.fh"
-#ifdef USE_TCGMSG
-#include "tcgmsg.fh"
-#else
-      integer nodeid
-      external nodeid
-#endif
 #include "pstat.fh"
 #include "util.fh"
 #include "inp.fh"
@@ -82,6 +76,7 @@ c
       logical ostartup, ocontinue, orestart
       logical  input_parse
       external input_parse
+      integer myrank
 #if defined(USE_OPENMP)
       integer omp_get_max_threads
       external omp_get_max_threads
@@ -89,7 +84,7 @@ c
 c
 c     Create parallel processes and initialize IPC layer
 c
-      call pbeginf()
+      call util_mpiinit(myrank)
 c
 c     MXINIT is needed by PeIGS and PFFT to initialize
 c     the communication fabric they use.
@@ -104,7 +99,7 @@ c
 c     Only process 0 opens the input file 
 c     (note that ga_nodeid() does not work yet!)
 c
-      if (nodeid() .eq. 0) then   
+      if (myrank .eq. 0) then
 c
 c     Get the name of the input file from the command line
 c

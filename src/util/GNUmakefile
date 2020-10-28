@@ -220,6 +220,7 @@ endif
               util_intrsc2008.o util_fadvise.o  util_scalapack_info.o\
               ga_conjg.o nwmolden.o ao_1prdm_read.o ao_1prdm_write.o\
               util_strips.o util_poltensor.o  util_mygop.o util_isnan.o \
+              util_mpiinit.o \
               $(EXTRA_OBJ)
 ifndef USE_MLIB
               OBJ_OPTIMIZE += icopy.o dsum.o dgefa.o zsum.o
@@ -306,6 +307,12 @@ ifdef USE_FORTRAN2003
 endif
 ifdef USE_NONBLOCKING_BCAST
   LIB_DEFINES += -DUSE_IBCAST
+endif
+
+ifdef ARMCI_NETWORK
+  ifeq ($(ARMCI_NETWORK),$(findstring $(ARMCI_NETWORK),MPI-PT MPI_PT MPI-MT MPI_MT DCMF))
+    LIB_DEFINES += -DUSE_MPIINITTHREAD
+  endif
 endif
 
 include ../config/makelib.h
