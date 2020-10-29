@@ -461,7 +461,6 @@ C Include Files
 #include "rtdb.fh"
 #include "errquit.fh"
 #include "mafdecls.fh"
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "msgids.fh"
 #include "msgtypesf.h"
@@ -565,11 +564,11 @@ c       write(6,*)'Now broad:',idmedium,msg_dntmc3+MSGINT, procnums
 c       write(6,*)'Now broad:',mitob(numgroups)
 C Broadcase Results, array of groups( starting from 0)
       call ga_pgroup_brdcst(idmedium,msg_dntmc3+MSGINT, procnums,
-     &     mitob(numgroups), 0)
+     &     util_mitob(numgroups), 0)
 C Broadcase Results, array of groups( starting from 1)
 c       write(6,*)'Now broadcasting,again'
       call ga_pgroup_brdcst(idmedium,msg_dntmc7+MSGINT, groupnums,
-     &     mitob(numgroups), 0)
+     &     util_mitob(numgroups), 0)
 c       write(6,*)'Now in destroying list'
 C Destroy GA "proc list"
       if (.not. ga_destroy(g_proc)) call errquit('mc_setup_ga:

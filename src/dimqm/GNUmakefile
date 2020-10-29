@@ -28,7 +28,7 @@
 #
    LIB_DEFINES = -DDBLEPREC_RYS
 
-   LIB_INCLUDES = -I../nwdft/include -I../ddscf -I../util -I../nwdft/grid -I../NWints/hondo
+   LIB_INCLUDES = -I../nwdft/include -I../ddscf  -I../nwdft/grid -I../NWints/hondo
 
 USES_BLAS = qmr_real.F dimqm_main.F 
 

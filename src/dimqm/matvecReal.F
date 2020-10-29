@@ -13,7 +13,7 @@ c   ==================================================================
 #include "nwc_const.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "testutil.fh"
+#include "util.fh"
 #include "dimqm_constants.fh"
 #include "dimqm.fh"
 c

@@ -7,7 +7,6 @@
 #include "global.fh"
 #include "inp.fh"
 #include "msgids.fh"
-#include "tcgmsg.fh"
       
       integer rtdb
 

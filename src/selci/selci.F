@@ -33,7 +33,6 @@ C>
 #include "rtdb.fh"
 #include "util.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "mafdecls.fh"
 #include "cselcifiles.fh"
       integer rtdb  !< [Input] The RTDB handle
@@ -113,7 +112,7 @@ c
       if (.not. rtdb_put(rtdb, 'fourindex:tol', mt_dbl, 1, findtol))
      $     call errquit('selci: rtdb_put failed',0,RTDB_ERR)
       if (ga_nodeid() .eq. 0) inquire(file=moints, exist=oexist)
-      call ga_brdcst(303, oexist, mitob(1), 0)
+      call ga_brdcst(303, oexist, util_mitob(1), 0)
       if (oforce .or. (.not. oexist)) then
          if (.not. moints_full(rtdb)) then
             selci = .false.
@@ -177,7 +176,7 @@ c     Should we delete the existing ciconf file?  (not checking this now).
 c     If it does not exisit then generate a default.
 c
       if (ga_nodeid() .eq. 0) inquire(file=ciconf, exist=oexist)
-      call ga_brdcst(304, oexist, mitob(1), 0)
+      call ga_brdcst(304, oexist, util_mitob(1), 0)
       if (.not. oexist) call selci_conf(rtdb, dbl_mb(k_mem), lword)
 c      
       if (mode .eq. 'ci+davids') then

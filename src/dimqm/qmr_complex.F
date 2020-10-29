@@ -10,7 +10,7 @@ c     Fancy QMR algorithm.  Will document later.
 #include "nwc_const.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "testutil.fh"
+#include "util.fh"
 #include "dimqm_constants.fh"
 c
 c     Input Variables

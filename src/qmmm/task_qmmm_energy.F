@@ -1283,7 +1283,6 @@ c     $Id$
 #include "qmmm.fh"
 #include "inp.fh"
 #include "msgids.fh"
-#include "tcgmsg.fh"
       integer irtdb
       logical task_qmmm_energy_pes0
       double precision cpu, wall

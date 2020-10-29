@@ -12,7 +12,6 @@ c
 #include "dimqm.fh"
 #include "errquit.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 c
 c   Input Variables
       integer nq                       ! Number of quadrature points

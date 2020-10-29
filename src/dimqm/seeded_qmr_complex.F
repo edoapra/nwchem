@@ -11,9 +11,8 @@ c     Fancy QMR algorithm.  Will document later.
 #include "nwc_const.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "testutil.fh"
+#include "util.fh"
 #include "dimqm_constants.fh"
-#include "tcgmsg.fh"
 #include "msgids.fh"
 c
 c     Input Variables
@@ -151,10 +150,10 @@ c        call ga_access(g_work(5), 1, nlen, 1, 1, k_seed, ld)
 c        call ga_release_update(g_work(5), 1, nlen, 1, 1)
           stat = rtdb_parallel(.true.)
         end if
-        call ga_brdcst(msg_dimqm, sinn, mdtob(2), 0)
-        call ga_brdcst(msg_dimqm, cosn, mdtob(1), 0)
-        call ga_brdcst(msg_dimqm, scpn, mdtob(1), 0)
-        call ga_brdcst(msg_dimqm, scs,  mdtob(2), 0)
+        call ga_brdcst(msg_dimqm, sinn, util_mdtob(2), 0)
+        call ga_brdcst(msg_dimqm, cosn, util_mdtob(1), 0)
+        call ga_brdcst(msg_dimqm, scpn, util_mdtob(1), 0)
+        call ga_brdcst(msg_dimqm, scs,  util_mdtob(2), 0)
         call ga_sync()
         g_n = ga_zdot(g_work(6), g_work(4)) * scpn
         rhs_n_plus1 = -CONJG(sinn) * rhs_n + cosn * g_n
