@@ -12,7 +12,6 @@ c
 C
 #include "ccsd_len.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 C
       IAm = GA_NodeID()
 

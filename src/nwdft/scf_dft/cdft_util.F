@@ -899,7 +899,6 @@ c
 #include "cdft.fh"
 #include "global.fh"
 #include "util.fh"
-#include "tcgmsg.fh"
 #include "schwarz.fh"
 #include "msgids.fh"
 c#include "dftps.fh"

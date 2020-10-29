@@ -7,7 +7,6 @@ c
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "bas.fh"
 #include "geom.fh"
 #include "schwarz.fh"
@@ -177,7 +176,8 @@ c
      $        dbl_mb(k_fock), dbl_mb(k_dens))
       end if
       call ga_sync()
-      call ga_brdcst(373, dbl_mb(k_dens), mdtob(nbf*nbf*nfock), 0)
+      call ga_brdcst(373, dbl_mb(k_dens),
+     c     util_mdtob(nbf*nbf*nfock), 0)
       call ga_sync()
       call dfill(nbf*nbf*nfock, 0.0d0, dbl_mb(k_fock), 1)
 c     

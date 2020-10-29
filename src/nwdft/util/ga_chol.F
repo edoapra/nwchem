@@ -7,8 +7,8 @@ c
 c
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgids.fh"
+#include "util.fh"
 c
       integer g_a               ! input matrix
       integer g_s               ! output matrix
@@ -217,7 +217,7 @@ c
 c     Make sure that even processes that did not participate in the
 c     process get info
 c
-      call ga_brdcst(Msg_ga_chol, info, mitob(1), 0)
+      call ga_brdcst(Msg_ga_chol, info, util_mitob(1), 0)
       call ga_sync()
       if (.not.ma_verify_allocator_stuff()) stop ' ma ck 2e'
 c

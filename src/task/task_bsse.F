@@ -518,7 +518,6 @@ c
       implicit none
 #include "rtdb.fh"
 #include "errquit.fh"
-c#include "tcgmsg.fh"
 #include "bsse_common.fh"
 #include "mafdecls.fh"
 #include "stdio.fh"
@@ -575,7 +574,6 @@ c
 #include "rtdb.fh"
 #include "errquit.fh"
 #include "stdio.fh"
-c#include "tcgmsg.fh"
 #include "bsse_common.fh"
 #include "mafdecls.fh"
       integer rtdb              ![input]
@@ -631,7 +629,6 @@ c
 #include "geom.fh"
 #include "rtdb.fh"
 #include "geomP.fh"
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "mafdecls.fh"
 #include "bsse_common.fh"       
@@ -735,11 +732,6 @@ c
         if (.not. geom_masses_set(mon_hnd, natoms, mass))
      $    call errquit('bsse_create_geom: geom_masses_set failed',
      $                 0,GEOM_ERR)
-c:debug proposes
-c     if (nodeid().eq. 0) then
-c       if (.not. geom_print(mon_hnd))
-c    $        call errquit('geom_input: print failed ', 0)
-c     endif
 c 
         if (.not.geom_rtdb_store(rtdb, mon_hnd,
      $                           mon_name(j)(1:lenname)//'g'))
@@ -791,7 +783,7 @@ c
      $    call errquit('bsse_create_geom: geom_masses_set failed',
      $                 0,GEOM_ERR)
 c
-        if (nodeid() .eq. 0) then
+        if (ga_nodeid() .eq. 0) then
           if(.not. geom_print(mon_hnd))
      $      call errquit('bsse_create_geom: print failed ', 0, GEOM_ERR)
         endif
@@ -1044,16 +1036,6 @@ c
      $ errquit('bsse_energy: failed to write charge to rtdb',0,RTDB_ERR)
 
 
-c:debug proposes vama
-c     if (.not. rtdb_print(rtdb, .true.)) call errquit('print failed',0)
-c
-c     if (nodeid().eq.0) then
-c       do j = 1, nmon
-c         write(LuOut,10) j, m_error(j)
-c 10      format
-c    $      (/' error  for monomer ', i4, ' =', f20.12/)
-c       enddo
-c
 
       if(ga_nodeid().eq.0) then
 
@@ -1087,7 +1069,6 @@ c:debug
 #include "bsse_common.fh"
 #include "rtdb.fh"
 #include "geom.fh"
-#include "tcgmsg.fh"
 c
 c
       integer rtdb              ![input]
@@ -1118,7 +1099,7 @@ c
 c
       bsse_gradient=.false.
 c
-      if (nodeid().eq.0) then
+      if (ga_nodeid().eq.0) then
         write(LuOut,*)
         write(LuOut,*)
         call util_print_centered(LuOut,
@@ -1339,7 +1320,7 @@ c
 
 c:print final energy gradient
 
-      if(nodeid().eq.0) then
+      if(ga_nodeid().eq.0) then
 c 
         write(luout,1000) theory(1:inp_strlen(theory)),
      $        'x','y','z','x','y','z'
@@ -1393,7 +1374,6 @@ c
 #include "inp.fh"
 #include "bsse_common.fh"
 #include "stdio.fh"
-#include "tcgmsg.fh"
 #include "errquit.fh"
 c
       integer rtdb              ![input]
@@ -1436,7 +1416,7 @@ c     call ecce_print_module_entry('task hessian')
 c
       bsse_hessian= .false.
 c
-      if (nodeid().eq.0) then
+      if (ga_nodeid().eq.0) then
         write(LuOut,*)
         write(LuOut,*)
         call util_print_centered(LuOut,
@@ -1520,7 +1500,7 @@ c: name of hessian file
       call util_file_name('hess',  .false., .false.,filehess)
 c:copy to operate the sum at the end|
 c
-      if (nodeid().eq.0) then
+      if (ga_nodeid().eq.0) then
 
         lenhess= inp_strlen(filehess)
 
@@ -1578,7 +1558,7 @@ c:get evaluated energy
 
 c:copy to operate the sum at the end|
 c
-        if(nodeid().eq.0) then
+        if(ga_nodeid().eq.0) then
 c
 
           filehesstmp= filehess(1:lenhess)//'.'//

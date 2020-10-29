@@ -13,9 +13,9 @@
       integer g_tmp, start, end
 !     
 #include "msgids.fh"
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "ccsdps.fh"
+#include "util.fh"
 !     
       Nodes = GA_NNodes()
       IAm = GA_NodeID()
@@ -137,7 +137,7 @@
             end do
          end do
       end if
-      call ga_brdcst(msg_cc_t1b,t1,mdtob(lnov),0)
+      call ga_brdcst(msg_cc_t1b,t1,util_mdtob(lnov),0)
 !
 !     Next phase transposes bits withing g_objo.  To avoid OVV local
 !     memory, duplicate g_objo and do some smaller operations

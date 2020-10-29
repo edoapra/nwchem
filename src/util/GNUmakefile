@@ -92,7 +92,7 @@ ifeq ($(TARGET),MACX)
 endif
 ifeq ($(TARGET),MACX64)
 #  LIB_DEFINES += -DBYTE_SHORT_PACKING  
-  LIB_DEFINES += -DNO_MPIF
+#  LIB_DEFINES += -DNO_MPIF
   EXTRA_OBJ += macx_trapfpe.o
 endif
 
@@ -231,7 +231,7 @@ endif
     HEADERS = util.fh itri.fh msgids.fh  numerical_constants.fh stdio.fh \
               printlevels.fh bitops.fh bitops_decls.fh bitops_funcs.fh \
               bgj.fh bgj_common.fh nwc_const.fh errquit.fh util_sgroup.fh \
-	      util_params.fh utilc_nwchem_srcdir.fh
+	      util_params.fh utilc_nwchem_srcdir.fh testutil.fh
 #if USE_VTUNE
     HEADERS += vtune.fh
 #endif

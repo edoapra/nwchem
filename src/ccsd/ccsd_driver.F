@@ -5,7 +5,6 @@ C     $Id$
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "bas.fh"
 #include "geom.fh"
 #include "rtdb.fh"
@@ -270,7 +269,7 @@ c
        npass = 0
        oseg_hi = occ_lo - 1
  22    continue
-       tpass = tcgtime()
+       tpass = util_wallsec()
        npass = npass + 1
        oseg_lo = oseg_hi + 1
        oseg_hi = moints_occrange( noper, occ_lo, oseg_lo, occ_hi )
@@ -304,7 +303,7 @@ capr insert oexch
 c
 c
 c
-       tpass = tcgtime() - tpass
+       tpass = util_wallsec() - tpass
        if (Me.eq.0.and.oprintdef) write(6,772) 
      $    npass, oseg_lo, oseg_hi, tpass
  772   format(5x,'Pass:',i5,5x,'Index range:',i5,2x,'-',i5,

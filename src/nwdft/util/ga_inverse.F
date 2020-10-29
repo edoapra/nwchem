@@ -4,7 +4,6 @@ C$Id$
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
       integer g_a               ! input matrix
       integer g_s               ! output matrix
 c

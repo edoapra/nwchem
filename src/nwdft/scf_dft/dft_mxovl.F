@@ -9,7 +9,6 @@ C$Id$
 #include "cdft.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgids.fh"
 #include "stdio.fh"
       integer basis

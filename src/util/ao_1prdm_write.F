@@ -8,7 +8,6 @@ c
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"

@@ -9,7 +9,6 @@ c
 #include "mafdecls.fh"
 #include "bas.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 c
 c     compute the product \delta w(j)*func(j)
 c

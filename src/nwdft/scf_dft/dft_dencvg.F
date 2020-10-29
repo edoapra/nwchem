@@ -9,7 +9,6 @@ c
 c
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgids.fh"
 c
       integer me,nproc,i,j

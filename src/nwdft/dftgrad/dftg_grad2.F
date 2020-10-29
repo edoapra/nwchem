@@ -63,7 +63,6 @@ c
 #include "global.fh"
 #include "bas.fh"
 #include "schwarz.fh"
-#include "tcgmsg.fh"
 #include "sym.fh"
 c
       integer g_dens(2), basis, nactive, geom

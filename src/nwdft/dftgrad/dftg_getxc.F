@@ -23,7 +23,6 @@ c
 #include "rtdb.fh"
 #include "bas.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "sym.fh"
 #include "stdio.fh"
 #include "cdft.fh"

@@ -5,9 +5,9 @@ C $Id$
       implicit none
 #include "errquit.fh"
 #include "rtdb.fh"
+#include "global.fh"
 #include "mafdecls.fh"
 #include "inp.fh"
-#include "tcgmsg.fh"
 #include "stdio.fh"
 c::passed
       integer rtdb ! run-time-data-base handle
@@ -62,7 +62,7 @@ c::local
       double precision convggm, convgg, convge
       character*255 stpr_token
 c
-      if (nodeid() .ne. 0) return
+      if (ga_nodeid() .ne. 0) return
       oselect  = .false.
       osetmass = .false.
 c

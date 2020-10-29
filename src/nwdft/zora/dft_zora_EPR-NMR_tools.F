@@ -224,7 +224,6 @@ c Author : Fredy W. Aquino, Northwestern University (Oct 2012)
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
@@ -398,7 +397,6 @@ c Author : Fredy W. Aquino, Northwestern University (Oct 2012)
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
@@ -628,7 +626,6 @@ c Author : Fredy W. Aquino, Northwestern University (Oct 2012)
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
@@ -758,7 +755,6 @@ c Author : Fredy W. Aquino, Northwestern University (Oct 2012)
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
@@ -930,7 +926,6 @@ c Author : Fredy W. Aquino, Northwestern University (Oct 2012)
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
@@ -1079,7 +1074,6 @@ c Author : Fredy W. Aquino, Northwestern University (Oct 2012)
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
@@ -1243,7 +1237,6 @@ c Note.- nmo ne nbf if linear dependencies appear.
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
@@ -1363,7 +1356,6 @@ c Author : Fredy W. Aquino, Northwestern University (Oct 2012)
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
@@ -1509,7 +1501,6 @@ c -->It will write only subscape nsub for (z1,Az1)
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
@@ -1660,7 +1651,6 @@ c Author : Fredy W. Aquino, Northwestern University (Oct 2012)
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
@@ -1856,7 +1846,6 @@ c Author : Fredy W. Aquino, Northwestern University (Oct 2012)
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"

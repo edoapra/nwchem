@@ -25,7 +25,6 @@ cso      integer ipol
 c     
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "stdio.fh"
 #include "msgids.fh"
 c

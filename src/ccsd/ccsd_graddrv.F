@@ -35,13 +35,12 @@ c
       Logical oprint
 C
 #include "msgids.fh"
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "mafdecls.fh"
 #include "ccsd_len.fh"
 #include "ccsdps.fh"
 #include "util.fh"
-c
+c     
 * DATA MUST FOLLOW ALL DELCARATIONS 
       data zip/0.0d00/
 c
@@ -133,8 +132,8 @@ c
        enddo
       endif
 c
-      call ga_brdcst(msg_cc_z1a,z1,mdtob(lnov),0)
-      tx(3)=tcgtime()
+      call ga_brdcst(msg_cc_z1a,z1,util_mdtob(lnov),0)
+      tx(3)=util_wallsec()
 c
 c ----------------------------------------------------------
 c form ``sigma'' vector
@@ -151,20 +150,20 @@ c ----------------------------------------------------------
        call ga_put(g_hz2,offt2+1,offt2+lnov,nvp1,nvp1,scra,1)
       endif
       call ga_sync()
-      tx(1)=tcgtime()
+      tx(1)=util_wallsec()
       call ccsd_zvecs(basis,idiis,nsh,ncor,nocc,nvir,nact,nbf,
      &                iprt,cmo,eorb,t1,hz1,
      $                scra,scrb,z1,hiu,hia,habe,giu,gabe,
      &                g_nt2,g_z2,g_hz2,g_nz2,g_nhz2,
      &                g_ncoul,g_nexch,tklst, Tol2E)
       call ga_sync()
-      tx(2)=tcgtime()
+      tx(2)=util_wallsec()
       tstart=tx(2)
       call ccsd_pdiis(nocc,nvir,idiis,ndiis,z1,hz1,scra,scrb,mxvec,
      &                 bbkp,bb,iprt,iter,rms,g_z2,g_hz2,lhoov)
       call ga_sync()
       eold=eccsd
-      tx(4)=tcgtime()
+      tx(4)=util_wallsec()
       tend=tx(4)
       if (iprt.gt.5.and.iam.eq.0)print *,' time pdiis ',tend-tstart
       if (iam.eq.0.and.oprint)then

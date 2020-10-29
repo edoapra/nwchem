@@ -8,7 +8,7 @@ C     $Id$
       double precision diag
 
 #include "global.fh"
-#include "tcgmsg.fh"
+
 c     
       integer nproc,igrad,next,i,j
       integer nxtask

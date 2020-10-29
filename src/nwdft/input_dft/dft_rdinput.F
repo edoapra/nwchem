@@ -26,7 +26,6 @@ c
 #include "rtdb.fh"
 #include "msgids.fh"
 #include "sym.fh"
-#include "tcgmsg.fh"
 #include "mafdecls.fh"
 #include "stdio.fh"
 #include "util.fh"

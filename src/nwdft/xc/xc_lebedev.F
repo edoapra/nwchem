@@ -6,7 +6,6 @@ c
 #include "cdft.fh"
 #include "stdio.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 c
 c     Routine for Lebedev weights, supplied by Mauro Causa`
 c     modified by E. Apra based on the following paper

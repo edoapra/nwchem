@@ -5,7 +5,6 @@ C     $Id$
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "stdio.fh"
       integer geom,basis
       logical symmetry

@@ -8,7 +8,6 @@ C$Id$
 #include "inp.fh"
 #include "util.fh"
 #include "stdio.fh"
-#include "tcgmsg.fh"
 #include "crohf.fh"
 #include "cscf.fh"
 #include "geom.fh"

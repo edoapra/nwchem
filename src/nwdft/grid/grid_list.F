@@ -9,7 +9,6 @@ c
 #include "rtdb.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "util.fh"
 #include "stdio.fh"
 #include "cdft.fh"

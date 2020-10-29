@@ -51,7 +51,6 @@ c
 
 C
 #include "msgids.fh"
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "mafdecls.fh"
 #include "rtdb.fh"
@@ -282,8 +281,8 @@ c
        enddo
       endif
 c
-      call ga_brdcst(msg_cc_t1a,t1,mdtob(lnov),0)
-      tx(3)=tcgtime()
+      call ga_brdcst(msg_cc_t1a,t1,util_mdtob(lnov),0)
+      tx(3)=util_wallsec()
 c
 c ----------------------------------------------------------
 c form ``sigma'' vector
@@ -307,7 +306,7 @@ c     ga_created moved here from aoccsd
          call ga_put(g_ht2,offt2+1,offt2+lnov,nvp1,nvp1,scra,lnov)
       endif
       call ga_sync()
-      tx(1)=tcgtime()
+      tx(1)=util_wallsec()
       call ccsd_pampt2(basis,idiis,nsh,ncor,nocc,nvir,nact,nbf,
      &                iprt,cmo,eorb,t1,ht1,
      $                scra,scrb,hiu,hia,habe,giu,gabe,
@@ -327,14 +326,14 @@ c     ga_created moved here from aoccsd
       endif
 
 
-      tx(2)=tcgtime()
+      tx(2)=util_wallsec()
       tstart=tx(2)
       call ccsd_pdiis(nocc,nvir,idiis,ndiis,t1,ht1,scra,scrb,mxvec,
      &                 bbkp,bb,iprt,iter,rms,g_t2,g_ht2,lhoov)
       call ga_sync()
       deccsd=eccsd-eold
       eold=eccsd
-      tx(4)=tcgtime()
+      tx(4)=util_wallsec()
       tend=tx(4)
       if (iprt.gt.5.and.iam.eq.0)print *,' time pdiis ',tend-tstart
       if (iam.eq.0 .and. oprint)then

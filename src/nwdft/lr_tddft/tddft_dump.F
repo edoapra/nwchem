@@ -9,7 +9,6 @@ c Written by So Hirata, Feb 2002. (c) Battelle, PNNL, 2002.
 c
       implicit none
 #include "mafdecls.fh"
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "bas.fh"
 #include "geom.fh"

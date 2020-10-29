@@ -167,7 +167,6 @@ c
      &                 t1(nocc,nvir)
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "bas.fh"
 #include "rtdb.fh"
 #include "ccsdps.fh"
@@ -303,7 +302,6 @@ c
 
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "bas.fh"
 #include "geom.fh"
 #include "rtdb.fh"
@@ -314,6 +312,7 @@ c
 *rak-e
 #include "ccsdps.fh"
 #include "ccsd_data.fh"
+#include "util.fh"
       integer ad1,ish,ilo,ihi,jsh,jlo,jhi,ksh,klo,khi,lsh,llo,lhi,next,
      &        icnt,nfi,nfk,lnijkl,offjl,offlj,lnoo,nfj,nfl,nodes,iam
       logical flush, store, use_storage
@@ -379,7 +378,7 @@ c - note integrals computed 4 times minimal list
 c ------------------------------------------------------------
 c
 c      call ga_sync()
-      tx(1)=tcgtime()
+      tx(1)=util_wallsec()
       if (iam.eq.0.and.iprt.gt.5)
      &    print *,' begin parallel integral generation'
       call ga_zero(g_c)
@@ -708,7 +707,7 @@ c sync before 3 and 4 index transformation
       endif
 c
       call ga_sync()
-      tx(2)=tcgtime()
+      tx(2)=util_wallsec()
       if (iam.eq.0) then
 *rak     write(6,*)'Time around main block',tx(2)-tx(1)
          main_block_time = tx(2)-tx(1)

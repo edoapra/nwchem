@@ -854,7 +854,6 @@ c -------------- for g-shift NLMO analysis ------------- START
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
@@ -1037,7 +1036,6 @@ c     Broadcast status to other nodes
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"

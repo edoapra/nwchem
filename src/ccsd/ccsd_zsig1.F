@@ -19,7 +19,6 @@
 c
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "bas.fh"
 #include "ccsd_debug.fh"
 c

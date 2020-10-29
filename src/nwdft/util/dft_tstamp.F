@@ -4,7 +4,6 @@ C$Id$
 
 
 #include "global.fh"
-c$$$#include "tcgmsg.fh"
 #include "stdio.fh"
       character*8 istime,isdate
       character*(*) name

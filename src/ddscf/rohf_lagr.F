@@ -7,7 +7,6 @@ C$Id$
       implicit none
 #include "errquit.fh"
 #include "mafdecls.fh"
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "cscf.fh"
 #include "crohf.fh"

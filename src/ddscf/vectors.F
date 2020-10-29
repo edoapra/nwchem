@@ -4,7 +4,6 @@ C$Id$
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -112,7 +111,6 @@ c
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
@@ -310,7 +308,6 @@ c
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
@@ -879,7 +876,6 @@ c
 #include "inp.fh"
 #include "bas.fh"
 #include "geom.fh"
-#include "tcgmsg.fh"
 #include "bq.fh"
       integer rtdb              ! [input]
       integer basis             ! [input]
@@ -999,7 +995,6 @@ c
      $     title, nrow, ncol)
       implicit none
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "inp.fh"
 #include "eaf.fh"
 #include "stdio.fh"
@@ -1109,7 +1104,6 @@ c
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "inp.fh"
@@ -1253,7 +1247,6 @@ c
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "inp.fh"

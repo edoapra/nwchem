@@ -20,7 +20,6 @@ c
 #include "dft_conv.fh"
 #include "global.fh"
 #include "util.fh"
-#include "tcgmsg.fh"
 #include "schwarz.fh"
 #include "msgids.fh"
 #include "dftps.fh"

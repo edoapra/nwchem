@@ -25,7 +25,6 @@ c     see scf_init for input of task_chunks etc.
 c     
 c     $Id$
 c     
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "schwarz.fh"
 #include "geom.fh"

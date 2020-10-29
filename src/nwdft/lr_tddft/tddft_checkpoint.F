@@ -9,7 +9,6 @@ c
 #include "mafdecls.fh"
 #include "global.fh"
 #include "rtdb.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "msgids.fh"
 #include "util.fh"

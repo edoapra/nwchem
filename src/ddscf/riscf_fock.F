@@ -10,7 +10,6 @@ C     from the density matrix and the transformed three-center ERIs
 #include "mafdecls.fh"
 #include "global.fh"
 #include "bas.fh"
-#include "tcgmsg.fh"
 #include "pstat.fh"
 #include "cscfps.fh"
 #include "cscf.fh"

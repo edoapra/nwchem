@@ -9,7 +9,6 @@ C$Id$
 #include "mafdecls.fh"
 #include "global.fh"
 #include "bas.fh"
-#include "tcgmsg.fh"
 #include "util.fh"
 #ifdef RISCF_USE_DRA
 #include "dra.fh"

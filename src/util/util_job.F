@@ -61,7 +61,6 @@ c
 #include "rtdb.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
       integer rtdb ! [input]
       integer required ! [input] required time in seconds
 c

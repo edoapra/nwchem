@@ -31,7 +31,7 @@ c $Id$
       external etime
 #endif
       util_cpusec = etime(tarray)
-#elif (defined(LINUX) || defined(CYGNUS)) && !defined(LINUXIA64) && !defined(CATAMOUNT)
+#elif (defined(LINUX) || defined(CYGNUS) || defined(MACX)) && !defined(LINUXIA64) && !defined(CATAMOUNT)
       double precision linux_cputime
       external linux_cputime
       util_cpusec = linux_cputime()
@@ -57,7 +57,9 @@ c $Id$
 #endif
       call cpu_time (util_cpusec)
 #else
-#include "tcgmsg.fh"
-      util_cpusec = TCGTIME()
+#warning broken code      
+      garbage here
+c#include "tcgmsg.fh"
+c      util_cpusec = TCGTIME()
 #endif
       end

@@ -5,11 +5,11 @@ C$Id$
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "msgids.fh"
 #include "cscfps.fh"
 #include "inp.fh"
+#include "util.fh"
 c
 c     Temporary routine
 c
@@ -51,13 +51,13 @@ c
          ok = 1
       endif
 c
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, mitob(1), 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, util_mitob(1), 0) ! Propagate status
       movecs_read_header_so = ok .eq. 1
       if (.not. movecs_read_header_so) return
 c
       call util_char_ga_brdcst(Msg_Vec_Ttl, title, 0)
       call util_char_ga_brdcst(Msg_Vec_Nam, basis_name, 0)
-      call ga_brdcst(Msg_Vec_NBF+MSGINT, nbf, mitob(1), 0)
+      call ga_brdcst(Msg_Vec_NBF+MSGINT, nbf, util_mitob(1), 0)
 c
       if (oscfps) call pstat_off(ps_vecio)
 c
@@ -95,7 +95,6 @@ c
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
@@ -158,11 +157,11 @@ c
      $      ('movecs_read_so: pop failed', l_vecs, MA_ERR)
       endif
       call ga_sync()
-      call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, mitob(1), 0) ! Propagate status
+      call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, util_mitob(1), 0) ! Propagate status
       if (ok .eq. 1) then
-	 call ga_brdcst(Msg_Vec_NBF+MSGINT, nbf, mitob(1), 0)
-	 call ga_brdcst(Msg_Vec_EVal+MSGDBL, evals, mdtob(nbf), 0)
-	 call ga_brdcst(Msg_Vec_Occ+MSGDBL, occ,   mdtob(nbf), 0)
+	 call ga_brdcst(Msg_Vec_NBF+MSGINT, nbf, util_mitob(1), 0)
+	 call ga_brdcst(Msg_Vec_EVal+MSGDBL, evals, util_mdtob(nbf), 0)
+	 call ga_brdcst(Msg_Vec_Occ+MSGDBL, occ, util_mdtob(nbf), 0)
       endif
 c
       movecs_read_so = ok .eq. 1
@@ -276,7 +275,6 @@ c
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
@@ -399,7 +397,7 @@ c
          ok = 1
       endif ! ga_nodeid() = 0
 c
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, mitob(1), 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, util_mitob(1), 0) ! Propagate status
 c
       movecs_write_so = ok .eq. 1
       if (ga_nodeid() .eq. 0 .and.
@@ -582,7 +580,7 @@ c
 #include "inp.fh"
 #include "bas.fh"
 #include "geom.fh"
-#include "tcgmsg.fh"
+#include "util.fh"
       integer rtdb              ! [input]
       integer basis             ! [input]
       character*(*) scftype     ! [input] Current SCF type
@@ -662,7 +660,7 @@ c
       endif
 c
  10   oldmode =  rtdb_parallel(oldmode)
-      call ga_brdcst(1311, status, mitob(1), 0)
+      call ga_brdcst(1311, status, util_mitob(1), 0)
       movecs_converged_so = status
       return
 c
@@ -680,7 +678,6 @@ c
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "inp.fh"
@@ -731,7 +728,7 @@ c
       endif
 c
  10   call ga_sync
-      call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, mitob(1), 0)        ! Propagate status
+      call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, util_mitob(1), 0)        ! Propagate status
 c
       file_write_ga_patch_so = ok .eq. 1
       if (ga_nodeid() .eq. 0 .and.
@@ -767,7 +764,6 @@ c
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "inp.fh"
@@ -818,7 +814,7 @@ c
       endif
 c
  10   call ga_sync()
-      call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, mitob(1), 0)        ! Propagate status
+      call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, util_mitob(1), 0)        ! Propagate status
 c
       file_read_ga_patch_so = ok .eq. 1
       if (ga_nodeid() .eq. 0 .and.
@@ -860,11 +856,11 @@ c
 C$Id$
       implicit none
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "msgids.fh"
 #include "cscfps.fh"
 #include "inp.fh"
+#include "util.fh"
 c
 c     Temporary routine
 c
@@ -888,7 +884,7 @@ c
           endif
       endif
 c
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, mitob(1), 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, util_mitob(1), 0) ! Propagate status
       spinor_guess = ok .eq. 1
       return
  1000 write(6,*) ' spinor_guess: failed to open ',
@@ -923,7 +919,6 @@ c
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
@@ -959,7 +954,7 @@ c
        ok = 1
       endif ! ga_nodeid() = 0
 c
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, mitob(1), 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, util_mitob(1), 0) ! Propagate status
 c
       call ga_sync()
       if (oscfps) call pstat_off(ps_vecio)

@@ -387,7 +387,6 @@ c
 #include "bas.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "stdio.fh"
 #include "msgids.fh"
 #include "util.fh"

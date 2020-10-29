@@ -10,7 +10,6 @@ c
 c
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "stdio.fh"
 c
       integer me,nproc,i,j,g_tmp2

@@ -3,7 +3,6 @@ C$Id$
       implicit none
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "stdio.fh"
 c
       integer  ga_create_atom_blocked
@@ -65,7 +64,6 @@ c
       implicit none
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 c
 c
       logical ok

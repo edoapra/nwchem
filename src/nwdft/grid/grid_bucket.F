@@ -111,8 +111,6 @@ c
       subroutine grid_buckend()
 c     
 #include "mafdecls.fh"
-#include "global.fh"
-#include "tcgmsg.fh"
 #include "cdft.fh"
 c
       if (.not. MA_free_heap(l_nxyz))

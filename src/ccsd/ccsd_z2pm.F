@@ -7,7 +7,6 @@ C     $Id$
       double precision cmo(nbf,nbf),scra(nbf*nbf),scrb(nbf*nbf)
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "bas.fh"
 #include "rtdb.fh"
 #include "ccsdps.fh"
@@ -139,7 +138,6 @@ c
 
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "bas.fh"
 #include "rtdb.fh"
 #include "ccsd_debug.fh"

@@ -16,7 +16,6 @@ c
 #include "rtdb.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "geom.fh"
 #include "bas.fh"
 #include "cdft.fh"

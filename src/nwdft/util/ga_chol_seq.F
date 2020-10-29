@@ -4,7 +4,7 @@ C$Id$
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
+#include "util.fh"
 #include "msgids.fh"
 #include "stdio.fh"
       integer g_a ! input matrix
@@ -89,7 +89,7 @@ c****
         if(.not.ma_pop_stack(l_a_in))
      &    call errquit('ga_chol_seq: cannot pop stack',0, MA_ERR)
       endif 
-      call ga_brdcst(Msg_ga_chol, info, mitob(1), 0)
+      call ga_brdcst(Msg_ga_chol, info, util_mitob(1), 0)
       call ga_sync()
       return 
 c     

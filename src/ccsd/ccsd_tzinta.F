@@ -11,7 +11,6 @@ C     $Id$
       Integer IAm
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 c
       IAM = GA_NodeID()
 C

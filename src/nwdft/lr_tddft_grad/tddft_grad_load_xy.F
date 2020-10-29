@@ -20,7 +20,6 @@ c
 #include "global.fh"
 #include "tddft_grad_util.fh"
 #include "stdio.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "msgids.fh"
 #include "mafdecls.fh"

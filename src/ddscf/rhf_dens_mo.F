@@ -6,7 +6,6 @@ C     $Id$
 #include "mafdecls.fh"
 #include "global.fh"
 #include "bas.fh"
-#include "tcgmsg.fh"
 #include "geom.fh"
 #include "rtdb.fh"
 #include "cscfps.fh"

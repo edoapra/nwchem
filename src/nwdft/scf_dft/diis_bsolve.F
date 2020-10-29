@@ -46,7 +46,6 @@ c
 #include "stdio.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "util.fh"
 c     
       logical LResult

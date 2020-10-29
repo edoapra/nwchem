@@ -5,7 +5,7 @@ C$Id$
 #include "errquit.fh"
 #include "global.fh"
 #include "mafdecls.fh"
-#include "tcgmsg.fh"
+#include "util.fh"
       integer n                 ! Matrix dimension
       integer nroot             ! No. of eigen vectors sought
       integer maxiter           ! Maximum no. of iterations
@@ -242,7 +242,7 @@ c
          if (oprint .and. ga_nodeid().eq.0) then
             do iroot = 1, nroot
                write(6,3) iter, nsub, cur_root, iroot, eval(iroot),
-     $              rnorm(iroot), tcgtime()
+     $              rnorm(iroot), util_wallsec()
  3             format(7x,4i5,1p,e16.9,e12.4,0p,f8.1)
                call ga_copy_patch('n',g_x,1,n,iroot,iroot,g_tmp,1,n,1,1)
                call ga_print(g_tmp)

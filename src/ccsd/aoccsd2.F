@@ -19,7 +19,6 @@ c
       logical use_trpdrv_offload
 c
 #include "ccsd_len.fh"
-#include "tcgmsg.fh"
 #include "bas.fh"
 #include "rtdb.fh"
 #include "global.fh"
@@ -921,7 +920,7 @@ c
          nvpass = nvpass + 1
          oseg_lo = oseg_hi + 1
          oseg_hi = min(oseg_hi+vchunk,vir_hi)
-         tx(1)=tcgtime()
+         tx(1)=util_wallsec()
          if (iam.eq.0)write(*,846)nvpass,tx(1)
  846     format(' commencing integral evaluation ',i8,' at ',f14.2)
          call moints_trp(rtdb,basis,  ohalf, occ_lo, oseg_lo, oseg_hi,
@@ -930,7 +929,7 @@ c
      &      blen, cmo, ncor, nocc, nvir, ndel, Tol2E)
 c        print *,'call trpdrv ',nvpass
          call ga_sync()
-         tx(2)=tcgtime()
+         tx(2)=util_wallsec()
 c
          if (use_trpdrv_omp) then
 c
@@ -1076,7 +1075,7 @@ c
 c
          endif
 c
-         tx(3)=tcgtime()
+         tx(3)=util_wallsec()
 
          if (iam.eq.0.and.oprint)then
             write(luout,'(1x,a,i5,f12.2)')

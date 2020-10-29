@@ -3,7 +3,6 @@ C$Id$
       implicit none
 #include "errquit.fh"
 #include "mafdecls.fh"
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "cscfps.fh"
 #include "cscf.fh"

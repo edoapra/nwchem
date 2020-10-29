@@ -54,17 +54,11 @@ c
                         !< 7: QM_FD/XC_{Nadd}
 c
 #include "mafdecls.fh"
-c#include "rtdb.fh"
-c#include "bas.fh"
 #include "global.fh"
-c#include "tcgmsg.fh"
 #include "cdft.fh"
 c#include "oep.fh"
-c#include "dftpara.fh"
 #include "util.fh"
-c#include "sym.fh"
 #include "stdio.fh"
-c#include "case.fh"
 c
       double precision rho_n    !< [Output] The number of electrons
                                 !< obtained by integrating the density

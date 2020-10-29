@@ -3,7 +3,6 @@ C$Id$
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "mafdecls.fh"
 c
       logical status, ga_iter_lsolve, ga_iter_diag

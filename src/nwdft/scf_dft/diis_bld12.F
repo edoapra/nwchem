@@ -21,7 +21,6 @@ c
 c
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "stdio.fh"
 #include "cdft.fh"
 #include "rtdb.fh"

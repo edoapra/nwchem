@@ -10,7 +10,6 @@ c
 #include "util.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "stdio.fh"
 c
       integer rtdb

@@ -11,7 +11,6 @@ c****
 #include "cdft.fh"
 #include "bas.fh"
 #include "basP.fh"
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "schwarz.fh"
 #include "stdio.fh"

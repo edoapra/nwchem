@@ -4,7 +4,6 @@
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "bas.fh"
 #include "geom.fh"
 #include "schwarz.fh"

@@ -7,7 +7,6 @@ C$Id$
 #include "mafdecls.fh"
 #include "inp.fh"
 #include "util.fh"
-#include "tcgmsg.fh"
 #include "cuhf.fh"
 #include "cscf.fh"
 #include "geom.fh"
@@ -1415,7 +1414,6 @@ C$Id$
       implicit none
 #include "errquit.fh"
 #include "mafdecls.fh"
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "cscfps.fh"
 #include "cscf.fh"

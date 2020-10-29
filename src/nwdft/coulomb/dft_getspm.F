@@ -145,7 +145,6 @@ c     Find the ranges of the molecular system in the x, y, and z directions
 c-----------------------------------------------------------------------
 #include "stdio.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
       integer natoms
       double precision xcrd(natoms),ycrd(natoms),zcrd(natoms)
 c     

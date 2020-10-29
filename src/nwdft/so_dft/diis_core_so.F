@@ -47,7 +47,6 @@ c
 #include "mafdecls.fh"
 #include "stdio.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "util.fh"
 c
       integer irow,ijcanon,i,j

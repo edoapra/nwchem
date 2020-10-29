@@ -10,7 +10,6 @@ C     read operation, else all of them
 
       implicit none
       
-#include "tcgmsg.fh"
 #include "bas.fh"
 
       integer ao_basis, g_three, g_sthree, g_indx, t, first, indx,
