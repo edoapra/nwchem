@@ -377,7 +377,6 @@ C
       SUBROUTINE HND_LST_PATH(RTDB,GEOM,RSTART)
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
 #include "mafdecls.fh"
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 #include "global.fh"
 #include "geom.fh"

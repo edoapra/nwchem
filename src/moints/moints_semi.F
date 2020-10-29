@@ -393,7 +393,6 @@ c
      G     g_kbuf_trans, mp2cpybck)
        implicit none
 #include "errquit.fh"
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "mafdecls.fh"
 #include "bas.fh"

@@ -48,7 +48,6 @@ c
 #include "rtdb.fh"
 #include "stdio.fh"
 
-#include "tcgmsg.fh"
 #include "msgtypesf.h"
 c#include "inp.fh"
 #include "msgids.fh"

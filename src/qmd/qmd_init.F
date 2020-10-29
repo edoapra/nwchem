@@ -10,7 +10,6 @@ c
 c
 #include "errquit.fh"
 #include "mafdecls.fh"
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "bas.fh"
 #include "rtdb.fh"

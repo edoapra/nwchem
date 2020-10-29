@@ -4,7 +4,6 @@ C$Id$
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "bas.fh"
 #include "geom.fh"
 #include "rtdb.fh"
@@ -304,7 +303,7 @@ c
 *skip:       npass = 0
 *skip:       oseg_hi = occ_lo - 1
 *skip: 22    continue
-*skip:       tpass = tcgtime()
+*skip:       tpass = util_wallsec()
 *skip:       npass = npass + 1
 *skip:       oseg_lo = oseg_hi + 1
 *skip:       oseg_hi = moints_occrange( noper, occ_lo, oseg_lo, occ_hi )
@@ -341,7 +340,7 @@ c
 *skip:c
 *skip:c
 *skip:c
-*skip:       tpass = tcgtime() - tpass
+*skip:       tpass = util_wallsec() - tpass
 *skip:       if ((ga_nodeid().eq.0).and.
 *skip:     $     (util_print('progress reports',print_default)))
 *skip:     $     write(6,772) npass, oseg_lo, oseg_hi, tpass
@@ -403,7 +402,7 @@ c ---------------------------
 c  Test semi-direct routine
 c ---------------------------
 c
-       tmp2 = tcgtime()
+       tmp2 = util_wallsec()
        call ga_zero(g_epair)
        oseg_hi = occ_lo - 1
        nvir = vir_hi - vir_lo + 1
@@ -437,7 +436,7 @@ c
        endif
  222   continue
 
-       tpass = tcgtime()
+       tpass = util_wallsec()
        ipass = ipass + 1
        oseg_lo = oseg_hi + 1
        oseg_hi = min((oseg_lo + seg_incr - 1),occ_hi)
@@ -453,7 +452,7 @@ cedo  open a 128mb file enough?
      $                       vir_lo, vir_hi, dbl_mb(k_x),
      $                       dbl_mb(k_evals), g_epair )
        status = ma_pop_stack(l_x)
-       tpass = tcgtime() - tpass
+       tpass = util_wallsec() - tpass
        if (ga_nodeid().eq.0) then
          write(6,332) ipass,oseg_lo,oseg_hi,tpass
  332     format('Pass:',i3,5x,'Segment:',i3,'-',i3,5x,f12.2)
@@ -471,7 +470,7 @@ c
            emp2 = emp2 + e2pair
          enddo
        enddo
-       tmp2 = tcgtime() - tmp2
+       tmp2 = util_wallsec() - tmp2
        if (ga_nodeid().eq.0) then
          write(6,999) emp2
          write(6,881) tmp2

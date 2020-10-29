@@ -52,7 +52,6 @@ c  when retrieved
 c
       integer function moints_nxttask( numnodes )
       implicit none
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "cmointsmoao.fh"
       integer numnodes

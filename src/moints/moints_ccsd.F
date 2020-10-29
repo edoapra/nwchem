@@ -9,7 +9,6 @@
 *
       implicit none
 #include "errquit.fh"
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "mafdecls.fh"
 #include "bas.fh"

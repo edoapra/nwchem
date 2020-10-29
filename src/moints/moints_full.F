@@ -4,7 +4,6 @@ C     $Id$
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "bas.fh"
 #include "geom.fh"
 #include "rtdb.fh"
@@ -419,7 +418,7 @@ c
 c
 c     Two index transformation of effective core hamiltonian
 c
-      tpass = -tcgtime()
+      tpass = -util_wallsec()
       if (.not. geom_nuc_rep_energy(geom, efzc)) call errquit
      $     ('moints: geom_nuc_rep_energy failed',0, GEOM_ERR)
       g_hcore = ga_create_atom_blocked(geom, basis, 'T+V')
@@ -451,7 +450,7 @@ c
          if (.not. ga_destroy(g_aofock)) call errquit
      $        ('moints: ga_destroy failed', 0, GA_ERR)
       end if
-      tpass = tpass + tcgtime()
+      tpass = tpass + util_wallsec()
 c
       if (ga_nodeid() .eq. 0) then
          write(6,712) tpass, efzc
@@ -502,7 +501,7 @@ c
       npass = 0
       oseg_hi = lo - 1
  22   continue
-      tpass = tcgtime()
+      tpass = util_wallsec()
       npass = npass + 1
       oseg_lo = oseg_hi + 1
       oseg_hi = moints_occrange( noper, lo, oseg_lo, hi )
@@ -527,7 +526,7 @@ c
      $     g_coul, lo, hi, oseg_lo, oseg_hi, tol_out,
      $     dbl_mb(k_g), osym, int_mb(k_irs), intfmt)
 c     
-      tpass = tcgtime() - tpass
+      tpass = util_wallsec() - tpass
       if ((ga_nodeid().eq.0).and.
      $     (util_print('progress reports',print_default)))
      $     write(6,772) npass, oseg_lo, oseg_hi, tpass

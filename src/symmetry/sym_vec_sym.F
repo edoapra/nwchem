@@ -6,7 +6,6 @@ C$Id$
 #include "geom.fh"
 #include "bas.fh"
 #include "mafdecls.fh"
-#include "tcgmsg.fh"
 *     KAP on SGI breaks this routine
 c*$*optimize(0)
 c*$*scalar optimize(0)

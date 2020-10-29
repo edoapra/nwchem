@@ -3,7 +3,6 @@ C$Id$
       implicit none
 #include "errquit.fh"
 #include "mafdecls.fh"
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "bas.fh"
 #include "geom.fh"
@@ -487,7 +486,7 @@ c
         call util_flush(6)
       endif
       call ga_sync()
-      call ga_brdcst(msg_direct_mp2_emp2, emp2, mdtob(1), 0 )
+      call ga_brdcst(msg_direct_mp2_emp2, emp2, util_mdtob(1), 0 )
       ttotal = util_cpusec() - ttotal
       if ((ga_nodeid().eq.0).and.(oprint)) then
         write(6,823) ttotal
