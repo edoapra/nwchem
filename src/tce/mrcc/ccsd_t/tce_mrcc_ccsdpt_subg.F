@@ -12,7 +12,6 @@ c     1                           iref,nref)
 
       IMPLICIT NONE
 #include "mafdecls.fh"
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "bas.fh"
 #include "geom.fh"

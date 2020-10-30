@@ -3,8 +3,6 @@
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
-#include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -48,7 +46,7 @@ c
          ok = 1
       endif
 c
-   10 call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0)
+   10 call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0)
 c
       ao_1prdm_write = ok .eq. 1
       if (ga_nodeid() .eq. 0 .and.

@@ -6,8 +6,6 @@ c     $     nbf, nsets, nmo, occ, ldocc, evals, ldevals, g_vecs)
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "tcgmsg.fh"
-#include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -146,7 +144,7 @@ c
          ok = 1
       endif
 c
-   10 call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+   10 call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
 c
       ao_rdm_write = ok .eq. 1
 c      if (ga_nodeid() .eq. 0 .and.

@@ -7,7 +7,6 @@ c
 c
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
 #include "inp.fh"
@@ -99,15 +98,15 @@ c
          end if ! nodezero
 c
 c        broadcast status and variables to other nodes
-         call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0)
-         call ga_brdcst(Msg_Vec_NMO+MSGINT, tda, logisize, 0)
-         call ga_brdcst(Msg_Vec_NMO+MSGINT,ipol, inntsize, 0)
-         call ga_brdcst(Msg_Vec_NMO+MSGINT,nroots, inntsize, 0)
-         call ga_brdcst(Msg_Vec_NMO+MSGINT, nocc, inntsize*2, 0)
-         call ga_brdcst(Msg_Vec_NMO+MSGINT, nmo, inntsize*2, 0)
-         call ga_brdcst(Msg_Vec_NMO+MSGINT, nfc, inntsize*2, 0)
-         call ga_brdcst(Msg_Vec_NMO+MSGINT, nfv, inntsize*2, 0)
-         call ga_brdcst(Msg_Vec_NMO+MSGINT, nov, inntsize*2, 0)
+         call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0)
+         call ga_brdcst(Msg_Vec_NMO, tda, logisize, 0)
+         call ga_brdcst(Msg_Vec_NMO,ipol, inntsize, 0)
+         call ga_brdcst(Msg_Vec_NMO,nroots, inntsize, 0)
+         call ga_brdcst(Msg_Vec_NMO, nocc, inntsize*2, 0)
+         call ga_brdcst(Msg_Vec_NMO, nmo, inntsize*2, 0)
+         call ga_brdcst(Msg_Vec_NMO, nfc, inntsize*2, 0)
+         call ga_brdcst(Msg_Vec_NMO, nfv, inntsize*2, 0)
+         call ga_brdcst(Msg_Vec_NMO, nov, inntsize*2, 0)
          call ga_sync()
 c
 c        Get the number of active occupied and virtuals
@@ -177,7 +176,7 @@ c
           ok = 1
          end if  ! nodezero
 c
-         call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0)
+         call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0)
          call ga_sync()
 c
 c        calculate unrelaxed difference density matrix T
@@ -234,7 +233,6 @@ c
 #include "global.fh"
 #include "stdio.fh"
 #include "errquit.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
 c

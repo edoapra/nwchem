@@ -17,7 +17,6 @@ c
 #include "util.fh"
 #include "msgids.fh"
 #include "stdio.fh"
-#include "msgtypesf.h"
 c
 #include "qmd_common.fh"
 c
@@ -163,7 +162,7 @@ c     random number seed
       call date_and_time(values=tvals)
 c     current seconds x milliseconds + minutes
       if (ga_nodeid().eq.0) svals = tvals(7)*tvals(8)+tvals(6)
-      call ga_brdcst(Msg_Vec_Stat+MSGINT,svals,inntsize,0)
+      call ga_brdcst(Msg_Vec_Stat,svals,inntsize,0)
       call ga_sync()
       if (.not.rtdb_get(rtdb,'qmd:rand_seed',mt_int,1,idum))
      & idum = svals ! default

@@ -7,7 +7,6 @@ c
       logical function moeig_read(filename, iset, evals )
       implicit none
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
 #include "inp.fh"
@@ -64,9 +63,9 @@ c
 c
  10   continue
       call ga_sync()
-      call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, mitob1, 0) ! Propagate status
+      call ga_brdcst(Msg_Vec_Stat, ok, mitob1, 0) ! Propagate status
       if (ok .eq. 1) then
-         call ga_brdcst(Msg_Vec_EVal+MSGDBL, evals,
+         call ga_brdcst(Msg_Vec_EVal, evals,
      $        MA_sizeof(MT_DBL,nbf,MT_BYTE), 0)
       endif
 c

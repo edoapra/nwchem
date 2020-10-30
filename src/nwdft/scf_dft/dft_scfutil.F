@@ -173,7 +173,6 @@ c
 #include "errquit.fh"
 #include "global.fh"
 #include "mafdecls.fh"
-#include "msgtypesf.h"
 #include "msgids.fh"
 #include "util.fh"
 c
@@ -212,7 +211,7 @@ c
        ok = 1
       endif ! ga_nodeid() = 0
 c
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok,
+ 10   call ga_brdcst(Msg_Vec_Stat, ok,
      C     MA_sizeof(MT_INT,1,MT_BYTE), 0) ! Propagate status
 c
       call ga_sync()

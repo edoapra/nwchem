@@ -47,7 +47,6 @@ c
       implicit double precision (a-h,o-z)
 #include "errquit.fh"
 #include "rtdb.fh"
-#include "msgtypesf.h"
 #include "global.fh"
 #include "mafdecls.fh"
 #include "stdio.fh"
@@ -377,7 +376,6 @@ C
       SUBROUTINE HND_LST_PATH(RTDB,GEOM,RSTART)
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
 #include "mafdecls.fh"
-#include "msgtypesf.h"
 #include "global.fh"
 #include "geom.fh"
 #include "rtdb.fh"

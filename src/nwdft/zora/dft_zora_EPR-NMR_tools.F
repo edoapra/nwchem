@@ -224,7 +224,6 @@ c Author : Fredy W. Aquino, Northwestern University (Oct 2012)
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -354,7 +353,7 @@ c     Close the file
       ok = 1
       end if
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
       dft_zoraNMR_write = (ok .eq. 1)
       if (ga_nodeid() .eq. 0) then
@@ -397,7 +396,6 @@ c Author : Fredy W. Aquino, Northwestern University (Oct 2012)
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -583,7 +581,7 @@ c      Close the file
       end if
 c
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
       dft_zoraNMR_read = ok .eq. 1
       return
@@ -626,7 +624,6 @@ c Author : Fredy W. Aquino, Northwestern University (Oct 2012)
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -714,7 +711,7 @@ c     Close the file
       ok = 1
       end if
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
       dft_zoraNMR_write_AB = (ok .eq. 1)
       if (ga_nodeid() .eq. 0) then
@@ -755,7 +752,6 @@ c Author : Fredy W. Aquino, Northwestern University (Oct 2012)
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -878,7 +874,7 @@ c      Close the file
       end if
 c
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
       dft_zoraNMR_read_AB = ok .eq. 1
       return
@@ -926,7 +922,6 @@ c Author : Fredy W. Aquino, Northwestern University (Oct 2012)
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -1032,7 +1027,7 @@ c     Close the file
       ok = 1
       end if
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
       dft_zoraCPHF_write = (ok .eq. 1)
       if (ga_nodeid() .eq. 0) then
@@ -1074,7 +1069,6 @@ c Author : Fredy W. Aquino, Northwestern University (Oct 2012)
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -1187,7 +1181,7 @@ c      Close the file
       end if
 c
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
       dft_zoraCPHF_read = ok .eq. 1
       return
@@ -1237,7 +1231,6 @@ c Note.- nmo ne nbf if linear dependencies appear.
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -1314,7 +1307,7 @@ c     Close the file
       ok = 1
       end if
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
       dft_CPHF1_write = (ok .eq. 1)
       if (ga_nodeid() .eq. 0) then
@@ -1356,7 +1349,6 @@ c Author : Fredy W. Aquino, Northwestern University (Oct 2012)
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -1449,7 +1441,7 @@ c      Close the file
       end if
 c
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
       dft_CPHF1_read = ok .eq. 1
       return
@@ -1501,7 +1493,6 @@ c -->It will write only subscape nsub for (z1,Az1)
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -1603,7 +1594,7 @@ c     Close the file
       ok = 1
       end if
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
       dft_CPHF2_write = (ok .eq. 1)
       if (ga_nodeid() .eq. 0) then
@@ -1651,7 +1642,6 @@ c Author : Fredy W. Aquino, Northwestern University (Oct 2012)
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -1801,7 +1791,7 @@ c      Close the file
        ok = 1
       end if ! ----- if-ga_nodeid-eq-0 ----- END
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
       dft_CPHF2_read = ok .eq. 1
       return
@@ -1846,7 +1836,6 @@ c Author : Fredy W. Aquino, Northwestern University (Oct 2012)
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -2001,7 +1990,7 @@ c      Close the file
       end if
 c
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
       dft_CPHF2_read2fix = ok .eq. 1
       return

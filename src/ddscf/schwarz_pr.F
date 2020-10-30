@@ -2,7 +2,6 @@
 C$Id$
       implicit none
 #include "schwarz.fh"
-#include "msgtypesf.h"
 #include "global.fh"
 #include "msgids.fh"
       integer natoms, nshell

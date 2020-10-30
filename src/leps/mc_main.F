@@ -463,7 +463,6 @@ C Include Files
 #include "mafdecls.fh"
 #include "global.fh"
 #include "msgids.fh"
-#include "msgtypesf.h"
 #include "util.fh"
 #include "util_sgroup.fh"
 #include "subgr.fh"
@@ -560,14 +559,14 @@ C          write(*,*) 'big proc (i,1): ',bigproc(i,1)
       else
         call ga_sync()
       endif
-c       write(6,*)'Now broad:',idmedium,msg_dntmc3+MSGINT, procnums
+c       write(6,*)'Now broad:',idmedium,msg_dntmc3, procnums
 c       write(6,*)'Now broad:',mitob(numgroups)
 C Broadcase Results, array of groups( starting from 0)
-      call ga_pgroup_brdcst(idmedium,msg_dntmc3+MSGINT, procnums,
+      call ga_pgroup_brdcst(idmedium,msg_dntmc3, procnums,
      &     util_mitob(numgroups), 0)
 C Broadcase Results, array of groups( starting from 1)
 c       write(6,*)'Now broadcasting,again'
-      call ga_pgroup_brdcst(idmedium,msg_dntmc7+MSGINT, groupnums,
+      call ga_pgroup_brdcst(idmedium,msg_dntmc7, groupnums,
      &     util_mitob(numgroups), 0)
 c       write(6,*)'Now in destroying list'
 C Destroy GA "proc list"

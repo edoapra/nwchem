@@ -11,8 +11,6 @@ c     (JB) Interface for Tailored CCSD method. Read active amplitudes in T12DUMP
 #include "util.fh"
 #include "stdio.fh"
 #include "tce_main.fh"
-#include "tcgmsg.fh"
-#include "msgtypesf.h"
 #include "msgids.fh"
 
       INTEGER d_a, d_b

@@ -8,7 +8,6 @@ c
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -56,7 +55,7 @@ c      Clean up
 c
 c     Broadcast status to other nodes
       ok = 1
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0)
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0)
       call ga_sync()
 c
       end

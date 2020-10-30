@@ -2,7 +2,6 @@
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -98,11 +97,11 @@ c	 if (.not. ma_pop_stack(l_vecs)) call errquit
 c     $      ('movecs_read: pop failed', l_vecs, MA_ERR)
 c      endif
       call ga_sync()
-      call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+      call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
 c      if (ok .eq. 1) then
-c	 call ga_brdcst(Msg_Vec_NBF+MSGINT, nbf, inntsize, 0)
-c	 call ga_brdcst(Msg_Vec_EVal+MSGDBL, evals, ddblsize*nbf, 0)
-c	 call ga_brdcst(Msg_Vec_Occ+MSGDBL, occ, ddblsize*nbf, 0)
+c	 call ga_brdcst(Msg_Vec_NBF, nbf, inntsize, 0)
+c	 call ga_brdcst(Msg_Vec_EVal, evals, ddblsize*nbf, 0)
+c	 call ga_brdcst(Msg_Vec_Occ, occ, ddblsize*nbf, 0)
 c      endif
 c
       ao_rdm_read = ok .eq. 1

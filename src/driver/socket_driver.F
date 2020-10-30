@@ -9,7 +9,6 @@
 #include "global.fh"
 #include "inp.fh"
 #include "stdio.fh"
-#include "msgtypesf.h"
 
 *     **** local variables ****
       integer MASTER,taskid
@@ -131,7 +130,7 @@
                 option = 4
              end if
          end if
-         call ga_brdcst(9+MSGINT,option,1,MASTER)
+         call ga_brdcst(9,option,1,MASTER)
 
          !*** EXIT ***
          if (option.eq.0)  then

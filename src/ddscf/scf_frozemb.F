@@ -8,7 +8,6 @@
 #include "mafdecls.fh"
 #include "global.fh"
 #include "geom.fh"
-#include "msgtypesf.h"
 #include "msgids.fh"
 #include "stdio.fh"
 c
@@ -176,7 +175,7 @@ c
       end if  ! ga_nodeid
 c
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
 c
       return

@@ -10,7 +10,6 @@ c
 #include "rtdb.fh"
 #include "errquit.fh"
 #include "mafdecls.fh"
-#include "msgtypesf.h"
 #include "msgids.fh"
 #include "stdio.fh"
 #include "global.fh"
@@ -60,7 +59,7 @@ c     Check for restart file is restart flag is true
       if (restart) then
         if (ga_nodeid().eq.0)
      $    inquire(file=rstfilename,exist=rst_exists)
-        call ga_brdcst(Msg_Vec_Stat+MSGINT,rst_exists,logsize,0)
+        call ga_brdcst(Msg_Vec_Stat,rst_exists,logsize,0)
         if (.not.rst_exists) then
           if (ga_nodeid().eq.0) then
             write(luout,*) 'No restart file found'

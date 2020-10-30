@@ -931,7 +931,6 @@ c mov  - total # of correlated ORBITALS = noas+nvas
 c
       implicit none
 #include "mafdecls.fh"
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "rtdb.fh"
 #include "geom.fh"

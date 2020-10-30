@@ -339,7 +339,6 @@ c
 c
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -371,7 +370,6 @@ c
 c
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -479,7 +477,7 @@ c
       end if
 c
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
 c
       dft_zora_read_so = ok .eq. 1
@@ -525,7 +523,6 @@ c
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -637,7 +634,7 @@ c
       end if
 c
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
 c
       dft_zora_write_so = (ok .eq. 1)

@@ -17,7 +17,6 @@ c Adapted from zora_getv_so
 #include "mafdecls.fh"
 #include "global.fh"
 #include "geom.fh"
-#include "msgtypesf.h"
 #include "msgids.fh"
 #include "stdio.fh"
 #include "cgridfile.fh"

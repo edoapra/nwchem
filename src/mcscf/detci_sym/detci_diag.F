@@ -237,7 +237,6 @@ c
       subroutine detci_dvddiag0( mxv, precon, nw, maxiter, tol,
      $                           e0, eval, g_w, g_x, oprint )
       implicit none
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "stdio.fh"
 #include "errquit.fh"

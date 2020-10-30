@@ -5,7 +5,6 @@ C$Id$
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "msgids.fh"
 #include "cscfps.fh"
 #include "inp.fh"
@@ -51,13 +50,13 @@ c
          ok = 1
       endif
 c
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, util_mitob(1), 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, util_mitob(1), 0) ! Propagate status
       movecs_read_header_so = ok .eq. 1
       if (.not. movecs_read_header_so) return
 c
       call util_char_ga_brdcst(Msg_Vec_Ttl, title, 0)
       call util_char_ga_brdcst(Msg_Vec_Nam, basis_name, 0)
-      call ga_brdcst(Msg_Vec_NBF+MSGINT, nbf, util_mitob(1), 0)
+      call ga_brdcst(Msg_Vec_NBF, nbf, util_mitob(1), 0)
 c
       if (oscfps) call pstat_off(ps_vecio)
 c
@@ -95,7 +94,6 @@ c
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -157,11 +155,11 @@ c
      $      ('movecs_read_so: pop failed', l_vecs, MA_ERR)
       endif
       call ga_sync()
-      call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, util_mitob(1), 0) ! Propagate status
+      call ga_brdcst(Msg_Vec_Stat, ok, util_mitob(1), 0) ! Propagate status
       if (ok .eq. 1) then
-	 call ga_brdcst(Msg_Vec_NBF+MSGINT, nbf, util_mitob(1), 0)
-	 call ga_brdcst(Msg_Vec_EVal+MSGDBL, evals, util_mdtob(nbf), 0)
-	 call ga_brdcst(Msg_Vec_Occ+MSGDBL, occ, util_mdtob(nbf), 0)
+	 call ga_brdcst(Msg_Vec_NBF, nbf, util_mitob(1), 0)
+	 call ga_brdcst(Msg_Vec_EVal, evals, util_mdtob(nbf), 0)
+	 call ga_brdcst(Msg_Vec_Occ, occ, util_mdtob(nbf), 0)
       endif
 c
       movecs_read_so = ok .eq. 1
@@ -275,7 +273,6 @@ c
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -397,7 +394,7 @@ c
          ok = 1
       endif ! ga_nodeid() = 0
 c
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, util_mitob(1), 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, util_mitob(1), 0) ! Propagate status
 c
       movecs_write_so = ok .eq. 1
       if (ga_nodeid() .eq. 0 .and.
@@ -678,7 +675,6 @@ c
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "inp.fh"
 #include "msgids.fh"
@@ -728,7 +724,7 @@ c
       endif
 c
  10   call ga_sync
-      call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, util_mitob(1), 0)        ! Propagate status
+      call ga_brdcst(Msg_Vec_Stat, ok, util_mitob(1), 0)        ! Propagate status
 c
       file_write_ga_patch_so = ok .eq. 1
       if (ga_nodeid() .eq. 0 .and.
@@ -764,7 +760,6 @@ c
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "inp.fh"
 #include "msgids.fh"
@@ -814,7 +809,7 @@ c
       endif
 c
  10   call ga_sync()
-      call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, util_mitob(1), 0)        ! Propagate status
+      call ga_brdcst(Msg_Vec_Stat, ok, util_mitob(1), 0)        ! Propagate status
 c
       file_read_ga_patch_so = ok .eq. 1
       if (ga_nodeid() .eq. 0 .and.
@@ -856,7 +851,6 @@ c
 C$Id$
       implicit none
 #include "global.fh"
-#include "msgtypesf.h"
 #include "msgids.fh"
 #include "cscfps.fh"
 #include "inp.fh"
@@ -884,7 +878,7 @@ c
           endif
       endif
 c
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, util_mitob(1), 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, util_mitob(1), 0) ! Propagate status
       spinor_guess = ok .eq. 1
       return
  1000 write(6,*) ' spinor_guess: failed to open ',
@@ -919,7 +913,6 @@ c
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
 #include "util.fh"
@@ -954,7 +947,7 @@ c
        ok = 1
       endif ! ga_nodeid() = 0
 c
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, util_mitob(1), 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, util_mitob(1), 0) ! Propagate status
 c
       call ga_sync()
       if (oscfps) call pstat_off(ps_vecio)

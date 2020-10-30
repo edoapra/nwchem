@@ -13,7 +13,6 @@ c
 #include "global.fh"
 #include "inp.fh"
 #include "mafdecls.fh"
-#include "msgtypesf.h"
 #include "msgids.fh"
 c
 #include "qmd_common.fh"
@@ -223,7 +222,7 @@ c
       end if !ga_nodeid
 c
       call ga_sync()
-      call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+      call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       return
 c
 90000 continue

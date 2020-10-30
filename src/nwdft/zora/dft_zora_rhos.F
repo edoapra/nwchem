@@ -531,7 +531,6 @@ c---- GA output: g_AtNr
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -634,7 +633,6 @@ czora...Write out the zora NMR shieldings to disk
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -699,7 +697,7 @@ c     Close the file
       ok = 1
       end if
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
       dft_zoraEFGZ4_write = (ok .eq. 1)
       if (ga_nodeid() .eq. 0) then
@@ -735,7 +733,6 @@ c     Broadcast status to other nodes
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -815,7 +812,7 @@ c      Close the file
       end if
 c
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
       dft_zoraEFGZ4_read = ok .eq. 1
       return
@@ -874,7 +871,6 @@ c                 --> Stored in get_munuV6() [hnd_elfcon_symm.F]
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -1005,7 +1001,7 @@ c     Close the file
       ok = 1
       end if
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
       dft_zoraEFGZ4_NLMOAnalysis_write = (ok .eq. 1)
       if (ga_nodeid() .eq. 0) then
@@ -1045,7 +1041,6 @@ c     Broadcast status to other nodes
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -1179,7 +1174,7 @@ c      Close the file
       end if
 c
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
       dft_zoraEFGZ4_NLMOAnalysis_read = ok .eq. 1
       return

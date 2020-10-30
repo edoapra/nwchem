@@ -1067,8 +1067,6 @@ c
 #include "tce_mrcc.fh"
 #include "tce_main.fh"
 #include "rtdb.fh"
-#include "tcgmsg.fh"
-#include "msgtypesf.h"
 #include "msgids.fh"
 
 c        integer nref
@@ -1451,8 +1449,8 @@ c     1   call errquit('tce_mrcc_iface_buff: MA problem',1,MA_ERR)
 
 cjb broadcasts
 
-        call ga_brdcst(Msg_Vec_EVal+MSGINT+30,mkroot,inntsize, 0)
-        call ga_brdcst(Msg_Vec_EVal+MSGDBL+31,epsilon,ddblsize, 0)
+        call ga_brdcst(Msg_Vec_EVal+30,mkroot,inntsize, 0)
+        call ga_brdcst(Msg_Vec_EVal+31,epsilon,ddblsize, 0)
         call ga_sync()
 
 c        write(LuOut,"(/,'Epsilon: ',2F16.12,/)") epsilon

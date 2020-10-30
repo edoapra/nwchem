@@ -4,7 +4,6 @@
 ! 
       implicit none
 #include "mafdecls.fh"
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "bas.fh"
 #include "geom.fh"

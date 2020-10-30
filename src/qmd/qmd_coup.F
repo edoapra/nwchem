@@ -156,7 +156,6 @@ c
 #include "errquit.fh"
 #include "stdio.fh"
 #include "mafdecls.fh"
-#include "msgtypesf.h"
 #include "msgids.fh"
 #include "global.fh"
 #include "rtdb.fh"

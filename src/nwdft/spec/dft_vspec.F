@@ -14,7 +14,6 @@ c
 #include "msgids.fh"
 #include "rtdb.fh"
 #include "geom.fh"
-#include "msgtypesf.h"
 #include "util.fh"
 #include "inp.fh"
 #include "util_params.fh"

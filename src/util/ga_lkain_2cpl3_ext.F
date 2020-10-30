@@ -1306,7 +1306,6 @@ c Date   : 03-15-12
 
       implicit none
 #include "errquit.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
 #include "global.fh"
@@ -2550,7 +2549,6 @@ c Date   : 03-15-12
 
       implicit none
 #include "errquit.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
 #include "global.fh"

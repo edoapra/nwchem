@@ -7,7 +7,6 @@ c     $Id$
 #include "errquit.fh"
 c     
 #include "mafdecls.fh"
-#include "msgtypesf.h"
 #include "global.fh"
 #include "geom.fh"
 #include "nwc_const.fh"
@@ -267,7 +266,7 @@ c
       endif
 c
       mitob1=MA_sizeof(MT_INT,1,MT_BYTE)
-      call ga_brdcst(Msg_Stpr_Walk+MSGINT, int_val, mitob1, 0) ! Propagate walker status
+      call ga_brdcst(Msg_Stpr_Walk, int_val, mitob1, 0) ! Propagate walker status
 c     
       lstpr_walk = .false.
       if (int_val.gt.0) lstpr_walk = .true.

@@ -13,7 +13,6 @@ c
 #include "msgids.fh"
 #include "rtdb.fh"
 #include "geom.fh"
-#include "msgtypesf.h"
 #include "util.fh"
 #include "inp.fh"
 c

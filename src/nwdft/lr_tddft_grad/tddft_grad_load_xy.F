@@ -20,7 +20,6 @@ c
 #include "global.fh"
 #include "tddft_grad_util.fh"
 #include "stdio.fh"
-#include "msgtypesf.h"
 #include "msgids.fh"
 #include "mafdecls.fh"
 c
@@ -454,7 +453,7 @@ c
 c     Broadcast status
       ok =1
       call ga_sync()
-      call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0)
+      call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0)
 c
 c Daniel (2-19-13): Deallocate local arrays.
       if (.not.ma_pop_stack(ihdl_s2saved)) 

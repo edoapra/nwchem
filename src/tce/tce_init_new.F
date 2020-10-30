@@ -6,7 +6,6 @@ c     Initialize for many-electron calculations.
 c
       implicit none
 #include "mafdecls.fh"
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "dra.fh"
 #include "bas.fh"

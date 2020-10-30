@@ -6,7 +6,6 @@ C$Id$
 #include "stdio.fh"
 #include "rtdb.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "inp.fh"
 #include "msgids.fh"

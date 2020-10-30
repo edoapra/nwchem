@@ -9,7 +9,6 @@ c
 #include "mafdecls.fh"
 #include "global.fh"
 #include "rtdb.fh"
-#include "msgtypesf.h"
 #include "msgids.fh"
 #include "util.fh"
 #include "stdio.fh"
@@ -71,7 +70,7 @@ c     Open output file.
      1    iostat=ios)
       end if
 c
-      call ga_brdcst(Msg_Vec_NBF+MSGINT, ios, inntsize, 0)
+      call ga_brdcst(Msg_Vec_NBF, ios, inntsize, 0)
       if (ios.ne.0) then 
         if (ga_nodeid().eq.0)
      1    write(LuOut,*) 'Error opening trials, using default guess'
@@ -87,10 +86,10 @@ c     Read how many trial vectors we have (TDA: nroots; RPA: 2*nroots)
         read(ioun) ispintag_verify
         read(ioun) nov_verify(1), nov_verify(2)
       end if
-      call ga_brdcst(Msg_Vec_stat+MSGINT, ntrials_old, inntsize, 0)
-      call ga_brdcst(Msg_Vec_stat+MSGINT, ipol_verify, inntsize, 0)
-      call ga_brdcst(Msg_Vec_stat+MSGINT, ispintag_verify, inntsize, 0)
-      call ga_brdcst(Msg_Vec_stat+MSGINT, nov_verify, 2*inntsize, 0)
+      call ga_brdcst(Msg_Vec_stat, ntrials_old, inntsize, 0)
+      call ga_brdcst(Msg_Vec_stat, ipol_verify, inntsize, 0)
+      call ga_brdcst(Msg_Vec_stat, ispintag_verify, inntsize, 0)
+      call ga_brdcst(Msg_Vec_stat, nov_verify, 2*inntsize, 0)
 c
       if ((ipol_verify.ne.ipol).or.(ispintag_verify.ne.ispintag).or.
      1  (nov_verify(1).ne.nov(1)).or.(nov_verify(2).ne.nov(2))) then

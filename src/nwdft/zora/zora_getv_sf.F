@@ -17,7 +17,6 @@ c
 #include "mafdecls.fh"
 #include "global.fh"
 #include "geom.fh"
-#include "msgtypesf.h"
 #include "msgids.fh"
 #include "stdio.fh"
 #include "cgridfile.fh"

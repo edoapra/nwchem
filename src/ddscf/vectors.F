@@ -4,7 +4,6 @@ C$Id$
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "msgids.fh"
 #include "cscfps.fh"
 #include "inp.fh"
@@ -64,16 +63,16 @@ c
          ok = 1
       endif
 c
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       movecs_read_header = ok .eq. 1
       if (.not. movecs_read_header) return
 c
       call util_char_ga_brdcst(Msg_Vec_Ttl, title, 0)
       call util_char_ga_brdcst(Msg_Vec_Nam, basis_name, 0)
       call util_char_ga_brdcst(Msg_Vec_Type, scftype, 0)
-      call ga_brdcst(Msg_Vec_NBF+MSGINT, nbf, inntsize, 0)
-      call ga_brdcst(Msg_Vec_Set+MSGINT, nsets, inntsize, 0)
-      call ga_brdcst(Msg_Vec_NMO+MSGINT, nmo, inntsize*nsets, 0)
+      call ga_brdcst(Msg_Vec_NBF, nbf, inntsize, 0)
+      call ga_brdcst(Msg_Vec_Set, nsets, inntsize, 0)
+      call ga_brdcst(Msg_Vec_NMO, nmo, inntsize*nsets, 0)
 c
       if (oscfps) call pstat_off(ps_vecio)
 c
@@ -111,7 +110,6 @@ c
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -187,11 +185,11 @@ c
      $      ('movecs_read: pop failed', l_vecs, MA_ERR)
       endif
       call ga_sync()
-      call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+      call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       if (ok .eq. 1) then
-	 call ga_brdcst(Msg_Vec_NBF+MSGINT, nbf, inntsize, 0)
-	 call ga_brdcst(Msg_Vec_EVal+MSGDBL, evals, ddblsize*nbf, 0)
-	 call ga_brdcst(Msg_Vec_Occ+MSGDBL, occ, ddblsize*nbf, 0)
+	 call ga_brdcst(Msg_Vec_NBF, nbf, inntsize, 0)
+	 call ga_brdcst(Msg_Vec_EVal, evals, ddblsize*nbf, 0)
+	 call ga_brdcst(Msg_Vec_Occ, occ, ddblsize*nbf, 0)
       endif
 c
       movecs_read = ok .eq. 1
@@ -308,7 +306,6 @@ c
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -462,7 +459,7 @@ c
          ok = 1
       endif
 c
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
 c
       movecs_write = ok .eq. 1
       if (ga_nodeid() .eq. 0 .and.
@@ -1104,7 +1101,6 @@ c
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "inp.fh"
 #include "msgids.fh"
@@ -1202,7 +1198,7 @@ c
       endif
 c
  10   call ga_sync
-      call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0)        ! Propagate status
+      call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0)        ! Propagate status
 c
       file_write_ga_patch = ok .eq. 1
       if (ga_nodeid() .eq. 0 .and.
@@ -1247,7 +1243,6 @@ c
       implicit none
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "inp.fh"
 #include "msgids.fh"
@@ -1348,7 +1343,7 @@ c
       endif
 c
  10   call ga_sync()
-      call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0)        ! Propagate status
+      call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0)        ! Propagate status
 c
       file_read_ga_patch = ok .eq. 1
       if (ga_nodeid() .eq. 0 .and.

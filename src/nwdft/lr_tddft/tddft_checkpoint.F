@@ -9,7 +9,6 @@ c
 #include "mafdecls.fh"
 #include "global.fh"
 #include "rtdb.fh"
-#include "msgtypesf.h"
 #include "msgids.fh"
 #include "util.fh"
 #include "stdio.fh"
@@ -66,7 +65,7 @@ c
      1    iostat=ios)
       end if
 c
-      call ga_brdcst(Msg_Vec_Stat+MSGINT, ios, inntsize, 0)
+      call ga_brdcst(Msg_Vec_Stat, ios, inntsize, 0)
       if (ios.ne.0) then
         if (ga_nodeid().eq.0)
      1    write(luout, *) trim(pname)//"failed to open: "//trim(fname)

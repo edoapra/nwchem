@@ -16,7 +16,6 @@ c
 #include "msgids.fh"
 #include "rtdb.fh"
 #include "geom.fh"
-#include "msgtypesf.h"
 #include "util.fh"
 #include "inp.fh"
 #include "util_params.fh"
@@ -368,7 +367,7 @@ c
 c     Broadcast status to other nodes
 c
       ok = 1
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
 c
  1000 format('== Spin-Orbit DFT Virtual Spectrum ==')

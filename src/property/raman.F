@@ -697,7 +697,6 @@ c Author: Fredy W. Aquino, Northwestern Universtiy (Oct. 2012)
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -737,7 +736,7 @@ c     Close the file
        ok = 1
       end if ! ========================== node 0 == END
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
       ramanpol_write = (ok .eq. 1)
       if (ga_nodeid() .eq. 0) then
@@ -776,7 +775,6 @@ c Author: Fredy W. Aquino, Northwestern Universtiy (Oct. 2012)
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -824,7 +822,7 @@ c     Close the file
        ok = 1
       end if ! ========================== node 0 == END
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
       ramanpol_read = (ok .eq. 1)
       if (ga_nodeid() .eq. 0) then
@@ -863,7 +861,6 @@ c Author: Fredy W. Aquino, Northwestern Universtiy (Oct. 2012)
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -904,7 +901,7 @@ c     Close the file
        ok = 1
       end if ! ========================== node 0 == END
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
       raman_write = (ok .eq. 1)
       if (ga_nodeid() .eq. 0) then
@@ -940,7 +937,6 @@ c Author: Fredy W. Aquino, Northwestern Universtiy (Oct. 2012)
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -983,7 +979,7 @@ c     Close the file
        ok = 1
       end if ! ========================== node 0 == END
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
       raman_read = (ok .eq. 1)
       if (ga_nodeid() .eq. 0) then
@@ -1022,7 +1018,6 @@ c Author: Fredy W. Aquino, Northwestern Universtiy (Oct. 2012)
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "inp.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -1187,7 +1182,7 @@ c ==============================================================================
 c ==> I need to propagate (rminfo,nmodes_missing,modes_missing) variables == END
 c ==============================================================================
 c     Broadcast status to other nodes
- 10   call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0) ! Propagate status
+ 10   call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0) ! Propagate status
       call ga_sync()
       raman_read_list = (ok .eq. 1)
       if (ga_nodeid() .eq. 0) then

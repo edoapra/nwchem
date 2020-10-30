@@ -580,7 +580,6 @@ c
       character*(*) xyzfilename
 
 #include "inp.fh"
-#include "msgtypesf.h"
 #include "errquit.fh"
 
       integer ii,nion,nbeads

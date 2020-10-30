@@ -11,7 +11,6 @@ c
 #include "stdio.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "msgids.fh"
 #include "errquit.fh"
 #include "inp.fh"

@@ -571,7 +571,6 @@ c
 #include "tcgmsg.fh"
 c--- added 11/15/05
 #include "msgids.fh"
-#include "msgtypesf.h"
 c---
 
       double precision coords(*), hessian(*)
@@ -600,7 +599,7 @@ c--- changed 11/15/05
 c
 c  Broadcast results to all of the processors 
 c
-       call ga_brdcst(msg_hess_exy+MSGDBL, hessian,
+       call ga_brdcst(msg_hess_exy, hessian,
      &               mdtob(3*numatoms*3*numatoms), 0)
 c---
       evaluateHessian = .true.

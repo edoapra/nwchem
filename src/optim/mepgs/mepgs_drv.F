@@ -1879,7 +1879,6 @@ c
       subroutine gsopt_check_hess(nvar, old_hessian)
       implicit none
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "mafdecls.fh"
 c
       integer nvar

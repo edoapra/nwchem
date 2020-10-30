@@ -124,9 +124,7 @@ c
 #include "errquit.fh"
 c
 #include "global.fh"
-#include "tcgmsg.fh"
 #include "hess_info.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
 #include "stdio.fh"
@@ -156,10 +154,10 @@ c
          call hess_read(ncent, dbl_mb(k_exy))
          call ddip_read(ncent, dbl_mb(k_dder))
       endif
-      call ga_brdcst(msg_hess_exy+MSGDBL, dbl_mb(k_exy), 
-     &               mdtob(n3xyz2), 0)
-      call ga_brdcst(msg_hess_ddip+MSGDBL, dbl_mb(k_dder),
-     &               mdtob(3*n3xyz),0)
+      call ga_brdcst(msg_hess_exy, dbl_mb(k_exy), 
+     &               util_mdtob(n3xyz2), 0)
+      call ga_brdcst(msg_hess_ddip, dbl_mb(k_dder),
+     &               util_mdtob(3*n3xyz),0)
 c
 c  Read Fock derivatives from disk
 c

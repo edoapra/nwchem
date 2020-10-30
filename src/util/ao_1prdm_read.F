@@ -7,7 +7,6 @@ c
 c
 #include "errquit.fh"
 #include "global.fh"
-#include "msgtypesf.h"
 #include "mafdecls.fh"
 #include "msgids.fh"
 #include "cscfps.fh"
@@ -55,7 +54,7 @@ c
      $      (pname//'pop failed', l_dens, MA_ERR)
       endif
       call ga_sync()
-      call ga_brdcst(Msg_Vec_Stat+MSGINT, ok, inntsize, 0)
+      call ga_brdcst(Msg_Vec_Stat, ok, inntsize, 0)
 c
       ao_1prdm_read = ok .eq. 1
       if (ga_nodeid() .eq. 0 .and. ao_1prdm_read .and.

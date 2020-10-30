@@ -7,7 +7,6 @@ c Written by Jeff Hammond, January 2008.
 c
       implicit none
 #include "mafdecls.fh"
-#include "tcgmsg.fh"
 #include "global.fh"
 #include "bas.fh"
 c#include "geom.fh"
