@@ -28,13 +28,13 @@ if [[ "$arch" == "aarch64" ]]; then
     fi
 else
     if [[ "$FC" == "ifort" ]] ; then
-	USE_FPIC=Y
 	FOPT=-O2
-	BLASOPT=" -lmkl_intel_ilp64 -lmkl_sequential -lmkl_core  -lpthread -lm -ldl"
-	LAPACK_LIB=" -lmkl_intel_ilp64 -lmkl_sequential -lmkl_core  -lpthread -lm -ldl"
-	SCALAPACK_LIB=" -lmkl_scalapack_ilp64 -lmkl_blacs_intelmpi_ilp64 -lpthread -lm -ldl" 
-	BLAS_SIZE=8 
-	SCALAPACK_SIZE=8
+	export USE_FPIC=Y
+	export BLASOPT=" -lmkl_intel_ilp64 -lmkl_sequential -lmkl_core  -lpthread -lm -ldl"
+	export LAPACK_LIB=" -lmkl_intel_ilp64 -lmkl_sequential -lmkl_core  -lpthread -lm -ldl"
+	export SCALAPACK_LIB=" -lmkl_scalapack_ilp64 -lmkl_blacs_intelmpi_ilp64 -lpthread -lm -ldl" 
+	export BLAS_SIZE=8 
+	export SCALAPACK_SIZE=8
 	unset BUILD_OPENBLAS
 	unset BUILD_SCALAPACK
     else
@@ -51,7 +51,8 @@ fi
        export PATH="/usr/local/bin:$PATH"
 #       export LDFLAGS="-L/usr/local/opt/python@3.7/lib:$LDFLAGS"
    fi
-if [[ -z "$TRAVIS_HOME" ]]; then
+   if [[ -z "$TRAVIS_HOME" ]]; then
+       env
     make V=0 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
 else
     ../travis/sleep_loop.sh make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
