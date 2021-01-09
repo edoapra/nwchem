@@ -12,7 +12,6 @@ echo NWCHEM_TOP is $NWCHEM_TOP
 export USE_MPI=y
 if [[ "$FC" == "flang" ]]; then
     export PATH=/usr/lib/aomp_11.12-0/bin/:$PATH
-    export BUILD_MPICH=1
 fi
 if [[ "$FC" == "ifort" ]]; then
     source /opt/intel/oneapi/compiler/latest/env/vars.sh
