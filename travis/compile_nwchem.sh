@@ -31,7 +31,7 @@ else
 	FOPT=-O2
     else
 	FOPT="-O2 -fno-aggressive-loop-optimizations  -ffast-math"
-    endif
+    fi
 fi    
  if [[ "$os" == "Darwin" ]]; then 
    if [[ "$NWCHEM_MODULES" == "tce" ]]; then
