@@ -38,8 +38,14 @@ jobs:
           - os: ubuntu-20.04
             experimental: true 
             mpi_impl: intel
-            armci_network: mpi-ts
-            nwchem_modules: "nwdft solvation driver"
+            armci_network: mpi-pr
+            nwchem_modules: "tinyqmpw python"
+            fc: ifort
+          - os: ubuntu-20.04
+            experimental: true 
+            mpi_impl: intel
+            armci_network: sockets
+            nwchem_modules: "tce"
             fc: ifort
           - os: ubuntu-20.04
             experimental: true 
