@@ -42,7 +42,7 @@ fi
             && sudo add-apt-repository "deb https://apt.repos.intel.com/oneapi all main"  \
 	    && sudo apt update
 	sudo apt-cache search intel-oneapi-mpi
-        mpi_bin="intel-oneapi-mpi " ; mpi_libdev="intel-oneapi-mpi-devel" scalapack_libdev="intel-oneapi-mkl"
+        mpi_bin="  " ; mpi_libdev="intel-oneapi-mpi-devel" scalapack_libdev="intel-oneapi-mkl"
 	
     fi
     sudo add-apt-repository universe && sudo apt update

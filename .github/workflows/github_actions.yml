@@ -87,8 +87,8 @@ jobs:
         if: ${{ failure() }}
         run: |
           pwd
-          tail -20 src/tools/build/config.log
-          tail -10 src/tools/build/comex/config.log
+          cat src/tools/build/config.log
+          cat src/tools/build/comex/config.log
       - name: qa_test
         if: ${{ success() }}
         run: |
