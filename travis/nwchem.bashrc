@@ -12,12 +12,15 @@ echo NWCHEM_TOP is $NWCHEM_TOP
 export USE_MPI=y
 if [[ "$FC" == "ifort" ]]; then
     source /opt/intel/oneapi/compiler/latest/env/vars.sh
+    ifort -V
     if [ -f /opt/intel/oneapi/mkl/latest/env/vars.sh ] ; then
 	source /opt/intel/oneapi/mkl/latest/env/vars.sh
     fi
 fi
 if [[ "$MPI_IMPL" == "intel" ]]; then
     source /opt/intel/oneapi/mpi/latest/env/vars.sh
+    mpif90 -v
+    mpif90 -show
     if [ -f /opt/intel/oneapi/mkl/latest/env/vars.sh ] ; then
 	source /opt/intel/oneapi/mkl/latest/env/vars.sh
     fi
