@@ -10,6 +10,14 @@ fi
 echo NWCHEM_TOP is $NWCHEM_TOP
 #TARBALL=https://github.com/nwchemgit/nwchem/releases/download/v7.0.0-beta1/nwchem-7.0.0-release.revision-5bcf0416-src.2019-11-01.tar.bz2
 export USE_MPI=y
+if [[ "$FC" == "ifort" ]]; then
+    source /opt/intel/oneapi/compiler/latest/env/vars.sh \
+	&&  source /opt/intel/oneapi/mkl/latest/env/vars.sh
+fi
+if [[ "$MPI_IMPL" == "intelh" ]]; then
+    source /opt/intel/oneapi/mpi/latest/env/vars.sh \
+	&&  source /opt/intel/oneapi/mkl/latest/env/vars.sh
+fi
 if [[ "$os" == "Darwin" ]]; then 
   export NWCHEM_TARGET=MACX64 
   export DYLD_LIBRARY_PATH=$TRAVIS_BUILD_DIR/lib:$DYLD_LIBRARY_PATH
