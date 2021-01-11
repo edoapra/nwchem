@@ -62,8 +62,12 @@ fi
 	sudo apt -y install llvm-amdgpu
 	dpkg-query -L llvm-amdgpu||true
 	ls -l /opt
+	ls -l /opt/rocm-4.0.0/llvm/bin
+	find /opt/rocm-4.0.0 -name flang
 	export PATH=/opt/rocm-4.0.0/llvm/bin:$PATH
 	flang -v
+	flang
+	which flang
     fi
     fi
 fi
