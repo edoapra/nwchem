@@ -43,6 +43,7 @@ jobs:
             armci_network: mpi-ts
             nwchem_modules: "nwdft driver solvation"
             fc: flang
+            cc: clang
           - os: ubuntu-20.04
             experimental: true
             mpi_impl: intel
@@ -61,6 +62,7 @@ jobs:
             armci_network: mpi-ts
             nwchem_modules: "nwdft driver solvation"
             fc: flang
+            cc: clang
           - os: ubuntu-20.04
             experimental: true 
             mpi_impl: intel
