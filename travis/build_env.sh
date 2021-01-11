@@ -64,6 +64,7 @@ fi
 	ls -l /opt
 	ls -l /opt/rocm-4.0.0/llvm/bin
 	find /opt/rocm-4.0.0 -name flang
+	find /opt/rocm-4.0.0 -name flang1
 	export PATH=/opt/rocm-4.0.0/llvm/bin:$PATH
 	flang -v
 	flang
