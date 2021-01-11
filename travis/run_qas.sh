@@ -18,7 +18,7 @@ else
 fi
 if [[ "$BUILD_MPICH" == 1 ]] ; then
     export PATH=$TRAVIS_BUILD_DIR/src/libext/bin:$PATH
-fi    
+fi
 
 os=`uname`
 arch=`uname -m`
@@ -111,7 +111,7 @@ fi
      if  [[ "$do_largeqas" == 1 ]]; then
 	 if [[ ! $(grep -i dft $TRAVIS_BUILD_DIR/src/stubs.F| awk '/dft_input/') ]]; then
 	     cd $TRAVIS_BUILD_DIR/QA && ./runtests.mpi.unix procs $nprocs dft_siosi3 h2o_opt
-	     cd $TRAVIS_BUILD_DIR/QA && ./runtests.mpi.unix procs $nprocs tddft_h2o 
+	     cd $TRAVIS_BUILD_DIR/QA && ./runtests.mpi.unix procs $nprocs tddft_h2o
 	     if [[ ! $(grep -i prop $TRAVIS_BUILD_DIR/src/stubs.F| awk '/prop_input/') ]]; then
 		 cd $TRAVIS_BUILD_DIR/QA && ./runtests.mpi.unix procs $nprocs h2o2-response
 	     fi

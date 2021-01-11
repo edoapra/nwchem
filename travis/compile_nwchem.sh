@@ -32,8 +32,8 @@ else
 	export USE_FPICF=Y
 	export BLASOPT=" -lmkl_intel_ilp64 -lmkl_sequential -lmkl_core  -lpthread -lm -ldl"
 	export LAPACK_LIB=" -lmkl_intel_ilp64 -lmkl_sequential -lmkl_core  -lpthread -lm -ldl"
-	export SCALAPACK_LIB=" -lmkl_scalapack_ilp64 -lmkl_blacs_intelmpi_ilp64 -lpthread -lm -ldl" 
-	export BLAS_SIZE=8 
+	export SCALAPACK_LIB=" -lmkl_scalapack_ilp64 -lmkl_blacs_intelmpi_ilp64 -lpthread -lm -ldl"
+	export BLAS_SIZE=8
 	export SCALAPACK_SIZE=8
 	unset BUILD_OPENBLAS
 	unset BUILD_SCALAPACK
