@@ -52,9 +52,18 @@ fi
 	sudo apt-get -y install intel-oneapi-mpi-devel
     fi
     if [[ "$FC" == "flang" ]]; then
-	wget https://github.com/ROCm-Developer-Tools/aomp/releases/download/rel_11.12-0/aomp_Ubuntu2004_11.12-0_amd64.deb
-	sudo dpkg -i aomp_Ubuntu2004_11.12-0_amd64.deb
-	export PATH=/usr/lib/aomp_11.12-0/bin/:$PATH
+#	wget https://github.com/ROCm-Developer-Tools/aomp/releases/download/rel_11.12-0/aomp_Ubuntu2004_11.12-0_amd64.deb
+	#	sudo dpkg -i aomp_Ubuntu2004_11.12-0_amd64.deb
+#	export PATH=/usr/lib/aomp_11.12-0/bin/:$PATH
+	wget -q -O - https://repo.radeon.com/rocm/rocm.gpg.key | sudo apt-key add -
+	echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/debian/ focal main' | sudo tee /etc/apt/sources.list.d/rocm.list
+	sudo apt update
+	sudo apt-cache search llvm-amdgpu || true 
+	sudo apt -y install llvm-amdgpu
+	dpkg-query -L llvm-amdgpu||true
+	ls -l /opt
+	export PATH=/opt/rocm-4.0.0/llvm/bin:$PATH
+	flang -v
     fi
     fi
 fi
