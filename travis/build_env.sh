@@ -56,7 +56,7 @@ fi
 	#	sudo dpkg -i aomp_Ubuntu2004_11.12-0_amd64.deb
 #	export PATH=/usr/lib/aomp_11.12-0/bin/:$PATH
 	wget -q -O - https://repo.radeon.com/rocm/rocm.gpg.key | sudo apt-key add -
-	echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/debian/ focal main' | sudo tee /etc/apt/sources.list.d/rocm.list
+	echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/debian/ xenial main' | sudo tee /etc/apt/sources.list.d/rocm.list
 	sudo apt update
 	sudo apt-cache search llvm-amdgpu || true 
 	sudo apt -y install llvm-amdgpu
