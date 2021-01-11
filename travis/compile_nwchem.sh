@@ -40,7 +40,11 @@ else
     elif [[ "$FC" == "flang" ]] ; then
 	export BUILD_MPICH=1
     else
-	FOPT="-O2 -fno-aggressive-loop-optimizations  -ffast-math"
+	if [[ -z "$TRAVIS_HOME" ]]; then
+	    echo ' do not modify compiler options when using github actions '
+	else
+	    FOPT="-O2 -fno-aggressive-loop-optimizations  -ffast-math"
+	fi
     fi
 fi    
  if [[ "$os" == "Darwin" ]]; then 
@@ -55,10 +59,14 @@ fi
    fi
    if [[ -z "$TRAVIS_HOME" ]]; then
        env
-    make V=0 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-else
-    ../travis/sleep_loop.sh make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-fi
+       if [[ -z "$FOPT" ]]; then
+	   make V=0   -j3
+       else
+	   make V=0 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
+       fi
+   else
+       ../travis/sleep_loop.sh make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
+   fi
      cd $TRAVIS_BUILD_DIR/src/64to32blas 
      make
      cd $TRAVIS_BUILD_DIR/src
