@@ -97,6 +97,7 @@ fi
      cd $TRAVIS_BUILD_DIR/src/ddscf ; make clean ; make V=0 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
      cd $TRAVIS_BUILD_DIR/src/cphf ; make clean ; make V=0 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
      cd $TRAVIS_BUILD_DIR/src/gradients ; make clean ;  make V=0 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
+     cd $TRAVIS_BUILD_DIR/src/atomscf ; make clean ;  make V=0 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
      cd $TRAVIS_BUILD_DIR/src
      $TRAVIS_BUILD_DIR/contrib/getmem.nwchem 1000
  fi
