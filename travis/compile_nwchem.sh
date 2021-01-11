@@ -86,8 +86,13 @@ fi
      cd $TRAVIS_BUILD_DIR/src/64to32blas 
      make
      # recompile to find the source of the QA aump2 slowdown
-     cd $TRAVIS_BUILD_DIR/src/mp2_grad ; make clean ;make FOPTIMIZE="-O2 -fno-aggressive-loop-optimizations  -ffast-math" FDEBUG="-O0 -g" -j3
-     cd $TRAVIS_BUILD_DIR/src/moints ; make clean ;make FOPTIMIZE="-O2 -fno-aggressive-loop-optimizations  -ffast-math" FDEBUG="-O0 -g" -j3
+     cd $TRAVIS_BUILD_DIR/src/mp2_grad ; make clean ;make FOPTIMIZE="-O2 -ffast-math" FDEBUG="-O0 -g" -j3
+     cd $TRAVIS_BUILD_DIR/src/moints ; make clean ;make FOPTIMIZE="-O2  -ffast-math" FDEBUG="-O0 -g" -j3
+     cd $TRAVIS_BUILD_DIR/src/util ; make clean ;make FOPTIMIZE="-O2  -ffast-math" FDEBUG="-O0 -g" -j3
+     cd $TRAVIS_BUILD_DIR/src/NWints ; make clean ;make FOPTIMIZE="-O2  -ffast-math" FDEBUG="-O0 -g" -j3
+     cd $TRAVIS_BUILD_DIR/src/ddscf ; make clean ;make FOPTIMIZE="-O2  -ffast-math" FDEBUG="-O0 -g" -j3
+     cd $TRAVIS_BUILD_DIR/src/cphf ; make clean ;make FOPTIMIZE="-O2  -ffast-math" FDEBUG="-O0 -g" -j3
+     cd $TRAVIS_BUILD_DIR/src/gradients ; make clean ;make FOPTIMIZE="-O2  -ffast-math" FDEBUG="-O0 -g" -j3
      cd $TRAVIS_BUILD_DIR/src
      $TRAVIS_BUILD_DIR/contrib/getmem.nwchem 1000
  fi
