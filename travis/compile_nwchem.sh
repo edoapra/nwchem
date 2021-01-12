@@ -97,9 +97,9 @@ fi
      cd $TRAVIS_BUILD_DIR/src/cphf ; make clean ; make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
      cd $TRAVIS_BUILD_DIR/src/util ; make clean ; make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
      cd $TRAVIS_BUILD_DIR/src/NWints ; make clean ; make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-     cd $TRAVIS_BUILD_DIR/src/ddscf ; make clean ; make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-     cd $TRAVIS_BUILD_DIR/src/gradients ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-     cd $TRAVIS_BUILD_DIR/src/atomscf ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
+#e     cd $TRAVIS_BUILD_DIR/src/ddscf ; make clean ; make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
+#e     cd $TRAVIS_BUILD_DIR/src/gradients ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
+#e     cd $TRAVIS_BUILD_DIR/src/atomscf ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
 #     cd $TRAVIS_BUILD_DIR/src/geom ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
 #     cd $TRAVIS_BUILD_DIR/src/symmetry ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
 #     cd $TRAVIS_BUILD_DIR/src/basis ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
