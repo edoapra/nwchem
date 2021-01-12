@@ -40,9 +40,9 @@ else
     elif [[ "$FC" == "flang" ]] ; then
 	export BUILD_MPICH=1
     else
-#	if [[ -z "$TRAVIS_HOME" ]]; then
-#	    echo ' do not modify compiler options when using github actions '
-#	else
+	if [[ -z "$TRAVIS_HOME" ]]; then
+	    echo ' do not modify compiler options when using github actions '
+	else
 	    if [[ "$FC" == "flang" ]] ; then
 		FOPT="-O2  -ffast-math"
 	    else
@@ -54,7 +54,7 @@ else
 #		FOPT="-fno-tree-dominator-opts  -finline-functions -O2  -Wuninitialized -fno-aggressive-loop-optimizations -O3  -mfpmath=sse  -fno-tree-dominator-opts  -ffast-math  -fprefetch-loop-arrays  -ftree-vectorize    -mtune=native "
 #		FOPT+="
 	    fi
-#	fi
+	fi
     fi
 fi    
  if [[ "$os" == "Darwin" ]]; then 
