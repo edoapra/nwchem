@@ -42,6 +42,8 @@ else
     else
 	if [[ -z "$TRAVIS_HOME" ]]; then
 	    echo ' do not modify compiler options when using github actions '
+	    unset FOPT
+	    unset FDOPT
 	else
 	    if [[ "$FC" == "flang" ]] ; then
 		FOPT="-O2  -ffast-math"
@@ -91,7 +93,11 @@ fi
      export MAKEFLAGS=-j3
      echo    "$FOPT$FDOPT"
 if [[ -z "$TRAVIS_HOME" ]]; then
-    make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
+    if [[ -z "$FOPT" ]]; then
+	make V=1   -j3
+    else
+	make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
+    fi
 else
     ../travis/sleep_loop.sh make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
 fi
