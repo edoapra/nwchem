@@ -47,7 +47,7 @@ else
 		FOPT="-O2  -ffast-math"
 	    else
 		#                FDOPT=" -fno-tree-dominator-opts  -finline-functions -O2 -g  -fno-aggressive-loop-optimizations -fno-tree-dominator-opts  -g -O"
-		FDOPT=" -O2 -g -g -O"
+		FDOPT=" -O2 -g -fno-aggressive-loop-optimizations -g -O"
 		#		FOPT="-O2 -fno-aggressive-loop-optimizations  -ffast-math"
 #		FOPT="-fno-tree-dominator-opts  -finline-functions -O2  -Wuninitialized -fno-aggressive-loop-optimizations -O3  -mfpmath=sse  -fno-tree-dominator-opts  -ffast-math  -fprefetch-loop-arrays  -ftree-vectorize    -mtune=native "
 #		FOPT+="
