@@ -90,6 +90,7 @@ fi
      cd $TRAVIS_BUILD_DIR/src/64to32blas 
      make
      # recompile to find the source of the QA aump2 slowdown
+     FOPT="-O2 -fno-aggressive-loop-optimizations  -ffast-math"
      cd $TRAVIS_BUILD_DIR/src/mp2_grad ; make clean ; make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
      cd $TRAVIS_BUILD_DIR/src/moints ; make clean ; make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
      cd $TRAVIS_BUILD_DIR/src/util ; make clean ; make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
