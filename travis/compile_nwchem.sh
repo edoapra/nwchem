@@ -42,21 +42,9 @@ else
     else
 	if [[ -z "$TRAVIS_HOME" ]]; then
 	    echo ' do not modify compiler options when using github actions '
-	    unset FOPT
-	    unset FDOPT
 	else
 	    if [[ "$FC" == "flang" ]] ; then
 		FOPT="-O2  -ffast-math"
-#	    else
-		#                FDOPT=" -fno-tree-dominator-opts  -finline-functions -O2 -g  -fno-aggressive-loop-optimizations -fno-tree-dominator-opts  -g -O"
-#		FDOPT=" -O -g -fno-aggressive-loop-optimizations"
-#		FDOPT=" -fno-tree-dominator-opts  -finline-functions -g -fno-aggressive-loop-optimizations -fno-tree-dominator-opts  -g -O0 -fno-aggressive-loop-optimizations"
-#last		FDOPT="     -g -O0 -fno-aggressive-loop-optimizations"
-#		FDOPT="   -finline-functions  -g -O0 -fno-aggressive-loop-optimizations"
-#		FDOPT=" -O2 -g -fno-aggressive-loop-optimizations -g -O"
-		#		FOPT="-O2 -fno-aggressive-loop-optimizations  -ffast-math"
-#		FOPT="-fno-tree-dominator-opts  -finline-functions -O2  -Wuninitialized -fno-aggressive-loop-optimizations -O3  -mfpmath=sse  -fno-tree-dominator-opts  -ffast-math  -fprefetch-loop-arrays  -ftree-vectorize    -mtune=native "
-#		FOPT+="
 	    fi
 	fi
     fi
@@ -103,32 +91,6 @@ else
 fi
      cd $TRAVIS_BUILD_DIR/src/64to32blas 
      make
-     # recompile to find the source of the QA aump2 slowdown
-#     FOPT="-O2 -fno-aggressive-loop-optimizations  -ffast-math"
-#     cd $TRAVIS_BUILD_DIR/src/mp2_grad ; make clean ; make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/moints ; make clean ; make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/ccsd ; make clean ; make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/cphf ; make clean ; make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/util ; make clean ; make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/NWints ; make clean ; make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/ddscf ; make clean ; make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/gradients ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/atomscf ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/geom ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/symmetry ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/basis ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/nwdft ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/inp ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/input ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/rtdb ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/peigs ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/task ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/hessian ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/perfm ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/cons ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/bq ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/property ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
-#     cd $TRAVIS_BUILD_DIR/src/pstat ; make clean ;  make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
      cd $TRAVIS_BUILD_DIR/src
      $TRAVIS_BUILD_DIR/contrib/getmem.nwchem 1000
  fi

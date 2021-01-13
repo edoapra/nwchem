@@ -41,7 +41,7 @@ jobs:
             experimental: true
             mpi_impl: mpich
             armci_network: mpi-ts
-            nwchem_modules: "nwdft driver solvation"
+            nwchem_modules: "tinyqmpw python"
             fc: flang
             cc: clang
           - os: ubuntu-20.04
@@ -60,7 +60,7 @@ jobs:
             experimental: true 
             mpi_impl: mpich
             armci_network: mpi-ts
-            nwchem_modules: "nwdft driver solvation"
+            nwchem_modules: "tce"
             fc: flang
             cc: clang
           - os: ubuntu-20.04
