@@ -134,6 +134,7 @@ jobs:
         if: steps.setup-cache.outputs.cache-hit == 'true'
         run: |
           rsync -av ~/cache/libext/* src/libext/.  || true
+          mkdir -p ~/cache/libext/mpich/mpich || true
           ls -lR ~/cache
           df -h ~/cache
           echo "cache fetched"
@@ -153,7 +154,7 @@ jobs:
           rsync -av src/libext/lib/*  ~/cache/libext/lib/. 2>/dev/null || true
           rsync -av src/libext/bin/*  ~/cache/libext/bin/. 2>/dev/null|| true
           rsync -av src/libext/include/*  ~/cache/libext/include/. 2>/dev/null || true
-          ln -sf ~/cache/libext/mpich/mpich-3.* ~/cache/libext/mpich/mpich || true
+          mkdir -p ~/cache/libext/mpich/mpich || true
           echo "cache stored"
           ls -Rl ~/cache 
       - name: qa_test
