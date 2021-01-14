@@ -120,7 +120,7 @@ jobs:
         with:
           path: |
             ~/cache
-          key: ${{ matrix.os }}-${{ matrix.mpi_impl}}-${{ matrix.fc}}-nwlibext-v001
+          key: ${{ matrix.os }}-${{ matrix.mpi_impl}}-${{ matrix.fc}}-${{ matrix.xcode_version}}-nwclibext-v001
       - name: Checkout code
         uses: actions/checkout@v2
         with:
@@ -149,11 +149,12 @@ jobs:
           cat src/tools/build/comex/config.log
       - name: store cache
         run: |
-          mkdir -p ~/cache/libext/lib  ~/cache/libext/bin  ~/cache/libext/include || true
+          mkdir -p ~/cache/libext/lib  ~/cache/libext/bin  ~/cache/libext/include ~/cache/libext/mpich || true
           ls -Rl src/libext/lib || true
           rsync -av src/libext/lib/*  ~/cache/libext/lib/. 2>/dev/null || true
           rsync -av src/libext/bin/*  ~/cache/libext/bin/. 2>/dev/null|| true
           rsync -av src/libext/include/*  ~/cache/libext/include/. 2>/dev/null || true
+          ln -sf ~/cache/libext/mpich/mpich-3.* ~/cache/libext/mpich/mpich
           echo "cache stored"
           ls -Rl ~/cache 
       - name: qa_test
