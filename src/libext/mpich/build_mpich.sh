@@ -12,7 +12,7 @@ if [[ $GNUMAJOR -ge 10  ]]; then
 fi
 echo 'using FFLAGS=' $FFLAGS
 ./configure --prefix=`pwd`/../.. --enable-fortran=all --disable-shared --disable-cxx --disable-romio --with-pm=gfor\
-ker
+ker --with-device=ch3:nemesis
 mkdir -p ../../../lib
 make -j3
 make install
