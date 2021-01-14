@@ -134,7 +134,7 @@ jobs:
         if: steps.setup-cache.outputs.cache-hit == 'true'
         run: |
           rsync -av ~/cache/libext/* src/libext/.  || true
-          rm -rf ~/cache/libext/mpich/mpich-* || true
+          rm -rf ~/cache/libext/mpich/mpich* || true
           mkdir -p ~/cache/libext/mpich/mpich || true
           ls -lR ~/cache
           ls ~/cache/libext/mpich/mpich/../../include ||true
