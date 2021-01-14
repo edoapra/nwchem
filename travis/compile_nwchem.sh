@@ -55,9 +55,9 @@ fi
    if [[ -z "$TRAVIS_HOME" ]]; then
        env
        if [[ -z "$FOPT" ]]; then
-	   make V=1   -j3
+	   make V=0   -j3
        else
-	   make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
+	   make V=0 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
        fi
    else
        ../travis/sleep_loop.sh make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
@@ -75,9 +75,9 @@ fi
      echo    "$FOPT$FDOPT"
 if [[ -z "$TRAVIS_HOME" ]]; then
     if [[ -z "$FOPT" ]]; then
-	make V=1   -j3
+	make V=0   -j3
     else
-	make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
+	make V=0 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
     fi
 else
     ../travis/sleep_loop.sh make V=1 FOPTIMIZE="$FOPT" FDEBUG="$FDOPT"  -j3
