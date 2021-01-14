@@ -120,7 +120,7 @@ jobs:
         with:
           path: |
             ~/cache
-          key: ${{ matrix.os }}-${{ matrix.mpi_impl}}-${{ matrix.fc}}-${{ matrix.xcode_version}}-nwclibext-v001
+          key: ${{ matrix.os }}-${{ matrix.mpi_impl}}-${{ matrix.fc}}-${{ matrix.xcode_version}}-nwchemcache-v001
       - name: Checkout code
         uses: actions/checkout@v2
         with:
@@ -133,9 +133,11 @@ jobs:
       - name: fetch cache
         if: steps.setup-cache.outputs.cache-hit == 'true'
         run: |
-          rm -rf ~/cache/libext/mpich/mpich* || true
-          mkdir -p ~/cache/libext/mpich/mpich || true
-          rsync -av ~/cache/libext/* src/libext/.  || true
+          rm -rf ~/cache/libext/mpich/mpich* 2>/dev/null || true
+          mkdir -p ~/cache/libext/mpich/mpich 2>/dev/null || true
+          rsync -av ~/cache/libext/* src/libext/. 2>/dev/null || true
+          mkdir -p src/NWints/simint/libsimint_source/simint_install || true
+          rsync -av ~/cache/simint/simint_install/* src/NWints/simint/libsimint_source/simint_install/.  2>/dev/null || true
           ls -lR ~/cache
           ls ~/cache/libext/mpich/mpich/../../include ||true
           df -h ~/cache
@@ -152,10 +154,12 @@ jobs:
       - name: store cache
         run: |
           mkdir -p ~/cache/libext/lib  ~/cache/libext/bin  ~/cache/libext/include ~/cache/libext/mpich || true
+          mkdir ~/cache/simint/simint_install || true
           ls -Rl src/libext/lib || true
           rsync -av src/libext/lib/*  ~/cache/libext/lib/. 2>/dev/null || true
           rsync -av src/libext/bin/*  ~/cache/libext/bin/. 2>/dev/null|| true
           rsync -av src/libext/include/*  ~/cache/libext/include/. 2>/dev/null || true
+          rsync -av src/NWints/simint/libsimint_source/simint_install/* ~/cache/simint/simint_install/. 2>/dev/null || true
           mkdir -p ~/cache/libext/mpich/mpich || true
           echo "cache stored"
           ls -Rl ~/cache 
