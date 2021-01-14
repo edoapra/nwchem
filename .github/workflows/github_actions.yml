@@ -131,9 +131,8 @@ jobs:
           ls -lart
           ./travis/build_env.sh
       - name: fetch cache
+        if: steps.setup-cache.outputs.cache-hit == 'true'
         run: |
-          mkdir -p cache/libext/lib || true
-          ls -Rl src/libext || true
           ls -lRrt cache
           df -h cache
           rsync -av cache/libext/lib/* src/libext/lib/.   || true
@@ -153,6 +152,8 @@ jobs:
           cat src/tools/build/comex/config.log
       - name: store cache
         run: |
+          mkdir -p cache/libext/lib || true
+          ls -Rl src/libext/lib || true
           rsync -av src/libext/lib/*  cache/libext/lib/. || true
           rsync -av src/libext/bin/*  cache/libext/bin/. || true
           rsync -av src/libext/include/*  cache/libext/include/. || true
