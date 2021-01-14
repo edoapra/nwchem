@@ -133,7 +133,7 @@ jobs:
       - name: fetch cache
         if: steps.setup-cache.outputs.cache-hit == 'true'
         run: |
-          ls -lRrt ~/cache
+          ls -lR ~/cache
           df -h ~/cache
           rsync -av ~/cache/libext/* src/libext/.  || true
           echo "cache fetched"
@@ -145,7 +145,6 @@ jobs:
         if: ${{ failure() }}
         run: |
           pwd
-          cc -v
           cat src/tools/build/config.log
           cat src/tools/build/comex/config.log
       - name: store cache
