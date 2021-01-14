@@ -120,7 +120,7 @@ jobs:
         with:
           path: |
             ~/cache
-          key: ${{ runner.os }}-${{ matrix.mpi_impl}}-${{ matrix.distro}}-${{ matrix.arch}}-nwlibext-v001
+          key: ${{ runner.os }}-${{ matrix.mpi_impl}}-${{ matrix.fc}}-nwlibext-v001
       - name: Checkout code
         uses: actions/checkout@v2
         with:
@@ -135,9 +135,7 @@ jobs:
         run: |
           ls -lRrt ~/cache
           df -h ~/cache
-          rsync -av ~/cache/libext/lib/* src/libext/lib/.   || true
-          rsync -av ~/cache/libext/bin/* src/libext/bin/.   || true
-          rsync -av ~/cache/libext/include/* src/libext/include/.   || true
+          rsync -av ~/cache/libext/* src/libext/.  || true
           echo "cache fetched"
       - name: compile
         run: |
@@ -154,9 +152,9 @@ jobs:
         run: |
           mkdir -p ~/cache/libext/lib  ~/cache/libext/bin  ~/cache/libext/include || true
           ls -Rl src/libext/lib || true
-          rsync -av src/libext/lib/*  ~/cache/libext/lib/. || true
-          rsync -av src/libext/bin/*  ~/cache/libext/bin/. || true
-          rsync -av src/libext/include/*  ~/cache/libext/include/. || true
+          rsync -av src/libext/lib/*  ~/cache/libext/lib/. 2>/dev/null || true
+          rsync -av src/libext/bin/*  ~/cache/libext/bin/. 2>/dev/null|| true
+          rsync -av src/libext/include/*  ~/cache/libext/include/. 2>/dev/null || true
           echo "cache stored"
           ls -Rl ~/cache 
       - name: qa_test
