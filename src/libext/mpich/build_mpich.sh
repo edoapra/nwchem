@@ -1,6 +1,6 @@
 #!/bin/bash 
 rm -rf mpich*
-VERSION=3.3.1
+VERSION=3.4
 curl -L http://www.mpich.org/static/downloads/${VERSION}/mpich-${VERSION}.tar.gz -o mpich.tgz
 tar xzf mpich.tgz
 #patch -p0 < mpistruct.patch
@@ -11,7 +11,8 @@ if [[ $GNUMAJOR -ge 10  ]]; then
     export FFLAGS=-std=legacy
 fi
 echo 'using FFLAGS=' $FFLAGS
-./configure --prefix=`pwd`/../.. --enable-fast --enable-fortran=all --disable-shared --disable-cxx
+./configure --prefix=`pwd`/../.. --enable-fortran=all --disable-shared --disable-cxx --disable-romio --with-pm=gfor\
+ker
 mkdir -p ../../../lib
 make -j3
 make install
