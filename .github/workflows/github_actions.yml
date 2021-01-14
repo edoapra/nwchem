@@ -133,9 +133,9 @@ jobs:
       - name: fetch cache
         if: steps.setup-cache.outputs.cache-hit == 'true'
         run: |
+          rsync -av ~/cache/libext/* src/libext/.  || true
           ls -lR ~/cache
           df -h ~/cache
-          rsync -av ~/cache/libext/* src/libext/.  || true
           echo "cache fetched"
       - name: compile
         run: |
@@ -144,9 +144,8 @@ jobs:
       - name: Check compilation result
         if: ${{ failure() }}
         run: |
-          pwd
-          cat src/tools/build/config.log
-          cat src/tools/build/comex/config.log
+          cat src/tools/build/config.log || true
+          cat src/tools/build/comex/config.log || true
       - name: store cache
         run: |
           mkdir -p ~/cache/libext/lib  ~/cache/libext/bin  ~/cache/libext/include ~/cache/libext/mpich || true
@@ -154,7 +153,7 @@ jobs:
           rsync -av src/libext/lib/*  ~/cache/libext/lib/. 2>/dev/null || true
           rsync -av src/libext/bin/*  ~/cache/libext/bin/. 2>/dev/null|| true
           rsync -av src/libext/include/*  ~/cache/libext/include/. 2>/dev/null || true
-          ln -sf ~/cache/libext/mpich/mpich-3.* ~/cache/libext/mpich/mpich
+          ln -sf ~/cache/libext/mpich/mpich-3.* ~/cache/libext/mpich/mpich || true
           echo "cache stored"
           ls -Rl ~/cache 
       - name: qa_test
