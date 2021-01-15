@@ -139,7 +139,6 @@ jobs:
           mkdir -p src/NWints/simint/libsimint_source/simint_install && \
           rsync -av ~/cache/simint/simint_install/* src/NWints/simint/libsimint_source/simint_install/.   || true
           ls -lR ~/cache
-          ls ~/cache/libext/mpich/mpich/../../include ||true
           echo "cache fetched"
       - name: compile
         run: |
