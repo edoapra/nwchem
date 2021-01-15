@@ -120,7 +120,7 @@ jobs:
         with:
           path: |
             ~/cache
-          key: ${{ matrix.os }}-${{ matrix.mpi_impl}}-${{ matrix.fc}}-${{ matrix.xcode_version}}-nwchemcache-v002
+          key: ${{ matrix.os }}-${{ matrix.mpi_impl}}-${{ matrix.fc}}-xcode${{ matrix.xcode_version}}-simint${{ matrix.use_simint}}-nwchemcache-v001
       - name: Checkout code
         uses: actions/checkout@v2
         with:
@@ -133,7 +133,7 @@ jobs:
       - name: fetch cache
         if: steps.setup-cache.outputs.cache-hit == 'true'
         run: |
-          [ -d "cache/libext"] && mkdir -p ~/cache/libext/mpich/mpich  && \
+          [ -d "cache/libext" ] && mkdir -p ~/cache/libext/mpich/mpich  && \
           rsync -av ~/cache/libext/* src/libext/.  
           [ -d "cache/simint/simint_install/lib" ] && \
           mkdir -p src/NWints/simint/libsimint_source/simint_install && \
