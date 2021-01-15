@@ -133,7 +133,6 @@ jobs:
       - name: fetch cache
         if: steps.setup-cache.outputs.cache-hit == 'true'
         run: |
-          rm -rf ~/cache/libext/mpich/mpich* 2>/dev/null || true
           [ -d "cache/libext"] && mkdir -p ~/cache/libext/mpich/mpich  && \
           rsync -av ~/cache/libext/* src/libext/.  
           [ -d "cache/simint/simint_install/lib" ] && \
@@ -141,7 +140,6 @@ jobs:
           rsync -av ~/cache/simint/simint_install/* src/NWints/simint/libsimint_source/simint_install/.   || true
           ls -lR ~/cache
           ls ~/cache/libext/mpich/mpich/../../include ||true
-          df -h ~/cache
           echo "cache fetched"
       - name: compile
         run: |
