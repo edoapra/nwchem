@@ -22,7 +22,7 @@ jobs:
         armci_network:
           - MPI-TS
         xcode_version:
-          - 11.7
+          - 12.1
         nwchem_modules:
           - "tinyqmpw python"
           - "qmandpw qmd"
