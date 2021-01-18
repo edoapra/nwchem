@@ -2,13 +2,13 @@
 os=`uname`
 arch=`uname -m`
 dist="ubuntu"
-if test -f " /usr/lib/os-release"; then
+if test -f "/usr/lib/os-release"; then
     dist=$(grep ID= /etc/os-release |head -1 |cut -c4-| sed 's/\"//g')
 fi
-if test -f " /usr/lib/fedora-release"; then
+if test -f "/usr/lib/fedora-release"; then
     dist="fedora"
 fi
-if test -f " /usr/lib/centos-release"; then
+if test -f "/usr/lib/centos-release"; then
     dist="centos"
 fi
 echo dist is "$dist"
