@@ -5,6 +5,9 @@ dist="ubuntu"
 if test -f " /usr/lib/fedora-release"; then
     dist="fedora"
 fi
+if test -f " /usr/lib/centos-release"; then
+    dist="centos"
+fi
 echo dist is "$dist"
 echo DISTR is "$DISTR"
  if [[ "$os" == "Darwin" ]]; then 
@@ -20,7 +23,7 @@ echo DISTR is "$DISTR"
 #  fi
 fi
  if [[ "$os" == "Linux" ]]; then
-     if [[ "$DISTR" == "fedora" ]];then
+     if [[ "$DISTR" == "fedora" ]] || [[ "$DISTR" == "centos" ]] ; then
 	 sudo dnf udate;  sudo dnf -y install perl perl python3-devel time patch openblas-serial64 openmpi-devel cmake gcc-gfortran unzip
 	 #	 module load mpi
 	 export PATH=/usr/lib64/openmpi/bin:$PATH
