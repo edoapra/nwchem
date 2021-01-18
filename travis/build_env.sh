@@ -2,6 +2,9 @@
 os=`uname`
 arch=`uname -m`
 dist="ubuntu"
+if test -f " /usr/lib/os-release"; then
+    dist=$(grep ID= /etc/os-release |head -1 |cut -c4-| sed 's/\"//g')
+fi
 if test -f " /usr/lib/fedora-release"; then
     dist="fedora"
 fi
@@ -9,6 +12,9 @@ if test -f " /usr/lib/centos-release"; then
     dist="centos"
 fi
 echo dist is "$dist"
+if [ -z "$DISTR" ] ; then
+    DISTR=$dist
+fi
 echo DISTR is "$DISTR"
  if [[ "$os" == "Darwin" ]]; then 
 #  HOMEBREW_NO_AUTO_UPDATE=1 brew cask uninstall oclint || true  
