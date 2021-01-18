@@ -34,7 +34,7 @@ fi
 	 if [[ "$DISTR" == "centos" ]] ; then
 	     rpminst=yum
 	 fi
-	 sudo $rpminst udate;  sudo $rpminst -y install perl perl python3-devel time patch openblas-serial64 openmpi-devel cmake gcc-gfortran unzip
+	 sudo $rpminst udate;  sudo $rpminst -y install perl perl python3-devel time patch openblas-serial64 openmpi-devel cmake gcc-gfortran unzip which make tar bzip2
 	 #	 module load mpi
 	 export PATH=/usr/lib64/openmpi/bin:$PATH
 	 export LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH
