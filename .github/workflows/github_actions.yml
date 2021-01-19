@@ -111,6 +111,7 @@ jobs:
         FC: ${{ matrix.fc }}
         COMEX_MAX_NB_OUTSTANDING: 4
         SIMINT_MAXAM: 3
+        SIMINT_VECTOR: avx2
         DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode_version}}.app/Contents/Developer
     continue-on-error: ${{ matrix.experimental }}
     steps: 
