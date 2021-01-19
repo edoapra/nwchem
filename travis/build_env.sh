@@ -34,7 +34,7 @@ fi
 	 if [[ "$DISTR" == "centos" ]] ; then
 	     rpminst=yum
 	 fi
-	 sudo $rpminst udate;  sudo $rpminst -y install perl perl python3-devel time patch openblas-serial64 openmpi-devel cmake gcc-gfortran unzip which make tar bzip2 openssh-clients
+	 sudo $rpminst udate;  sudo $rpminst -y install perl perl python3-devel time patch openblas-serial64 openmpi-devel cmake gcc-gfortran unzip which make tar bzip2 openssh-clients rsync
 	 #	 module load mpi
 	 if [[ "$MPI_IMPL" == "openmpi" ]]; then
 	     sudo $rpminst -y install  openmpi-devel
