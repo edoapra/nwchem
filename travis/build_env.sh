@@ -36,8 +36,14 @@ fi
 	 fi
 	 sudo $rpminst udate;  sudo $rpminst -y install perl perl python3-devel time patch openblas-serial64 openmpi-devel cmake gcc-gfortran unzip which make tar bzip2
 	 #	 module load mpi
-	 export PATH=/usr/lib64/openmpi/bin:$PATH
-	 export LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH
+	 if [[ "$MPI_IMPL" == "openmpi" ]]; then
+	     sudo $rpminst -y install  openmpi-devel
+	 else
+	     echo ready only for openmpi
+	     exit 1
+	 fi
+	 export PATH=/usr/lib64/"$MPI_IMPL"/bin:$PATH
+	 export LD_LIBRARY_PATH=/usr/lib64/"$MPI_IMPL"/lib:$LD_LIBRARY_PATH
 	 which mpif90
 	 mpif90 -show
      else

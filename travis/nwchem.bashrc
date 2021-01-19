@@ -1,6 +1,12 @@
 #- env: == default ==
 os=`uname`
 arch=`uname -m`
+if test -f "/usr/lib/os-release"; then
+    dist=$(grep ID= /etc/os-release |head -1 |cut -c4-| sed 's/\"//g')
+fi
+if [ -z "$DISTR" ] ; then
+    DISTR=$dist
+fi
 echo DISTR is "$DISTR"
 if [[ -z "$TRAVIS_BUILD_DIR" ]] ; then
     TRAVIS_BUILD_DIR=$(pwd)
@@ -51,7 +57,7 @@ if [[ "$BLAS_SIZE" == "4" ]]; then
   export USE_64TO32=y
 fi
 
-if [[ "$DISTR" == "fedora" ]]; then
+if [[ "$DISTR" == "fedora" ]] || [[ "$DISTR" == "centos" ]]; then
     export PATH=/usr/lib64/"$MPI_IMPL"/bin:$PATH
     export LD_LIBRARY_PATH=/usr/lib64/"$MPI_IMPL"/lib:$LD_LIBRARY_PATH
 fi
