@@ -12,6 +12,8 @@ fi
 tar xzf OpenBLAS-${VERSION}.tar.gz
 ln -sf OpenBLAS-${VERSION} OpenBLAS
 cd OpenBLAS-${VERSION}
+# patch for apple clang -fopenmp
+patch -p0 < ../clang_omp.patch
 #curl -L https://github.com/xianyi/OpenBLAS/commit/aa21cb52179b86b00f7ac52a4e41ed712836f2d1.patch -o  avx2.patch
 #patch -p1 < ./avx2.patch
 if [[  -z "${FORCETARGET}" ]]; then
@@ -69,13 +71,15 @@ fi
 #disable threading for ppc64le since it uses OPENMP
 echo arch is "$arch"
 if [[ "$arch" == "ppc64le" ]]; then
-    THREADOPT=" USE_THREAD=0 NUM_THREADS=1 "
+    THREADOPT=" USE_THREAD=0 "
     echo ppc64le using opt "$THREADOPT" 
 else
     THREADOPT=" USE_THREAD=1 NUM_THREADS=8 "
 fi
-echo make $FORCETARGET  LAPACK_FPFLAGS="$LAPACK_FPFLAGS_VAL"  INTERFACE64="$sixty4_int" BINARY="$binary" "$THREADOPT" NO_CBLAS=1 NO_LAPACKE=1 DEBUG=0   libs netlib -j4
- make $FORCETARGET  LAPACK_FPFLAGS="$LAPACK_FPFLAGS_VAL"  INTERFACE64="$sixty4_int" BINARY="$binary" "$THREADOPT" NO_CBLAS=1 NO_LAPACKE=1 DEBUG=0   libs netlib -j4
+    echo  using thread opt "$THREADOPT"
+
+echo make $FORCETARGET  LAPACK_FPFLAGS="$LAPACK_FPFLAGS_VAL"  INTERFACE64="$sixty4_int" BINARY="$binary" NUM_THREADS=128  "$THREADOPT" NO_CBLAS=1 NO_LAPACKE=1 DEBUG=0   libs netlib -j4
+ make $FORCETARGET  LAPACK_FPFLAGS="$LAPACK_FPFLAGS_VAL"  INTERFACE64="$sixty4_int" BINARY="$binary" NUM_THREADS=128 "$THREADOPT" NO_CBLAS=1 NO_LAPACKE=1 DEBUG=0   libs netlib -j4
 # make $FORCETARGET  LAPACK_FPFLAGS="$LAPACK_FPFLAGS_VAL"  INTERFACE64="$sixty4_int" BINARY="$binary" USE_THREAD=1 NO_CBLAS=1 NO_LAPACKE=1 DEBUG=0 NUM_THREADS=1  libs netlib -j4
 
 mkdir -p ../../lib
