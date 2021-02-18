@@ -170,7 +170,7 @@ jobs:
         run: |
           ./travis/run_qas.sh
       - name: Check if QA testing has failed
-        if: steps.qa_test.outcome == 'failure'
+        if: ${{ failure() }}  && steps.qa_test.outcome == 'failure'
         run: |
           grep d= QA/testoutputs/dft_he2+.out
           grep @ QA/testoutputs/h2o_opt.out
