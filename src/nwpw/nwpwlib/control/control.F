@@ -1297,7 +1297,7 @@ cccc set to some reasonable default !
             end do
          end if
       end if
-      pio = pio.and.(np_dimensions(2).gt.1)
+      pio = pio.and.((np_dimensions(2).gt.1).or.(np_dimensions(3).gt.1))
 
 *     **** minimizer ****
       if (.not.btdb_get(rtdb,'nwpw:minimizer',mt_int,1,minimizer)) then
@@ -7305,6 +7305,34 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
      >   value = .false.
 
       control_use_director = value
+      return
+      end
+
+
+*     ***********************************
+*     *                                 *
+*     *      control_unset_excited_ne   *
+*     *                                 *
+*     ***********************************
+      subroutine control_unset_excited_ne()
+      implicit none
+
+#include "bafdecls.fh"
+#include "btdb.fh"
+
+*     **** control_rtdb common block ****
+      integer rtdb
+      common / control_rtdb1 / rtdb
+
+      logical value
+      integer ne(2)
+
+      ne(1) = 0
+      ne(2) = 0
+      value = btdb_put(rtdb,'nwpw:excited_ne',mt_int,2,ne)
+
+      !value = rtdb_delete(rtdb,'nwpw:excited_ne')
+
       return
       end
 
