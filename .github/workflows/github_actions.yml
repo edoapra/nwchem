@@ -175,6 +175,11 @@ jobs:
           echo "The steps context is:"
           echo "${{ toJson(steps) }}"
           echo "!!!!!!!!!!!!!!!!!!!!!!!!!"
+          echo " failure variables "
+          echo "${{ failure() }}"
+          echo "!!!!!!!!!!!!!!!!!!!!!!!!!"
+          echo "conditional && "
+          echo " ${{ failure() }}  && steps.qa_test.outcome == 'failure'"
           grep d= QA/testoutputs/dft_he2+.out
           grep @ QA/testoutputs/h2o_opt.out
           tail -30 QA/testoutputs/dft_he2+.out
