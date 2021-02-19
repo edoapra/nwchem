@@ -175,13 +175,15 @@ jobs:
           echo "The steps context is:"
           echo "${{ toJson(steps) }}"
           echo "!!!!!!!!!!!!!!!!!!!!!!!!!"
-          grep d= QA/testoutputs/dft_he2+.out
-          grep @ QA/testoutputs/h2o_opt.out
-          tail -30 QA/testoutputs/dft_he2+.out
-          tail -490 QA/testoutputs/h2o2-response.out
-          tail -30 QA/testoutputs/prop_mep_gcube.out
-          diff QA/testoutputs/prop_ch3f.o*nw*
-          diff QA/testoutputs/h2o2-response.o*nw*
+          if [[ -f QA/testoutputs/dft_he2+.out ]]; \
+          then grep d= QA/testoutputs/dft_he2+.out || true ; \
+          tail -30 QA/testoutputs/dft_he2+.out || true; fi
+          if [[ -f QA/testoutputs/h2o_opt.out ]]; \
+          grep @ QA/testoutputs/h2o_opt.out || true ; fi
+          if [[ -f QA/testoutputs/h2o2-response.out ]]; \
+          tail -490 QA/testoutputs/h2o2-response.out || true; fi
+          if [[ -f QA/testoutputs/prop_mep_gcube.out ]]; \
+          tail -30 QA/testoutputs/prop_mep_gcube.out || true; fi
   
 
 
