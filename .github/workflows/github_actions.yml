@@ -194,6 +194,8 @@ jobs:
           tail -490 QA/testoutputs/h2o2-response.out || true; fi
           if [[ -f QA/testoutputs/prop_mep_gcube.out ]]; then \
           tail -30 QA/testoutputs/prop_mep_gcube.out || true; fi
+          if [[ -f QA/testoutputs/pspw.out ]]; then \
+          tail -490 QA/testoutputs/pspw.out || true; fi
   
 
 
