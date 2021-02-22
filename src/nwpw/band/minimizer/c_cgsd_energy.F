@@ -91,8 +91,12 @@
          write(luout,1304)
          if (minimizer.eq.1) write(luout,1305)
          if (minimizer.eq.2) write(luout,1306)
+         if (minimizer.eq.3) write(luout,1307)
+         if (minimizer.eq.4) write(luout,1308)
          if (minimizer.eq.5) write(luout,1309)
-         if (minimizer.eq.8) write(luout,1311)
+         if (minimizer.eq.6) write(luout,1311)
+         if (minimizer.eq.7) write(luout,1312)
+         if (minimizer.eq.8) write(luout,1313)
          call util_flush(luout)
       end if
 
@@ -157,8 +161,14 @@
            stop
          else if (minimizer.eq.4) then
            bfgscount = bfgscount + 1
-           write(*,*) "Bundled Stiefel minimizer not implemented"
-           stop
+           call c_cgminimize2(E,deltae,deltac,bfgscount,it_in)
+c           if (control_fractional()) then
+c              call psi_1gen_hml()
+c              call psi_diagonalize_hml_assending()
+c              call psi_1define_occupation(-1.0d0,.false.)
+c              !call psi_1rotate2()
+c              !call psi_2to1()
+c           end if
          else if (minimizer.eq.5) then
            bfgscount = bfgscount + 1
            call c_bybminimize(E,deltae,deltac,bfgscount,.false.,1)
@@ -361,7 +371,9 @@ c          if (mprint) write(luout,1511)
  1308 FORMAT(10X,'=== bundled Stiefel conjugate gradient iteration ===')
  1309 FORMAT(10X,'=========== scf minimization (potential) ===========')
  1310 FORMAT(I8,E20.10,3E15.5)
- 1311 FORMAT(10X,'=========== scf minimization (density)  ============')
+ 1311 FORMAT(10X,'=== Projected bundled Grassmann lmbfgs iteration ===')
+ 1312 FORMAT(10X,'========= bundled Stiefel lmbfgs iteration =========')
+ 1313 FORMAT(10X,'============ scf minimization (density) ============')
  1320 FORMAT(' number of electrons: spin up=',F11.5,'  down=',F11.5,A)
  1330 FORMAT(/' comparison between hamiltonian and lambda matrix')
  1340 FORMAT(I3,2I3,' H=',E16.7,', L=',E16.7,', H-L=',E16.7)

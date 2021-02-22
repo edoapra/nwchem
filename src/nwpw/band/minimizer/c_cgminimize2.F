@@ -35,6 +35,7 @@ c      complex*16 G1(nfft3d,nemax)
       real*8     Enew,Eold,Estart
       common / c_cgsd_block / Enew,Eold,Estart
 
+      logical value
       integer it
       real*8 tmin,deltat
       real*8 max_sigma,ehfx,phfx
@@ -43,12 +44,13 @@ c      complex*16 G1(nfft3d,nemax)
       integer neall,nfft3d,npack1,nbrill
 
 *     **** external functions ****
+      real*8   cpsi_geodesic2_energy,cpsi_geodesic2_denergy
+      external cpsi_geodesic2_energy,cpsi_geodesic2_denergy
+
       logical  band_hfx
       integer  cpsi_neq,control_version,cpsi_ispinq,cpsi_nbrillq
       integer  cpsi_data_push_stack
       real*8   control_tole,control_tolc
-      real*8   cpsi_geodesic_energy
-      real*8   cpsi_geodesic_denergy
       real*8   c_rho_error
       real*8   c_dng_1ehartree
       real*8   cpsi_1ke
@@ -64,8 +66,6 @@ c      complex*16 G1(nfft3d,nemax)
       external cpsi_neq,control_version,cpsi_ispinq,cpsi_nbrillq
       external cpsi_data_push_stack
       external control_tole,control_tolc
-      external cpsi_geodesic_energy
-      external cpsi_geodesic_denergy
       external c_rho_error
       external c_dng_1ehartree
       external cpsi_1ke
@@ -90,6 +90,7 @@ c      complex*16 G1(nfft3d,nemax)
       neall  = ne(1)+ne(2)
       nbrill = cpsi_nbrillq()
 
+      value = MA_set_error_print(.true.)
 
 *     **** allocate H0, G0, and G1 ****
       H0_tag = cpsi_data_push_stack(nbrill,neall,2*npack1)
@@ -120,7 +121,7 @@ c      G0_tag = cpsi_data_push_stack(nbrill,neall,2*npack1)
       do it=2,it_in
 
 *        **** initialize the geoedesic line data structure ****
-         call c_geodesic2_start(H0_tag,max_sigma,dE0)
+         call cpsi_1geodesic2_start(H0_tag,max_sigma,dE0)
 
 
 *        ******* line search *********
@@ -134,7 +135,6 @@ c      G0_tag = cpsi_data_push_stack(nbrill,neall,2*npack1)
      >                        cpsi_geodesic2_energy,
      >                        cpsi_geodesic2_denergy,
      >                        tole,tmin,deltae,1)
-
 c         write(*,*)'e0= ',e0
 c         write(*,*)'de0 = ',de0
 c         write(*,*)'tmin = ',tmin
@@ -191,7 +191,8 @@ c         call BGrsm_fff_Sub_tag(G1_tag,G0_tag,G0_tag)
 
 *     **** initialize the geoedesic line data structure ****
 
-      call c_geodesic_start(H0_tag,max_sigma,dE0)
+      !call c_geodesic2_start(H0_tag,max_sigma,dE0)
+      call cpsi_1geodesic2_start(H0_tag,max_sigma,dE0)
 
 *     ******* line search *********
       if (tmin.gt.0.0d0) then
