@@ -111,7 +111,7 @@ ln -sf scalapack-$COMMIT scalapack
 #tar xzf scalapack.tgz
 cd scalapack
 # macos accelerate does not contain dcombossq
-ifeq [[ $(echo "$BLASOPT" |awk '/Accelerate/ {print "Y"; exit}' == "Y" ]]; then
+if [[ $(echo "$BLASOPT" |awk '/Accelerate/ {print "Y"; exit}' == "Y" ]]; then
     export USE_DCOMBSSQ=1
 fi
 if [[  -z "$USE_DCOMBSSQ" ]]; then
