@@ -68,6 +68,8 @@ elif [[ "$BLAS_ENV" == "accelerate" ]]; then
     export BLASOPT="-framework Accelerate"
     export BLAS_LIB=${BLASOPT}
     export LAPACK_LIB=${BLASOPT}
+    BLAS_SIZE=4
+    SCALAPACK_SIZE=4
 fi
 if [[ "$BLAS_SIZE" == "4" ]]; then
   export USE_64TO32=y
