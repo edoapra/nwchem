@@ -94,4 +94,8 @@ if [[ -z "$USE_INTERNALBLAS" ]]; then
 	fi
     fi
 fi
+#summary
+echo "from nwchem.bashrc"
+echo "BLAS_SIZE = " "$BLAS_SIZE"
+echo "SCALAPACK_SIZE = " "$SCALAPACK_SIZE"
 export NWCHEM_EXECUTABLE=$TRAVIS_BUILD_DIR/.cachedir/binaries/$NWCHEM_TARGET/nwchem_"$arch"_`echo $NWCHEM_MODULES|sed 's/ /-/g'`_"$MPI_IMPL"

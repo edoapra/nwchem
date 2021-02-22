@@ -77,7 +77,9 @@ pwd
 #    exit 1
 #fi
 if [[ "$BLAS_SIZE" != "$SCALAPACK_SIZE"  ]] ; then
-    echo BLAS_SIZE must be the same as SCALAPACK_SIZE
+    echo "BLAS_SIZE must be the same as SCALAPACK_SIZE"
+    echo "BLAS_SIZE = " "$BLAS_SIZE"
+    echo "SCALAPACK_SIZE = " "$SCALAPACK_SIZE"
     exit 1
 fi
 if [[ "$BLAS_SIZE" == 4 ]] && [[ -z "$USE_64TO32"   ]] ; then
