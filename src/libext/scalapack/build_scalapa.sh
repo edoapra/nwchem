@@ -110,6 +110,10 @@ ln -sf scalapack-$COMMIT scalapack
 #curl -L http://www.netlib.org/scalapack/scalapack-${VERSION}.tgz -o scalapack.tgz
 #tar xzf scalapack.tgz
 cd scalapack
+# macos accelerate does not contain dcombossq
+ifeq [[ $(echo "$BLASOPT" |awk '/Accelerate/ {print "Y"; exit}' == "Y" ]]; then
+    export USE_DCOMBSSQ=1
+fi
 if [[  -z "$USE_DCOMBSSQ" ]]; then
     patch -p0 -s -N < ../dcombssq.patch
 fi
