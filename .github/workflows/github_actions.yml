@@ -113,6 +113,7 @@ jobs:
             nwchem_modules: "tinyqmpw"
             fc: gfortran
             blas: "accelerate"
+            xcode_version: 12.1
       fail-fast: false
     env:
         MPI_IMPL: ${{ matrix.mpi_impl }}
