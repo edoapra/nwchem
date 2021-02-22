@@ -53,9 +53,6 @@ if [[ "$os" == "Linux" ]]; then
 fi
 export OMP_NUM_THREADS=1
 export USE_NOIO=1
-if [[ "$BLAS_SIZE" == "4" ]]; then
-  export USE_64TO32=y
-fi
 
 if [[ "$DISTR" == "fedora" ]] || [[ "$DISTR" == "centos" ]]; then
     export PATH=/usr/lib64/"$MPI_IMPL"/bin:$PATH
@@ -67,6 +64,13 @@ if [[ "$BLAS_ENV" == "internal" ]]; then
 elif [[ "$BLAS_ENV" == "build_openblas" ]]; then
     export BUILD_OPENBLAS="y"
     export BLAS_SIZE=8
+elif [[ "$BLAS_ENV" == "accelerate" ]]; then
+    export BLASOPT="-framework Accelerate"
+    export BLAS_LIB=${BLASOPT}
+    export LAPACK_LIB=${BLASOPT}
+fi
+if [[ "$BLAS_SIZE" == "4" ]]; then
+  export USE_64TO32=y
 fi
 if [[ -z "$USE_INTERNALBLAS" ]]; then
     if [[ -z "$BLASOPT" ]] ; then
