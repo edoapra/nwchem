@@ -111,7 +111,7 @@ jobs:
             mpi_impl: openmpi
             armci_network: mpi-ts
             nwchem_modules: "tinyqmpw"
-            fc: gfortran
+            fc: gfortran-9
             blas: "accelerate"
             xcode_version: 12.1
       fail-fast: false
