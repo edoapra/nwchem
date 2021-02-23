@@ -157,6 +157,7 @@ jobs:
         id: compile
         run: |
           cc -v
+          ./travis/config_nwchem.sh
           ./travis/compile_nwchem.sh
       - name: Check compilation result
         if: ${{ failure() }}
