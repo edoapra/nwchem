@@ -81,7 +81,7 @@ fi
 	flang -v
 	which flang
     fi
-    if [[ "$FC" == "nvfortran" ]]; then
+    if [[ "$(basename -- $(FC)| cut -d \- -f 1)" == "nvfortran" ]]; then
 	sudo apt-get -y install lmod
 	wget https://developer.download.nvidia.com/hpc-sdk/21.2/nvhpc-21-2_21.2_amd64.deb
 	wget https://developer.download.nvidia.com/hpc-sdk/21.2/nvhpc-2021_21.2_amd64.deb
