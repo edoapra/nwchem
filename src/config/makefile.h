@@ -1169,7 +1169,7 @@ ifeq ($(TARGET),MACX64)
      FC = gfortran
      _FC = gfortran
    endif
-    ifeq ($(call stripextra,$(FC)),gfortran)
+   ifeq ($(shell basename -- $(FC)| cut -d \- -f 1),gfortran)
      _FC = gfortran
    endif
 #
@@ -1359,13 +1359,13 @@ ifeq ($(TARGET),$(findstring $(TARGET),LINUX CYGNUS CYGWIN))
      FC = gfortran
      _FC = gfortran
    endif
-   ifeq ($(call stripextra,$(FC)),gfortran)
+   ifeq ($(shell basename -- $(FC)| cut -d \- -f 1),gfortran)
      _FC = gfortran
    endif
    ifeq ($(FC),$(findstring $(FC),i686-w64-mingw32.static-gfortran))
      _FC = gfortran
    endif
-   ifeq ($(call stripextra,$(CC)),gcc)
+   ifeq ($(shell basename -- $(CC)| cut -d \- -f 1),gcc)
      ifneq ($(CC),cc)
        _CC = gcc
      endif
@@ -1741,7 +1741,7 @@ endif
       ifeq ($(FC),pgf90)
         _FC=pgf90
       endif
-      ifeq ($(call stripextra,$(FC)),nvfortran)
+      ifeq ($(shell basename -- $(FC)| cut -d \- -f 1),nvfortran)
         _FC=pgf90
       endif
       ifeq ($(FC),pgf77)
@@ -1756,13 +1756,13 @@ endif
       ifeq ($(FC),ifx)
        _FC=ifx
       endif
-     ifeq ($(call stripextra,$(FC)),gfortran)
+     ifeq ($(shell basename -- $(FC)| cut -d \- -f 1),gfortran)
        _FC= gfortran
      endif
      ifeq ($(FC),$(findstring $(FC),i686-w64-mingw32.static-gfortran x86_64-w64-mingw32-gfortran-win32))
        _FC= gfortran
      endif
-     ifeq ($(call stripextra,$(CC)),gcc)
+     ifeq ($(shell basename -- $(CC)| cut -d \- -f 1),gcc)
 	fneq ($(CC),cc)
        _CC= gcc
      endif
@@ -3215,8 +3215,3 @@ else
 endif
 
 endif
-#function to strip extra content from compiler name
-#e.g. /usr/local/bin/gfortran-10 becomes gfortran
-define stripextra
-  basename -- $(1)| cut -d \- -f 1
-endef
