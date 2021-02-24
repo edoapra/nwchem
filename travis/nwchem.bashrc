@@ -88,9 +88,9 @@ if [[ -z "$USE_INTERNALBLAS" ]]; then
     else
 	if [[ -z "$SCALAPACK" ]] ; then
 	    export BUILD_SCALAPACK="y"
-	    	if [[ -z "$SCALAPACK_SIZE" ]] ; then
-	    	    export SCALAPACK_SIZE=8
-		fi
+	    if [[ -z "$SCALAPACK_SIZE" ]] ; then
+		export SCALAPACK_SIZE=8
+	    fi
 	else
 	    unset BUILD_SCALAPACK
 	fi
