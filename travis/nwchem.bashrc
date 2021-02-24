@@ -23,7 +23,7 @@ fi
 if [[ "$FC" == "nvfortran" ]]; then
     source /etc/profile.d/lmod.sh
     module use /opt/nvidia/hpc_sdk/modulefiles
-    module load nvhpc
+    module load nvhpc-nompi
 #    export FC=nvfortran
 fi
 if [[ "$FC" == "ifort" ]]; then

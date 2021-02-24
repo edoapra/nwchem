@@ -79,7 +79,6 @@ fi
 	sudo dpkg -i aomp_Ubuntu2004_11.12-0_amd64.deb
 	export PATH=/usr/lib/aomp_11.12-0/bin/:$PATH
 	flang -v
-	flang
 	which flang
     fi
     if [[ "$FC" == "nvfortran" ]]; then
@@ -89,7 +88,7 @@ fi
 	sudo dpkg -i nvhpc-21-2_21.2_amd64.deb nvhpc-2021_21.2_amd64.deb
 	source /etc/profile.d/lmod.sh
         module use /opt/nvidia/hpc_sdk/modulefiles
-	module load nvhpc
+	module load nvhpc-nompi
 	#	export FC=nvfortran
 	env | grep FC || true
 	nvfortran -v
