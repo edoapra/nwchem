@@ -21,6 +21,7 @@ if [[ "$FC" == "flang" ]]; then
 #    export PATH=/opt/rocm-4.0.0/llvm/bin:$PATH
 fi
 if [[ "$FC" == "nvfortran" ]]; then
+    source /etc/profile.d/lmod.sh
     module load nvhpc-nompi
 fi
 if [[ "$FC" == "ifort" ]]; then
