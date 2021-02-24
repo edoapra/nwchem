@@ -1169,7 +1169,7 @@ ifeq ($(TARGET),MACX64)
      FC = gfortran
      _FC = gfortran
    endif
-   ifeq ($(FC),$(findstring $(FC),gfortran gfortran-4 gfortran-5 gfortran-6 gfortran-7 gfortran-8 gfortran-9 gfortran-10 gfortran-11 gfortran-12))
+    ifeq ($(call stripextra,$(FC)),gfortran)
      _FC = gfortran
    endif
 #
@@ -1359,13 +1359,21 @@ ifeq ($(TARGET),$(findstring $(TARGET),LINUX CYGNUS CYGWIN))
      FC = gfortran
      _FC = gfortran
    endif
-   ifeq ($(FC),$(findstring $(FC),gfortran gfortran-4 gfortran-5 gfortran-6 gfortran-7 gfortran-8 gfortran-9 gfortran-10 gfortran-11 gfortran-12 i686-w64-mingw32.static-gfortran))
+   ifeq ($(call stripextra,$(FC)),gfortran)
      _FC = gfortran
    endif
-   ifeq ($(CC),$(findstring $(CC),gcc gcc-4 gcc-5 gcc-6 gcc-7 gcc-8 gcc-9 gcc-10 gcc-11 gcc-12 i686-w64-mingw32.static-gcc))
-   ifneq ($(CC),cc)
-     _CC = gcc
+   ifeq ($(FC),$(findstring $(FC),i686-w64-mingw32.static-gfortran))
+     _FC = gfortran
    endif
+   ifeq ($(call stripextra,$(CC)),gcc)
+     ifneq ($(CC),cc)
+       _CC = gcc
+     endif
+   endif
+   ifeq ($(CC),$(findstring $(CC),i686-w64-mingw32.static-gcc))
+     ifneq ($(CC),cc)
+       _CC = gcc
+     endif
    endif
 
          LINUXCPU = $(shell uname -m |\
@@ -1733,7 +1741,7 @@ endif
       ifeq ($(FC),pgf90)
         _FC=pgf90
       endif
-      ifeq ($(FC),nvfortran)
+      ifeq ($(call stripextra,$(FC)),nvfortran)
         _FC=pgf90
       endif
       ifeq ($(FC),pgf77)
@@ -1748,17 +1756,21 @@ endif
       ifeq ($(FC),ifx)
        _FC=ifx
       endif
-     ifeq ($(FC),$(findstring $(FC),gfortran gfortran-4 gfortran-5 gfortran6 gfortran-6 gfortran-7 gfortran7 gfortran-8 gfortran8 gfortran-9 gfortran9 gfortran-10 gfortran10 gfortran-11 gfortran-12 i686-w64-mingw32.static-gfortran x86_64-w64-mingw32-gfortran-win32))
+     ifeq ($(call stripextra,$(FC)),gfortran)
        _FC= gfortran
      endif
-     ifeq ($(CC),$(findstring $(CC),gcc gcc-4 gcc-5 gcc6 gcc-6 gcc-7 gcc7 gcc-8 gcc8 gcc-9 gcc9 gcc-10 gcc10 gcc-11 gcc-12 i686-w64-mingw32.static-gcc x86_64-w64-mingw32-gcc-win32))
+     ifeq ($(FC),$(findstring $(FC),i686-w64-mingw32.static-gfortran x86_64-w64-mingw32-gfortran-win32))
+       _FC= gfortran
+     endif
+     ifeq ($(call stripextra,$(CC)),gcc)
+	fneq ($(CC),cc)
+       _CC= gcc
+     endif
+     ifeq ($(CC),$(findstring $(CC),i686-w64-mingw32.static-gcc x86_64-w64-mingw32-gcc-win32))
      ifneq ($(CC),cc)
        _CC= gcc
      endif
      endif
-      ifeq ($(FC),gfortran)
-       _FC=gfortran
-      endif
       ifeq ($(FC),armflang)
        _FC=armflang
        USE_FLANG=1
@@ -3203,3 +3215,8 @@ else
 endif
 
 endif
+#function to strip extra content from compiler name
+#e.g. /usr/local/bin/gfortran-10 becomes gfortran
+define stripextra
+  basename -- $(1)| cut -d \- -f 1
+endef

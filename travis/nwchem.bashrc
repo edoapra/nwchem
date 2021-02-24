@@ -24,7 +24,7 @@ if [[ "$FC" == "nvfortran" ]]; then
     source /etc/profile.d/lmod.sh
     module use /opt/nvidia/hpc_sdk/modulefiles
     module load nvhpc
-    export FC=nvfortran
+#    export FC=nvfortran
 fi
 if [[ "$FC" == "ifort" ]]; then
     source /opt/intel/oneapi/compiler/latest/env/vars.sh

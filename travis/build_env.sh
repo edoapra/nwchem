@@ -90,7 +90,8 @@ fi
 	source /etc/profile.d/lmod.sh
         module use /opt/nvidia/hpc_sdk/modulefiles
 	module load nvhpc
-	export FC=nvfortran
+	#	export FC=nvfortran
+	env | grep FC || true
 	nvfortran -v
 	nvfortran
 	which nvfortran
