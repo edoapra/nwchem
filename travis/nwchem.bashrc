@@ -20,6 +20,9 @@ if [[ "$FC" == "flang" ]]; then
     export PATH=/usr/lib/aomp_11.12-0/bin/:$PATH
 #    export PATH=/opt/rocm-4.0.0/llvm/bin:$PATH
 fi
+if [[ "$FC" == "nvfortran" ]]; then
+    module load nvhpc-nompi
+fi
 if [[ "$FC" == "ifort" ]]; then
     source /opt/intel/oneapi/compiler/latest/env/vars.sh
     ifort -V

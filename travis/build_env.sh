@@ -82,5 +82,14 @@ fi
 	flang
 	which flang
     fi
+    if [[ "$FC" == "nvfortran" ]]; then
+	sudo apt-get -y install lmod
+	wget  https://developer.download.nvidia.com/hpc-sdk/21.2/nvhpc-21-2_21.2_amd64.deb
+	sudo dpkg -i nvhpc-21-2_21.2_amd64.deb
+	module load nvhpc-nompi
+	nvfortran -v
+	nvfortran
+	which nvfortran
+    fi
     fi
 fi
