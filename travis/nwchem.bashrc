@@ -22,6 +22,7 @@ if [[ "$FC" == "flang" ]]; then
 fi
 if [[ "$FC" == "nvfortran" ]]; then
     source /etc/profile.d/lmod.sh
+    module use /opt/nvidia/hpc_sdk/modulefiles
     module load nvhpc-nompi
 fi
 if [[ "$FC" == "ifort" ]]; then

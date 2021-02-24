@@ -88,6 +88,7 @@ fi
 	wget https://developer.download.nvidia.com/hpc-sdk/21.2/nvhpc-2021_21.2_amd64.deb
 	sudo dpkg -i nvhpc-21-2_21.2_amd64.deb nvhpc-2021_21.2_amd64.deb
 	source /etc/profile.d/lmod.sh
+        module use /opt/nvidia/hpc_sdk/modulefiles
 	module load nvhpc-nompi
 	nvfortran -v
 	nvfortran
