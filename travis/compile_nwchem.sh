@@ -42,6 +42,9 @@ else
         if [[ "$FC" == "flang" ]]; then
 	    FOPT="-O2  -ffast-math"
 	fi
+        if [[ "$FC" == "nvfortran" ]]; then
+	    export USE_FPICF=1
+	fi
     fi
 fi    
  if [[ "$os" == "Darwin" ]]; then 
