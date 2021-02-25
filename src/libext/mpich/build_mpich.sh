@@ -10,6 +10,9 @@ GNUMAJOR=`$FC -dM -E - < /dev/null 2> /dev/null | grep __GNUC__ |cut -c18-`
 if [[ $GNUMAJOR -ge 10  ]]; then
     export FFLAGS=-std=legacy
 fi
+#mpich crashes when F90 and F90FLAGS are set
+unset F90
+unset F90FLAGS
 echo 'using FFLAGS=' $FFLAGS
 ./configure --prefix=`pwd`/../.. --enable-fortran=all --disable-shared --disable-cxx --disable-romio --with-pm=gfor\
 ker --with-device=ch3:nemesis
