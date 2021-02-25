@@ -1763,7 +1763,7 @@ endif
        _FC= gfortran
      endif
      ifeq ($(shell basename -- $(CC)| cut -d \- -f 1),gcc)
-	fneq ($(CC),cc)
+	ifneq ($(CC),cc)
        _CC= gcc
      endif
      ifeq ($(CC),$(findstring $(CC),i686-w64-mingw32.static-gcc x86_64-w64-mingw32-gcc-win32))
