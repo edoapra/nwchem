@@ -1756,21 +1756,22 @@ endif
       ifeq ($(FC),ifx)
        _FC=ifx
       endif
-     ifeq ($(shell basename -- $(FC)| cut -d \- -f 1),gfortran)
-       _FC= gfortran
-     endif
-     ifeq ($(FC),$(findstring $(FC),i686-w64-mingw32.static-gfortran x86_64-w64-mingw32-gfortran-win32))
-       _FC= gfortran
-     endif
-     ifeq ($(shell basename -- $(CC)| cut -d \- -f 1),gcc)
+      ifeq ($(shell basename -- $(FC)| cut -d \- -f 1),gfortran)
+        _FC= gfortran
+      endif
+      ifeq ($(FC),$(findstring $(FC),i686-w64-mingw32.static-gfortran x86_64-w64-mingw32-gfortran-win32))
+        _FC= gfortran
+      endif
+      ifeq ($(shell basename -- $(CC)| cut -d \- -f 1),gcc)
 	ifneq ($(CC),cc)
-       _CC= gcc
-     endif
-     ifeq ($(CC),$(findstring $(CC),i686-w64-mingw32.static-gcc x86_64-w64-mingw32-gcc-win32))
-     ifneq ($(CC),cc)
-       _CC= gcc
-     endif
-     endif
+          _CC= gcc
+        endif
+      endif
+      ifeq ($(CC),$(findstring $(CC),i686-w64-mingw32.static-gcc x86_64-w64-mingw32-gcc-win32))
+        ifneq ($(CC),cc)
+          _CC= gcc
+        endif
+      endif
       ifeq ($(FC),armflang)
        _FC=armflang
        USE_FLANG=1
