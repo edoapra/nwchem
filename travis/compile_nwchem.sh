@@ -44,6 +44,7 @@ else
 	fi
         if [[ "$FC" == "nvfortran" ]]; then
 	    export USE_FPICF=1
+	    FOPT="-O2 -tp haswell"
 	fi
     fi
 fi    
