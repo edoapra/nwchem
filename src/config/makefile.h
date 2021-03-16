@@ -1169,8 +1169,8 @@ ifeq ($(TARGET),MACX64)
      FC = gfortran
      _FC = gfortran
    endif
-   ifeq ($(shell basename -- $(FC)| cut -d \- -f 1),gfortran)
-     _FC = gfortran
+   ifeq ($(shell $(CNFDIR)/strip_compiler.sh $(FC)),gfortran)
+     _FC := gfortran
    endif
 #
 # MacOSX 64bit
@@ -1359,13 +1359,13 @@ ifeq ($(TARGET),$(findstring $(TARGET),LINUX CYGNUS CYGWIN))
      FC = gfortran
      _FC = gfortran
    endif
-   ifeq ($(shell basename -- $(FC)| cut -d \- -f 1),gfortran)
-     _FC = gfortran
+   ifeq ($(shell $(CNFDIR)/strip_compiler.sh $(FC)),gfortran)
+     _FC := gfortran
    endif
    ifeq ($(FC),$(findstring $(FC),i686-w64-mingw32.static-gfortran))
      _FC = gfortran
    endif
-   ifeq ($(shell basename -- $(CC)| cut -d \- -f 1),gcc)
+   ifeq ($(shell $(CNFDIR)/strip_compiler.sh $(CC)),gcc)
      ifneq ($(CC),cc)
        _CC = gcc
      endif
@@ -1741,8 +1741,8 @@ endif
       ifeq ($(FC),pgf90)
         _FC=pgf90
       endif
-      ifeq ($(shell basename -- $(FC)| cut -d \- -f 1),nvfortran)
-        _FC=pgf90
+      ifeq ($(shell $(CNFDIR)/strip_compiler.sh $(FC)),nvfortran)
+        _FC := pgf90
       endif
       ifeq ($(FC),pgf77)
         _FC=pgf90
@@ -1756,15 +1756,15 @@ endif
       ifeq ($(FC),ifx)
        _FC=ifx
       endif
-      ifeq ($(shell basename -- $(FC)| cut -d \- -f 1),gfortran)
-        _FC= gfortran
+      ifeq ($(shell $(CNFDIR)/strip_compiler.sh $(FC)),gfortran)
+        _FC := gfortran
       endif
       ifeq ($(FC),$(findstring $(FC),i686-w64-mingw32.static-gfortran x86_64-w64-mingw32-gfortran-win32))
-        _FC= gfortran
+        _FC := gfortran
       endif
-      ifeq ($(shell basename -- $(CC)| cut -d \- -f 1),gcc)
+      ifeq ($(shell $(CNFDIR)/strip_compiler.sh $(CC)),gcc)
 	ifneq ($(CC),cc)
-          _CC= gcc
+          _CC := gcc
         endif
       endif
       ifeq ($(CC),$(findstring $(CC),i686-w64-mingw32.static-gcc x86_64-w64-mingw32-gcc-win32))
@@ -1776,7 +1776,7 @@ endif
        _FC=armflang
        USE_FLANG=1
       endif
-      ifeq ($(FC),flang)
+      ifeq ($(shell $(CNFDIR)/strip_compiler.sh $(FC)),flang)
        _FC=gfortran
        USE_FLANG=1
       endif
@@ -2165,18 +2165,6 @@ endif
      endif # _FC = ifort (i think)
 #
       ifeq ($(_FC),pgf90)
-        FOPTIONS   += -Mdalign -Mllalign -Kieee
-	FOPTIONS   += -Mbackslash
-#        FOPTIONS   += -tp k8-64  
-#        FOPTIONS   +=    -Ktrap=fp
-        FOPTIMIZE   = -O3 -fastsse -Mnounroll -Minfo=loop -Mipa=fast
-        FVECTORIZE   = -fast  -fastsse  -O3   -Mipa=fast
-        FDEBUG = -g -O2
-        DEFINES  += -DCHKUNDFLW -DPGLINUX
-        ifdef USE_OPENMP
-           FOPTIONS  += -mp -Minfo=mp
-           LDOPTIONS += -mp
-        endif
        ifeq ($(FC),ftn)
           LINK.f = ftn  $(LDFLAGS) $(FOPTIONS)
        endif
@@ -2474,8 +2462,9 @@ ifeq ($(_CPU),$(findstring $(_CPU), ppc64 ppc64le))
 #     EXTRA_LIBS +=  -dynamic-linker /lib64/ld64.so.1 -melf64ppc -lxlf90_r -lxlopt -lxlomp_ser -lxl -lxlfmath -ldl -lm -lc -lgcc -lm
     endif # end of ppc64 arch
       ifeq ($(_FC),pgf90)
+        FOPTIONS   += -Mdalign -Mllalign -Kieee
+	FOPTIONS   += -Mbackslash
         FOPTIONS   += -Mcache_align  # -Kieee 
-#        FOPTIMIZE   = -O3  -Mnounroll -Minfo=loop -Mipa=fast
         FOPTIMIZE   =  -fast -O3 -Mvect=simd  -Munroll -Minfo=loop # -Mipa=fast
         FVECTORIZE   = -fast    -O3   #-Mipa=fast
         FDEBUG = -g -O2
