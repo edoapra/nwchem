@@ -219,7 +219,11 @@ jobs:
           if [[ -f QA/testoutputs/pspw.out ]]; then \
           tail -490 QA/testoutputs/pspw.out || true; fi
           if [[ -f QA/testoutputs/dft_smear.out ]]; then \
-          tail -490 QA/testoutputs/dft_smear.out || true; fi
+          grep @ QA/testoutputs/dft_smear.out || true; fi
+          if [[ -f QA/testoutputs/dft_smear.out ]]; then \
+          egrep d=  QA/testoutputs/dft_smear.out || true; fi
+          if [[ -f QA/testoutputs/dft_smear.out ]]; then \
+          tail -2000  QA/testoutputs/dft_smear.out || true; fi
   
 
 
