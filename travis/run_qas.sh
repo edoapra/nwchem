@@ -133,7 +133,10 @@ fi
 	   fi
        fi
        if [[ ! $(grep -i pspw $TRAVIS_BUILD_DIR/src/stubs.F| awk '/pspw_input/') ]]; then
-	   cd $TRAVIS_BUILD_DIR/QA && ./runtests.mpi.unix procs $nprocs pspw_md
+#skip pspw_md when openmp is on
+	   if [[ ! -z "$USE_OPENMP" ]]; then
+	       cd $TRAVIS_BUILD_DIR/QA && ./runtests.mpi.unix procs $nprocs pspw_md
+	   fi
        fi
        if [[ ! $(grep -i dft_input $TRAVIS_BUILD_DIR/src/stubs.F| awk '/dft_input/') ]]; then
 	   if [[ ! $(grep -i prop_input $TRAVIS_BUILD_DIR/src/stubs.F| awk '/prop_input/') ]]; then
