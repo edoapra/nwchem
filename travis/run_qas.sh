@@ -134,7 +134,7 @@ fi
        fi
        if [[ ! $(grep -i pspw $TRAVIS_BUILD_DIR/src/stubs.F| awk '/pspw_input/') ]]; then
 #skip pspw_md when openmp is on
-	   if [[ ! -z "$USE_OPENMP" ]]; then
+	   if [[ -z "$USE_OPENMP" ]]; then
 	       cd $TRAVIS_BUILD_DIR/QA && ./runtests.mpi.unix procs $nprocs pspw_md
 	   fi
        fi
