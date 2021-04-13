@@ -75,7 +75,7 @@ jobs:
         run: |
           cd src
           make USE_INTERNALBLAS=y nwchem_config NWCHEM_MODULES="nwdft driver solvation"
-      - uses: uraimo/run-on-arch-action@v2.0.8
+      - uses: uraimo/run-on-arch-action@v2.0.9
         name: Build and Test NWChem
         id: build
         with:
@@ -100,12 +100,13 @@ jobs:
             DISTR: ${{ matrix.distro_short }}
             BLAS_ENV:  ${{ matrix.blas }}
             SCALAPACK_ENV:  ${{ matrix.scalapack }}
+            DEBIAN_FRONTEND: noninteractive
           shell: /bin/sh
           install: |
             case "${{ matrix.distro }}" in
             ubuntu*|jessie|stretch|buster)
             apt-get update -q -y 
-            apt-get install -q -y sudo git gfortran libopenmpi-dev curl wget unzip perl rsync python3-dev python-dev cmake
+            DEBIAN_FRONTEND=noninteractive apt-get install -q -y sudo git gfortran libopenmpi-dev curl wget unzip perl rsync python3-dev python-dev cmake
             ;;
             fedora*)
             dnf -y update
