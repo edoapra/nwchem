@@ -110,7 +110,8 @@ jobs:
             export DEBIAN_FRONTEND=noninteractive
             apt-get install -y tzdata
             dpkg-reconfigure --frontend noninteractive tzdata
-            DEBIAN_FRONTEND=noninteractive apt-get install -q -y sudo git g++ gfortran libopenmpi-dev curl wget unzip perl rsync python3-dev python-dev cmake
+            DEBIAN_FRONTEND=noninteractive apt-get install -q -y sudo git  gfortran libopenmpi-dev curl wget unzip perl rsync python3-dev python-dev cmake
+            if [[ "$FC" == "nvfortran" ]]; then apt-get install -q -y g++ libtinfo5 libncursesw5; fi
             ;;
             fedora*)
             dnf -y update
