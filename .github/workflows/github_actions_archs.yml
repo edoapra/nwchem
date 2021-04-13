@@ -108,9 +108,10 @@ jobs:
             apt-get update -q -y 
             ln -fs /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
             export DEBIAN_FRONTEND=noninteractive
-            apt-get install -y tzdata
+            apt-get install -y tzdata apt-utils
             dpkg-reconfigure --frontend noninteractive tzdata
             DEBIAN_FRONTEND=noninteractive apt-get install -q -y sudo git  gfortran libopenmpi-dev curl wget unzip perl rsync python3-dev python-dev cmake g++ libtinfo5 libncursesw5 lua-posix
+            ln -sf /usr/lib/x86_64-linux-gnu/lua/5.2/posix_c.so /usr/lib/x86_64-linux-gnu/lua/5.2/posix.so
             ;;
             fedora*)
             dnf -y update
