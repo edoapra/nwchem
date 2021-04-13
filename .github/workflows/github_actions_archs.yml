@@ -25,6 +25,17 @@ jobs:
             blas: "build_openblas"
             scalapack: "off"
             nwchem_modules: "tinyqmpw"
+            mpi_impl: "openmpi"
+            fc: "gfortran"
+          - arch: aarch64
+            distro_short: ubuntu
+            distro: ubuntu18.04
+            ftarget: " TARGET=ARMV8"
+            blas: "build_openblas"
+            scalapack: "off"
+            nwchem_modules: "tinyqmpw"
+            mpi_impl: "mpich"
+            fc: "nvfortran"
           - arch: ppc64le
             distro_short: ubuntu
             distro: ubuntu18.04
@@ -32,6 +43,8 @@ jobs:
             scalapack: "on"
             ftarget: " TARGET=POWER8"
             nwchem_modules: "tinyqmpw"
+            mpi_impl: "openmpi"
+            fc: "gfortran"
 
       fail-fast: false
     steps: 
@@ -81,9 +94,9 @@ jobs:
             FORCETARGET: ${{ matrix.ftarget }}
             COMEX_MAX_NB_OUTSTANDING: 4
             SIMINT_MAXAM: 3
-            MPI_IMPL: openmpi
+            MPI_IMPL: ${{ matrix.mpi_impl }}
             ARMCI_NETWORK: MPI-TS
-            FC: gfortran
+            FC: ${{ matrix.fc }}
             DISTR: ${{ matrix.distro_short }}
             BLAS_ENV:  ${{ matrix.blas }}
             SCALAPACK_ENV:  ${{ matrix.scalapack }}
