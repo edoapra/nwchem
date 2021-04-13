@@ -105,7 +105,7 @@ jobs:
           install: |
             case "${{ matrix.distro }}" in
             ubuntu*|jessie|stretch|buster)
-            apt-get update -q -y 
+            #apt-get update -q -y 
             DEBIAN_FRONTEND=noninteractive apt-get install -q -y sudo git gfortran libopenmpi-dev curl wget unzip perl rsync python3-dev python-dev cmake
             ;;
             fedora*)
