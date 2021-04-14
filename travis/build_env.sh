@@ -1,5 +1,6 @@
 #!/bin/bash
 os=`uname`
+arch=`uname -m`
 dist="ubuntu"
 if test -f "/usr/lib/os-release"; then
     dist=$(grep ID= /etc/os-release |head -1 |cut -c4-| sed 's/\"//g')
@@ -84,12 +85,13 @@ fi
 	sudo apt-get -y install lmod g++ libtinfo5 libncursesw5 lua-posix lua-filesystem lua-lpeg lua-luaossl
         sudo mkdir -p /usr/lib ||true
         sudo ln -sf /usr/lib/`uname -m`-linux-gnu/lua /usr/lib/lua || true
-        sudo ln -sf /usr/lib/`uname -m`-linux-gnu/lua/5.2/posix.so /usr/lib/lua/5.2/posix.so || true
+#        sudo ln -sf /usr/lib/`uname -m`-linux-gnu/lua/5.2/posix.so /usr/lib/lua/5.2/posix.so || true
         sudo ln -sf /usr/lib/`uname -m`-linux-gnu/lua/5.3/posix.so /usr/lib/`uname -m`-linux-gnu/lua/5.3/posix_c.so ||true
         sudo ln -sf /usr/lib/`uname -m`-linux-gnu/lua/5.2/posix.so /usr/lib/`uname -m`-linux-gnu/lua/5.2/posix_c.so || true
         ls -Rla /usr/lib/`uname -m`-linux-gnu/lua ||true
         ls -Rla /usr/lib/lua/5.2 || true
         ls -Rla /usr/lib/lua/ || true
+	ls -l 
 	
 	nv_major=21
 	nv_minor=3
@@ -101,9 +103,8 @@ fi
 	wget https://developer.download.nvidia.com/hpc-sdk/"$nverdot"/"$nv_p1"
 	wget https://developer.download.nvidia.com/hpc-sdk/"$nverdot"/"$nv_p2"
 	sudo dpkg -i "$nv_p1" "$nv_p2"
-	source /etc/profile.d/lmod.sh
-        module use /opt/nvidia/hpc_sdk/modulefiles
-	module load nvhpc
+	export PATH=/opt/nvidia/hpc_sdk/Linux_"$arch"/"$nverdot"/compilers/bin:$PATH
+	export LD_LIBRARY_PATH=/opt/nvidia/hpc_sdk/Linux_"$arch"/"$nverdot"/compilers/lib:$LD_LIBRARY_PATH
 	export FC=nvfortran
 #	export CC=gcc
 	env | grep FC || true

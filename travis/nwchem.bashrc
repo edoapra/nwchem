@@ -21,9 +21,14 @@ if [[ "$FC" == "flang" ]]; then
 #    export PATH=/opt/rocm-4.0.0/llvm/bin:$PATH
 fi
 if [[ "$FC" == "nvfortran" ]]; then
-    source /etc/profile.d/lmod.sh
-    module use /opt/nvidia/hpc_sdk/modulefiles
-    module load nvhpc
+#    source /etc/profile.d/lmod.sh
+#    module use /opt/nvidia/hpc_sdk/modulefiles
+#    module load nvhpc
+	nv_major=21
+	nv_minor=3
+	nverdot="$nv_major"."$nv_minor"
+	export PATH=/opt/nvidia/hpc_sdk/Linux_"$arch"/"$nverdot"/compilers/bin:$PATH
+	export LD_LIBRARY_PATH=/opt/nvidia/hpc_sdk/Linux_"$arch"/"$nverdot"/compilers/lib:$LD_LIBRARY_PATH
     export FC=nvfortran
 #    export CC=gcc
 fi
