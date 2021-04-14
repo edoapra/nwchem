@@ -81,7 +81,16 @@ fi
 	which flang
     fi
     if [[ "$FC" == "nvfortran" ]]; then
-	sudo apt-get -y install lmod
+	sudo apt-get -y install lmod g++ libtinfo5 libncursesw5 lua-posix lua-filesystem lua-lpeg lua-luaossl
+        sudo mkdir -p /usr/lib ||true
+        sudo ln -sf /usr/lib/`uname -m`-linux-gnu/lua /usr/lib/lua || true
+        sudo ln -sf /usr/lib/`uname -m`-linux-gnu/lua/5.2/posix.so /usr/lib/lua/5.2/posix.so || true
+        sudo ln -sf /usr/lib/`uname -m`-linux-gnu/lua/5.3/posix.so /usr/lib/`uname -m`-linux-gnu/lua/5.3/posix_c.so ||true
+        sudo ln -sf /usr/lib/`uname -m`-linux-gnu/lua/5.2/posix.so /usr/lib/`uname -m`-linux-gnu/lua/5.2/posix_c.so || true
+        ls -Rla /usr/lib/`uname -m`-linux-gnu/lua ||true
+        ls -Rla /usr/lib/lua/5.2 || true
+        ls -Rla /usr/lib/lua/ || true
+	
 	nv_major=21
 	nv_minor=3
 	nverdot="$nv_major"."$nv_minor"
