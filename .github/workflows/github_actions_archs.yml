@@ -34,7 +34,7 @@ jobs:
             blas: "build_openblas"
             scalapack: "off"
             nwchem_modules: "tinyqmpw"
-            mpi_impl: "openmpi"
+            mpi_impl: "mpich"
             fc: "nvfortran"
           - arch: ppc64le
             distro_short: ubuntu
