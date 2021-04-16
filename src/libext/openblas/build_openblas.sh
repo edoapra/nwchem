@@ -20,6 +20,8 @@ ln -sf OpenBLAS-${VERSION} OpenBLAS
 cd OpenBLAS
 # patch for apple clang -fopenmp
 patch -p0 < ../clang_omp.patch
+# patch for pgi/nvfortran missing -march=armv8
+patch -p0 < ../arm64_fopt.patch
 if [[  -z "${FORCETARGET}" ]]; then
 FORCETARGET=" "
 UNAME_S=$(uname -s)
