@@ -66,12 +66,12 @@ elif  [[ -n ${FC} ]] && [[ "${FC}" == "flang" ]]; then
     LAPACK_FPFLAGS_VAL=" -O1 -g -Kieee"
 elif  [[ -n ${FC} ]] && [[ "${FC}" == "pgf90" ]] || [[ "${FC}" == "nvfortran" ]]; then
     FORCETARGET+=' F_COMPILER=PGI '
-    if [[ "$arch" == "aarch64" ]]; then
-	LAPACK_FLAGS=-O2  -Mrecursive -Kieee -fPIC
+#    if [[ "$arch" == "aarch64" ]]; then
+	LAPACK_FLAGS="-O2  -Mrecursive -Kieee -fPIC"
         if [[ ${BLAS_SIZE} == 8 ]]; then
-	    LAPACK_FLAGS+= -i8
+	    LAPACK_FLAGS+=" -i8"
 	fi
-    fi
+#    fi
     LAPACK_FPFLAGS_VAL=" -O1 -g -Kieee"
 elif  [[ -n ${FC} ]] && [[ "${FC}" == "ifort" ]] || [[ "${FC}" == "ifx" ]]; then
     FORCETARGET+=' F_COMPILER=INTEL '
