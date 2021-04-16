@@ -30,11 +30,11 @@ if [[ "$FC" == "nvfortran" ]]; then
      export PATH=/opt/nvidia/hpc_sdk/Linux_"$arch"/"$nverdot"/compilers/bin:$PATH
      export LD_LIBRARY_PATH=/opt/nvidia/hpc_sdk/Linux_"$arch"/"$nverdot"/compilers/lib:$LD_LIBRARY_PATH
      export FC=nvfortran
-	if [ -z "$BUILD_MPICH" ] ; then
-#use bundled openmpi
-	export PATH=/opt/nvidia/hpc_sdk/Linux_"$arch"/"$nverdot"/comm_libs/mpi/bin:$PATH
-	export LD_LIBRARY_PATH=/opt/nvidia/hpc_sdk/Linux_"$arch"/"$nverdot"/comm_libs/mpi/lib:$LD_LIBRARY_PATH
-	fi
+#	if [ -z "$BUILD_MPICH" ] ; then
+##use bundled openmpi
+#	export PATH=/opt/nvidia/hpc_sdk/Linux_"$arch"/"$nverdot"/comm_libs/mpi/bin:$PATH
+#	export LD_LIBRARY_PATH=/opt/nvidia/hpc_sdk/Linux_"$arch"/"$nverdot"/comm_libs/mpi/lib:$LD_LIBRARY_PATH
+#	fi
 #    export CC=gcc
 fi
 if [[ "$FC" == "ifort" ]]; then
