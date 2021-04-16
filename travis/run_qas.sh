@@ -18,6 +18,7 @@ else
 fi
 if [[ "$BUILD_MPICH" == 1 ]] ; then
     export PATH=$TRAVIS_BUILD_DIR/src/libext/bin:$PATH
+    export MPIRUN_PATH=$TRAVIS_BUILD_DIR/src/libext/bin/mpirun
 fi
 
 os=`uname`
