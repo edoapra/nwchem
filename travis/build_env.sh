@@ -1,6 +1,7 @@
 #!/bin/bash
 os=`uname`
 dist="ubuntu"
+arch=`uname -m`
 if test -f "/usr/lib/os-release"; then
     dist=$(grep ID= /etc/os-release |head -1 |cut -c4-| sed 's/\"//g')
 fi
@@ -94,10 +95,7 @@ fi
 	sudo dpkg -i "$nv_p1" "$nv_p2"
 	export PATH=/opt/nvidia/hpc_sdk/Linux_"$arch"/"$nverdot"/compilers/bin:$PATH
 	export LD_LIBRARY_PATH=/opt/nvidia/hpc_sdk/Linux_"$arch"/"$nverdot"/compilers/lib:$LD_LIBRARY_PATH	
-	ls -Rl /opt/nvidia/hpc_sdk
-	echo 'llllllll'
-        ls -Rl /opt/nvidia/hpc_sdk/Linux_"$arch"/"$nverdot"/compilers/bin
-	env|egrep PATH
+
 #	source /etc/profile.d/lmod.sh
 #        module use /opt/nvidia/hpc_sdk/modulefiles
 #	module load nvhpc
