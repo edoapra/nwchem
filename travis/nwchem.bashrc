@@ -19,11 +19,13 @@ export USE_MPI=y
 if [[ "$FC" == "flang" ]]; then
     export PATH=/usr/lib/aomp_11.12-0/bin/:$PATH
 #    export PATH=/opt/rocm-4.0.0/llvm/bin:$PATH
+     export BUILD_MPICH=1
 fi
 if [[ "$FC" == "nvfortran" ]]; then
 #    source /etc/profile.d/lmod.sh
 #    module use /opt/nvidia/hpc_sdk/modulefiles
 #    module load nvhpc
+     export BUILD_MPICH=1
      nv_major=21
      nv_minor=3
      nverdot="$nv_major"."$nv_minor"
