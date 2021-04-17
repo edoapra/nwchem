@@ -31,6 +31,9 @@ if [[ ! -z "$USE_OPENMP" ]]; then
     export OMP_NUM_THREADS="$USE_OPENMP"
     export OMP_STACKSIZE=32M
 fi
+if [[ "$arch" == "aarch64" ]] ; then
+    nprocs=1
+fi    
 env|egrep MP
  do_largeqas=1
 
