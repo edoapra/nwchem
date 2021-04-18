@@ -31,6 +31,7 @@ if [[ "$FC" == "nvfortran" ]]; then
      nverdot="$nv_major"."$nv_minor"
      export PATH=/opt/nvidia/hpc_sdk/Linux_"$arch"/"$nverdot"/compilers/bin:$PATH
      export LD_LIBRARY_PATH=/opt/nvidia/hpc_sdk/Linux_"$arch"/"$nverdot"/compilers/lib:$LD_LIBRARY_PATH
+     sudo /opt/nvidia/hpc_sdk/Linux_"$arch"/"$nverdot"/compilers/bin/makelocalrc -x
      export FC=nvfortran
 #	if [ -z "$BUILD_MPICH" ] ; then
 ##use bundled openmpi

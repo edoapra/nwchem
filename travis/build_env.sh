@@ -94,7 +94,8 @@ fi
 	wget https://developer.download.nvidia.com/hpc-sdk/"$nverdot"/"$nv_p2"
 	sudo dpkg -i "$nv_p1" "$nv_p2"
 	export PATH=/opt/nvidia/hpc_sdk/Linux_"$arch"/"$nverdot"/compilers/bin:$PATH
-	export LD_LIBRARY_PATH=/opt/nvidia/hpc_sdk/Linux_"$arch"/"$nverdot"/compilers/lib:$LD_LIBRARY_PATH	
+	export LD_LIBRARY_PATH=/opt/nvidia/hpc_sdk/Linux_"$arch"/"$nverdot"/compilers/lib:$LD_LIBRARY_PATH
+	sudo /opt/nvidia/hpc_sdk/Linux_"$arch"/"$nverdot"/compilers/bin/makelocalrc -x
 
 #	source /etc/profile.d/lmod.sh
 #        module use /opt/nvidia/hpc_sdk/modulefiles
