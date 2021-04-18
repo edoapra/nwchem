@@ -110,11 +110,11 @@ jobs:
             export DEBIAN_FRONTEND=noninteractive
             apt-get install -y tzdata apt-utils
             dpkg-reconfigure --frontend noninteractive tzdata
-            DEBIAN_FRONTEND=noninteractive apt-get install -q -y sudo git  gfortran libopenmpi-dev curl wget unzip perl rsync python3-dev python-dev cmake 
+            DEBIAN_FRONTEND=noninteractive apt-get install -q -y sudo git  gfortran curl wget unzip perl rsync python3-dev python-dev cmake 
             ;;
             fedora*)
             dnf -y update
-            dnf -y install git  which sudo curl wget unzip openblas-serial64 openmpi-devel perl python3-devel gcc-gfortran unzip cmake patch time
+            dnf -y install git  which sudo curl wget unzip openblas-serial64  perl python3-devel gcc-gfortran unzip cmake patch time
             ;;
             esac
           run: |
