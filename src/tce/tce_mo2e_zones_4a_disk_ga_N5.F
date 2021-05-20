@@ -193,6 +193,7 @@ c
      3  call errquit('tce_mo2e_zone: MA problem 1',0,
      2    BASIS_ERR)
       call dfill(nbf*(iha+ipa),0.0d0, dbl_mb(k_movecs_orb), 1)
+#if 0
       do i=1,iha
       do isigma1=1,nbf
        dbl_mb(k_movecs_orb+(i-1)*nbf+isigma1-1)=
@@ -205,6 +206,13 @@ c
      & dbl_mb(k_movecs_sorted+(i+ihb-1)*nbf+isigma1-1)
       enddo
       enddo
+#else
+      call dcopy(iha*nbf,dbl_mb(k_movecs_sorted),1,
+     d     dbl_mb(k_movecs_orb),1)
+      call dcopy(ipa*nbf,
+     d     dbl_mb(k_movecs_sorted+(iha+ihb)*nbf),1,
+     d     dbl_mb(k_movecs_orb+iha*nbf),1)
+#endif
 c
 c
       call int_mem_2e4c(work1,work2)
@@ -410,6 +418,7 @@ c
 c
       if(azone3.ne.azone4) then !!============azone3.ne.azone4
 c --- C_[g3][sigma]
+#if 1
        i = 0 
        do isigma1 =  1,nalength(azone3)
        do igi3    =  1,int_mb(k_range_alpha+g3b-1)
@@ -419,6 +428,11 @@ c --- C_[g3][sigma]
        dbl_mb(k_coeff+i-1)=dbl_mb(k_movecs_orb+ipos1-1)
        enddo
        enddo
+#else
+      call tce_zone4_util1(dbl_mb(k_coeff),dbl_mb(k_movecs_orb),
+     c     int_mb(k_offset_alpha+g3b-1),tot_azone3_sh,
+     c     nalength(azone3),int_mb(k_range_alpha+g3b-1),nbf)
+#endif
 c --- C_[g3][sigma]([sigma]<[rho]|[nu] [mu])
 c            zone3   zone3  zone4
       call  dgemm('N','N',
@@ -447,6 +461,7 @@ c
       if (.not.ma_pop_stack(l_aux))
      1     call errquit('l_aux1',15,MA_ERR)
 c C([g4][azone4=rho])
+#if 0
        i = 0
        do irho1   =  1,nalength(azone4)
        do igi4    =  1,int_mb(k_range_alpha+g4b-1)
@@ -456,6 +471,11 @@ c C([g4][azone4=rho])
        dbl_mb(k_coeff+i-1)=dbl_mb(k_movecs_orb+ipos1-1)
        enddo
        enddo
+#else
+      call tce_zone4_util1(dbl_mb(k_coeff),dbl_mb(k_movecs_orb),
+     c     int_mb(k_offset_alpha+g4b-1),tot_azone4_sh,
+     c     nalength(azone4),int_mb(k_range_alpha+g4b-1),nbf)
+#endif
 c C([g4][azone4=rho])([rho][g3]|[azone1][azone2])
       call  dgemm('N','N',
      1 int_mb(k_range_alpha+g4b-1),  !m
@@ -481,6 +501,7 @@ c  ([rho][sigma]|[nu][mu])
 ccx      if (.not.ma_pop_stack(l_aux))
 ccx     1     call errquit('l_aux2',15,MA_ERR) ! see after dgemm
 c C([g3][azone4=rho])
+#if 0
        i = 0
        do irho1   =  1,nalength(azone4)
        do igi3    =  1,int_mb(k_range_alpha+g3b-1)
@@ -490,6 +511,11 @@ c C([g3][azone4=rho])
        dbl_mb(k_coeff+i-1)=dbl_mb(k_movecs_orb+ipos1-1)
        enddo
        enddo
+#else
+      call tce_zone4_util1(dbl_mb(k_coeff),dbl_mb(k_movecs_orb),
+     c     int_mb(k_offset_alpha+g3b-1),tot_azone4_sh,
+     c     nalength(azone4),int_mb(k_range_alpha+g3b-1),nbf)
+#endif
 c C([g3][azone4=rho])([rho=azone4][sigma=azone3]|[nu][mu])
       call  dgemm('N','N',
      1 int_mb(k_range_alpha+g3b-1),  !m
@@ -520,6 +546,7 @@ c
       if (.not.ma_pop_stack(l_aux))
      1     call errquit('l_aux1',15,MA_ERR)
 c C([g4][azone3=sigma])
+#if 0
        i = 0
        do isigma1   =  1,nalength(azone3)
        do igi4    =  1,int_mb(k_range_alpha+g4b-1)
@@ -529,6 +556,11 @@ c C([g4][azone3=sigma])
        dbl_mb(k_coeff+i-1)=dbl_mb(k_movecs_orb+ipos1-1)
        enddo
        enddo
+#else
+      call tce_zone4_util1(dbl_mb(k_coeff),dbl_mb(k_movecs_orb),
+     c     int_mb(k_offset_alpha+g4b-1),tot_azone3_sh,
+     c     nalength(azone3),int_mb(k_range_alpha+g3b-1),nbf)
+#endif
 c C([g4][azone3=sigma])([sigma][g3]|[azone1][azone2])
       call  dgemm('N','N',
      1 int_mb(k_range_alpha+g4b-1),  !m
@@ -546,6 +578,7 @@ c
 c
       if(azone3.eq.azone4) then
 c --- C_[g3][sigma]
+#if 0
        i = 0 
        do isigma1 =  1,nalength(azone3)
        do igi3    =  1,int_mb(k_range_alpha+g3b-1)
@@ -555,6 +588,11 @@ c --- C_[g3][sigma]
        dbl_mb(k_coeff+i-1)=dbl_mb(k_movecs_orb+ipos1-1)
        enddo
        enddo
+#else
+      call tce_zone4_util1(dbl_mb(k_coeff),dbl_mb(k_movecs_orb),
+     c     int_mb(k_offset_alpha+g3b-1),tot_azone3_sh,
+     c     nalength(azone3),int_mb(k_range_alpha+g3b-1),nbf)
+#endif
 c --- C_[g3][sigma]([sigma]=[rho]|[nu] [mu])
 c            zone3   zone3  zone4
       call  dgemm('N','N',
@@ -583,6 +621,7 @@ c
       if (.not.ma_pop_stack(l_aux))
      1     call errquit('l_aux1',15,MA_ERR)
 c C([g4][azone4=rho])
+#if 0
        i = 0
        do irho1   =  1,nalength(azone4)
        do igi4    =  1,int_mb(k_range_alpha+g4b-1)
@@ -592,6 +631,11 @@ c C([g4][azone4=rho])
        dbl_mb(k_coeff+i-1)=dbl_mb(k_movecs_orb+ipos1-1)
        enddo
        enddo
+#else
+      call tce_zone4_util1(dbl_mb(k_coeff),dbl_mb(k_movecs_orb),
+     c     int_mb(k_offset_alpha+g4b-1),tot_azone4_sh,
+     c     nalength(azone4),int_mb(k_range_alpha+g4b-1),nbf)
+#endif
 c C([g4][azone4=rho])([rho][g3]|[azone1][azone2])
       call  dgemm('N','N',
      1 int_mb(k_range_alpha+g4b-1),  !m
@@ -745,6 +789,7 @@ c
         tot_azone2_sh=tot_zone(azone2)
        if(azone1.ne.azone2) then !-----------------
 c C_([mu-azone2][g2])
+#if 0
         ii=0
         do igi2    =  1,int_mb(k_range_alpha+g2b-1)
         do imu1    =  1,nalength(azone2)
@@ -754,6 +799,11 @@ c C_([mu-azone2][g2])
          dbl_mb(k_coeff+ii-1)=dbl_mb(k_movecs_orb+ipos1-1)
         enddo
         enddo 
+#else
+      call tce_zone4_util1(dbl_mb(k_coeff),dbl_mb(k_movecs_orb),
+     c     int_mb(k_offset_alpha+g2b-1),tot_azone2_sh,
+     c     nalength(azone2),int_mb(k_range_alpha+g2b-1),nbf)
+#endif
 c ([g4][g3]|[nu-azone1][mu-azone2])*C_([mu-azone2][g2])
          call dgemm('N','N',
      1   int_mb(k_range_alpha+g4b-1)*int_mb(k_range_alpha+g3b-1)*
@@ -782,6 +832,7 @@ c transposition ([g4][g3]|[nu-azone1][g2])=>([g4][g3]|[g2][nu-azone1])
       if (.not.ma_pop_stack(l_aux))
      1     call errquit('l_aux2',15,MA_ERR)
 c C_([nu-azone1][g1])
+#if 0
         ii=0
         do igi1    =  1,int_mb(k_range_alpha+g1b-1)
         do inu1    =  1,nalength(azone1)
@@ -791,6 +842,11 @@ c C_([nu-azone1][g1])
          dbl_mb(k_coeff+ii-1)=dbl_mb(k_movecs_orb+ipos1-1)
         enddo
         enddo
+#else
+      call tce_zone4_util1(dbl_mb(k_coeff),dbl_mb(k_movecs_orb),
+     c     int_mb(k_offset_alpha+g1b-1),tot_azone1_sh,
+     c     nalength(azone1),int_mb(k_range_alpha+g1b-1),nbf)
+#endif
 c ([g4][g3]|[g2][nu-azone1])*C_([nu-azone1][g1])
          call dgemm('N','N',
      1   int_mb(k_range_alpha+g4b-1)*int_mb(k_range_alpha+g3b-1)*
@@ -819,6 +875,7 @@ c  ([g4][g3]|[azone2-mu][azone1-nu])
 ccx      if (.not.ma_pop_stack(l_aux))
 ccx     1     call errquit('l_aux2',15,MA_ERR) ! see after dgemm
 c C([azone1-nu][g2])
+#if 0
         ii=0
         do igi2    =  1,int_mb(k_range_alpha+g2b-1)
         do inu1    =  1,nalength(azone1)
@@ -828,6 +885,11 @@ c C([azone1-nu][g2])
          dbl_mb(k_coeff+ii-1)=dbl_mb(k_movecs_orb+ipos1-1)
         enddo
         enddo
+#else
+      call tce_zone4_util1(dbl_mb(k_coeff),dbl_mb(k_movecs_orb),
+     c     int_mb(k_offset_alpha+g2b-1),tot_azone1_sh,
+     c     nalength(azone1),int_mb(k_range_alpha+g2b-1),nbf)
+#endif
 c ([g4][g3]|[azone2-mu][azone1-nu])*C([azone1-nu][g2])
          call dgemm('N','N',
      1   int_mb(k_range_alpha+g4b-1)*int_mb(k_range_alpha+g3b-1)*
@@ -859,6 +921,7 @@ c transposition ([g4][g3]|[azone2-mu][g2])=>([g4][g3]|[g2][azone2-mu])
       if (.not.ma_pop_stack(l_aux))
      1     call errquit('l_aux2',15,MA_ERR)
 c C([azone2-mu][g1])
+#if 0
         ii=0
         do igi1    =  1,int_mb(k_range_alpha+g1b-1)
         do imu1    =  1,nalength(azone2)
@@ -868,6 +931,11 @@ c C([azone2-mu][g1])
          dbl_mb(k_coeff+ii-1)=dbl_mb(k_movecs_orb+ipos1-1)
         enddo
         enddo
+#else
+      call tce_zone4_util1(dbl_mb(k_coeff),dbl_mb(k_movecs_orb),
+     c     int_mb(k_offset_alpha+g1b-1),tot_azone2_sh,
+     c     nalength(azone2),int_mb(k_range_alpha+g1b-1),nbf)
+#endif
 c ([g4][g3]|[g2][azone2-mu])*C([azone2-mu][g1])
          call dgemm('N','N',
      1   int_mb(k_range_alpha+g4b-1)*int_mb(k_range_alpha+g3b-1)*
@@ -891,6 +959,7 @@ c second part
 c
         if(azone1.eq.azone2) then
 c C_([mu-azone2][g2])
+#if 1
         ii=0
         do igi2    =  1,int_mb(k_range_alpha+g2b-1)
         do imu1    =  1,nalength(azone2)
@@ -900,6 +969,11 @@ c C_([mu-azone2][g2])
          dbl_mb(k_coeff+ii-1)=dbl_mb(k_movecs_orb+ipos1-1)
         enddo
         enddo 
+#else
+      call tce_zone4_util2(dbl_mb(k_coeff),dbl_mb(k_movecs_orb),
+     c     int_mb(k_offset_alpha+g2b-1),tot_azone2_sh,
+     c     nalength(azone2),int_mb(k_range_alpha+g2b-1),nbf)
+#endif
 c ([g4][g3]|[nu-azone1][mu-azone2])*C_([mu-azone2][g2])
          call dgemm('N','N',
      1   int_mb(k_range_alpha+g4b-1)*int_mb(k_range_alpha+g3b-1)*
@@ -928,6 +1002,7 @@ c transposition ([g4][g3]|[nu-azone1][g2])=>([g4][g3]|[g2][nu-azone1])
       if (.not.ma_pop_stack(l_aux))
      1     call errquit('l_aux2',15,MA_ERR)
 c C_([nu-azone1][g1])
+#if 0
         ii=0
         do igi1    =  1,int_mb(k_range_alpha+g1b-1)
         do inu1    =  1,nalength(azone1)
@@ -937,6 +1012,11 @@ c C_([nu-azone1][g1])
          dbl_mb(k_coeff+ii-1)=dbl_mb(k_movecs_orb+ipos1-1)
         enddo
         enddo
+#else
+      call tce_zone4_util2(dbl_mb(k_coeff),dbl_mb(k_movecs_orb),
+     c     int_mb(k_offset_alpha+g1b-1),tot_azone1_sh,
+     c     nalength(azone1),int_mb(k_range_alpha+g1b-1),nbf)
+#endif
 c ([g4][g3]|[g2][nu-azone1])*C_([nu-azone1][g1])
          call dgemm('N','N',
      1   int_mb(k_range_alpha+g4b-1)*int_mb(k_range_alpha+g3b-1)*
@@ -1135,6 +1215,7 @@ c
      3  call errquit('tce_mo2e_zone: MA problem 1',0,
      2    BASIS_ERR)
       call dfill(nbf*(iha+ipa),0.0d0, dbl_mb(k_movecs_orb), 1)
+#if 0
       do i=1,iha
       do isigma1=1,nbf
        dbl_mb(k_movecs_orb+(i-1)*nbf+isigma1-1)=
@@ -1147,6 +1228,13 @@ c
      & dbl_mb(k_movecs_sorted+(i+ihb-1)*nbf+isigma1-1)
       enddo
       enddo
+#else
+      call dcopy(iha*nbf,dbl_mb(k_movecs_sorted),1,
+     d     dbl_mb(k_movecs_orb),1)
+      call dcopy(ipa*nbf,
+     d     dbl_mb(k_movecs_sorted+(iha+ihb)*nbf),1,
+     d     dbl_mb(k_movecs_orb+iha*nbf),1)
+#endif
 c
       if (.not.ma_push_get(mt_dbl,nbf*dim_mol,'l_aux',l_aux,k_aux))
      1    call errquit('l_aux_core: MA problem',0,MA_ERR)
@@ -1420,4 +1508,56 @@ c
 c
       return
       end
-
+      subroutine tce_zone4_util1(coeff,movecs_orb,
+     c     offset_alpha,tot_azone4_sh,
+     c     n_rho1,n_igi4,nbf)
+      implicit none
+      double precision coeff(*),movecs_orb(*)
+      integer offset_alpha
+      integer tot_azone4_sh
+      integer  n_rho1,n_igi4
+      integer nbf
+c
+      integer i, irho1,igi4,ipos1
+c
+      i = 0
+      do irho1   =  1,n_rho1
+         ipos1=offset_alpha*nbf+tot_azone4_sh+
+     &           irho1
+         do igi4    =  1,n_igi4
+            i = i+1
+c            ipos1=(offset_alpha+igi4-1)*nbf+tot_azone4_sh+
+c     &           irho1
+            coeff(i)=movecs_orb(ipos1)
+            ipos1=ipos1+nbf
+         enddo
+      enddo
+      return
+      end
+      subroutine tce_zone4_util2(coeff,movecs_orb,
+     c     offset_alpha,tot_azone4_sh,
+     c     n_rho1,n_igi4,nbf)
+      implicit none
+      double precision coeff(*),movecs_orb(*)
+      integer offset_alpha
+      integer tot_azone4_sh
+      integer  n_rho1,n_igi4
+      integer nbf
+c
+      integer i, irho1,igi4,ipos1
+      integer ipos0
+c
+      i = 0
+      ipos0=offset_alpha*nbf+tot_azone4_sh
+         do igi4    =  1,n_igi4
+c     ipos1=(offset_alpha+igi4-1)*nbf+tot_azone4_sh
+            ipos1=ipos0
+            do irho1   =  1,n_rho1
+            i = i+1
+            ipos1=ipos1+1
+            coeff(i)=movecs_orb(ipos1)
+         enddo
+         ipos0=ipos0+nbf
+      enddo
+      return
+      end
