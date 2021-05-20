@@ -274,6 +274,7 @@ cccx            call dfill(work2, 0.0d0, dbl_mb(k_work2), 1)
             call int_2e4c(ao_bas_han,mu,nu,ao_bas_han,rho,sigma,
      1           work2,dbl_mb(k_work2),work1,dbl_mb(k_work1))
 c
+#if 0
             i=0
              do mu1     = 1,mu_range
              do nu1     = 1,nu_range
@@ -293,6 +294,12 @@ c (isigma1,irho1|inu1, imu1)
             enddo
             enddo
             enddo
+#else
+            call tce_zone4_util3(dbl_mb(k_4a),dbl_mb(k_work1),
+     c           mu_range,nu_range,rho_range,sigma_range,
+     c           shift_mu,shift_nu,shift_rho,shift_sigma,
+     c           nalength(azone1),nalength(azone3),nalength(azone4))
+#endif
             end if !schwarz  screening
          shift_sigma = shift_sigma + sigma_range
          enddo !sigma
@@ -418,7 +425,7 @@ c
 c
       if(azone3.ne.azone4) then !!============azone3.ne.azone4
 c --- C_[g3][sigma]
-#if 1
+#if 0
        i = 0 
        do isigma1 =  1,nalength(azone3)
        do igi3    =  1,int_mb(k_range_alpha+g3b-1)
@@ -455,9 +462,13 @@ c
      & int_mb(k_range_alpha+g3b-1),nalength(azone4),
      & nalength(azone1),nalength(azone2),
      &2,1,3,4,1.0d0)
+#if 0
       do i=1,size_aux
        dbl_mb(k_integral+i-1)=dbl_mb(k_aux+i-1)
       enddo
+#else
+      call dcopy(size_aux,dbl_mb(k_aux),1,dbl_mb(k_integral),1)
+#endif
       if (.not.ma_pop_stack(l_aux))
      1     call errquit('l_aux1',15,MA_ERR)
 c C([g4][azone4=rho])
@@ -540,9 +551,13 @@ c
      & int_mb(k_range_alpha+g3b-1),nalength(azone3),
      & nalength(azone1),nalength(azone2),
      &2,1,3,4,1.0d0)
+#if 0
       do i=1,size_aux
        dbl_mb(k_integral+i-1)=dbl_mb(k_aux+i-1)
       enddo
+#else
+      call dcopy(size_aux,dbl_mb(k_aux),1,dbl_mb(k_integral),1)
+#endif
       if (.not.ma_pop_stack(l_aux))
      1     call errquit('l_aux1',15,MA_ERR)
 c C([g4][azone3=sigma])
@@ -615,9 +630,13 @@ c
      & int_mb(k_range_alpha+g3b-1),nalength(azone4),
      & nalength(azone1),nalength(azone2),
      &2,1,3,4,1.0d0)
+#if 0
       do i=1,size_aux
        dbl_mb(k_integral+i-1)=dbl_mb(k_aux+i-1)
       enddo
+#else
+      call dcopy(size_aux,dbl_mb(k_aux),1,dbl_mb(k_integral),1)
+#endif
       if (.not.ma_pop_stack(l_aux))
      1     call errquit('l_aux1',15,MA_ERR)
 c C([g4][azone4=rho])
@@ -826,9 +845,13 @@ c transposition ([g4][g3]|[nu-azone1][g2])=>([g4][g3]|[g2][nu-azone1])
      &int_mb(k_range_alpha+g4b-1),int_mb(k_range_alpha+g3b-1), 
      &nalength(azone1),int_mb(k_range_alpha+g2b-1), 
      &1,2,4,3,1.0d0)
+#if 0
       do ii=1,size_aux
        dbl_mb(k_integral+ii-1)=dbl_mb(k_aux+ii-1)
       enddo
+#else
+      call dcopy(size_aux,dbl_mb(k_aux),1,dbl_mb(k_integral),1)
+#endif
       if (.not.ma_pop_stack(l_aux))
      1     call errquit('l_aux2',15,MA_ERR)
 c C_([nu-azone1][g1])
@@ -915,9 +938,13 @@ c transposition ([g4][g3]|[azone2-mu][g2])=>([g4][g3]|[g2][azone2-mu])
      &int_mb(k_range_alpha+g4b-1),int_mb(k_range_alpha+g3b-1),
      &nalength(azone2),int_mb(k_range_alpha+g2b-1),
      &1,2,4,3,1.0d0)
+#if 0
       do ii=1,size_aux
        dbl_mb(k_integral+ii-1)=dbl_mb(k_aux+ii-1)
       enddo
+#else
+      call dcopy(size_aux,dbl_mb(k_aux),1,dbl_mb(k_integral),1)
+#endif
       if (.not.ma_pop_stack(l_aux))
      1     call errquit('l_aux2',15,MA_ERR)
 c C([azone2-mu][g1])
@@ -959,7 +986,7 @@ c second part
 c
         if(azone1.eq.azone2) then
 c C_([mu-azone2][g2])
-#if 1
+#if 0
         ii=0
         do igi2    =  1,int_mb(k_range_alpha+g2b-1)
         do imu1    =  1,nalength(azone2)
@@ -996,9 +1023,13 @@ c transposition ([g4][g3]|[nu-azone1][g2])=>([g4][g3]|[g2][nu-azone1])
      &int_mb(k_range_alpha+g4b-1),int_mb(k_range_alpha+g3b-1), 
      &nalength(azone1),int_mb(k_range_alpha+g2b-1), 
      &1,2,4,3,1.0d0)
+#if 0
       do ii=1,size_aux
        dbl_mb(k_integral+ii-1)=dbl_mb(k_aux+ii-1)
       enddo
+#else
+      call dcopy(size_aux,dbl_mb(k_aux),1,dbl_mb(k_integral),1)
+#endif
       if (.not.ma_pop_stack(l_aux))
      1     call errquit('l_aux2',15,MA_ERR)
 c C_([nu-azone1][g1])
@@ -1474,7 +1505,7 @@ c
       END DO
 c     ehfa for RHF reference
       ehfa=0.0d0
-      ehfa=ehfa+enrep_tce 
+      ehfa=ehfa+enrep_tce
       do igi1=1,r_occ
        ehfa=ehfa+(2.0d0)*f2m(igi1,igi1)
       enddo
@@ -1558,6 +1589,39 @@ c     ipos1=(offset_alpha+igi4-1)*nbf+tot_azone4_sh
             coeff(i)=movecs_orb(ipos1)
          enddo
          ipos0=ipos0+nbf
+      enddo
+      return
+      end
+      subroutine tce_zone4_util3(k4a,work1,
+     c     mu_range,nu_range,rho_range,sigma_range,
+     c     shift_mu,shift_nu,shift_rho,shift_sigma,
+     c     nal1,nal3,nal4)
+      implicit none
+      double precision k4a(*),work1(*)
+      integer mu_range,nu_range,rho_range,sigma_range
+      integer shift_mu,shift_nu,shift_rho,shift_sigma
+      integer nal1,nal3,nal4
+c
+      integer i, mu1,nu1,rho1,sigma1
+      integer ipos1,imu1,irho1,inu1,isigma1
+
+      i=0
+      do mu1     = 1,mu_range
+         imu1=mu1+shift_mu
+         do nu1     = 1,nu_range
+            inu1=nu1+shift_nu
+            do rho1    = 1,rho_range
+                  irho1=rho1+shift_rho
+                  ipos1=(((imu1-1)*nal1+inu1-1)*
+     1                 nal4+irho1-1)*nal3+shift_sigma
+               do sigma1  = 1,sigma_range
+                  i=i+1
+                  ipos1=ipos1+1
+c     (isigma1,irho1|inu1, imu1)
+                  k4a(ipos1)=work1(i)
+               enddo
+            enddo
+         enddo
       enddo
       return
       end
