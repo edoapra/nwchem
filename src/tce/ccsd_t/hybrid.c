@@ -9,10 +9,10 @@ static long long device_id=-1;
 #include <hip/hip_runtime_api.h>
 #endif
 #ifdef TCE_CUDA
-#ifdef OLD_CUDA
-#include <cuda_runtime_api.h>
-#else
+#ifdef NEW_CUDA
 #include <cuda.h>
+#else
+#include <cuda_runtime_api.h>
 #endif
 #endif
 #include "ga.h"
