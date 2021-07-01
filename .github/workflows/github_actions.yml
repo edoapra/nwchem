@@ -103,6 +103,10 @@ jobs:
             cc: icc
             use_libxc: 1
           - os: macos-10.15
+            experimental: true 
+            mpi_impl: openmpi
+            armci_network: MPI-TS
+            nwchem_modules: "tinyqmpw"
             fc: gfortran-10
             cc: gcc
             xcode_version: 12.4
