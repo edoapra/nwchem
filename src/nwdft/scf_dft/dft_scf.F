@@ -243,6 +243,10 @@ C     RTDB flag for printing out all matrices
       logical lsave_mats   !save matrices to file?
       logical molden, forceatguess, save_evals
       integer ma_type, no_sflip,l_at_flip,k_at_flip
+      integer deltava,deltavb
+      integer l_vmoa,k_vmoa
+      integer l_vmo,k_vmo
+      double precision e_alchem
       character*26 date
 
 c     == initialize DIIS call counter ==
@@ -2270,6 +2274,28 @@ c     unset save evals
          if (.not. rtdb_put(rtdb,'dft:save_evals',mt_log,1,save_evals))
      &        call errquit('dft_scf: rtdbput failed',1234,RTDB_ERR)
       endif
+c
+c     deltaV alc
+c
+      deltavb=0
+      deltava=0
+         if (rtdb_get(rtdb,'dft:deltava',mt_int,1,deltava).or.
+     c     rtdb_get(rtdb,'dft:deltavb',mt_int,1,deltavb)) then
+         if (.not.MA_Push_Get(MT_Dbl,nmo*nmo,'vb',l_vmo,k_vmo))
+     &        call errquit('dft_scf: cannot allocate vmo',0, MA_ERR)
+         if (.not.MA_Push_Get(MT_Dbl,nmo*nmo,'va',l_vmoa,k_vmoa))
+     &        call errquit('dft_scf: cannot allocate vmoa',0, MA_ERR)
+      write(6,*) ' scf ev 1    ',dbl_mb(k_eval(1))
+      write(6,*) ' scf ev 2    ',dbl_mb(k_eval(1)+1)
+      write(6,*) ' scf ev 3    ',dbl_mb(k_eval(1)+2)
+            call dft_alcv(e_alchem,deltava,deltavb,
+     n     ao_bas_han,nbf,nmo,noc,oskel,
+     i     int_mb(icetobfr),
+     c     dbl_mb(k_vmo),dbl_mb(k_vmoa),
+     b     g_movecs,dbl_mb(k_eval(1)))
+            if (.not.ma_chop_stack(l_vmo))
+     &   call errquit('dft_scf: cannot chop stack',21, MA_ERR)
+         endif
 c     
 c     Shut down DIIS.
 c     
