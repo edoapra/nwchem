@@ -2277,10 +2277,11 @@ c     unset save evals
 c
 c     deltaV alc
 c
-      deltavb=0
-      deltava=0
-         if (rtdb_get(rtdb,'dft:deltava',mt_int,1,deltava).or.
-     c     rtdb_get(rtdb,'dft:deltavb',mt_int,1,deltavb)) then
+      if (.not.rtdb_get(rtdb,'dft:deltava',mt_int,1,deltava))
+     c     deltava=0
+      if(.not.rtdb_get(rtdb,'dft:deltavb',mt_int,1,deltavb))
+     c     deltavb=0
+      if ((deltava.ne.0).or.(deltavb.ne.0)) then
          if (.not.MA_Push_Get(MT_Dbl,nmo*nmo,'vb',l_vmo,k_vmo))
      &        call errquit('dft_scf: cannot allocate vmo',0, MA_ERR)
          if (.not.MA_Push_Get(MT_Dbl,nmo*nmo,'va',l_vmoa,k_vmoa))
