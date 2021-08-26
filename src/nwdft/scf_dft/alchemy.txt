@@ -1,0 +1,82 @@
+                      E_SCF(A)          E_SCF(B)        DeltaE from DeltaV    E_SCF(B)-E_SCF(A)  DV1
+Pd-Pd -> Pd-Pt   -255.670633187906 -243.744540922510  3.9400149529652935       11.926092265396   6.9179102586405232
+Ag-Ag -> Ag-Au   -293.911960662702 -278.655496671041  5.9473836475145871       15.256463991661   8.8061294803396635
+
+
+=====
+CODE
+=====
+c     compute deltav = vb - va
+      do j=1,nmo
+         do i=1,nmo
+            vmo_b(i,j)= vmo_b(i,j)-vmo_a(i,j)
+         enddo
+      enddo
+
+c     deltaV_ii
+      e=0d0
+      do i=1,nocc
+         e=e+vmo_b(i,i)
+      enddo
+
+
+c     - (deltaV_ia)^2/(e_a - e_i)
+      do i=1,nocc
+         do a=nocc+1,nmo
+            e = e - vmo_b(i,a)**2/(eval(a)-eval(i))
+         enddo
+      enddo
+
+
+
+====
+Input example
+start pdal
+
+geometry #noautosym nocenter
+pd  0. 0. 0.
+pd 0. 0  2.8
+symmetry c2v
+end
+
+basis spherical
+pd library def2-svp
+pt library pd def2-svp
+end
+
+ecp
+pd library def2-ecp
+pt library def2-ecp
+end
+dft
+#xc xpbe96 cpbe96
+xc pbe0
+smear 1d-5
+convergence ncydp 0 damp 45 dampon 1d99 dampoff 1d-5
+end
+unset dft:deltavb
+set dft:deltava 2
+task dft
+
+ecp
+pd library def2-ecp
+pt library def2-ecp
+end
+geometry  #noautosym nocenter
+pd 0. 0. 0.
+pt 0. 0  2.8
+symmetry c4v
+end
+
+dft
+noscf
+noprint "final vectors analysis" multipole
+end
+set dft:deltavb 2
+
+task dft ignore
+=== output ===
+  e DeltaV     6.9179102586435226     
+  e DeltaV2    3.9400149529772661     
+====
+E(B) = E(A) + DeltaV
