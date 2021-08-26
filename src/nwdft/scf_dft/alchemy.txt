@@ -6,6 +6,31 @@ Ag-Ag -> Ag-Au   -293.911960662702 -278.655496671041  5.9473836475145871       1
 =====
 CODE
 =====
+ How to compute DeltaV=V_Pt-V_Pd
+
+A) Ingredients for V_Pd:
+
+1) AO basis Pd
+
+2) ECP Pd
+
+B) Ingredients for V_Pt
+
+1) AO basis Pd,Pt
+
+2) ECP Pd, Pt
+
+Steps
+ 
+ 1. compute V_Pd =< a | V | a>
+ Using Pd coeff. & exp. and all is needed to converge Pd2.
+ V_Pd file contains Pd2 eigenvalues.
+
+2. Quick noscf PdPt runs using Pd2 M.O.s
+   compute V_Pr= <a| V |a> and combine it with Pd2 eigenvalues to compute
+
+DeltaV=V_Pt-V_Pd (dove V_Pd read from disk after having been computed at step 1)
+ 
 c     compute deltav = vb - va
       do j=1,nmo
          do i=1,nmo
@@ -31,9 +56,11 @@ c     - (deltaV_ia)^2/(e_a - e_i)
 
 ====
 Input example
+=====
+
 start pdal
 
-geometry #noautosym nocenter
+geometry 
 pd  0. 0. 0.
 pd 0. 0  2.8
 symmetry c2v
@@ -49,7 +76,6 @@ pd library def2-ecp
 pt library def2-ecp
 end
 dft
-#xc xpbe96 cpbe96
 xc pbe0
 smear 1d-5
 convergence ncydp 0 damp 45 dampon 1d99 dampoff 1d-5
@@ -58,10 +84,6 @@ unset dft:deltavb
 set dft:deltava 2
 task dft
 
-ecp
-pd library def2-ecp
-pt library def2-ecp
-end
 geometry  #noautosym nocenter
 pd 0. 0. 0.
 pt 0. 0  2.8
@@ -80,3 +102,14 @@ task dft ignore
   e DeltaV2    3.9400149529772661     
 ====
 E(B) = E(A) + DeltaV
+
+ECP_VCA = w_A * ECP_A + w_B * ECP_B
+
+W_A=1-x w_B=x 
+
+Z_VCA = w_A * Z_A + w_B *Z_B 
+
+
+Pd n_tot_el 46
+Pt n_tot_el 78
+Z_tot = 0.5 *(46+78)=62 => Sm
