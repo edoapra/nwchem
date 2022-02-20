@@ -15,15 +15,13 @@ jobs:
     strategy:
         fail-fast: false
         matrix:
-          folder:
-            - nwchem-dev
-          archs: [linux/amd64, linux/arm64, linux/ppc64le, linux/arm/v7]
-          fc: [ gfortran, nvfortran]
           include:
+            - {folder: nwchem-dev, archs: linux/aarch64, fc: gfortran}
+            - {folder: nwchem-dev, archs: linux/aarch64, fc: gfortran}
+            - {folder: nwchem-dev, archs: linux/ppc64le, fc: gfortran}
             - {folder: nwchem-dev.xlf, archs: linux/ppc64le, fc: xlf}
-          exclude:
-            - {folder: nwchem-dev, archs: linux/ppc64le, fc: nvfortran}
-            - {folder: nwchem-dev, archs: linux/arm/v7, fc: nvfortran}
+            - {folder: nwchem-dev, archs: linux/arm/v7, fc: gfortran}
+ 
     runs-on: ubuntu-latest
     timeout-minutes: 420
     steps:
