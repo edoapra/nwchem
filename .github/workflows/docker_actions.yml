@@ -88,7 +88,7 @@ jobs:
           name: nwchem_image
           path: /tmp/nwchem_image.tar
       - name: Download artifact
-        uses: actions/dowload-artifact@v2
+        uses: actions/download-artifact@v2
         with:
           name: nwchem_image
           path: /tmp/nwchem_image.tar
