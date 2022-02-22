@@ -36,7 +36,7 @@ jobs:
         with:
           path: |
             ~/cache
-          key: ${{ matrix.folder}}-${{ matrix.fc}}/${{ matrix.archs}}-nwchemcache-v016
+          key: ${{ matrix.folder}}-${{ matrix.fc}}/${{ matrix.archs}}-nwchem-dockeractions-v001
       - name: Qemu
         id: qemu
         uses: docker/setup-qemu-action@v1
@@ -68,7 +68,6 @@ jobs:
         run: |
           cd ${{ matrix.folder }}
           if [[ -f ~/cache/libext.tar.bz2 ]]; then \
-          echo "libext cache present" ; \
           mkdir -p cache|| true ; \
           rsync -av ~/cache/libext* cache/. ; \
           echo "libext cache fetched" ; \
@@ -79,13 +78,28 @@ jobs:
           push: false
           context: ${{ matrix.folder }}
           platforms: ${{ matrix.archs }}
+          outputs: type=docker,dest=/tmp/nwchem_image.tar
+          tags: nwchem_image
           build-args: |
             FC=${{ matrix.fc }}
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: nwchem_image
+          path: /tmp/nwchem_image.tar
+      - name: Download artifact
+        uses: actions/dowload-artifact@v2
+        with:
+          name: nwchem_image
+          path: /tmp/nwchem_image.tar
       - name: store cache
         run: |
             mkdir -p ~/cache/
+            ls -l /tmp/nwchem_image.tar || true
+            docker load --input /tmp/nwchem_image.tar
+            docker images
             docker run --privileged --user 0 --rm --platform ${{matrix.archs }} \
             --entrypoint='/bin/cp' -v ~/cache:/data \
-            ghcr.io/${{ github.actor }}/${{ matrix.folder }}${{ steps.fc-tag.outputs.fc }}/${{ steps.get-arch.outputs.arch }} \
+            nwchem_image \
             -rp /opt/nwchem/src/libext/libext.tar.bz2 /data/.  || true
             ls -Ralrt ~/cache || true
