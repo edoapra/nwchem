@@ -82,22 +82,13 @@ jobs:
           tags: nwchem_image
           build-args: |
             FC=${{ matrix.fc }}
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: nwchem_image
-          path: /tmp/nwchem_image.tar
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: nwchem_image
-          path: /tmp/nwchem_image.tar
       - name: store cache
         run: |
             mkdir -p ~/cache/
             ls -l /tmp/nwchem_image.tar || true
             docker load --input /tmp/nwchem_image.tar
             docker images
+            docker tag `docker images -q` nwchem_image
             docker run --privileged --user 0 --rm --platform ${{matrix.archs }} \
             --entrypoint='/bin/cp' -v ~/cache:/data \
             nwchem_image \
