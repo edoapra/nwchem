@@ -90,6 +90,7 @@ jobs:
             ls -l /tmp/nwchem_image.tar || true
             docker load --input /tmp/nwchem_image.tar
             docker images
+            docker inspect nwchem_image
             docker run --privileged --user 0 --rm --platform ${{matrix.archs }} \
             --entrypoint='/bin/cp' -v ~/cache:/data \
             nwchem_image \
