@@ -87,6 +87,7 @@ fi
        echo tail deps.log '@@@'
        tail -10  deps.log
        echo done tail deps.log '@@@'
+       export QUICK_BUILD=1
        if [[ -z "$FOPT" ]]; then
 	   make V=0   -j3
        else
@@ -117,6 +118,7 @@ if [[ -z "$TRAVIS_HOME" ]]; then
     echo tail deps.log '@@@'
     tail -10  deps.log
     echo done tail deps.log '@@@'
+    export QUICK_BUILD=1
     if [[ -z "$FOPT" ]]; then
 	make V=0   -j3
     else
