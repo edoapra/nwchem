@@ -82,7 +82,7 @@ fi
        make nwchem_config
        cd libext   && make V=-1  && cd ..
        cd tools    && make V=-1  && cd ..
-       ( make USE_INTERNALBLAS=y deps_stamp  >& deps.log &)
+       make USE_INTERNALBLAS=y deps_stamp  >& deps.log &
        sleep 15s
        echo tail deps.log '@@@'
        tail -10  deps.log
@@ -113,7 +113,7 @@ if [[ -z "$TRAVIS_HOME" ]]; then
     make nwchem_config
     cd libext   && make V=-1  && cd ..
     cd tools    && make V=-1  && cd ..
-    ( make USE_INTERNALBLAS=y deps_stamp  >& deps.log &)
+    make USE_INTERNALBLAS=y deps_stamp  >& deps.log &
     sleep 15s
     echo tail deps.log '@@@'
     tail -10  deps.log
