@@ -18,12 +18,12 @@ fi
  cd $TRAVIS_BUILD_DIR/src
      make nwchem_config
 if [[ ! -z "$USE_64TO32"  ]]; then
-    os=`uname`
     echo " CONVERSION 64_to_32"
-    if [[ "$os" == "Darwin" ]]; then
+#    os=`uname`
+#    if [[ "$os" == "Darwin" ]]; then
         make 64_to_32  >& 64log &
-    else
-        make 64_to_32 CONVERT_ALL=y >& 64log &
-    fi
+#    else
+#        make 64_to_32 CONVERT_ALL=y >& 64log &
+#    fi
 fi
 env
