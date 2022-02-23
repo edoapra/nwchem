@@ -83,7 +83,7 @@ fi
        cd libext   && make V=-1  && cd ..
        cd tools    && make V=-1  && cd ..
        make USE_INTERNALBLAS=y deps_stamp  >& deps.log &
-       sleep 15s
+       sleep 75s
        echo tail deps.log '@@@'
        tail -10  deps.log
        echo done tail deps.log '@@@'
@@ -114,7 +114,7 @@ if [[ -z "$TRAVIS_HOME" ]]; then
     cd libext   && make V=-1  && cd ..
     cd tools    && make V=-1  && cd ..
     make USE_INTERNALBLAS=y deps_stamp  >& deps.log &
-    sleep 15s
+    sleep 75s
     echo tail deps.log '@@@'
     tail -10  deps.log
     echo done tail deps.log '@@@'
