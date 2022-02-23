@@ -77,6 +77,16 @@ fi
    fi
    if [[ -z "$TRAVIS_HOME" ]]; then
        env
+       mkdir -p ../bin/MACX64
+       gcc -o ../bin/MACX64/depend.x config/depend.c
+       make nwchem_config
+       cd libext   && make V=-1  && cd ..
+       cd tools    && make V=-1  && cd ..
+       ( make USE_INTERNALBLAS=y deps_stamp  >& deps.log &)
+       sleep 15s
+       echo tail deps.log '@@@'
+       tail -10  deps.log
+       echo done tail deps.log '@@@'
        if [[ -z "$FOPT" ]]; then
 	   make V=0   -j3
        else
@@ -97,6 +107,16 @@ fi
      export MAKEFLAGS=-j3
      echo    "$FOPT$FDOPT"
 if [[ -z "$TRAVIS_HOME" ]]; then
+    mkdir -p ../bin/LINUX64
+    gcc -o ../bin/LINUX64/depend.x config/depend.c
+    make nwchem_config
+    cd libext   && make V=-1  && cd ..
+    cd tools    && make V=-1  && cd ..
+    ( make USE_INTERNALBLAS=y deps_stamp  >& deps.log &)
+    sleep 15s
+    echo tail deps.log '@@@'
+    tail -10  deps.log
+    echo done tail deps.log '@@@'
     if [[ -z "$FOPT" ]]; then
 	make V=0   -j3
     else
