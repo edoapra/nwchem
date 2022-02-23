@@ -96,6 +96,7 @@ fi
    else
        ../travis/sleep_loop.sh make V=1 FOPTIMIZE="$FOPT"   -j3
    fi
+     unset QUICK_BUILD
      cd $TRAVIS_BUILD_DIR/src/64to32blas 
      make
      cd $TRAVIS_BUILD_DIR/src
@@ -127,6 +128,7 @@ if [[ -z "$TRAVIS_HOME" ]]; then
 else
     ../travis/sleep_loop.sh make V=1 FOPTIMIZE="$FOPT"  -j3
 fi
+     unset QUICK_BUILD
      cd $TRAVIS_BUILD_DIR/src/64to32blas 
      make
      cd $TRAVIS_BUILD_DIR/src
