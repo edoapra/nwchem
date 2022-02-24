@@ -318,6 +318,7 @@ jobs:
         run: |
           cat src/tools/build/config.log || true
           cat src/tools/build/comex/config.log || true
+          tail -100 64log || true
       - name: store cache
         run: |
           mkdir -p ~/apps || true
