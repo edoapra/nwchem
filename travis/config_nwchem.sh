@@ -21,7 +21,11 @@ if [[ ! -z "$USE_64TO32"  ]]; then
     echo " CONVERSION 64_to_32"
     os=`uname`
     if [[ "$os" == "Darwin" ]]; then
-        make 64_to_32  >& 64log &
+        nohup make 64_to_32  >& 64log &
+	wait 120s
+	echo @@@@ tail 64log
+	tail -30 64log
+	echo @@@
     else
         make 64_to_32 CONVERT_ALL=y >& 64log &
     fi
