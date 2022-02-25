@@ -25,7 +25,7 @@ if [[ ! -z "$USE_64TO32"  ]]; then
     else
         nohup make 64_to_32 CONVERT_ALL=y >& 64log &
     fi
-    sleep 120s
+    sleep 300s
     echo @@@@ tail 64log
     tail -30 64log
     echo @@@
