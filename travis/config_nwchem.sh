@@ -22,10 +22,11 @@ if [[ ! -z "$USE_64TO32"  ]]; then
     os=`uname`
     if [[ "$os" == "Darwin" ]]; then
         nohup make 64_to_32  >& 64log &
+	sleep 50s
     else
+	sleep 300s
         nohup make 64_to_32 CONVERT_ALL=y >& 64log &
     fi
-    sleep 300s
     echo @@@@ tail 64log
     tail -30 64log
     echo @@@
