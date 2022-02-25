@@ -1726,6 +1726,15 @@ ifeq ($(TARGET),$(findstring $(TARGET),LINUX CYGNUS CYGWIN))
             DEFINES   += -DPGLINUX
 #           added -Kieee to get dlamc1 to work on pgf77 3.1-3 EA Jun 8th 2000
             FOPTIONS   = -Mdalign -Minform,warn -Mnolist -Minfo=loop -Munixlogical -Kieee
+            FOPTIONS   = -Mdalign -Minform,warn -Mnolist -Munixlogical -Kieee
+            ifeq ($(V),-1)
+                 FOPTIONS += -Minform,fatal
+            else
+                 FOPTIONS += -Minform,warn
+            endif
+            ifdef USE_OPTREPORT
+                 FOPTIONS += -Minfo=loop
+            endif
             ifeq ($(shell $(CNFDIR)/check_env.sh $(USE_HWOPT)),1)
                 ifeq ($(_CPU),i586)
                     FOPTIONS  += -tp p5  
@@ -2808,7 +2817,7 @@ ifneq ($(TARGET),LINUX)
                     ifdef USE_A64FX
                         COPTIMIZE += -mtune=a64fx -mcpu=a64fx 
                     else
-                        COPTIMIZE +=  -mcpu=native
+                        COPTIMIZE += -mtune=native -march=native
                     endif 
                 endif
 
@@ -2842,7 +2851,10 @@ ifneq ($(TARGET),LINUX)
 
                 FOPTIMIZE  += -fprefetch-loop-arrays #-ftree-loop-linear
                 ifeq ($(GNU_GE_4_8),true)
-                    FOPTIMIZE  += -ftree-vectorize   -fopt-info-vec
+                    FOPTIMIZE  += -ftree-vectorize
+                         ifdef USE_OPTREPORT
+                              FOPTIMIZE += -fopt-info-vec
+			 endif
                 endif
 
                 FDEBUG += -g -O
@@ -2853,9 +2865,12 @@ ifneq ($(TARGET),LINUX)
                             FOPTIMIZE += -mtune=a64fx -mcpu=a64fx
                             FOPTIMIZE += -march=armv8.2-a+sve
                         else
-                            FOPTIMIZE += -mtune=native -mcpu=native
+                            FOPTIMIZE += -mtune=native -march=native
                         endif
-                        FOPTIMIZE += -ffp-contract=fast -fopt-info-vec 
+                        FOPTIMIZE += -ffp-contract=fast
+                             ifdef USE_OPTREPORT
+			          FOPTIMIZE += -fopt-info-vec
+			     endif
                         FOPTIMIZE += -fstack-arrays
                     endif
 #                   causes slowdows in mp2/ccsd
@@ -3011,7 +3026,10 @@ ifneq ($(TARGET),LINUX)
             endif
             FOPTIONS   += -Mbackslash
             FOPTIONS   += -Mcache_align  # -Kieee 
-            FOPTIMIZE   =  -fast -O3 -Mvect=simd  -Munroll -Minfo=loop # -Mipa=fast
+            FOPTIMIZE   =  -fast -O3 -Mvect=simd  -Munroll # -Mipa=fast
+            ifdef USE_OPTREPORT
+                 FOPTIMIZE += -Minfo=loop
+            endif
             FVECTORIZE   = -fast    -O3   #-Mipa=fast
             FDEBUG = -g -O2
             DEFINES  += -DCHKUNDFLW -DPGLINUX
@@ -3024,7 +3042,10 @@ ifneq ($(TARGET),LINUX)
             endif
             ifdef USE_OPENMP
 	      ifndef UNSET_OPENMP
-                FOPTIONS  += -mp -Minfo=mp
+                FOPTIONS  += -mp
+                ifdef USE_OPTREPORT
+                    FOPTIONS  += -Minfo=mp
+                endif
                 LDOPTIONS += -mp
 	      endif
             endif
