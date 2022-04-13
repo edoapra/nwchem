@@ -255,6 +255,9 @@ ifdef USE_LIBXC
     NW_CORE_SUBDIRS += libext
 endif
 
+ifdef USE_TBLITE
+    NW_CORE_SUBDIRS += libext
+endif
 
 ifdef BUILD_OPENBLAS
     ifndef BLAS_SIZE
@@ -1484,6 +1487,9 @@ ifeq ($(TARGET),MACX64)
                 FOPTIONS += -fimf-arch-consistency=true
             endif
         endif
+        ifeq ($(V),-1)
+            FOPTIONS += -diag-disable=7713,8291,15009
+        endif
     endif #ifort
 
 
@@ -2162,8 +2168,12 @@ ifneq ($(TARGET),LINUX)
                 ifeq ($(_CC),$(findstring $(_CC),gcc clang))
                     COPTIONS += -Wall
 		endif
-                ifndef USE_FLANG
-                    FOPTIMIZE  += -Wno-maybe-uninitialized
+                ifeq ($(GNU_GE_4_8),true)
+                    ifndef USE_FLANG
+                        FOPTIMIZE  += -Wno-maybe-uninitialized
+                    endif
+                else
+                    FOPTIONS   += -Wuninitialized
                 endif
             endif
 
@@ -2203,20 +2213,6 @@ ifneq ($(TARGET),LINUX)
                 FOPTIONS +=-fno-aggressive-loop-optimizations
                 FOPTIMIZE +=-fno-aggressive-loop-optimizations
                 FFLAGS_FORGA += -fno-aggressive-loop-optimizations
-                ifeq ($(V),-1)
-                    FOPTIONS += -w
-                else
-                    FOPTIONS += -Warray-bounds
-                endif
-            else
-                ifeq ($(V),-1)
-                    FOPTIONS += -w
-                else
-                    FOPTIONS   += -Wuninitialized
-                    ifndef USE_FLANG
-                        FOPTIONS   += -Wno-maybe-uninitialized # -Wextra -Wunused
-                    endif
-                endif
             endif
 
             ifeq ($(GNU_GE_8),true)
@@ -2449,7 +2445,7 @@ ifneq ($(TARGET),LINUX)
                         FOPTIONS += -qopt-report-file=stderr
                     endif
                     ifeq ($(V),-1)
-                        FOPTIONS += -diag-disable=8291,15009
+                        FOPTIONS += -diag-disable=7713,8291,15009
                     endif
 #                   to avoid compiler crashes on simd directive. e.g .Version 15.0.2.164 Build 20150121
                     ifdef USE_NOSIMD
@@ -3412,7 +3408,7 @@ else
 endif
 
 ifdef NWCHEM_LINK_CUDA
-    CORE_LIBS += -acc -gpu=managed -cuda -cudalib=cublas
+    CORE_LIBS += -acc -cuda -cudalib=cublas
 endif
 
 
@@ -3608,6 +3604,41 @@ ifdef USE_PLUMED
 	    $(info  Please file an issue at https://github.com/nwchemgit/nwchem/issues )
 	    $(info )
     endif
+endif
+
+
+#TBLITE
+ifeq ("$(wildcard $(NWCHEM_TOP)/src/config/NWCHEM_CONFIG)","")
+    ifeq (xtb, $(findstring xtb, $(NWCHEM_MODULES)))
+        MODULES_HAS_XTB=Y
+    endif
+else
+    MODULES_HAS_XTB = $(shell head -2 $(NWCHEM_TOP)/src/config/NWCHEM_CONFIG| awk '/xtb/ {print "Y"}')
+endif
+
+ifeq ($(MODULES_HAS_XTB),Y)
+    ifndef USE_TBLITE
+        $(error the xtb module requires setting the env variable USE_TBLITE)
+    endif
+endif
+
+ifdef USE_TBLITE
+    ifneq ($(MODULES_HAS_XTB),Y)
+        $(error Add xtb to NWCHEM_MODULES when setting USE_TBLITE )
+    endif
+    DEFINES  += -DUSE_TBLITE
+    EXTRA_LIBS += -L$(NWCHEM_TOP)/src/libext/lib
+    ifdef TBLITE_MESON
+        TBLITE_MODS=$(NWCHEM_TOP)/src/libext/tblite/tblite/_build/libtblite.so.0.2.0.p
+        MCTC_MODS=$(NWCHEM_TOP)/src/libext/tblite/tblite/_build/subprojects/mctc-lib/libmctc-lib.a.p
+        EXTRA_LIBS += -ltblite
+    else
+        EXTRA_LIBS += -ltblite -ltoml-f -ldftd4 -lmulticharge -ls-dftd3 -lmctc-lib
+        TBLITE_MODS=$(NWCHEM_TOP)/src/libext/include/tblite
+        MCTC_MODS=$(sort $(dir $(wildcard $(NWCHEM_TOP)/src/libext/include/mctc-lib/*/)))
+        MCHR_MODS=$(sort $(dir $(wildcard $(NWCHEM_TOP)/src/libext/include/multicharge/*/)))
+    endif
+    EXTRA_LIBS += $(LAPACK_LIB) $(BLASOPT)
 endif
 
 # CUDA
