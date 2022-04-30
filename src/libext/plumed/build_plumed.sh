@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+#set -ex
 if [[  -z "${NWCHEM_TOP}" ]]; then
     dir3=$(dirname `pwd`)
     dir2=$(dirname "$dir3")
@@ -17,6 +17,7 @@ if [[ ! -z "$BUILD_OPENBLAS"   ]] ; then
 fi
 plumed_branch=cvhd
 github_user=edoapra
+#rm -rf plumed2
 git clone --depth=1 -b $plumed_branch https://github.com/$github_user/plumed2 plumed2
 cd plumed2
 if [[  -z "${FC}" ]]; then
@@ -28,11 +29,16 @@ if [[  "${FC_EXTRA}" == "gfortran" ]]; then
     LDFLAGS_EXTRA+=" -L"`gfortran -print-file-name=libgfortran.a|sed -e s/libgfortran.a//`" -lgfortran"
 fi
 if [[ "$BLAS_SIZE" == 8 ]];  then
-   ILP64="--enable-ilp64 "
+   ILP64=--enable-ilp64 
 else
     ILP64=" "
 fi
 echo LDFLAGS_EXTRA is "$LDFLAGS_EXTRA"
+echo executing the command \
+./configure --enable-modules=+cvhd --disable-mpi \
+	    "$ILP64" \
+	    LDFLAGS="$BLASOPT $LDFLAGS_EXTRA" \
+	    --prefix=$NWCHEM_TOP/src/libext
 ./configure --enable-modules=+cvhd --disable-mpi \
 	    "$ILP64" \
 	    LDFLAGS="$BLASOPT $LDFLAGS_EXTRA" \
