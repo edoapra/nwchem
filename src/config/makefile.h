@@ -3603,6 +3603,15 @@ ifdef USE_SIMINT
 endif
 
 
+ifdef BUILD_PLUMED
+    NW_CORE_SUBDIRS += libext
+    PATH := $(NWCHEM_TOP)/src/libext/bin:$(PATH)
+#    USE_PLUMED=1
+    DEFINES += -DUSE_PLUMED
+    PLUMED_HOME=$(NWCHEM_TOP)/src/libext
+    PLUMED_DYNAMIC_LIBS=$(shell $(NWCHEM_TOP)/src/libext/bin/plumed info --configuration|egrep DYNAMIC_LIBS| cut -c 14-)
+    PLUMED_HASMPI = $(shell $(NWCHEM_TOP)/src/libext/bin/plumed info --configuration|grep program_can_run_mpi|cut -c 21-21)
+endif
 ifdef USE_PLUMED
     DEFINES += -DUSE_PLUMED
     #check presence of plumed command. TODO
@@ -3617,13 +3626,8 @@ ifdef USE_PLUMED
     PLUMED_HOME = $(shell plumed info --configuration|egrep prefix=|head -1|cut -c 8-)
     PLUMED_DYNAMIC_LIBS = $(shell plumed info --configuration|egrep DYNAMIC_LIBS| cut -c 14-)
     PLUMED_HASMPI = $(plumed info --configuration|grep program_can_run_mpi|cut -c 21-21)
-    ifeq ($(PLUMED_HASMPI),y)
-        DEFINES += -DPLUMED_HASMPI
-    endif
     #PLUMED_LOAD= /home/edo/tahoma/apps/plumed262.intel20u2/lib/libplumed.a -ldl  -lstdc++ -lfftw3 -lz -ldl -llapack -lblas   -rdynamic -Wl,-Bsymbolic -fopenmp 
-    ifdef PLUMED_DYNAMIC_LIBS
-        EXTRA_LIBS += -L$(PLUMED_HOME)/lib -lplumed $(PLUMED_DYNAMIC_LIBS)
-    else
+    ifndef PLUMED_DYNAMIC_LIBS
         errorplumed:
 	    $(info )
 	    $(info  PLUMED info command not returning the expected output)
@@ -3631,6 +3635,12 @@ ifdef USE_PLUMED
 	    $(info )
     endif
 endif
+    ifdef PLUMED_DYNAMIC_LIBS
+        EXTRA_LIBS += -L$(PLUMED_HOME)/lib -lplumed $(PLUMED_DYNAMIC_LIBS)
+    endif
+    ifeq ($(PLUMED_HASMPI),y)
+        DEFINES += -DPLUMED_HASMPI
+    endif
 
 
 #TBLITE
