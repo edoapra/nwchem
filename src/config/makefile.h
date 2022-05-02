@@ -3607,6 +3607,7 @@ endif
 ifdef BUILD_PLUMED
     NW_CORE_SUBDIRS += libext
     PATH := $(NWCHEM_TOP)/src/libext/bin:$(PATH)
+    LD_LIBRARY_PATH := $(NWCHEM_TOP)/src/libext/lib:$(LD_LIBRARY_PATH)
 #    USE_PLUMED=1
     DEFINES += -DUSE_PLUMED
     PLUMED_HOME=$(NWCHEM_TOP)/src/libext
