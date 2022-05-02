@@ -13,18 +13,25 @@ if [[ "$BLAS_SIZE" == 4 ]] && [[ -z "$USE_64TO32"   ]] ; then
     fi
 fi
 if [[ ! -z "$BUILD_OPENBLAS"   ]] ; then
-    BLASOPT="-L`pwd`/../lib -lnwc_openblas"
+    BLASOPT="-L`pwd`/../lib -lnwc_openblas -lpthread"
 fi
 plumed_branch=cvhd
-github_user=edoapra
+githubuser=edoapra
+#plumed_branch=master
+#githubuser=plumed
 #rm -rf plumed2
-git clone --depth=1 -b $plumed_branch https://github.com/$github_user/plumed2 plumed2
+echo executing git clone --depth=1 -b "$plumed_branch" https://github.com/"$githubuser"/plumed2 plumed2
+git clone --depth=1 -b $plumed_branch https://github.com/$githubuser/plumed2 plumed2
 cd plumed2
 if [[  -z "${FC}" ]]; then
     FC=gfortran
 fi
 FC_EXTRA=$(${NWCHEM_TOP}/src/config/strip_compiler.sh ${FC})
-LDFLAGS_EXTRA="-L/usr/local/opt/fftw/lib "
+pkg-config  --exists fftw3
+if [[ "$?" == 0 ]]; then
+    LDFLAGS_EXTRA+=`pkg-config --libs fftw3`
+fi
+#LDFLAGS_EXTRA="-L/usr/local/opt/fftw/lib "
 if [[  "${FC_EXTRA}" == "gfortran" ]]; then
     LDFLAGS_EXTRA+=" -L"`gfortran -print-file-name=libgfortran.a|sed -e s/libgfortran.a//`" -lgfortran"
 fi
@@ -34,14 +41,17 @@ else
     ILP64=" "
 fi
 echo LDFLAGS_EXTRA is "$LDFLAGS_EXTRA"
+#MODULES_EXTRA=" --enable-modules=+cvhd "
 echo executing the command \
-./configure --enable-modules=+cvhd --disable-mpi \
+./configure "$MODULES_EXTRA" --disable-mpi \
 	    "$ILP64" \
 	    LDFLAGS="$BLASOPT $LDFLAGS_EXTRA" \
+	    LIBS="$BLASOPT $LDFLAGS_EXTRA" \
 	    --prefix=$NWCHEM_TOP/src/libext
-./configure --enable-modules=+cvhd --disable-mpi \
+./configure "$MODULES_EXTRA" --disable-mpi \
 	    "$ILP64" \
 	    LDFLAGS="$BLASOPT $LDFLAGS_EXTRA" \
+	    LIBS="$BLASOPT $LDFLAGS_EXTRA" \
 	    --prefix=$NWCHEM_TOP/src/libext
 make  -j4 
 if [[ "$?" != "0" ]]; then
