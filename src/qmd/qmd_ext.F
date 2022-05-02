@@ -91,6 +91,7 @@ c     get output file name
 #include "mafdecls.fh"
 #include "stdio.fh"
 #include "inp.fh"
+#include "errquit.fh"
       integer nat                ! [in]
       integer istep_nucl         ! [in]
       double precision energy    ! [in]
@@ -100,14 +101,20 @@ c     get output file name
       character*(*) ext_forces
 #ifdef USE_PLUMED
       integer i
+      integer l_gorg,k_gorg
+      double precision dabssum
+      external dabssum
 c     call plumed: r[in], g[out]
 c     pointer to current timestep
       if(ext_forces(1:inp_strlen(ext_forces)).ne.'plumed') call
      E     errquit(' qmd_ext works only with plumed ',0,0)
       if(ga_nodeid().eq.0) then
+         if (.not.ma_push_get(mt_dbl,3*nat,'forces',l_gorg,k_gorg))
+     E   call errquit(' qmd_ext push_get failed',3*nat,MA_ERR)
       call plumed_f_gcmd("setStep"//char(0),istep_nucl)
       call plumed_f_gcmd("setMasses"//char(0),m)
-c plumed uses forces not gradientes. double flip
+      call dcopy(3*nat, g, 1, dbl_mb(k_gorg),1)
+c plumed uses forces not gradients. double flip
 c first flip
         call dscal(3*nat, -1d0, g, 1)
        if(ga_nodeid().eq.0) then
@@ -125,6 +132,10 @@ c      write(6,*) ' E ext', energy
        call plumed_f_gcmd("setEnergy"//char(0),energy)
 c     forces before plumed call
        call plumed_f_gcmd("calc"//char(0),0)
+c     check plumed change
+       call daxpy(3*nat,1d0,g,1,dbl_mb(k_gorg),1)
+       write(luout,*) ' dabssum of Plumed change ',
+     D      dabssum(3*nat,dbl_mb(k_gorg))
       endif
 c second sign flip
       call dscal(3*nat, -1d0, g, 1)
@@ -137,6 +148,8 @@ c     broadcast from 0
           enddo
        endif
  1     format(i5,3f12.6)
+         if (.not.ma_pop_stack(l_gorg))
+     E   call errquit(' qmd_ext popstack failed',3*nat,MA_ERR)
 c     check sign agreement with plumed ...
 #endif
 
