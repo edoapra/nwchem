@@ -136,6 +136,8 @@ c     check plumed change
        call daxpy(3*nat,1d0,g,1,dbl_mb(k_gorg),1)
        write(luout,*) ' dabssum of Plumed change ',
      D      dabssum(3*nat,dbl_mb(k_gorg))
+         if (.not.ma_pop_stack(l_gorg))
+     E   call errquit(' qmd_ext popstack failed',3*nat,MA_ERR)
       endif
 c second sign flip
       call dscal(3*nat, -1d0, g, 1)
@@ -148,8 +150,6 @@ c     broadcast from 0
           enddo
        endif
  1     format(i5,3f12.6)
-         if (.not.ma_pop_stack(l_gorg))
-     E   call errquit(' qmd_ext popstack failed',3*nat,MA_ERR)
 c     check sign agreement with plumed ...
 #endif
 
