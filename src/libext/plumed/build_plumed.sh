@@ -43,12 +43,12 @@ fi
 echo LDFLAGS_EXTRA is "$LDFLAGS_EXTRA"
 #MODULES_EXTRA=" --enable-modules=+cvhd "
 echo executing the command \
-./configure "$MODULES_EXTRA" --disable-mpi \
+./configure "$MODULES_EXTRA" --disable-mpi --disable-gsl \
 	    "$ILP64" \
 	    LDFLAGS="$BLASOPT $LDFLAGS_EXTRA" \
 	    LIBS="$BLASOPT $LDFLAGS_EXTRA" \
 	    --prefix=$NWCHEM_TOP/src/libext
-./configure "$MODULES_EXTRA" --disable-mpi \
+./configure "$MODULES_EXTRA" --disable-mpi  --disable-gsl \
 	    "$ILP64" \
 	    LDFLAGS="$BLASOPT $LDFLAGS_EXTRA" \
 	    LIBS="$BLASOPT $LDFLAGS_EXTRA" \
