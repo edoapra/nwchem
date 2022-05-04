@@ -33,7 +33,7 @@ if [[ "$?" == 0 ]]; then
 fi
 #LDFLAGS_EXTRA="-L/usr/local/opt/fftw/lib "
 if [[  "${FC_EXTRA}" == "gfortran" ]]; then
-    LDFLAGS_EXTRA+=" -L"`gfortran -print-file-name=libgfortran.a|sed -e s/libgfortran.a//`" -lgfortran"
+    LDFLAGS_EXTRA+=" -L"`${FC_EXTRA} -print-file-name=libgfortran.a|sed -e s/libgfortran.a//`" -lgfortran"
 fi
 if [[ "$BLAS_SIZE" == 8 ]];  then
    ILP64=--enable-ilp64 
