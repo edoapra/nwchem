@@ -40,21 +40,20 @@ if [[ "$BLAS_SIZE" == 8 ]];  then
 else
     ILP64=" "
 fi
-LDFLAGS_RPATH=" -Wl,--rpath $NWCHEM_TOP/src/libext/lib "
 echo LDFLAGS_EXTRA is "$LDFLAGS_EXTRA"
-#MODULES_EXTRA=" --enable-modules=+cvhd "
+MODULES_EXTRA="--enable-modules=+cvhd"
 echo executing the command \
-./configure "$MODULES_EXTRA" --disable-mpi --disable-gsl \
+./configure "$MODULES_EXTRA" --disable-mpi --disable-gsl  --disable-shared \
 	    "$ILP64" \
 	    LDFLAGS="$BLASOPT $LDFLAGS_EXTRA" \
 	    LIBS="$BLASOPT $LDFLAGS_EXTRA" \
 	    --prefix=$NWCHEM_TOP/src/libext
-./configure "$MODULES_EXTRA" --disable-mpi  --disable-gsl \
+./configure "$MODULES_EXTRA" --disable-mpi  --disable-gsl  --disable-shared\
 	    "$ILP64" \
 	    LDFLAGS="$BLASOPT $LDFLAGS_EXTRA" \
 	    LIBS="$BLASOPT $LDFLAGS_EXTRA" \
 	    --prefix=$NWCHEM_TOP/src/libext
-make  -j4 LDFLAGS="$LDFLAGS_RPATH"
+make  -j4
 if [[ "$?" != "0" ]]; then
     echo " "
     echo "compilation failed"
