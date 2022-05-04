@@ -31,9 +31,8 @@ pkg-config  --exists fftw3
 if [[ "$?" == 0 ]]; then
     LDFLAGS_EXTRA+=`pkg-config --libs fftw3`
 fi
-#LDFLAGS_EXTRA="-L/usr/local/opt/fftw/lib "
 if [[  "${FC_EXTRA}" == "gfortran" ]]; then
-    LDFLAGS_EXTRA+=" -L"`${FC_EXTRA} -print-file-name=libgfortran.a|sed -e s/libgfortran.a//`" -lgfortran"
+    LDFLAGS_EXTRA+=" -L"`${FC} -print-file-name=libgfortran.a|sed -e s/libgfortran.a//`" -lgfortran"
 fi
 if [[ "$BLAS_SIZE" == 8 ]];  then
    ILP64=--enable-ilp64 
