@@ -3637,7 +3637,7 @@ ifdef USE_PLUMED
     endif
 endif
     ifdef PLUMED_DYNAMIC_LIBS
-        EXTRA_LIBS += -L$(PLUMED_HOME)/lib -lplumed $(PLUMED_DYNAMIC_LIBS)
+        EXTRA_LIBS += -L$(PLUMED_HOME)/lib -lplumed -lplumedKernel $(PLUMED_DYNAMIC_LIBS)
     endif
     ifeq ($(PLUMED_HASMPI),y)
         DEFINES += -DPLUMED_HASMPI
