@@ -426,6 +426,14 @@ close(20)
 if (align_flag) close(30)
 deallocate(ir_acf,ir_fft)
 deallocate(vdos_acf,vdos_fft,wsave)
+deallocate(coord)
+deallocate(ref)
+deallocate(mask)
+deallocate(altags)
+deallocate(grptags)
+deallocate(atgrp)
+deallocate(atmass)
+
 
 end program qmd_analysis
 
