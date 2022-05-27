@@ -40,11 +40,7 @@ c******************************************************************************
 
 c Initialize the block of derivative NAIs.
 
-      do 10 id = 1,Nder
-      do 10 nn = 1,Nint
-      do 10 mp = 1,NPP
-       Vab(mp,nn,id) = 0.D0
-   10 continue
+      call dfill(Nder*Nint*NPP,0.0d00,Vab,1)
 
 c Define the number of shell components on each center.
 
@@ -98,6 +94,9 @@ c Define the angular momentum indices for shell "B".
 
           np = IJK(Ip+n1,Jp+n2,Kp+n3)
 
+#ifdef PGI_NOSIMD
+cpgi$l novect
+#endif
           do 20 mp = 1,NPP
            Vab(mp,nn,id) = Vab(mp,nn,id) + E(1,mp,n4,Ip,Ia,Ib)*
      &                                     E(2,mp,n5,Jp,Ja,Jb)*

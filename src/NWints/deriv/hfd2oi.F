@@ -80,6 +80,9 @@ c Define the angular momentum indices for shell "B".
          n2 = inder(2,id)
          n3 = inder(3,id)
 
+#ifdef PGI_NOSIMD
+cpgi$l novect
+#endif
          do 20 mp = 1,NPP
           Sab(mm,id) = Sab(mm,id) + E(1,mp,n1,0,Ia,Ib)*
      &                              E(2,mp,n2,0,Ja,Jb)*

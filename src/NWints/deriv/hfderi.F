@@ -309,6 +309,9 @@ c charge distribution "Q".
      &               Eq(2,1,n11,Jq,Jc,Jd)*
      &               Eq(3,1,n12,Kq,Kc,Kd)
              else
+#ifdef PGI_NOSIMD
+cpgi$l novect
+#endif
              do mq = 1,NPQ
                 E3(mq) = Eq(1,mq,n10,Iq,Ic,Id)*
      &               Eq(2,mq,n11,Jq,Jc,Jd)*
