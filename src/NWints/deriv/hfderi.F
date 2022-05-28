@@ -148,6 +148,9 @@ c Sum across (Ip,Jp,Kp) for each value of (Iq,Jq,Kq).
 c Define the product of the Hermite expansions coefficients for 
 c charge distribution "P".
 
+#ifdef PGI_NOSIMD
+cpgi$l novect
+#endif
            do 410 mp = 1,NPP
             E3(mp) = Ep(1,mp,n7,Ip,Ia,Ib)*
      &               Ep(2,mp,n8,Jp,Ja,Jb)*
