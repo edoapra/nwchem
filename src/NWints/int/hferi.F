@@ -256,6 +256,9 @@ c overlap distribution "Q" and calculate eri
                  do Iq = 0,Ic+Id
                     do Jq = 0,Jc+Jd
 !DEC$ LOOP COUNT MAX=30, MIN=1
+#ifdef PGI_NOSIMD
+cpgi$l novect
+#endif
                        do Kq = 0,Kc+Kd
                           nq = IJK(Iq,Jq,Kq)
                           ERInn = ERInn + 
@@ -285,6 +288,9 @@ c overlap distribution "Q" and calculate eri
                              nq = IJK(Iq,Jq,Kq)
                              nq1 = IJK(Iq1,Jq,Kq)
 !DEC$ LOOP COUNT MAX=30, MIN=1
+#ifdef PGI_NOSIMD
+cpgi$l novect
+#endif
                              do mq = 1,MPQ
                                 ERInn = ERInn + 
      &                               (Eq(1,mq,0,Iq,Ic,Id)*sum(mq,nq)+
@@ -301,6 +307,9 @@ c overlap distribution "Q" and calculate eri
                        do Kq = 0,Kc+Kd
                           nq = IJK(Iqfin,Jq,Kq)
 !DEC$ LOOP COUNT MAX=30, MIN=1
+#ifdef PGI_NOSIMD
+cpgi$l novect
+#endif
                           do mq = 1,MPQ
                              ERInn = ERInn + 
      &                            Eq(1,mq,0,Iqfin,Ic,Id)*
