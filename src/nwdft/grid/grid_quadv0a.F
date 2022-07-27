@@ -37,6 +37,7 @@ c
 #include "grid_quad.fh"
 #include "steric.fh"
 #include "msgids.fh"
+#include "dftps.fh"
 c
       double precision rqbuf(*)
       double precision rad
@@ -114,8 +115,10 @@ c
      &     lbas_cset_info, ibas_cset_info))
      &     call errquit(pname//'cannot allocate bas_cset_info',0,
      &       MA_ERR)
+      if (odftps) call pstat_on(ps_xcmk)
       call xc_make_basis_info(basis, int_mb(ibas_cent_info),
      &     int_mb(ibas_cset_info), natoms)
+      if (odftps) call pstat_off(ps_xcmk)
       if (xcfit) then
          if (.not.MA_Push_Get(mt_int, 3*natoms, 'bas_cent_xinfo',
      &        lbas_cent_xinfo, ibas_cent_xinfo))
@@ -131,8 +134,10 @@ c
      &     ldocsetx, idocsetx))
      &     call errquit(pname//'cannot allocate docset',
      .     ncontrset, MA_ERR)
+      if (odftps) call pstat_on(ps_xcmk)
       call xc_make_basis_info(xc_bas_han, int_mb(ibas_cent_xinfo),
      &     int_mb(ibas_cset_xinfo), natoms)
+      if (odftps) call pstat_off(ps_xcmk)
       endif
       if (.not.MA_Push_Get(mt_int, 6*n_per_rec, 'iscratch',
      &     l_iscratch, i_iscratch))
@@ -155,8 +160,10 @@ c AJL/Begin/FDE
      &   lbas_cset_info_fde, ibas_cset_info_fde))
      &   call errquit(pname//'cannot allocate bas_cset_info_fde',0,
      &       MA_ERR)
+      if (odftps) call pstat_on(ps_xcmk)
        call xc_make_basis_info(FD_bas_han, int_mb(ibas_cent_info_fde),
      &     int_mb(ibas_cset_info_fde), ncenters_fde)
+      if (odftps) call pstat_off(ps_xcmk)
        if (.not.MA_Push_Get(mt_log, ncontrset_fde, 'docset_fde',
      &     ldocset_fde, idocset_fde))
      &     call errquit(pname//'cannot allocate docset_fde',

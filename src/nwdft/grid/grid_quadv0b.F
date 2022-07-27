@@ -336,6 +336,7 @@ c We pre-screen grid points to see if they meet a threshold only if the
 c calculation involves addressing the QM density only. For the FDE and
 c combined systems we cannot screen in this same way as it will results in
 c losing useful grid points
+      if (odftps) call pstat_on(ps_scre)
       if (fde_option.eq.0.or.fde_option.eq.2.or.fde_option.eq.5)
 c      call grid_pscreen(nqpts,qwght,qxyz,tol_rho,natoms,
      ,     call grid_pscreen(nqpts,qwght,qxyz,tol_rho,natoms,
@@ -343,6 +344,7 @@ c      call grid_pscreen(nqpts,qwght,qxyz,tol_rho,natoms,
      ,     dbl_mb(ichi_ao),dbl_mb(idelchi_ao),dbl_mb(iheschi_ao),
      M     mbf_ao,grad,kslap,
      ,     ipol,iscratch)
+      if (odftps) call pstat_off(ps_scre)
       if (.not.MA_Push_Get(mt_dbl,mxnbf_ce*nqpts*3,
      &     'Dmat', lDmat,iDmat))
      &     call errquit(pname//'cannot allocate Dmat',0,
@@ -365,6 +367,7 @@ c
 c Not sure if want to pre-screen with the FDE basis - otherwise might lose
 c valuable points from the QM environment. Only applied for FDE calcs.
 c For combined systems we cannot use this method of removing grid points
+      if (odftps) call pstat_on(ps_scre)
         if (fde_option.eq.3.or.fde_option.eq.6)
      ,       call grid_pscreen(nqpts,qwght,qxyz,tol_rho,ncenters_fde,
      ,       rchi_atom_fde,rdelchi_atom_fde,
@@ -372,6 +375,7 @@ c For combined systems we cannot use this method of removing grid points
      ,       dbl_mb(ichi_fde),dbl_mb(idelchi_fde),dbl_mb(iheschi_fde),
      ,       mbf_fde,grad,do_xdm,
      ,       ipol,iscratch)
+      if (odftps) call pstat_off(ps_scre)
 
         if (.not.MA_Push_Get(mt_dbl,nbf_fde_mxnbf_ce*nqpts*3,
      &       'Dmat_fde', lDmat_fde,iDmat_fde))

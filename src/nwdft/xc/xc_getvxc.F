@@ -59,12 +59,9 @@ c#include "bas.fh"
 #include "global.fh"
 c#include "tcgmsg.fh"
 #include "cdft.fh"
-c#include "oep.fh"
-c#include "dftpara.fh"
 #include "util.fh"
-c#include "sym.fh"
 #include "stdio.fh"
-c#include "case.fh"
+#include "dftps.fh"
 c
       double precision rho_n    !< [Output] The number of electrons
                                 !< obtained by integrating the density
@@ -219,9 +216,10 @@ c
      &                   dbl_mb(iTmat),1)
             endif
 
-
+            if (odftps) call pstat_on(ps_fitv)
             call xc_fitv(rtdb,Dbl_MB(iTmat), nTrows, nTcols,
      &           g_vxc, g_xcinv, IOLGC)  
+            if (odftps) call pstat_off(ps_fitv)
 
             if (ADFT) then
               call dcopy(ipol*nbf_cd,dbl_mb(iTmat),1,
