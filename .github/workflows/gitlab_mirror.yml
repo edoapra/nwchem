@@ -11,17 +11,13 @@ jobs:
   mirror_nwchemgit:
     runs-on: [ubuntu-18.04]
     steps:
-      - name: Checkout nwchemgit/nwchem
-        uses: actions/checkout@v2
-        with:
-          repository: nwchemgit/nwchem
-          persist-credentials: false
-          fetch-depth: 0
       - name: fetch and merge
         run: |
           git config user.name "edoapra"
           git config user.email "edoardo.apra@gmail.com"
           git config pull.rebase false
+          git clone  --depth 30 git@github.com:edoapra/nwchem.git
+          cd nwchem
           git remote add upstream https://github.com/nwchemgit/nwchem > /dev/null 2>&1
           git fetch origin
           git fetch upstream
@@ -30,7 +26,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          branch: "master"
   mirror_to_gitlab:
     runs-on: ubuntu-latest
     steps:
