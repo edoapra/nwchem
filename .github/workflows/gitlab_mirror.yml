@@ -2,7 +2,7 @@ name: Mirror and run GitLab CI
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '5 0 * * FRI,TUE'
   repository_dispatch:
     types: [backend_automation]
   workflow_dispatch:
@@ -18,15 +18,6 @@ jobs:
           persist-credentials: false
           fetch-depth: 1
           ref: master
-      - name: fetch and merge
-        run: |
-          git config user.name "edoapra"
-          git config user.email "edoardo.apra@gmail.com"
-          git config pull.rebase false
-          git remote add upstream https://github.com/nwchemgit/nwchem > /dev/null 2>&1
-          git fetch origin
-          git fetch upstream
-          git merge upstream/master --no-edit
       - name: Mirror + trigger CI
         uses: SvanBoxel/gitlab-mirror-and-ci-action@master
         with:
