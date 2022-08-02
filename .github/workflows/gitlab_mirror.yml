@@ -16,7 +16,7 @@ jobs:
         with:
           repository: nwchemgit/nwchem
           persist-credentials: false
-          fetch-depth: 1
+          fetch-depth: 200
           ref: master
       - name: Mirror + trigger CI
         uses: SvanBoxel/gitlab-mirror-and-ci-action@master
