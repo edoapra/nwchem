@@ -1,13 +1,37 @@
 name: Mirror and run GitLab CI
 
 on:
-  push:
+  schedule:
+    - cron: '0 0 * * *'
   repository_dispatch:
     types: [backend_automation]
   workflow_dispatch:
 
 jobs:
-  build:
+  mirror_nwchemgit:
+    runs-on: [ubuntu-18.04]
+    steps:
+      - name: Checkout nwchemgit/nwchem
+        uses: actions/checkout@v2
+        with:
+          repository: nwchemgit/nwchem
+          persist-credentials: false
+          fetch-depth: 0
+      - name: fetch and merge
+        run: |
+          git config user.name "edoapra"
+          git config user.email "edoardo.apra@gmail.com"
+          git config pull.rebase false
+          git remote add upstream https://github.com/nwchemgit/nwchem > /dev/null 2>&1
+          git fetch origin
+          git fetch upstream
+          git merge upstream/master --no-edit
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+  mirror_to_gitlab:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
