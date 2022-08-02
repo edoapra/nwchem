@@ -10,14 +10,15 @@ on:
 jobs:
   mirror_nwchemgit:
     runs-on: [ubuntu-18.04]
+    fail-fast: true
     steps:
       - name: fetch and merge
         run: |
+          git clone  --depth 30 git@github.com:edoapra/nwchem.git
+          cd nwchem
           git config user.name "edoapra"
           git config user.email "edoardo.apra@gmail.com"
           git config pull.rebase false
-          git clone  --depth 30 git@github.com:edoapra/nwchem.git
-          cd nwchem
           git remote add upstream https://github.com/nwchemgit/nwchem > /dev/null 2>&1
           git fetch origin
           git fetch upstream
