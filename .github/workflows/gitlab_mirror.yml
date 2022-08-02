@@ -23,6 +23,7 @@ jobs:
           git config user.name "edoapra"
           git config user.email "edoardo.apra@gmail.com"
           git config pull.rebase false
+          git remote add upstream https://github.com/nwchemgit/nwchem > /dev/null 2>&1
           git fetch origin
           git fetch upstream
           git merge upstream/master --no-edit
@@ -31,10 +32,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: "master"
-  mirror_to_gitlab:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
     - name: Mirror + trigger CI
       uses: SvanBoxel/gitlab-mirror-and-ci-action@master
       with:
