@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: fetch and merge
         run: |
-          git clone  --depth 30 git@github.com:edoapra/nwchem.git
+          git clone  --depth 30 https://github.com/edoapra/nwchem
           cd nwchem
           git config user.name "edoapra"
           git config user.email "edoardo.apra@gmail.com"
