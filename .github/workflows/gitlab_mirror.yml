@@ -10,7 +10,8 @@ on:
 jobs:
   mirror_nwchemgit:
     runs-on: [ubuntu-18.04]
-    fail-fast: true
+    strategy:
+      fail-fast: true
     steps:
       - name: fetch and merge
         run: |
