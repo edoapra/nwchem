@@ -17,8 +17,7 @@ jobs:
           repository: nwchemgit/nwchem
           persist-credentials: false
           fetch-depth: 1
-          with:
-            ref: master
+          ref: master
       - name: fetch and merge
         run: |
           git config user.name "edoapra"
