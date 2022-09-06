@@ -26,7 +26,7 @@ jobs:
           - MPI-TS
           - MPI-PR
         nwchem_modules:
-          - "all python"
+          - "all python xtb"
         fc:
           - gfortran
         use_openmp:
