@@ -1,4 +1,4 @@
-name: NWChem_CI
+name: NWChem_CI_selfhosted
 
 on:
   push:
