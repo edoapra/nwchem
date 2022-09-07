@@ -20,15 +20,15 @@ jobs:
     strategy:
       matrix:
         blas: [build_openblas]
-        blas_size: [8]
+        blas_size: [8,4]
         experimental: [false]
         armci_network:
           - MPI-TS
         nwchem_modules:
           - "all python xtb"
         fc:
-          - gfortran
           - ifort
+          - gfortran
         use_openmp:
           - 2
         use_simint:
