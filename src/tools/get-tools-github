@@ -45,6 +45,8 @@ function ga_download()
 	gzip -t ga-"$GA_RELEASE_NO".tar.gz >&  /dev/null
 	if [ $? -ne 0 ]; then
             echo ga-"$GA_RELEASE_NO".tar.gz file integrity check failed
+	    rm -f ga-"$GA_RELEASE_NO".tar.gz || true
+	    sleep 5
             return 1
 	else
             echo ga-"$GA_RELEASE_NO".tar.gz file integrity OK
