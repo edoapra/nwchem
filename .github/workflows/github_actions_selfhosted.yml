@@ -25,6 +25,7 @@ jobs:
         experimental: [false]
         armci_network:
           - MPI-TS
+          - MPI-PR
         nwchem_modules:
           - "all python xtb"
         fc:
