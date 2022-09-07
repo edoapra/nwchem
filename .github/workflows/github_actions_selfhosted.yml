@@ -128,7 +128,8 @@ jobs:
         id: qa_test
         if: steps.compile.conclusion == 'success'
         run: |
-          cd QA && ./doafewqmtests.mpi 3
+          source travis/nwchem.bashrc; cd QA && ./doafewqmtests.mpi 3
+        shell: bash
       - name: Check if QA testing has failed
 #        if: steps.qa_test.outcome == 'failure' || steps.qa_test.outcome == 'cancelled'
         if: ${{ failure() }} &&  steps.qa_test.outcome == 'failure'
