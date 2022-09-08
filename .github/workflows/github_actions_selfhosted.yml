@@ -30,6 +30,7 @@ jobs:
           - "all python xtb"
         fc:
           - ifort
+          - gfortran
         use_openmp:
           - 2
         use_simint:
