@@ -110,6 +110,7 @@ jobs:
         id: qa_test
         if: steps.compile.conclusion == 'success'
         run: |
+          export TRAVIS_BUILD_DIR=`pwd`
           source travis/nwchem.bashrc; cd QA && ./doafewqmtests.mpi 3
         shell: bash
       - name: Check if QA testing has failed
