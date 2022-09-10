@@ -92,13 +92,17 @@ jobs:
         run: |
           echo "::set-output name=simd::$(./travis/guess_simd.sh)"
         shell: bash
+      - name: Clear cache dir
+        run: |
+          rm -rf ~/cache || true
+        shell: bash
       - name: Setup cache
         id: setup-cache
         uses: actions/cache@v3
         with:
           path: |
             ~/cache
-          key: ${{ runner.os }}-${{ matrix.mpi_impl}}-${{ matrix.fc}}-xcode${{ matrix.xcode_version}}-simint${{ matrix.use_simint}}-blas${{ matrix.blas}}-blas_size${{ matrix.blas_size}}-libxc${{matrix.use_libxc}}-tblite${{matrix.use_tblite}}-simd${{ steps.get-simd.outputs.simd }}-nwchemcache-v001
+          key: ${{ runner.os }}-${{ matrix.mpi_impl}}-${{ matrix.fc}}-xcode${{ matrix.xcode_version}}-simint${{ matrix.use_simint}}-blas${{ matrix.blas}}-blas_size${{ matrix.blas_size}}-libxc${{matrix.use_libxc}}-tblite${{matrix.use_tblite}}-simd${{ steps.get-simd.outputs.simd }}-nwchemcache-v002
       - name: build environment
         run: |
           ./travis/build_env.sh
