@@ -7,17 +7,17 @@ on:
   pull_request:
   release:
   schedule:
-    - cron: '0 0 * * SUN'
+    - cron: '0 4 * * SAT'
   repository_dispatch:
     types: [backend_automation]
   workflow_dispatch:
 jobs:
   build:
-    timeout-minutes: 1440
     if: |
       github.event_name == 'schedule' ||
       (!contains(github.event.head_commit.message, 'ci skip'))
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 1440
     strategy:
       matrix:
         os:
