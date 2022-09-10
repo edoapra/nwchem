@@ -21,7 +21,7 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu1604
+          - linux
           - macOS
         blas: [build_openblas]
         blas_size:
