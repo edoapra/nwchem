@@ -77,18 +77,9 @@ jobs:
         with:
           path: |
             ~/cache
-            ~/apps/oneapi
-          key: ${{ runner.os }}-${{ matrix.mpi_impl}}-${{ matrix.fc}}-xcode${{ matrix.xcode_version}}-simint${{ matrix.use_simint}}-blas${{ matrix.blas}}-blas_size${{ matrix.blas_size}}-libxc${{matrix.use_libxc}}-tblite${{matrix.use_tblite}}-simd${{ steps.get-simd.outputs.simd }}-nwchemcache-v003
-      - name: fetch apps cache
-        if: steps.setup-cache.outputs.cache-hit == 'true'
-        run: |
-          if [[ -f ~/apps/oneapi/setvars.sh ]]; then \
-          echo "apps oneapi cache fetched" ; \
-          export GOT_APPSCACHE="Y" ; fi
+          key: ${{ runner.os }}-${{ matrix.mpi_impl}}-${{ matrix.fc}}-xcode${{ matrix.xcode_version}}-simint${{ matrix.use_simint}}-blas${{ matrix.blas}}-blas_size${{ matrix.blas_size}}-libxc${{matrix.use_libxc}}-tblite${{matrix.use_tblite}}-simd${{ steps.get-simd.outputs.simd }}-nwchemcache-v000
       - name: build environment
         run: |
-          pwd
-          ls -lart
           ./travis/build_env.sh
       - name: fetch cache
         if: steps.setup-cache.outputs.cache-hit == 'true'
@@ -115,7 +106,6 @@ jobs:
           source travis/nwchem.bashrc; cd QA && ./doafewqmtests.mpi 3
         shell: bash
       - name: Check if QA testing has failed
-#        if: steps.qa_test.outcome == 'failure' || steps.qa_test.outcome == 'cancelled'
         if: ${{ failure() }} &&  steps.qa_test.outcome == 'failure'
         run: |
           ./travis/check_qas.sh
