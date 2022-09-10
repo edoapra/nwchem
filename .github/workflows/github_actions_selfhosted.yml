@@ -17,7 +17,7 @@ jobs:
     if: |
       github.event_name == 'schedule' ||
       (!contains(github.event.head_commit.message, 'ci skip'))
-    runs-on: self-hosted, ${{matrix.os}}
+    runs-on: self-hosted, ${{ matrix.os }}
     strategy:
       matrix:
         os:
