@@ -111,6 +111,7 @@ jobs:
         if: steps.compile.conclusion == 'success'
         run: |
           export TRAVIS_BUILD_DIR=`pwd`
+          unset USE_SIMINT
           source travis/nwchem.bashrc; cd QA && ./doafewqmtests.mpi 3
         shell: bash
       - name: Check if QA testing has failed
