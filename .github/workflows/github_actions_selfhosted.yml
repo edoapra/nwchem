@@ -21,8 +21,8 @@ jobs:
     strategy:
       matrix:
         os:
-          - [self-hosted, Linux]
-          - [self-hosted, macOS]
+          - [self-hosted, ubuntu1604]
+          - [self-hosted, osx-arm64]
         blas: [build_openblas]
         blas_size:
           - 8
@@ -44,8 +44,7 @@ jobs:
         build_plumed:
           - 1
         include:
-          - os: [self-hosted, Linux]
-            experimental: true
+          - os: [self-hosted, ubuntu1804]
             mpi_impl: intel
             armci_network: MPI-TS
             nwchem_modules: "xtb qmd driver solvation"
