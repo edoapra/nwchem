@@ -17,20 +17,21 @@ jobs:
     if: |
       github.event_name == 'schedule' ||
       (!contains(github.event.head_commit.message, 'ci skip'))
-    runs-on: self-hosted
+    runs-on: self-hosted, ${{matrix.os}}
     strategy:
       matrix:
+        os:
+          - ubuntu1604
+          - macOS
         blas: [build_openblas]
         blas_size:
           - 8
         experimental: [false]
         armci_network:
-          - MPI-TS
           - MPI-PR
         nwchem_modules:
           - "all python xtb"
         fc:
-          - ifort
           - gfortran
         use_openmp:
           - 2
@@ -42,7 +43,17 @@ jobs:
           - 1
         build_plumed:
           - 1
-        
+        include:
+          - os: ubuntu1604
+            experimental: true
+            mpi_impl: intel
+            armci_network: MPI-TS
+            nwchem_modules: "xtb qmd driver solvation"
+            fc: ifort
+            blas: "build_openblas"
+            build_plumed: 1
+            use_openmp: 2
+            use_tblite: 1
       fail-fast: false
     env:
         ARMCI_NETWORK: ${{ matrix.armci_network }}
