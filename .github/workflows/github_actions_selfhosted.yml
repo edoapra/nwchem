@@ -48,10 +48,20 @@ jobs:
             experimental: false
             mpi_impl: intel
             armci_network: MPI-TS
-            nwchem_modules: "xtb qmd driver solvation"
+            nwchem_modules: "xtb qmd driver solvation python"
             fc: ifort
             blas: "build_openblas"
-            build_plumed: 1
+            use_libxc: 1
+            use_openmp: 2
+            use_tblite: 1
+          - os: [self-hosted, osx-64]
+            experimental: false
+            mpi_impl: intel
+            armci_network: MPI-TS
+            nwchem_modules: "xtb qmd driver solvation  python"
+            fc: ifort
+            blas: "build_openblas"
+            use_libxc: 1
             use_openmp: 2
             use_tblite: 1
       fail-fast: false
