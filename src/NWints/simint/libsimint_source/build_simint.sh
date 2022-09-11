@@ -26,6 +26,7 @@ if  [ -z "$(command -v patch)" ]; then
     exit 1
 fi
 UNAME_S=$(uname -s)
+arch=`uname -m`
 if [[ ${UNAME_S} == Linux ]]; then
     CPU_FLAGS=$(cat /proc/cpuinfo | grep flags |tail -n 1)
     CPU_FLAGS_2=$(cat /proc/cpuinfo | grep flags |tail -n 1)
@@ -57,6 +58,12 @@ elif [[ "${GOTSVE}" == "Y" ]]; then
     VEC=sve
 else
     VEC=scalar
+fi
+# force scalar on macos arm64
+if [[ ${UNAME_S} == Darwin ]]; then
+    if [[ "$arch" != "x86_64" ]]; then
+	VEC=scalar
+    fi
 fi
 echo VEC $VEC
 if [[ "${VEC}" == "avx512" ]]; then

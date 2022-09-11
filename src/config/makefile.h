@@ -1291,6 +1291,9 @@ ifeq ($(TARGET),MACX64)
     ifeq ($(shell $(CNFDIR)/strip_compiler.sh $(FC)),gfortran)
         _FC := gfortran
     endif
+    ifeq ($(FC),ifort)
+	_FC= = ifort
+    endif
 
     ifdef USE_VECLIB
         ifdef USE_64TO32
