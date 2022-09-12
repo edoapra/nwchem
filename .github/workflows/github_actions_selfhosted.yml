@@ -57,7 +57,7 @@ jobs:
           - os: [self-hosted, osx-arm64]
             experimental: false
             mpi_impl: intel
-            armci_network: MPI-TS
+            armci_network: MPI-PT
             nwchem_modules: "xtb qmd driver solvation  python"
             fc: ifort
             blas: "build_openblas"
