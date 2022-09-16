@@ -48,7 +48,7 @@ jobs:
             experimental: false
             mpi_impl: intel
             armci_network: MPI-TS
-            nwchem_modules: "xtb qmd driver solvation python"
+            nwchem_modules: "all python xtb"
             fc: ifort
             blas: "build_openblas"
             use_libxc: 1
@@ -58,7 +58,7 @@ jobs:
             experimental: false
             mpi_impl: intel
             armci_network: MPI-PT
-            nwchem_modules: "xtb qmd driver solvation  python"
+            nwchem_modules: "xtb qmd tinyqmpw  python"
             fc: ifort
             blas: "build_openblas"
             use_libxc: 1
