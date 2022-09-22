@@ -1,10 +1,6 @@
 name: NWChem_CI_selfhosted
 
 on:
-  push:
-    paths-ignore:
-      - .gitlab-ci.yml
-  pull_request:
   release:
   schedule:
     - cron: '0 4 * * SAT'
