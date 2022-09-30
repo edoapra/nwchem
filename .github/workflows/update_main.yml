@@ -24,7 +24,7 @@ jobs:
           set -ex
           echo " pwd " `pwd`
           git remote rename origin upstream
-          git remote add origin git@github.com:edoapra/nwchem.git
+          git remote add origin https://github.com/edoapra/nwchem
           git fetch origin
           git cherry-pick ff4a4ccfda507d4680ecbe86f46dcfaef89c06e4
           git cherry-pick cbc1e0354aeb8cbdfe7b76858f4d9de1d45a44b5
