@@ -21,13 +21,11 @@ jobs:
           fetch-depth: 0
       - name: update with cherrypicks
         run: |
+          set -ex
           echo " pwd " `pwd`
           git remote rename origin upstream
           git remote add origin git@github.com:edoapra/nwchem.git
-          git config commit.gpgsign false 
           git fetch origin
-          git checkout main2
-          git branch --set-upstream-to=origin/main2 main2
           git cherry-pick ff4a4ccfda507d4680ecbe86f46dcfaef89c06e4
           git cherry-pick cbc1e0354aeb8cbdfe7b76858f4d9de1d45a44b5
           git cherry-pick 47497081202f32ac41b3d77f6c34c7ba31644ee9
@@ -35,7 +33,7 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.REPOSITORY_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           repository: edoapra/nwchem
           force: true
           branch: main2
