@@ -27,5 +27,6 @@ jobs:
       - name: 'Dependency Review'
         uses: actions/dependency-review-action@v2
         with:
+          # insert the event fields here
           base-ref: ${{ github.event.before }}
           head-ref: ${{ github.sha }}
