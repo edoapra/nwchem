@@ -32,5 +32,5 @@ jobs:
         uses: actions/dependency-review-action@v2
         if: github.event_name == 'schedule'
         with:
-          base-ref: main
-          head-ref: main
+          base-ref: ${{ github.ref_name }}
+          head-ref: ${{ github.ref_name }}
