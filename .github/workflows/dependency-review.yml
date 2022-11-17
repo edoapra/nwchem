@@ -31,5 +31,4 @@ jobs:
           #base-ref: ${{ github.event.before }}
           base-ref: a6dd3855da54c4ace0ec2d3d040565c175693842
           head-ref: ${{ github.sha }}
-          allow-licenses: ECL-2.0
           deny-licenses:  LGPL-3.0-or-later
