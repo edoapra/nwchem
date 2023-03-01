@@ -216,6 +216,7 @@ if [[ "$?" != "0" ]]; then
     exit 1
 fi
     make V=0   install
-
+strip ${NWCHEM_TOP}/src/libext/lib/libelpa.a
+ranlib ${NWCHEM_TOP}/src/libext/lib/libelpa.a
 ln -sf ${NWCHEM_TOP}/src/libext/lib/libelpa.a  ${NWCHEM_TOP}/src/libext/lib/libnwc_elpa.a
 ln -sf ${NWCHEM_TOP}/src/libext/include/elpa-${SHORTVERSION}  ${NWCHEM_TOP}/src/libext/include/elpa
