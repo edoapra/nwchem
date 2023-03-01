@@ -302,6 +302,7 @@ if [[ "$?" != "0" ]]; then
 fi
 mkdir -p ../../../lib
 strip lib/libscalapack.a
+ranlib lib/libscalapack.a
 cp lib/libscalapack.a ../../../lib/libnwc_scalapack.a
 if [[ "$KNL_SWAP" == "1" ]]; then
     module swap  craype-haswell craype-mic-knl
