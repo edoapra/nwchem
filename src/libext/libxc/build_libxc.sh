@@ -125,6 +125,9 @@ $CMAKE  -DCMAKE_INSTALL_PREFIX=${NWCHEM_TOP}/src/libext/libxc/install -DCMAKE_C_
 
 make -j4 | tee make.log
 make install
+strip ../../install/lib/libxc.a
+strip ../../install/lib/libxcf03.a
+strip ../../install/lib/libxcf90.a
 ln -sf  ../../install/lib/libxc.a ../../install/lib/libnwc_xc.a
 ln -sf  ../../install/lib/libxcf03.a ../../install/lib/libnwc_xcf03.a
 
