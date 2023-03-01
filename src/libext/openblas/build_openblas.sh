@@ -241,6 +241,7 @@ fi
 
 mkdir -p ../../lib
 strip libopenblas*-*.a
+ranlib libopenblas*-*.a
 cp libopenblas.a ../../lib/libnwc_openblas.a
 #make PREFIX=. install
 if [[  ! -z "${NWCHEM_USE_OPENMP}" ]]; then
