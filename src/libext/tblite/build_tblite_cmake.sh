@@ -233,4 +233,5 @@ $CMAKE --install _build
 
 cd ..
 strip ../lib/libtblite.a
+ranlib ../lib/libtblite.a
 ln -sf  ../lib/libtblite.a  ../lib/libnwc_tblite.a
