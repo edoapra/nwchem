@@ -70,27 +70,13 @@ C LOCAL VARIABLES
       character*80 key 
       character*20 space
       Integer mlen
-C
-C PRIVATE DATA
-      Integer PerTbl(NElements)
-C
-C     NOTE: This version of the table assumes 5d & 7f representations in
-c     the basis.
+#include "geom_numcore.fh"      
 c
 c     rjh: To avoid problems with ECPs and atoms that aren't really
 c     .    atoms 'cos the user is messing with their charge, simply
 c     .    ignore atoms that don't have a charge = atomic number.
 C
-      Data PerTbl /2*0,     ! H-He, <none> 
-     $    8* 1,             ! Li-Ne, 1s
-     $    8* 5,             ! Na-Ar,  +2s2p
-     $   18* 9,             ! K-Kr,       +3s3p
-     $   18*18,             ! Rb-Xe,          +4s3d4p 
-     $   32*27,             ! Cs-Rn,                +5s4d5p
-     $   34*43/             ! Fr-Og,                      +6s4f5d6p
-C
-      
-      
+     
       space = 'number tag elements'
       key = ' '
       mlen = inp_strlen(module) 
@@ -134,3 +120,14 @@ C
       Return
       End
 C> @}
+      integer function geom_ncore_element(atnr)
+      Implicit NONE
+      integer atnr ! atomic number [in]
+#include "nwc_const.fh"
+#include "periodic.fh"
+#include "geom_numcore.fh"
+      if(atnr.lt.0.or.atnr.gt.nelements) call
+     E     errquit(' geom_ncore_element: wrong z ',atnr,0)
+      geom_ncore_element=pertbl(atnr)
+      return
+      end
