@@ -1,0 +1,9 @@
+      Integer PerTbl(NElements)
+      Data PerTbl /2*0,     ! H-He, <none> 
+     $    8* 1,             ! Li-Ne, 1s
+     $    8* 5,             ! Na-Ar,  +2s2p
+     $   18* 9,             ! K-Kr,       +3s3p
+     $   18*18,             ! Rb-Xe,          +4s3d4p 
+     $   32*27,             ! Cs-Rn,                +5s4d5p
+     $   34*43/             ! Fr-Og,                      +6s4f5d6p
+
