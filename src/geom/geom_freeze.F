@@ -20,12 +20,30 @@ C> \return The function returns .true. if this number is found, and
 C> .false. otherwise.
 c
       Logical Function geom_freeze (rtdb, geom, module, ncore)
+      implicit none
+      Integer rtdb                       !< [Input] the RTDB handle
+      Integer geom                       !< [Input] the geometry handle
+      Character*(*) module               !< [Input] the name of the code module
+      Integer ncore             !< [Output] the number of frozen core orbitals
+      external geom_freeze_check
+      logical geom_freeze_check
+     c
+      integer dummy_movecs
+      geom_freeze=geom_freeze_check (rtdb, geom, module, ncore,
+     $     .false., dummy_movecs)
+      return
+      end
+      Logical Function geom_freeze_check (rtdb, geom, module, ncore,
+     $     check_core, movecs)
 
       Implicit NONE
       Integer rtdb                       !< [Input] the RTDB handle
       Integer geom                       !< [Input] the geometry handle
       Character*(*) module               !< [Input] the name of the code module
       Integer ncore                      !< [Output] the number of frozen core orbitals
+      logical check_core
+      integer movecs
+c     
       Character*255 a_name               ! freeze by atoms
       Character*255 c_name               ! freeze by core
       Logical status                     ! status variable for rtdb
@@ -45,11 +63,16 @@ C:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
       a_name = module // ':frozen core:freeze by atoms'
       c_name = module // ':frozen core'
 
-      Geom_Freeze = .true.
+      geom_freeze_check = .true.
 
       if (rtdb_get(rtdb, a_name , MT_LOG, 1, status)) then
            if (.not. geom_num_core(rtdb, geom, module, ncore)) then
-                Geom_Freeze = .false.
+              geom_freeze_check = .false.
+           else
+              if(check_core) then
+c     analyze core eigenv looping over 1,ncore MOs
+c     check if each ncore MO is a core MO by using code from movecs_print_anal
+              endif
            endif
       else if (rtdb_get(rtdb, c_name, MT_INT, 1, ncore)) then
            continue
