@@ -1,0 +1,5 @@
+      integer nuc_num
+      integer nuc_cent
+      integer max_quantum_nuc
+      parameter (max_quantum_nuc = nw_max_basis_sets-1)
+      common /ccneo/ nuc_num, nuc_cent(max_quantum_nuc)

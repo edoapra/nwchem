@@ -355,6 +355,8 @@ c
                continue         ! Already digested by input_file_info
             else if (inp_compare(.false.,test,'ecce_print')) then
                continue         ! Already digested by input_file_info
+            else if (inp_compare(.false.,test,'cneo')) then 
+               call cneo_input(rtdb)
             else
                call errquit('input_parse: unknown directive '//test,0,
      &       INPUT_ERR)

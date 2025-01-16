@@ -1,0 +1,16 @@
+      double precision f_cneo
+      double precision exp_pos
+      integer g_int1e_r
+      integer g_fock0, g_fock_add
+      integer g_fock0_solve, g_int1e_r_solve, nbf_solve
+      integer bas_solve
+      logical converged_solve
+
+      common/cconstrain/
+     $   f_cneo(3, max_quantum_nuc),
+     $   exp_pos(3, max_quantum_nuc),
+     $   g_int1e_r(3, max_quantum_nuc), 
+     $   g_fock0(max_quantum_nuc), g_fock_add(max_quantum_nuc),
+     $   g_fock0_solve, g_int1e_r_solve(3), nbf_solve, bas_solve,
+     $   converged_solve
+      

@@ -1,0 +1,53 @@
+      integer ccneo_init_flag   ! Validity flag for this common block
+c     
+      integer ccneo_vlen        ! Length of parameter space
+      integer ccneo_vlen_e
+      integer ccneo_vlen_n
+      integer ccneo_g_fcv_e       ! Closed-virtual Fock matrix handle
+      integer ccneo_g_fpv       ! Partial-virtual Fock matrix handle
+      integer ccneo_g_fcp       ! Closed-partial Fock matrix handle
+      integer ccneo_g_fcv_n
+c
+      integer nelec_e, nclosed_e, nopen_e
+      integer nmo_e, nmo_n
+      integer nbf_e, nbf_n
+      integer g_movecs_e, g_movecs_n
+      integer bas_e, bas_n, geom_cneo
+      double precision charge_cneo
+      double precision shifts_e, shifts_n
+      double precision l_shift_n, l_shift_e
+c      double precision ls_tol, precond_tol
+      integer pflg_e, pflg_n, pflg_prev_e, pflg_prev_n
+      integer l_eval_e, k_eval_e, l_eval_n, k_eval_n
+      integer l_occ_e, k_occ_e, l_occ_n, k_occ_n
+      double precision gnorm_tol_cneo, tol2e_cneo
+      integer maxiter_cneo, iter_cneo
+c      integer nuc_start_flag
+
+c
+      logical noskew_e            ! to facilitate generic solvers wiith
+                                ! imaginary components (i.e. NMR
+                                ! shielding) default is .true. but
+                                ! needs to be .false. for NMR
+      common/cscf_cneo/
+     $     ccneo_init_flag,
+     $     ccneo_vlen,
+     $     ccneo_vlen_e,
+     $     ccneo_vlen_n,
+     $     ccneo_g_fcv_e,
+     $     ccneo_g_fpv,
+     $     ccneo_g_fcp,
+     $     ccneo_g_fcv_n(max_quantum_nuc),
+     $     nelec_e, nclosed_e, nopen_e,
+     $     nmo_e, nmo_n, nbf_e, nbf_n, charge_cneo,
+     $     g_movecs_e, g_movecs_n(max_quantum_nuc), 
+     $     bas_e, bas_n(max_quantum_nuc), geom_cneo,
+     $     shifts_e(6), shifts_n(6), l_shift_n, l_shift_e,
+     $     pflg_e, pflg_n, pflg_prev_e, pflg_prev_n,
+     $     l_eval_e, k_eval_e, 
+     $     l_eval_n(max_quantum_nuc), k_eval_n(max_quantum_nuc),
+     $     l_occ_e, k_occ_e, 
+     $     l_occ_n(max_quantum_nuc), k_occ_n(max_quantum_nuc),
+     $     gnorm_tol_cneo, tol2e_cneo, maxiter_cneo, iter_cneo,
+     $     noskew_e
+c
