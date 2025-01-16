@@ -164,7 +164,7 @@ c
             jngen = infbs_cont(CONT_NGEN,  ju, bra)
             if (jtype.eq.0 .and. jngen.gt.1) goto 10
 c     
-            ku = (sf_ibs_cn2ucn(kcl(iq),bra))
+            ku = (sf_ibs_cn2ucn(kcl(iq),ket))
             ktype = infbs_cont(CONT_TYPE,  ku, ket)
             if (ktype .gt. 0) goto 10
             knprim= infbs_cont(CONT_NPRIM, ku, ket)
@@ -172,7 +172,7 @@ c
             kngen = infbs_cont(CONT_NGEN,  ku, ket)
             if (ktype.eq.0 .and. kngen.gt.1) goto 10
 c     
-            lu = (sf_ibs_cn2ucn(lcl(iq),bra))
+            lu = (sf_ibs_cn2ucn(lcl(iq),ket))
             ltype = infbs_cont(CONT_TYPE,  lu, ket)
             if (ltype .gt. 0) goto 10
             lnprim= infbs_cont(CONT_NPRIM, lu, ket)
