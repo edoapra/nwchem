@@ -200,7 +200,7 @@ if [[  -z "${CC}" ]]; then
     CC=cc
 fi
 GOTMINGW64=` $CC -dM -E - </dev/null 2> /dev/null |grep MINGW64|cut -c21 `
-if [[ -d "ga-5.9" ]]; then
+#if [[ -d "ga-5.9" ]]; then
 #    if [[ ! -f "ga-5.9/patched59" ]]; then
 #	./gamalloc_patch.sh $GA_DIR
 #	./peigstubs_patch.sh $GA_DIR
@@ -214,7 +214,7 @@ if [[ -d "ga-5.9" ]]; then
 #	echo patched
 #	touch ga-59/patched59
 #    fi
-fi
+#fi
 #if [ ! -z "$GOTMINGW64" ]
 #then
 #echo "CC" $CC
