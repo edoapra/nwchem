@@ -1,0 +1,48 @@
+c     Common block for Z-vector equations of CNEO-TDDFT    
+c     Modified from nwdft/lr_tddft_grad/tddft_grad_solve_common.fh 
+      
+#include "nwc_const.fh"
+#include "ccneo.fh"
+      double precision ctdg_tol2e   ! the 2-electron integral tolerance
+      double precision ctdg_kfac    
+c
+      integer ctdg_rtdb    ! the runtime database
+      integer ctdg_geom    ! the geometry handle
+      integer ctdg_bfao    ! the basis set handle
+      integer ctdg_ipol    ! =1 (restricted), =2 (unrestricted)
+      integer ctdg_nroots  ! the number of roots
+      integer ctdg_nao     ! the number of AOs
+      integer ctdg_nocc(2) ! the number of occupied orbitals
+      integer ctdg_naoc(2) ! the number of active occupied orbitals
+      integer ctdg_nav(2)  ! the number of active virtual orbitals
+      integer ctdg_nfc(2)  ! the number of frozen core orbitals
+      integer ctdg_nfv(2)  ! the number of frozen virtual orbitals
+      integer ctdg_nmo(2)  ! the number of molecular orbitals
+      integer ctdg_g_mo(2) ! global arrays to the MOs
+      integer ctdg_e_mo    ! the orbital energy pointer
+      logical ctdg_tda     ! True if Tamm-Dancoff approximation
+      logical ctdg_oskel
+      logical ctdg_lhashf
+      logical ctdg_triplet 
+      logical ctdg_lhascd
+
+      integer ctdg_bfn(max_quantum_nuc)
+      integer ctdg_nao_n(max_quantum_nuc)
+      integer ctdg_naoc_n(max_quantum_nuc)
+      integer ctdg_nav_n(max_quantum_nuc)
+      integer ctdg_nmo_n(max_quantum_nuc)
+      integer ctdg_g_mo_n(max_quantum_nuc)
+      integer ctdg_e_mo_n   ! pointer for nuclear orbital energy
+      integer ctdg_e_size
+      integer ctdg_n_size(max_quantum_nuc)
+      integer ctdg_tot_size
+      integer ctdg_g_int1er_ao(max_quantum_nuc)
+      integer ctdg_g_int1er_ov(max_quantum_nuc)
+      common/ccneo_tdgrad_solve/ctdg_tol2e,ctdg_kfac,ctdg_rtdb,
+     +       ctdg_geom,ctdg_bfao,ctdg_ipol,ctdg_nroots,ctdg_nao,
+     +       ctdg_nocc,ctdg_naoc,ctdg_nav,ctdg_nfc,ctdg_nfv,ctdg_nmo,
+     +       ctdg_g_mo,ctdg_e_mo,ctdg_tda,
+     +       ctdg_oskel,ctdg_lhashf,ctdg_triplet,ctdg_lhascd,
+     +       ctdg_bfn,ctdg_nao_n,ctdg_naoc_n,ctdg_nav_n,ctdg_nmo_n,
+     +       ctdg_g_mo_n,ctdg_e_mo_n,ctdg_e_size,ctdg_n_size, 
+     +       ctdg_tot_size, ctdg_g_int1er_ao,ctdg_g_int1er_ov
