@@ -1,13 +1,13 @@
       subroutine get_j_dm(geom,bas1,bas2,jfac,
      $     tol2e,oskel,g_dens,g_fock,inttype,
      $     idx1, idx2, ofock)
-c     This subroutine implicitly assumed that the input
-c     density matrix is symmetric, so as the output fock
-c     matrix.
-c     As a result, this subroutine cannot be utilized 
-c     in cneo TDDFT grad for the calculation of en response.
-c     Similar subroutine is implemented for TDDFT gradient
-c     calculation
+c
+c     To calculate Coulomb matrix between two different
+c     basis sets
+c
+c     Note that this subroutine implicitly assumed that 
+c     the input density matrix is symmetric
+
       implicit none
 #include "errquit.fh"
 #include "mafdecls.fh"
@@ -80,10 +80,6 @@ c     calculation
 
       call util_file_name(tmp_filename,.true.,.false.,int2efilename)
 
-      ! print *, 'cneo:get_j_dm:int2efilename:', int2efilename, inttype
-      maxquartet = 10000
-      maxeri = 1296*100
-
       tol2e_local = min(tol2e,1d-8)
 
       if (oreadfile) then
@@ -107,78 +103,79 @@ c     calculation
       lmemlist = 0
       status = .true.
       status = status .and. ma_push_get(MT_DBL, nbf2*nbf2, 
-     $     'en_rep: density', l_dens, k_dens)
+     $     'get_j_dm: density', l_dens, k_dens)
       if (status) then
         lmemlist = lmemlist + 1
         memlist(lmemlist) = l_dens
       endif
       status = status .and. ma_push_get(MT_DBL, nbf1*nbf1, 
-     $     'en_rep: fock',    l_fock, k_fock)
+     $     'get_j_dm: fock',    l_fock, k_fock)
       if (status) then
         lmemlist = lmemlist + 1
         memlist(lmemlist) = l_fock
       endif
       status = status .and. ma_push_get(MT_DBL, nsh2*nsh2, 
-     $     'en_rep: fock',    l_rdens, k_rdens)
+     $     'get_j_dm: fock',    l_rdens, k_rdens)
       if (status) then
         lmemlist = lmemlist + 1
         memlist(lmemlist) = l_rdens
       endif
       status = status .and. ma_push_get(MT_DBL, maxquartet,
-     $     'en_rep: q4',    l_q4, k_q4)
+     $     'get_j_dm: q4',    l_q4, k_q4)
       if (status) then
         lmemlist = lmemlist + 1
         memlist(lmemlist) = l_q4
       endif
       status = status .and. ma_push_get(MT_INT, 4*maxquartet,
-     $     'en_rep: ijkl',    l_ijkl, k_ijkl)
+     $     'get_j_dm: ijkl',    l_ijkl, k_ijkl)
       if (status) then
         lmemlist = lmemlist + 1
         memlist(lmemlist) = l_ijkl
       endif
       status = status .and. ma_push_get(MT_INT, nbf1*(nbf1+1),
-     $     'en_rep: plist1',    l_plist1, k_plist1)
+     $     'get_j_dm: plist1',    l_plist1, k_plist1)
       if (status) then
         lmemlist = lmemlist + 1
         memlist(lmemlist) = l_plist1
       endif
       status = status .and. ma_push_get(MT_DBL, nbf1*(nbf1+1)/2,
-     $     'en_rep: plist1',    l_ps1, k_ps1)
+     $     'get_j_dm: plist1',    l_ps1, k_ps1)
       if (status) then
         lmemlist = lmemlist + 1
         memlist(lmemlist) = l_ps1
       endif
       status = status .and. ma_push_get(MT_INT, 2*tdim,
-     $     'en_rep: pinfo1',    l_pinfo1, k_pinfo1)
+     $     'get_j_dm: pinfo1',    l_pinfo1, k_pinfo1)
       if (status) then
          lmemlist = lmemlist + 1
          memlist(lmemlist) = l_pinfo1
       endif
 c     For bas2
       status = status .and. ma_push_get(MT_INT, nbf2*(nbf2+1),
-     $     'en_rep: plist2',    l_plist2, k_plist2)
+     $     'get_j_dm: plist2',    l_plist2, k_plist2)
       if (status) then
         lmemlist = lmemlist + 1
         memlist(lmemlist) = l_plist2
       endif
       status = status .and. ma_push_get(MT_DBL, nbf2*(nbf2+1)/2,
-     $     'en_rep: plist2',    l_ps2, k_ps2)
+     $     'get_j_dm: plist2',    l_ps2, k_ps2)
       if (status) then
         lmemlist = lmemlist + 1
         memlist(lmemlist) = l_ps2
       endif
       status = status .and. ma_push_get(MT_INT, 2*tdim,
-     $     'en_rep: pinfo2',    l_pinfo2, k_pinfo2)
+     $     'get_j_dm: pinfo2',    l_pinfo2, k_pinfo2)
       if (status) then
          lmemlist = lmemlist + 1
          memlist(lmemlist) = l_pinfo2
+      else
+         call errquit('get_j_dm:ma_push_get?',0,MA_ERR)
       endif
-      ! add error info later (line 143 in ao_replicated)
 
       call ga_sync()
       if (ga_nodeid() .eq. 0) then
          status = ma_push_get(MT_DBL, nbf2*nbf2, 
-     $     'en_rep: density tmp', l_dens_tmp, k_dens_tmp)
+     $     'get_j_dm: density tmp', l_dens_tmp, k_dens_tmp)
          if (.not. status) call errquit('cneo:fock:tmp dens',0,0)
          call ga_get(g_dens, 1, nbf2, 1, nbf2, 
      $           dbl_mb(k_dens_tmp), nbf2)
@@ -261,8 +258,6 @@ c
      $         call errquit('cneo:get_j_dm: close file',0,0)
       endif
 
-      ! call ga_print(g_fock)
-
       end
 
       subroutine fock_en_rep(geom, bas1, bas2, nbf1,nbf2, nsh1, nsh2,
@@ -280,7 +275,6 @@ c
 #include "mafdecls.fh"
 
       integer geom, bas1, bas2
-      ! integer nfock
       integer nbf1, nbf2
       integer nsh1, nsh2
       integer natom
@@ -342,8 +336,6 @@ c
       next = 1
       incomplete_top = 0
 
-      ! nops = sym_number_ops(geom)+1
-      ! dnops = nops
       dnops = 1
       nops = 1
 
@@ -353,7 +345,7 @@ c
       incomplete = -1
 
       if (.not. geom_ncent_unique(geom, natom_unique)) call errquit
-     $     ('fock_2e_rep: bad geom handle?',0, GEOM_ERR)
+     $     ('fock_en_rep: bad geom handle?',0, GEOM_ERR)
       if (nsh1 .gt. cnmax)   call errquit('fock_en_rep: cnmax',nsh1,
      &       UNKNOWN_ERR)
       if (nsh2 .gt. cnmax)   call errquit('fock_en_rep: cnmax',nsh2,
@@ -439,13 +431,11 @@ cedo         integ_acc = 1d-15 ! Not used
       if (max_p .lt. nint(sqrt(dble(qdim))) .and.
      $     chunk .gt. 4) then
          max_p = min(nint(sqrt(dble(qdim))),2*max_p)
-         ! if (oprint .and. ga_nodeid().eq.0) write(6,*) ' A ', max_p
          odonea = .true.
          goto 10
       else if ((ntype1*ntype2)/ga_nnodes().lt.ntp  .and.
      $        max_p.gt.10 .and. (.not. odonea)) then
          max_p = max(10,max_p/2)
-         ! if (oprint .and. ga_nodeid().eq.0) write(6,*) ' B ', max_p
          goto 10
       end if
       if ((util_print('semi_direct',print_debug))
@@ -457,7 +447,6 @@ cedo         integ_acc = 1d-15 ! Not used
 
       
       nproc = ga_nnodes()
-      ! next = nxtask(nproc, chunk)
 
       next = 0
 
@@ -569,7 +558,7 @@ c
 c     
 c     Given a list of integral quartets, notionally all of the
 c     same type, compute the integrals and add them into the
-c     fock matrix, optionally caching them on disk/memory.
+c     fock matrix
 c     
       integer lenscr, leneri, lenlab
       integer l_eri, k_eri, l_lab, k_lab, l_scr, k_scr
@@ -587,16 +576,10 @@ c
       double precision nqdone, neri_done
       common/fred/nqdone, neri_done, neri_direct, neri_cached,ntreq
 c     
-      logical int2e_file_write, intb_2e4c, modified_intb_init4c
-      external int2e_file_write, intb_2e4c, modified_intb_init4c
+      logical int2e_file_write, intb_2e4c, intb_init4c
+      external int2e_file_write, intb_2e4c, intb_init4c
 c     
       if (nq .le. 0) return
-c
-c     Figure out dimensions for scratch and eri buffer space.
-c     The eri buffer space is defaulted in scf_get_info to some
-c     suitable non-zero number.  The scratch space defaults to zero
-c     in which case int_mem_2e4c is used, otherwise the user input
-c     is taken.
 c
       call intb_mem_2e4c(maxg, lenscr) ! blocking algorithm
       if (maxscr .ne. 0) then
@@ -650,7 +633,7 @@ c
       k_k = k_j   + leneri
       k_l = k_k   + leneri
 c     
-      if (.not. modified_intb_init4c(bas1, iq, jq, bas2, kq, lq,
+      if (.not. intb_init4c(bas1, iq, jq, bas2, kq, lq,
      $     nq, q4, .true., lenscr, dbl_mb(k_scr), leneri, block_eff))
      $     call errquit('intb_init?',nq, UNKNOWN_ERR)
 c     

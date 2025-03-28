@@ -1,5 +1,5 @@
 c
-c     == Main DFT driver ==
+c     == Main CNEO-DFT driver ==
       logical function cneo_dft_main0d(rtdb)
 c     
 c     $Id$
@@ -26,7 +26,7 @@ c
 #include "dftps.fh"
 #include "bgj.fh"
 #include "ccneo.fh"
-#include "cscf_cneo.fh"
+#include "ccneo_dft.fh"
 c
 #ifdef SCALAPACK
 #include "dft_scaleig.fh"
@@ -96,11 +96,11 @@ c
 c
 c     == Preliminaries ==
       cneo_dft_main0d = .false.
-      pname = "dft_main0d:"
+      pname = "cneo_dft_main0d:"
       me = ga_nodeid()
       nproc = ga_nnodes()
-      oprint = util_print('dft info', print_default)
-      oprint_time = util_print('dft timings', print_high)
+      oprint = util_print('cneo dft info', print_default)
+      oprint_time = util_print('cneo dft timings', print_high)
       oprint_ioinfo = util_print('io info', print_debug)
       if(ga_nodeid().eq.0.and.
      .     util_print('geometry', print_high)) then
@@ -116,10 +116,10 @@ c
       ltried_cgmin = .false.
 c
 c     initialize
-      if (.not. rtdb_put(rtdb, 'dft:energy', MT_DBL, 1, 0.d0))
+      if (.not. rtdb_put(rtdb, 'cneo_dft:energy', MT_DBL, 1, 0.d0))
      &   call errquit('dft_scf: failed to store energy in rtdb', 0,
      &       RTDB_ERR)
-      if (.not. rtdb_put(rtdb, 'dft:converged', MT_LOG, 1, .false.))
+      if (.not. rtdb_put(rtdb, 'cneo_dft:converged', MT_LOG,1,.false.))
      &   call errquit('dft_scf: failed to store converged in rtdb', 0,
      &       RTDB_ERR)
 c
@@ -161,8 +161,6 @@ c     == Check which solver to use ==
 c
 c     == Check real-time TDDFT flag ==
       lrt_tddft = .false.
-   !    if (.not. rtdb_get(rtdb, 'dft:lrt_tddft', mt_log, 1, lrt_tddft))
-   !   &   lrt_tddft = .false.
 c
 c     == Evaluate the nuclear repulsion energy ==
       LResult = geom_nuc_rep_energy(geom, Enuc)
@@ -428,8 +426,6 @@ c     == Call the main drivers ==
      &                         g_evecs, g_vxc, g_fock, g_svecs,
      &                         dbl_mb(isvals),g_xcinv,g_s,g_s_n,lcdft,
      &                         nconstr, g_svecs_n, dbl_mb(isvals_n))
-          else if (lcgmin) then
-            ! dft_main0d = dft_cg_solve(rtdb)
           endif
        else
           cneo_dft_main0d = .false.
@@ -476,9 +472,17 @@ c
       if (.not. ga_destroy(g_svecs)) call errquit
      &   (pname//'Could not destroy g_svecs', 0, GA_ERR)
 
+      do i=1,nuc_num
+         if (.not.ga_destroy(g_s_n(i))) call errquit
+     +      (pname//'could not destroy g_s_n',0,GA_ERR)
+         if (.not.ga_destroy(g_svecs_n(i))) call errquit
+     +      (pname//'could not destroy g_svecs_n',0,GA_ERR)
+      enddo
+
 c
       if (.not.ma_chop_stack(lsvals))
      &  call errquit(pname//'Cannot chop stack lsvals', 12, MA_ERR)
+
 c
       return
       end

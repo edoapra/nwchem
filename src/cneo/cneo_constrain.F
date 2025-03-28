@@ -5,8 +5,8 @@
 #include "global.fh"
 #include "nwc_const.fh"
 #include "ccneo.fh"
-#include "cconstrain.fh"
-#include "cscf_cneo.fh"
+#include "ccneo_constrain.fh"
+#include "ccneo_dft.fh"
 
       integer rtdb
       integer g_cfock, g_nfock
@@ -30,7 +30,7 @@
       call util_Newton_solve(g_f,position_analysis,
      $            1.0d-9,10,converged_solve)
 
-      call get_fock_add_cneo(g_f,g_int1e_r(1,idx),g_fock_add(idx))
+      call cneo_fock_constrain(g_f,g_int1e_r(1,idx),g_fock_add(idx))
 
       call ga_get(g_f,1,3,1,1,f_cneo(1,idx),3)
 
@@ -47,7 +47,7 @@
 #include "mafdecls.fh"
 #include "global.fh"
 #include "ccneo.fh"
-#include "cconstrain.fh"
+#include "ccneo_constrain.fh"
 
       double precision acc
       integer g_f
@@ -71,7 +71,7 @@
      $      call errquit('pos_ana:ga_duplicate?',0,0)
       call ga_zero(g_fock_add_local)
 
-      call get_fock_add_cneo(g_f, g_int1e_r_solve, g_fock_add_local)
+      call cneo_fock_constrain(g_f, g_int1e_r_solve, g_fock_add_local)
 
       if (.not. ga_create(mt_dbl, nbf_solve,nbf_solve,'pos_ana: fock',
      $         32, 32, g_fock_local)) call errquit
@@ -139,7 +139,7 @@
       implicit none 
 #include "nwc_const.fh"
 #include "ccneo.fh"
-#include "cconstrain.fh"
+#include "ccneo_constrain.fh"
 
       integer idx
       integer nbf, basis

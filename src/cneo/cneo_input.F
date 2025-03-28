@@ -21,9 +21,7 @@
       character*256 nuc_bas_name
       character*255 cdft_bas_input
 
-      do i=1,10
-         quantum_nuc_idx(i) = 0
-      end do
+      quantum_nuc_idx = 0
 
       oidx = .false.
       osmb = .false.
@@ -37,13 +35,9 @@
      $     call errquit('cdft_input: failed to read keyword',0,
      &       INPUT_ERR)
 
-      ! print *, 'current reading is...', test
-
       if (inp_compare(.false.,'quantum_nuc',test)) then
  110     if (inp_f(tmp_idx)) then
-            ! print *, tmp_idx
             oidx = .true.
-            ! quantum_nuc(int(tmp_idx))=1
             i = i+1
             quantum_nuc_idx(i)=int(tmp_idx)
             go to 110
@@ -70,15 +64,10 @@
             s = rtdb_cput(rtdb,tmp,1,quantum_nuc_smb)
          end if
          go to 100
-      
-      else if (inp_compare(.false.,'threshold',test)) then  ! TODO: check convergence
-         continue
-         go to 100
-      
       else if (inp_compare(.false.,'end',test)) then
          go to 900
       else if (inp_compare(.false.,'basis',test)) then
-         call bas_input(rtdb)
+         call cneo_bas_input(rtdb)
          go to 100
       else if (inp_compare(.false.,'dft',test)) then
          call dft_input(rtdb)

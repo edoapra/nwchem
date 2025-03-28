@@ -10,7 +10,7 @@ c
 #include "errquit.fh"
 #include "nwc_const.fh"
 #include "ccneo.fh"
-#include "cconstrain.fh"
+#include "ccneo_constrain.fh"
 c      
       integer ispin
       integer ipol
@@ -126,7 +126,6 @@ c          if not(keeps) we use 2 more matrices for S^-1/2 and S^+1/2
 c
         dw_agg_avail = dble(nproc)*dble(avail)/8.0d0
      $                                    -2.0d0*dble(nbf_e)**2
-   !   $                                        -2.0d0*dble(nbf_n)**2
         if (.not.keeps) dw_agg_avail = dw_agg_avail
      $                     -2.0d0*dble(nbf_e)**2-2.0d0*dble(nbf_n)**2
 c
@@ -146,7 +145,6 @@ c
               if (me.eq.0)write(LuOut,2119)mxhist
            endif
          endif
-         ! return
 *ga:1:0
          do i=1,mxhist*ipol
             if (.not. ga_duplicate(g_focks(1), g_diis(i), 'g_diis'))
@@ -165,8 +163,6 @@ c
             if (.not. ga_duplicate(g_nfock(1), g_diis(i), 'g_diis'))
      &           call errquit('diis_driver: error creating ga',0,GA_ERR)
          enddo
-   !      if (me.eq.0)write(LuOut,*)'avail,dw_agg_avail,n_n2_objs,mxhist',
-   !   &                            avail,dw_agg_avail,n_n2_objs,mxhist
       endif
  2118 format(/,10x,'Not enough global memory currently available for ',
      &       /,10x,'DIIS.  DIIS option disabled. ')
@@ -270,8 +266,6 @@ c     Assemble: S^(-1/2)*F*D*S^(1/2) - S^(1/2)*D*F*S^(-1/2)
 c
       call ga_transpose(g_tmp_local,g_tmp2)
       call ga_add(-1d0,g_tmp_local,1d0,g_tmp2,g_tmp_local)
-      ! print *, 'debug:diis:g_err:'
-      ! call ga_print(g_tmp_local)
 
       if (.not. ga_destroy(g_tmp2)) call errquit
      &     ('diis_driver: could not destroy g_tmp2', 0, GA_ERR)
@@ -324,7 +318,7 @@ c     Clean up and leave
 #include "errquit.fh"
 #include "cdft.fh"
 #include "ccneo.fh"
-#include "cscf_cneo.fh"
+#include "ccneo_dft.fh"
       character particle
 
       if (particle .eq. 'e') then

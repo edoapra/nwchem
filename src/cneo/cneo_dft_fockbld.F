@@ -31,8 +31,8 @@ c
 #include "case.fh"
 #include "cfock.fh"
 #include "ccneo.fh"
-#include "cscf_cneo.fh"
-#include "cconstrain.fh"
+#include "ccneo_dft.fh"
+#include "ccneo_constrain.fh"
 c#include "dimqm.fh"
 c
       integer g_fock,g_dens(2),g_vxc(4),g_movecs(2) ! [handle in/values out]
@@ -136,17 +136,8 @@ c
       gcds = 0.D0
 c
 c
-c <-- MN solvation models
-c
-      use_dimqm = util_module_avail("dimqm")
-      if (use_dimqm) then
-         call dimqm_init(rtdb)
-         call dimqm_used(ldimqm)
-         call dimqm_getgo(dimqm_go)
-      else
-         ldimqm=.false.
-         dimqm_go=.false.
-      endif
+      ldimqm=.false.
+      dimqm_go=.false.
 c     =========================================================================
 
       me=ga_nodeid()
@@ -167,13 +158,6 @@ c
       Exc(2) = 0d0
 
       icd_coef = 1
-
-   !    if (cdfit) then
-   !      ! We need 2*ipol coefficients for ADFT calculations
-   !      if (.not.MA_Push_Get(MT_Dbl,2*ipol*nbf_cd,'cd_coef',lcd_coef,
-   !   &       icd_coef))
-   !   &    call errquit('dft_scf: cannot allocate cd_coef',0, MA_ERR)
-   !    endif
 
 c Jorge Garza/Begin
       if (ldmix) then
@@ -240,7 +224,7 @@ c     == Copy Fock matrix to individual components for spin ECPs ==
             oreadfile = .false.
             owritefile = .true.
          end if
-         call get_j_dm(geom,bas_e,bas_n(i),-1.0d0,1.0d-9,.false.,
+         call get_j_dm(geom,bas_e,bas_n(i),-1.0d0,tol2e_cneo,.false.,
      $         g_ndens(i),g_fock,'enints',i,0,.true.)
 
          e_en = e_en+ga_ddot(g_fock,g_dens(1))
@@ -314,12 +298,8 @@ cc AJL/End
 c
 c     add Bonacic-Fantucci repulsive term
 c
-      if (.not.rtdb_get(rtdb, 'dft:fant_d', mt_dbl, 1,
-     &   fant_d)) fant_d=-1d0
-      if (.not.rtdb_get(rtdb, 'dft:fant_a', mt_dbl, 1,
-     &   fant_a)) fant_a=-1d0
-      if(fant_a.ne.-1d0.and.fant_d.ne.-1d0)
-     A     Ecore=Ecore+dft_fant(geom,natoms,fant_a,fant_d)
+      fant_d=-1d0
+      fant_a=-1d0
       if (odftps) call pstat_off(ps_onel)
 c
 c     Pre-compute reduced total density matrices over atoms
@@ -375,7 +355,7 @@ c        call ga_dadd(1.d0, g_vxc(1), 1.d0, g_fock, g_fock)
       end if
 c      
       if (CDFIT)then
-         call errquit('cneo_dft_fockbld:unsupported')
+         call errquit('cneo_dft_fockbld:unsupported',0,0)
       else
          Ecoul = 0d0
       endif
@@ -501,15 +481,6 @@ c        call ga_print(g_focks(1))
 c        if (ipol.eq.2) call ga_print(g_focks(2))
 cc AJL/End
 c
-c MN solvation models -->
-c
-c     ----- Add SMD-CDS energy contribution when needed -----
-c
-c      if(cosmo_on.and.cosmo_phase.eq.2.and.do_cosmo_smd) then
-c        Ecore=Ecore+gcds
-c      endif
-c
-c <-- MN solvation models
 c
 
 
@@ -525,7 +496,7 @@ c
       do i=1,nuc_num
          iatom = nuc_cent(i)
          call ga_zero(g_nfock(i))
-         call get_j_dm(geom,bas_n(i),bas_e,-1.0d0,1.0d-9,.false.,
+         call get_j_dm(geom,bas_n(i),bas_e,-1.0d0,tol2e_cneo,.false.,
      $         g_dens(1), g_nfock(i), 'neints', i,0,.true.)
 
          do j=1,nuc_num
@@ -536,7 +507,7 @@ c
                end if
                call ga_zero(g_tmp_n)
                call get_j_dm(geom,bas_n(i),bas_n(j),1.0d0,
-     $                  1.0d-9,.false.,g_ndens(j),g_tmp_n,'nnints',
+     $                  tol2e_cneo,.false.,g_ndens(j),g_tmp_n,'nnints',
      $                  i,j,.true.)
                call ga_dadd(1d0,g_tmp_n,1d0,g_nfock(i),g_nfock(i))
                e_nn = e_nn+ga_ddot(g_tmp_n, g_ndens(i))
@@ -563,6 +534,9 @@ c
 
       if (ipol .gt. 1)
      $   call ga_dadd(1d0,g_dens(1),-1d0,g_dens(2),g_dens(1))
+
+      if(.not.ga_destroy(g_tmp_n)) call errquit
+     +   ('cneo_dft_fockbld:destroy g_tmp_n?',0,GA_ERR)
 
 
       end

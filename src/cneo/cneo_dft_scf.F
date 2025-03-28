@@ -1,5 +1,5 @@
 c
-c     main scalar DFT driver
+c     main CNEO-DFT driver
 c
       logical function cneo_dft_scf(rtdb, Etold, Enuc, iVcoul_opt, 
      &           iVxc_opt, iter, g_dens, g_dens_at, g_movecs, g_vxc,
@@ -10,7 +10,6 @@ c     $Id$
 c     
       implicit none
 #include "errquit.fh"
-! #include "nwc_const.fh"
 c
       integer rtdb              ! [input]
       double precision Etold, Enuc
@@ -45,9 +44,8 @@ c
 #include "modelpotential.fh"
 #include "inp.fh"
 #include "ccneo.fh"
-#include "cscf_cneo.fh"
-#include "cconstrain.fh"
-! #include "cscf_cneo.fh"
+#include "ccneo_dft.fh"
+#include "ccneo_constrain.fh"
 c     
       Logical movecs_write, movecs_converged, movecs_read
       External movecs_write, movecs_converged, movecs_read
@@ -299,7 +297,7 @@ c
       oprint_vecs = util_print('intermediate vectors', print_high)
       oprint_eval = util_print('intermediate evals', print_high)
       oprint_syma = util_print('interm vector symm', print_high)
-      oprint_time = util_print('dft timings', print_high)
+      oprint_time = util_print('cneo-dft timings', print_high)
       oprint_tol = util_print('screening parameters', print_high)
       oprint_energy_step = util_print('intermediate energy info',
      &                                print_high)
@@ -893,6 +891,8 @@ c
          call rohf_dens(g_movecs_n(i),nbf_n,1,0, g_ndens(i),g_odens)
          call ga_dscal(g_ndens(i), 5.0d-1)
       enddo
+      if (.not. ga_duplicate(g_nfock(1), g_tmp_n, 'tmp n matrix'))
+     &  call errquit('dft_scf:failed duplicate',g_nfock(1), GA_ERR)
 c
       if(iterations.eq.0) then
          if (.not. ga_destroy(g_denso(1))) call errquit
@@ -957,7 +957,7 @@ c     build DFT Fock matrix
 c  jbecca START: adding in electric field energy interaction term
       eelec = zero
 c
-      if(util_print('dft timings', print_high))
+      if(util_print('cneo-dft timings', print_high))
      &      time1=util_wallsec()  ! start fock matrix build time
 c     flip spins if needed
       if (.not. rtdb_get_info(rtdb, 'nwdft:spinflip',
@@ -982,10 +982,6 @@ c     remove flipping to avoid multiple operation in geom opt.
          if(.not.rtdb_delete(rtdb, 'nwdft:spinflip'))
      &        call errquit('dft_scf: cannot rtdb_delete',3, MA_ERR)
       endif
-      
-      if (.not. ga_duplicate(g_nfock(1), g_tmp_n, 'tmp n matrix'))
-     &  call errquit('dft_scf:failed duplicate',g_nfock(1), GA_ERR)
-
 
       call cneo_dft_fockbld(rtdb,natoms,ntotel, g_ndens,
      ,     g_fock,g_focks,g_dens,g_vxc,g_movecs,g_xcinv, 
@@ -1004,11 +1000,11 @@ cc AJL/Begin/FDE
      &     g_rel,g_frozemb,g_vxc_fde,g_xcinv_fde,g_dens_fde,eelec,
      &     g_nfock, ecore_n, e_en, e_nn)
 cc AJL/End
-      if(util_print('dft timings', print_high))
+      if(util_print('cneo-dft timings', print_high))
      &      time2=util_wallsec()  ! end fock matrix build time
 c
 c     print fock matrix build time
-      if(util_print('dft timings', print_high)) then
+      if(util_print('cneo-dft timings', print_high)) then
         if (me.eq.0) then
           write(*,"(4x,'Total Fock Matrix Build Time:',F13.1,'s')") 
      &                     time2-time1
@@ -1062,7 +1058,7 @@ c
          if (oprint_time)
      &        call dft_tstamp(' calling diis driver ')
          call cneo_diis_driver(toll_s, derr,  ipol, 
-     &           icall, nfock, nbf_e, nbf_n, geom, 
+     &           icall, nfock, nbf_ao, nbf_n, geom, 
      &           ao_bas_han, g_focks, g_nfock,g_dens,
      &           g_ndens, g_tmp_n,
      &           g_tmp, g_svecs, svals, 
@@ -1078,12 +1074,15 @@ c
         if (ga_nodeid() .eq. 0) then
           write(6,*)
           call util_print_centered(6,
-     $         'Intermediate Elec Fock Matrix',40,.true.)
+     $         'Intermediate Fock Matrix',40,.true.)
           write(6,*)
           call util_flush(6)
         end if
         call ga_print(g_focks(1))
         if (ipol.eq.2) call ga_print(g_focks(2))
+        do i=1,nuc_num
+          call ga_print(g_nfock(i))
+        enddo
       endif
 cc AJL/End
 
@@ -1116,7 +1115,6 @@ c        call ga_copy(g_dens(ispin), g_denso(ispin))
 c Constrained DFT /When lcdft, save at the beginning
       if((.not.lcdft) .or. dlold.eq.zero) then
          call ga_copy(g_dens(ispin), g_denso(ispin))
-         ! call ga_copy(g_ndens, g_ndenso)
       endif
 
 c Constrained DFT / end
@@ -1277,29 +1275,6 @@ c
      &                      nbf_ao, ipol, nmo, dbl_mb(k_occ), nbf_ao, 
      &                      dbl_mb(k_eval(1)), nbf_ao, g_movecs))
      &   call errquit('dft_scf: movec_write failed', 0, DISK_ERR)
-! c
-! c     print out the eigenvalues
-! c
-   !    call dft_prevals('inter',me,oprint_eval,oprint_vecs,
-   !   ,     g_movecs,dbl_mb(k_eval(1)),dbl_mb(k_occ))
-
-! c     
-! c     If open shell compute overlap of alpha orbitals with beta 
-! c     orbitals.
-! c     
-!       if ((ipol.gt.1).and.(oprint_interm_overlap)) then
-!          call dft_mxspin_ovlp(nbf_ao,nmo,ao_bas_han, g_movecs(1), 
-!      &       g_movecs(2),g_tmp)
-!       endif
-! c     
-! c     computation of <S2> for open shell
-! c     
-!       if ((ipol.gt.1).and.(oprint_interm_S2)) then
-
-!          call dft_s2_value(geom, AO_bas_han, .false., noc(1), noc(2),
-!      &                     nbf_ao, g_dens(1), g_dens(2))
-!       endif
-! c     
 c     
 c     Form the total density matrix.
 c     
@@ -1407,8 +1382,6 @@ c
 c
       call ga_sync()
 c
-c <-- MN solvation models
-c
       if (me.eq.0.and.oprint)then
          if (.not.converged)then
             write(LuOut,*)
@@ -1418,9 +1391,7 @@ c
          endif
 c
 c        Tally up last energy 
-c
-c        DIM/QM JEM
-        
+c    
          dft_time = dft_time+util_wallsec()
          if (nexc.le.1)then
           write(LuOut,222)etnew+enuc, 
@@ -1445,22 +1416,12 @@ c        DIM/QM JEM
 c
       endif
 c
-c MN solvation models -->
-c
  1970 continue
 c
 c     do analysis of MO occupations per irrep
 c
       call print_irrep_occp(ao_bas_han, nbf_ao, int_mb(k_ir),
      &                      dbl_mb(k_occ), ipol)
-c
-c     DIM/QM JEM
-c     Final DIM dipoles
-c
-      if (ldimqm) then
-        call dimqm_main(rtdb, ao_bas_han, geom, g_dens, .true.)
-      end if
-
 c
 c     Print all the eigenvalues
 c
@@ -1482,6 +1443,13 @@ c
             write(6,*)
             call util_flush(6)
          end do ! ispin
+         do i = 1, nuc_num
+            call util_print_centered(6,'Final nuclear eigenvalues',
+     &           20,.true.)
+            call output(dbl_mb(k_eval_n(i)),1,nmo_n,1,1,nmo_n,1,1)
+            write(6,*)
+            call util_flush(6)
+         end do ! nuc_num
         end if ! final evals
       end if ! ga_nodeid()  
 c
@@ -1507,6 +1475,10 @@ c
      &          int_mb(k_ir+(ispin-1)*nbf_ao),
      &          .true., dbl_mb(k_occ+(ispin-1)*nbf_ao))
          endif
+      enddo
+
+      do i = 1, nuc_num
+         call movecs_fix_phase(g_movecs_n(i))
       enddo
 
       if (.not. rtdb_get(rtdb, 'dft:molden', mt_log, 1, molden))
@@ -1591,6 +1563,14 @@ c
      &   call errquit('dft_scf: failed to MO irreps in rtdb', 0,
      &       RTDB_ERR)
       endif
+      if (.not. rtdb_put(rtdb, 'cneo_dft:energy', MT_DBL, 
+     &   1, (Etnew+Enuc)))
+     &   call errquit('dft_scf: failed to store energy in rtdb', 0,
+     &       RTDB_ERR)
+      if (.not. rtdb_put(rtdb, 'cneo_dft:converged', MT_LOG,
+     &   1, converged))
+     &   call errquit('dft_scf: failed to store converged in rtdb', 0,
+     &       RTDB_ERR)
 c
 c     if present, force noscf=f to avoid having it in future restarts
       if (noscf) then 
@@ -1613,7 +1593,6 @@ c
          write(str_i, '(I0)') i
          call util_file_name('movecs_n'//trim(str_i), .false.,
      $                                          .false.,movecs_out_n)
-      !    print *, 'debug:movecs:',i,movecs_out_n
          if (.not.movecs_write(rtdb, bas_n(i), movecs_out_n, 'dft', 
      &                      title, nbf_n, 1, nmo_n, 
      &                      dbl_mb(k_occ_n(i)), nbf_n, 
@@ -1643,7 +1622,7 @@ c     Shut down DIIS.
 c     
       if (icall(1).gt.0 .or. noscf)then
          call cneo_diis_driver(toll_s, derr,  ipol, 
-     &           icall, nfock, nbf_e, nbf_n, geom, 
+     &           icall, nfock, nbf_ao, nbf_n, geom, 
      &           ao_bas_han, g_focks, g_nfock,g_dens,
      &           g_ndens, g_tmp_n,
      &           g_tmp, g_svecs, svals, 
@@ -1816,6 +1795,8 @@ C
       
       if (.not. ga_destroy(g_tmp)) call errquit
      &   ('dft_scf: could not destroy g_tmp', 0, GA_ERR)
+      if (.not. ga_destroy(g_tmp_n)) call errquit
+     &   ('dft_scf: could not destroy g_tmp', 0, GA_ERR)
       if (.not. ga_destroy(g_focks(1))) call errquit
      &        ('dft_scf: could not destroy g_focks1', 0, GA_ERR)
       if (ipol.gt.1) then
@@ -1878,6 +1859,14 @@ c     deallocate xdm arrays
 c     AOR end
 
       if (odftps) call pstat_off(ps_scfend)
+
+      do i=1,nuc_num
+         if(.not. ga_destroy(g_ndens(i))) call errquit
+     +      ('cneo_dft_scf:destroy g_ndens',0,GA_ERR)
+         if(.not. ga_destroy(g_nfock(i))) call errquit
+     +      ('cneo_dft_scf:destroy g_nfock',0,GA_ERR)
+      enddo
+
       return
 c     
  21   format(/,10x,' Memory utilization after 1st SCF pass: ')

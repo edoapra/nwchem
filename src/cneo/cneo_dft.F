@@ -38,14 +38,15 @@
 
       call int_init(rtdb,nuc_num+1,bases(1:nuc_num+1))
       call cneo_int1er_init(rtdb,geom_cneo,bases_nuc)
-
-      call cneo_scf_init(rtdb,geom_cneo,basis,bases_nuc)
-
+      call cneo_dft_init(rtdb,geom_cneo,basis,bases_nuc)
       call cneo_schwarz_init(geom_cneo,nuc_num+1,bases)
 
-      status = rtdb_cput(rtdb,'dft:theory', 1, 'dft')
+      if(.not. rtdb_cput(rtdb,'dft:theory', 1, 'dft')) call errquit
+     +      ('cneo_dft_energy: could not put dft:theory',0,0)
       cneo_dft_energy = cneo_nwdft(rtdb)
+      call cneo_int1er_tidy
       call cneo_schwarz_tidy(nuc_num+1,bases)
+      call cneo_dft_tidy
       call grid_cleanup(.true.)
       if (.not. geom_destroy(geom)) call errquit
      $   ('cneo_dft:geom_destroy?',0,0)
@@ -75,7 +76,7 @@ c
 #include "modelpotential.fh"
 #include "zora.fh"
 #include "ccneo.fh"
-#include "cscf_cneo.fh"
+#include "ccneo_dft.fh"
 cinclude "crohf.fh"
 c
       integer rtdb
@@ -118,7 +119,7 @@ cc AJL/End
 
       logical status
 c     
-      pname = "nwdft:"
+      pname = "cneo_dft:"
       cneo_nwdft = .false.
       iproc  = ga_nodeid()
 c
@@ -161,13 +162,15 @@ c
           endif
         endif
       endif
+      if (.not. rtdb_put(rtdb,'dft:skeleton',mt_log,1,.false.))
+     +      call errquit(pname//'block symmetry',0,0)
+      if (.not. rtdb_put(rtdb,'dft:adapt',mt_log,1,.false.))
+     +      call errquit(pname//'block adapt',0,0)
 c
 c     == Gather input from all available resources e.g. input unit, ==
 c     == old checkpoint files, etc. ==
       call dft_rdinput(rtdb)
-      oskel = .false.
-      oadapt = .false.
-
+      tol2e_cneo = min(1.0d-8,g_conv*1d-2)
       if (.not. bas_destroy(AO_bas_han))
      $      call errquit('cneo_dft:bas_destroy?',0,0)
 
@@ -175,12 +178,8 @@ c     == old checkpoint files, etc. ==
 c
       call dft_printinfo()
 c
-c     == Cosmo initialization ==
       cosmo_last = .false.
-c
-c     == Relativistic model potential initialization ==
-      if (.not. (rtdb_get(rtdb,'zora',mt_log,1,do_zora))) 
-     &        do_zora = .false.
+      do_zora = .false.
 c
       use_modelpotential = .false.
 c
@@ -189,16 +188,8 @@ c     == Check to see if system is already converged? ==
          if (.not. rtdb_cget(rtdb, 'dft:theory', 1, theory))
      $        call errquit(pname//'Theory not specified',0, RTDB_ERR)
 c
-          if(iproc.eq.0) then
-           if (theory .eq. 'sodft') then
-             call util_print_centered(
-     &         LuOut, 'Spin-Orbit DFT', 40, .true.)
-             write(LuOut,*)
-             write(LuOut,*)
-           endif
-          endif
 c
-         if(theory .eq. 'dft'.or.theory.eq.'sodft')then 
+         if(theory .eq. 'dft')then 
             if(.not.xc_gotxc()) then
                grid_ok=.true.
             else
@@ -215,15 +206,9 @@ c
 c
 c     check if we can get the grid from a file
 c         
-               if(theory.eq.'sodft') then
-                 if(.not.rtdb_get(rtdb,'sodft:energy',mt_dbl,1,energy)) 
-     &             call errquit(
-     &             pname//'Failed getting converged energy',0, RTDB_ERR)
-               else
-                 if(.not.rtdb_get(rtdb,'dft:energy', mt_dbl,1,energy)) 
-     &             call errquit(
-     &             pname//'Failed getting converged energy',0, RTDB_ERR)
-               endif
+               if(.not.rtdb_get(rtdb,'cneo_dft:energy', mt_dbl,
+     &             1,energy)) call errquit(
+     &             pname//'Failed getting converged energy',0,RTDB_ERR)
                if (iproc.eq.0 .and. oprint)then
                   write(LuOut,1011)energy
                   call util_flush(Luout)
@@ -235,7 +220,7 @@ c
          endif
       endif
       endif
- 1011 format(/'  The DFT is already converged '//,
+ 1011 format(/'  The CNEO-DFT is already converged '//,
      &     '         Total DFT energy =', f20.12/)
 c     
 c     == Initialize the integral object ==
@@ -303,12 +288,7 @@ c
 #ifdef GA_TRACE
         call trace_init(100000)                       ! initialize trace
 #endif
-
-        if (lrt_tddft) then
-         !   nwdft = rt_tddft (rtdb)
-        else
-           cneo_nwdft = cneo_dft_main0d(rtdb)
-        endif
+         cneo_nwdft = cneo_dft_main0d(rtdb)
 
 #ifdef GA_TRACE
         call trace_end(ga_nodeid())                   ! end trace

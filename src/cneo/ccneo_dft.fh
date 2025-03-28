@@ -1,0 +1,14 @@
+
+      integer nbf_e, nbf_n, nmo_n
+      integer g_movecs_n
+      integer bas_e, bas_n, geom_cneo
+      integer l_eval_n, k_eval_n
+      integer l_occ_n, k_occ_n
+      double precision tol2e_cneo
+      common/ccneo_dft/
+     $     nbf_e, nbf_n, nmo_n,
+     $     g_movecs_n(max_quantum_nuc), 
+     $     bas_e, bas_n(max_quantum_nuc), geom_cneo,
+     $     l_eval_n(max_quantum_nuc), k_eval_n(max_quantum_nuc),
+     $     l_occ_n(max_quantum_nuc), k_occ_n(max_quantum_nuc),
+     $     tol2e_cneo

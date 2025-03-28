@@ -104,6 +104,9 @@ c
       if (idone.eq.1)then
          if (.not.rtdb_put(rtdb, 'dft:converged', MT_LOG, 1, converged))
      &      call errquit('dft_scfcvg: rtdb_put failed', 1, RTDB_ERR)
+         if (.not.rtdb_put(rtdb, 'cneo_dft:converged', MT_LOG, 1,
+     &       converged)) call errquit
+     &      ('dft_scfcvg: rtdb_put failed', 1, RTDB_ERR)
       endif
       return
       end

@@ -29,7 +29,7 @@
 
       end
 
-      subroutine get_fock_add_cneo(g_f, g_int1e_r, g_fock)
+      subroutine cneo_fock_constrain(g_f, g_int1e_r, g_fock)
       implicit none 
 #include "errquit.fh"
 #include "mafdecls.fh"
@@ -55,20 +55,57 @@
       
       end
 
-      subroutine cneo_get_fock(nuc_num,g_fock_e,g_fock_n)
-      implicit none
-      integer nuc_num
-      integer g_fock_e
-      integer g_fock_n(nuc_num)
-      integer i
+      subroutine cneo_vecs_guess_nuc(rtdb, i,iatom,g_edens)
+      implicit none 
+#include "errquit.fh"
+#include "mafdecls.fh"
+#include "global.fh"
+#include "util.fh"
+#include "nwc_const.fh"
+#include "ccneo.fh"
+#include "ccneo_dft.fh"
 
+      integer rtdb,i, iatom
+      integer g_edens
 
-      call cneo_scf_set('e',0)
-      call rohf_get_fock(g_fock_e)
+      integer g_nhcore, g_nfock, g_over, g_tmp
+      integer ga_create_atom_blocked
+      external ga_create_atom_blocked
 
-      do i=1,nuc_num
-         call cneo_scf_set('n',i)
-         call rohf_get_fock(g_fock_n(i))
-      enddo
+      g_nfock = ga_create_atom_blocked(geom_cneo, bas_n(i), 
+     $            'Temp:n:fock')
+      if (.not. ga_create(MT_DBL,nbf_n,nbf_n,'cneo_vecs_guess_n:over',
+     $     0, 0, g_over)) call
+     $     errquit('cneo_vecs_guess_n: ga failed for over', 0, GA_ERR)
+
+      if (.not. ga_create(MT_DBL,nbf_n,nbf_n,'cneo_vecs_guess_n:tmp',
+     $     0, 0, g_tmp)) call
+     $     errquit('cneo_vecs_guess_n: ga failed for tmp', 0, GA_ERR)
+
+      call ga_zero(g_nfock)
+      call get_j_dm(geom_cneo, bas_n(i), bas_e, -1.0d0, tol2e_cneo,
+     $       .false., g_edens, g_nfock, 'neints', i,0,.false.)
+      call hcore_nuc(geom_cneo, bas_n(i), g_nhcore, iatom)
+      call ga_dadd(1.0d0, g_nhcore, 1.0d0, g_nfock, g_nfock)
+      if (util_print('cneo_vec_nuc', print_debug)) 
+     $         call ga_print(g_nfock)
+
+      call ga_zero(g_over)
+      call int_1e_ga(bas_n(i), bas_n(i), g_over, 'overlap', .false.)
+
+      call ga_diag(g_nfock, g_over, g_tmp, dbl_mb(k_eval_n(i)))
+      call ga_copy(g_tmp, g_movecs_n(i))
+
+      if (.not. ga_destroy(g_tmp)) call errquit
+     $      ('cneo_vecs_guess_nuc: destroy ga',0,GA_ERR)
+      if (.not. ga_destroy(g_over)) call errquit
+     $      ('cneo_vecs_guess_nuc: destroy ga',0,GA_ERR)
+      if (.not. ga_destroy(g_nfock)) call errquit
+     $      ('cneo_vecs_guess_nuc: destroy ga',0,GA_ERR)
+      if (.not. ga_destroy(g_nhcore)) call errquit
+     $      ('cneo_vecs_guess_nuc: destroy ga',0,GA_ERR)
+
+      if (util_print('cneo_vec_guess_nuc', print_debug)) 
+     $         call ga_print(g_movecs_n(i))
 
       end

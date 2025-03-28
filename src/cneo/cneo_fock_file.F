@@ -108,7 +108,6 @@ c
       integer labels(4,neri)
       double precision eri(neri)
       double precision fock(*), dens(*)
-      ! character*(*) inttype
       logical oreverse
 
       integer i, j, k, l, ind

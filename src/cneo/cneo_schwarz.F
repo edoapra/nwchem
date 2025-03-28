@@ -3,7 +3,7 @@
 #include "errquit.fh"
 #include "nwc_const.fh"
 #include "cschwarz.fh"
-#include "cschwarz_cneo.fh"
+#include "ccneo_schwarz.fh"
 #include "schwarz.fh"
 #include "basP.fh"
 
@@ -34,7 +34,7 @@
 #include "errquit.fh"
 #include "nwc_const.fh"
 #include "cschwarz.fh"
-#include "cschwarz_cneo.fh"
+#include "ccneo_schwarz.fh"
 #include "basP.fh"
 
       integer basisin, basis
@@ -54,7 +54,7 @@ C$Id$
       implicit none
 #include "errquit.fh"
 #include "nwc_const.fh"
-#include "cschwarz_cneo.fh"
+#include "ccneo_schwarz.fh"
 #include "mafdecls.fh"
 #include "basP.fh"
       integer nbas
