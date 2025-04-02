@@ -281,6 +281,8 @@ c
       logical geom_rtdb_ncent
       logical leps_gradient 
       external leps_gradient
+      logical cneo_dft_energy_gradient, cneo_tddft_gradient
+      external cneo_dft_energy_gradient, cneo_tddft_gradient
 c
 c      logical tce_gradient
 c      external tce_gradient
@@ -545,6 +547,18 @@ c         status = .false.
            status = task_num_grad(rtdb)
          else
            status = leps_gradient(rtdb)
+         endif
+      else if (theory .eq. 'cneo') then
+         if (numerical) then
+           status=task_num_grad(rtdb)
+         else
+           status = cneo_dft_energy_gradient(rtdb)
+         endif
+      else if (theory .eq. 'cneo_tddft') then
+         if (numerical) then
+           status=task_num_grad(rtdb)
+         else
+           status = cneo_tddft_gradient(rtdb)
          endif
       else
          call util_flush(luout)

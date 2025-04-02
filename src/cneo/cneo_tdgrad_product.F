@@ -1,150 +1,4 @@
-      subroutine cneo_disassamble(nroot,nuc_num,g_x,e_size,n_size,
-     +      g_x_e,g_x_n,g_tdg)
-      implicit none 
-#include "errquit.fh"
-#include "mafdecls.fh"
-#include "global.fh"
-      integer nroot
-      integer nuc_num
-      integer g_x    ![input] concatenated array; (tot_size,nroot)
-      integer e_size ![input] elec array size
-      integer n_size(nuc_num) ![input] nuclear array size
-      integer g_x_e  ![output]  electron part of the concatenated array (e_size,nroot)
-      integer g_x_n(nuc_num)  ![output] nuclear part of the concatenated array g_x_n(i):(n_size(i),nroot)
-      integer g_tdg(nuc_num)  ![output] constrained multiplier for cneo tdgrad g_tdf(i):(3,nroot)
-
-      integer i
-      integer current
-
-      call ga_copy_patch('n',g_x,1,e_size,1,nroot,
-     $            g_x_e,1,e_size,1,nroot)
-      current=e_size
-      do i=1,nuc_num
-         call ga_copy_patch('n',g_x,current+1,current+n_size(i),
-     $            1,nroot,g_x_n(i),1,n_size(i),1,nroot)
-         current = current+n_size(i)
-      enddo
-      do i=1,nuc_num
-         call ga_copy_patch('n',g_x,current+1,current+3,1,nroot,
-     $            g_tdg(i),1,3,1,nroot)
-         current = current+3
-      enddo
-
-      end
-
-      subroutine cneo_assamble(nroot,nuc_num,g_y_e,g_y_n,g_y_g,
-     +      e_size,n_size,g_y)
-      implicit none 
-#include "errquit.fh"
-#include "mafdecls.fh"
-#include "global.fh"
-      integer nroot
-      integer nuc_num
-      integer g_y_e  ![input]  electron array (e_size,nroot)
-      integer g_y_n(nuc_num)  ![input] nuclear array g_x_n(i):(n_size(i),nroot)
-      integer g_y_g(nuc_num)  ![input] constrained multiplier array:(3,nroot)
-      integer e_size ![input] elec array size
-      integer n_size(nuc_num) ![input] nuclear array size
-      integer g_y    ![output] concatenated array; (tot_size,nroot)
-
-      integer i
-      integer current
-
-      call ga_copy_patch('n',g_y_e,1,e_size,1,nroot,
-     $         g_y,1,e_size,1,nroot)
-
-      current=e_size
-      do i=1,nuc_num
-         call ga_copy_patch('n',g_y_n(i),1,n_size(i),1,nroot,
-     $            g_y,current+1,current+n_size(i),1,nroot)
-         current = current+n_size(i)
-      enddo
-
-      do i=1,nuc_num
-         call ga_copy_patch('n',g_y_g(i),1,3,1,nroot,
-     $            g_y,current+1,current+3,1,nroot)
-         current = current+3
-      enddo
-      
-      end
-      
-      
-      subroutine cneo_tdgrad_destroy_r_n(nuc_num,g_r)
-c
-c     This is directly copied from subroutine tddft_grad_destroy_r
-c     The only changes are
-c        1. ipol -> nuc_num
-c        2. g_r(2) -> g_r(nuc_num)
-c
-      implicit none
-c
-#include "mafdecls.fh"
-#include "errquit.fh"
-#include "global.fh"
-c
-      integer nuc_num 
-      integer g_r(nuc_num)
-c
-c     Local
-c
-      integer i ! just a counter
-c
-      do i = 1, nuc_num
-        if (.not.ga_destroy(g_r(i))) call errquit(
-     +         'tddft_grad_destroy_r: failed to destroy g_r',
-     +         0, GA_ERR)
-      enddo
-c
-      end
-
-      subroutine cneo_tdgrad_int1er_ov(nuc_num,g_int1e_r,g_mo,
-     +            nao,naoc,nav,g_int1e_r_ao,g_int1e_r_mo)
-      implicit none 
-#include "errquit.fh"
-#include "global.fh"
-      integer nuc_num
-      integer g_int1e_r(3,nuc_num)
-      integer g_mo(nuc_num)
-      integer nao(nuc_num)
-      integer naoc(nuc_num)
-      integer nav(nuc_num)
-      integer g_int1e_r_mo(nuc_num) ![output]
-
-      integer i,ii
-      integer g_int1e_r_ao(nuc_num)
-
-      integer alo(3),ahi(3)
-      integer blo(2),bhi(2)
-
-      call cneo_tdgrad_create_r_n(nuc_num,nao,nao,3,g_int1e_r_ao)
-      call cneo_tdgrad_create_r_n(nuc_num,naoc,nav,3,g_int1e_r_mo)
-
-      do i=1,nuc_num
-         do ii=1,3
-            alo(1)=ii
-            ahi(1)=ii
-            alo(2)=1
-            ahi(2)=nao(i)
-            alo(3)=1
-            ahi(3)=nao(i)
-            blo(1)=1
-            bhi(1)=nao(i)
-            blo(2)=1
-            bhi(2)=nao(i)
-            call nga_copy_patch('n',g_int1e_r(ii,i),blo,bhi,
-     $                              g_int1e_r_ao(i),alo,ahi)
-         enddo
-
-         call tddft_grad_trans_ao2mo(1,nao(i),0,naoc(i),naoc(i),nav(i),
-     $                     0,3,1.0d0,0d0,'ib',g_mo(i),g_int1e_r_ao(i),
-     $                     g_int1e_r_mo(i),'ib')
-      enddo
-
-      end
-
-      ! subroutine cneo_tdgrad_solve_constrain
-
-      subroutine cneo_tdgrad_solve_product(acc,g_x,g_Ax)
+subroutine cneo_tdgrad_solve_product(acc,g_x,g_Ax)
       implicit none 
 #include "errquit.fh"
 #include "mafdecls.fh"
@@ -222,7 +76,7 @@ c     nwdft/lr_tddft_grad/tddft_grad_solve_product.F
 c     In principle, this can be done by calling subroutine 
 c     tddft_grad_solve_product with g_x_e as input.
 c     But the common file tddft_grad_solve_common.fh is a 
-c     local common file and it's not in the nwdft/include file.
+c     local common file and it's not straightforward to call
 c
 c     1. g_x 2D MO -> g_x_3d_mo (both e and n)
 c
@@ -316,24 +170,18 @@ c     7. Add orbital energy difference term
 c
       call tddft_grad_epsilon(g_x_3d_mo,g_Ax_3d_mo,ctdg_ipol,
      +     ctdg_nroots,ctdg_nao,ctdg_nocc,ctdg_nfc,dbl_mb(ctdg_e_mo))
-c
-! c     8. destroy g_x_3d_mo
-! c
-!       call tddft_grad_destroy_r(ctdg_ipol,g_x_3d_mo)
 c     
 c     8. add en term: H_en[Z_n]
 c  
       do ip=1,ctdg_ipol
          do i=1,nuc_num
-            ! print *, 'tdgrad:debug:before response:'
-            ! print *, g_x_3d_n(i),i,ip
             call cneo_tdgrad_response_ov(i,0,'enints',ctdg_bfao,
      $            ctdg_bfn(i),-4.0d0,g_x_3d_n(i),ctdg_g_mo(ip),   ! check later
      $            ctdg_g_mo_n(i),ctdg_nao,ctdg_nao_n(i),ctdg_naoc(ip),
      $            ctdg_naoc_n(i),ctdg_nav(ip),ctdg_nav_n(i),
      $            ctdg_nfc(ip),0,ctdg_nfv(ip),0,ctdg_nroots,
      $            g_Ax_3d_mo(ip),ctdg_geom,
-     $            ctdg_nocc(ip),ctdg_naoc_n(i),'ib')
+     $            ctdg_nocc(ip),ctdg_naoc_n(i),'ib',ctdg_tol2e_cneo)
          enddo
       enddo
 c
@@ -354,6 +202,8 @@ c
         enddo
       enddo
 
+c  ========= Start nuc part:orbital energy+H_ne[Ze]+H_nn[Zn]=======
+c
 c     10. calculate g_Ax_n: add orbital contribution
       call cneo_tdgrad_create_r_n(nuc_num,ctdg_naoc_n,ctdg_nav_n,
      $         ctdg_nroots,g_Ax_n_mo)
@@ -370,17 +220,15 @@ c     11. add ne and nn response to g_Ax_n_mo
 c
       do i=1,nuc_num
          do ip=1,ctdg_ipol
-            ! print *,'tdgrad:product:ne',i,ip
             call cneo_tdgrad_response_ov(i,0,'neints',ctdg_bfn(i),
      $            ctdg_bfao,-2.0d0,g_x_3d_mo(ip),ctdg_g_mo_n(i),
      $            ctdg_g_mo(ip),ctdg_nao_n(i),ctdg_nao,ctdg_naoc_n(i),
      $            ctdg_naoc(ip),ctdg_nav_n(i),ctdg_nav(ip),0,
      $            ctdg_nfc(ip),0,ctdg_nfv(ip),ctdg_nroots,g_Ax_n_mo(i),
-     $            ctdg_geom,ctdg_naoc_n(i),ctdg_nocc(ip),'ib')
+     $            ctdg_geom,ctdg_naoc_n(i),ctdg_nocc(ip),'ib',
+     $            ctdg_tol2e_cneo)
          enddo
          do j=1,nuc_num
-            ! print *,'tdgrad:product:nn',i,j
-            ! call ga_print(g_x_3d_n(j))
             if (j.eq.i) goto 10
             call cneo_tdgrad_response_ov(i,j,'nnints',ctdg_bfn(i),
      $            ctdg_bfn(j),2.0d0,g_x_3d_n(j),ctdg_g_mo_n(i),
@@ -388,15 +236,15 @@ c
      $            ctdg_naoc_n(i),ctdg_naoc_n(j),
      $            ctdg_nav_n(i),ctdg_nav_n(j),0,0,0,0,
      $            ctdg_nroots,g_Ax_n_mo(i),
-     $            ctdg_geom,ctdg_naoc_n(i),ctdg_naoc_n(j),'ib')
+     $            ctdg_geom,ctdg_naoc_n(i),ctdg_naoc_n(j),'ib',
+     $            ctdg_tol2e_cneo)
 
  10         continue
          enddo
       enddo
-      ! print *, 'tdgrad:product:end nn/ne response'
 
 c     12. add 2g.r to g_Ax_n_mo
-c     TESTED!
+c    
       do i=1,nuc_num
          do j=1,ctdg_nav_n(i)
             alo(1)=1
@@ -421,11 +269,9 @@ c     TESTED!
      $                     g_Ax_n_mo(i),clo,chi)
          enddo
       enddo
-      ! print *, 'tdgrad:product:end 2gr'
-
-
+c
 c     13. Transform g_Ax_n_mo -> g_Ax_n 2D MO
-
+c
       do ip = 1, nuc_num
         do ir = 1, ctdg_nroots
           alo(1) = ir
@@ -466,8 +312,6 @@ c        (3,nroot)        (3,nocc,nvir)     (nroot,nocc,nvir)
             enddo ! end loop nroot
          enddo ! end loop x,y,z
       enddo ! end loop nuc_num
-      ! print *, 'tdgrad:product:line 468'
-
 c
 c     15. Assemble g_Ax_e,g_Ax_n,g_Ax_g to g_Ax
 c
@@ -479,7 +323,6 @@ c     16. Destroy local arrays
       call tddft_grad_destroy_r(ctdg_ipol,g_x_3d_mo)
       call cneo_tdgrad_destroy_r_n(nuc_num,g_x_3d_n)
       call cneo_tdgrad_destroy_r_n(nuc_num,g_Ax_n_mo)
-      ! print *, 'tdgrad:product:line 481'
       status = .true.
       status = status .and. ga_destroy(g_x_e)
       status = status .and. ga_destroy(g_Ax_e)
@@ -493,19 +336,94 @@ c     16. Destroy local arrays
 
       end
 
+      subroutine cneo_disassamble(nroot,nuc_num,g_x,e_size,n_size,
+     +      g_x_e,g_x_n,g_tdg)
+      implicit none 
+#include "errquit.fh"
+#include "mafdecls.fh"
+#include "global.fh"
+      integer nroot
+      integer nuc_num
+      integer g_x    ![input] concatenated array; (tot_size,nroot)
+      integer e_size ![input] elec array size
+      integer n_size(nuc_num) ![input] nuclear array size
+      integer g_x_e  ![output]  electron part of the concatenated array (e_size,nroot)
+      integer g_x_n(nuc_num)  ![output] nuclear part of the concatenated array g_x_n(i):(n_size(i),nroot)
+      integer g_tdg(nuc_num)  ![output] constrained multiplier for cneo tdgrad g_tdf(i):(3,nroot)
+
+      integer i
+      integer current
+
+      call ga_copy_patch('n',g_x,1,e_size,1,nroot,
+     $            g_x_e,1,e_size,1,nroot)
+      current=e_size
+      do i=1,nuc_num
+         call ga_copy_patch('n',g_x,current+1,current+n_size(i),
+     $            1,nroot,g_x_n(i),1,n_size(i),1,nroot)
+         current = current+n_size(i)
+      enddo
+      do i=1,nuc_num
+         call ga_copy_patch('n',g_x,current+1,current+3,1,nroot,
+     $            g_tdg(i),1,3,1,nroot)
+         current = current+3
+      enddo
+
+      end
+
+      subroutine cneo_assamble(nroot,nuc_num,g_y_e,g_y_n,g_y_g,
+     +      e_size,n_size,g_y)
+      implicit none 
+#include "errquit.fh"
+#include "mafdecls.fh"
+#include "global.fh"
+      integer nroot
+      integer nuc_num
+      integer g_y_e  ![input]  electron array (e_size,nroot)
+      integer g_y_n(nuc_num)  ![input] nuclear array g_x_n(i):(n_size(i),nroot)
+      integer g_y_g(nuc_num)  ![input] constrained multiplier array:(3,nroot)
+      integer e_size ![input] elec array size
+      integer n_size(nuc_num) ![input] nuclear array size
+      integer g_y    ![output] concatenated array; (tot_size,nroot)
+
+      integer i
+      integer current
+
+      call ga_copy_patch('n',g_y_e,1,e_size,1,nroot,
+     $         g_y,1,e_size,1,nroot)
+
+      current=e_size
+      do i=1,nuc_num
+         call ga_copy_patch('n',g_y_n(i),1,n_size(i),1,nroot,
+     $            g_y,current+1,current+n_size(i),1,nroot)
+         current = current+n_size(i)
+      enddo
+
+      do i=1,nuc_num
+         call ga_copy_patch('n',g_y_g(i),1,3,1,nroot,
+     $            g_y,current+1,current+3,1,nroot)
+         current = current+3
+      enddo
+      
+      end
+
       subroutine cneo_tdgrad_response_ov(idx1,idx2,inttype,bas1,bas2,
      +            jfac,g_moin,g_mo1,
      +            g_mo2,nao1,nao2,naoc1,naoc2,nav1,nav2,nfc1,nfc2,
-     +            nfv1,nfv2,nroot,g_r,geom,nocc1,nocc2,blockout)
+     +            nfv1,nfv2,nroot,g_r,geom,nocc1,nocc2,blockout,
+     +            tol2e)
       implicit none 
-c     This subroutine is written because the input g_moin for cneo_tdgrad_en_response
-c     needs to be a full matrix (nao,nao), but the g_x in cneo_tdgrad_solve_product is 
-c     only a partial matrix (nocc,nvir). This subroutine is a bruteforce (and stupid)
-c     way to make sure cneo_tdgrad_en_respoonse is called properly by:
-c     1. create temporary array g_moin_tmp (nao,nao)
-c     2. fill ov part with values in g_moin, and zero the rest part
-c     3. call cneo_tdgrad_en_response
-c     4. destroy the temporary array
+c
+c     This subroutine is written because the input g_moin for 
+c     cneo_tdgrad_en_response needs to be a symmetric full matrix (nao,nao),
+c     but the g_x in cneo_tdgrad_solve_product only has asymmetric ov block.
+c     Therefore, the input g_x (nocc, nvir) needs to be transfered to
+c
+c           | 0       Xia/2 |
+c           |                 |  where t(A) is the transpose of A.
+c           | t(Xia/2)  0   |
+c     
+c     cneo_tdgrad_en_response is then called to get the Coulomb response
+c
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
@@ -514,8 +432,6 @@ c     4. destroy the temporary array
       integer bas1, bas2,geom
       double precision jfac
       integer g_moin ! [input] input (ov) matrix in MO2 basis: (nroots,nocc2,nvir2)
-      ! integer nblocksin
-      ! character*(*) blocksin(nblocksin)
       integer g_mo1
       integer g_mo2
       integer nao1, naoc1, nav1, nfc1, nfv1, nocc1
@@ -523,6 +439,7 @@ c     4. destroy the temporary array
       integer nroot
       integer g_r ! [output] output (ov) matrix in MO1 basis: (nroots,nocc1,nvir1)
       character*(*) blockout
+      double precision tol2e
       character*32 pname
       integer g_moin_tmp
       integer idim(3)
@@ -556,13 +473,22 @@ c     4. destroy the temporary array
       blo(3) = naoc2+nfc2+1
       bhi(3) = blo(3)+nav2-1
       call nga_copy_patch('n', g_moin, alo, ahi, g_moin_tmp, blo, bhi)
-      ! print *, 'response_ov: at line 558'
-      ! call ga_print(g_moin_tmp)
+      blo(2) = naoc2+nfc2+1
+      bhi(2) = blo(2)+nav2-1
+      blo(3) = 1
+      bhi(3) = naoc2
+      call nga_copy_patch('t', g_moin, alo, ahi, g_moin_tmp, blo, bhi)
+      blo(2) = 1
+      bhi(2) = nao2
+      blo(3) = 1
+      bhi(3) = nao2
+      call nga_scale_patch(g_moin_tmp, blo, bhi, 5.0d-1)
 
       call cneo_tdgrad_en_response(idx1,idx2, inttype,bas1,bas2,
-     +            jfac,g_moin_tmp,1,'ib',g_mo1,
+     +            jfac,g_moin_tmp,1,'pq',g_mo1,
      +            g_mo2,nao1,nao2,naoc1,naoc2,nav1,nav2,nfc1,nfc2,
-     +            nfv1,nfv2,nroot,g_r,geom,nocc1,nocc2,blockout)
+     +            nfv1,nfv2,nroot,g_r,geom,nocc1,nocc2,blockout,
+     +            tol2e)
 
       if (.not. ga_destroy(g_moin_tmp)) call errquit
      $      (pname//'destroy temp array',0,GA_ERR)

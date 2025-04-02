@@ -1,3 +1,10 @@
+c     ============================================
+c     Build Fock matrices for CNEO-DFT calculations
+c
+c     Elec-nuc interaction block is added on the conventional DFT Fock
+c     Nuclear Fock matrices are built (hcore_nuc + en + nn)
+c     ============================================
+c
       subroutine cneo_dft_fockbld(rtdb,natoms,ntotel,g_ndens,
      ,     g_fock,g_focks,g_dens,g_vxc,g_movecs,g_xcinv,
      ,     g_tmp,g_nq,g_wght,g_xyz,
@@ -247,6 +254,7 @@ c     == Copy Fock matrix to individual components for spin ECPs ==
      $      oreopen_local))
      &      call errquit('cneo_fock: open aoints failed',0,0)
       call cneo_schwarz_set(ao_bas_han)
+      call cneo_reset_int2efile_print(print_debug)
 c
 c     if requested separate calculation of bq-electron energy (MV)
 c     ----------------------------------------------------------- 
@@ -467,6 +475,9 @@ c       DIM potential is from total density, so same for both alpha and beta
      &     call dft_tstamp(' End of parallel region. ')
 c     
       if (odftps) call pstat_off(ps_fockb)
+      if (.not. int2e_file_close(.true.))
+     $       call errquit('cneo:get_j_dm: close file',0,0)
+      call cneo_reset_int2efile_print(print_default)
 c
 cc AJL/Begin/SPIN ECPs (Debug)
 c      if(util_print('Intermediate Fock Matrix', print_debug)) then

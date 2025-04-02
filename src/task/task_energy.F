@@ -241,6 +241,8 @@ c     external oimp2
       external xtb_energy
       logical dft_guesshfx,nwdft
       external dft_guesshfx,nwdft
+      logical cneo_dft_energy, cneo_tddft_energy
+      external cneo_dft_energy, cneo_tddft_energy
 c
       logical status
       double precision dipole(3)
@@ -446,6 +448,10 @@ c         status = .false.
          status = dc_energy(rtdb)
       else if (theory .eq. 'wfn1') then
          status = wfn1_task_energy(rtdb)
+      else if (theory .eq. 'cneo') then 
+         status = cneo_dft_energy(rtdb)
+      else if (theory .eq. 'cneo_tddft') then 
+         status = cneo_tddft_energy(rtdb)
       else
          call errquit('task_energy: unknown theory',0, INPUT_ERR)
       endif

@@ -2,23 +2,15 @@
 c
 c $Id$
 c 
-c Main routine for TDDFT excitation energy calculations.
+c Main routine for CNEO-TDDFT (under Frozen nuclear orbital assumption)
+c excitation energy calculations.
 c
-c Capability includes:
-c (1) CIS, TDHF, TDDFT, Tamm-Dancoff TDDFT,
-c (2) Spin-restricted singlets and triplets,
-c (3) Spin-unrestricted doublets etc.,
-c (4) Transition moments and oscillator strengths,
-c (5) Characterizes symmetry of excited states,
-c (6) Uses Davidson's trial vector algorithm,
-c (7) Spin (S**2) expectation values,
-c (8) Incore/disk-based multiple/single tensor contraction,
-c (9) Numerical gradients, optimization, and frequencies.
+c Modified from tddft_energy.F
 c
-c See, e.g., Bauernschmitt & Ahlrichs, CPL 256, 454 (1996);
-c Hirata & Head-Gordon, CPL 302, 375 (1999), for formalisms.
-c
-c Written by So Hirata, Feb 2002. (c) Battelle, PNNL, 2002.
+c Major changes on top of tddft_energy.F
+c  1. the ground state calculation is done by cneo_dft_energy.F
+c  2. initialize params with cneo_tddft_init.F
+c  3. store cneo_tddft:energy & cneo_tddft:energy_all in rtdb
 c
       implicit none
 #include "errquit.fh"
@@ -123,6 +115,7 @@ c
       integer ipolar,ipolar_start,ipolar_end
       integer geom_cneo
       double precision tmp_charge
+      integer l_root, k_root
 c
       nodezero=(ga_nodeid().eq.0)
 c
@@ -522,6 +515,21 @@ c
      &       RTDB_ERR)
       endif
 #endif
+
+      if (.not. rtdb_put(rtdb,'cneo_tddft:energy',mt_dbl,1,energy))
+     +   call errquit('cneo_tddft_energy: store energy',0,RTDB_ERR)
+
+      if (.not.ma_push_get(mt_dbl,nroots,'roots',
+     1  l_root,k_root)) call errquit
+     2  ('cneo_td_energy: failed to allocate root',0, MA_ERR)
+      if (.not. rtdb_get(rtdb,'tddft:energy-all',mt_dbl,nroots,
+     1                  dbl_mb(k_root))) call errquit
+     2  ('cneo_tddft_energy: failed to load energy-all',0,RTDB_ERR)
+      if (.not. rtdb_put(rtdb,'cneo_tddft:energy-all',mt_dbl,nroots,
+     1                  dbl_mb(k_root))) call errquit
+     2  ('cneo_tddft_energy: failed to store energy-all',0,RTDB_ERR)
+      if (.not.ma_pop_stack(l_root)) call errquit
+     1  ('cneo_td_energy: failed to deallocate root',0, MA_ERR)
          
       call tddft_finalize(geom,ao_bas_han,ipol,g_movecs,l_evl,k_evl,
      1  l_occ,k_occ,l_irs,k_irs)

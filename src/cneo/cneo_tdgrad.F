@@ -1,26 +1,17 @@
 c
 c     ------------------------------------------------------------------
-c     Main routine for calculating the gradients of the TDDFT excitation
-c     energies with respect to geometric perturbations.
+c     Main routine for calculating the gradients of the CNEO-TDDFT
+c     (under frozen nuclear orbital assumption)excitation energies 
+c     with respect to nuclear coordinates.
+c
+c     Workflow modified from tddft_gradient.F, with most of the functions
+c     replaced by their CNEO-TDDFT counterparts.
 c     ------------------------------------------------------------------
 c
-      logical function test_tddft_gradient(rtdb)
+      logical function cneo_tddft_gradient(rtdb)
 c
 c     Notation:  Xia (i=occupied,a=virtual) 
 c     Occupied index runs faster than the virtual index.
-c
-c     The notation closely follows the Furche, Ahlrichs paper
-c     "Adiabatic time-dependent density functional methods for excited state properties"
-c     F. Furche, R. Ahlrichs, J. Chem. Phys. 117, 7433 (2002)
-c
-c     Please cite the following paper for the NWChem implementation:
-c
-c     Simulating One-Photon Absorption and Resonance Raman Scattering Spectra
-c     Using Analytical Excited State Energy Gradients within
-c     Time-Dependent Density Functional Theory
-c
-c     D.W. Silverstein, N. Govind, H.J.J. van Dam, L. Jensen
-c     J. Chem. Theory Comput., 2013, 9 (12), pp 5490–5503 DOI: 10.1021/ct4007772
 c
       implicit none
 c
@@ -114,7 +105,7 @@ c
       integer g_xmy(2)     ! global arrays to hold X-Y
       integer g_tp(2)      ! global arrays to hold T, and later P
       integer g_r(2)       ! global arrays to hold right-hand-sides
-      integer g_z(2)       ! global arrays to hold solutions
+      integer g_z(2)       ! global arrays to hold solutions Ze
       integer g_w(2)       ! global arrays to hold energy weighted density matrices
       integer g_g          ! global array to hold the gradients
 c
@@ -135,16 +126,17 @@ c
       external task_gradient
       logical task_energy
       external task_energy
-
-      integer ihdl_bfn(max_quantum_nuc)
-      integer nao_n(max_quantum_nuc)
-      integer nmo_n(max_quantum_nuc)
+c     === Nuclear variables === 
+      integer ihdl_bfn(max_quantum_nuc)   ! basis handles for quantum nuc
+      integer nao_n(max_quantum_nuc)      ! number of AOs for quantum nuc
+      integer nmo_n(max_quantum_nuc)      ! number of MOs for quantum nuc
       integer naoc_n(max_quantum_nuc), nav_n(max_quantum_nuc)
       integer nov_n(max_quantum_nuc)
-      integer g_mo_n(max_quantum_nuc)
-      integer ihdl_mo_e_n, iptr_mo_e_n
-      integer g_r_n(max_quantum_nuc)
-      integer g_z_n(max_quantum_nuc)
+      integer g_mo_n(max_quantum_nuc)     ! global arrays to the nuclear MOs
+      integer ihdl_mo_e_n, iptr_mo_e_n    ! nuclear mo energy handle/pointer
+      integer g_r_n(max_quantum_nuc)      ! global arrays to hold nuclear RHSs
+      integer g_z_n(max_quantum_nuc)      ! global arrays to hold nuclear solutions Zn
+      double precision tol2e_cneo         ! tolerance for 2-body integrals (en, nn)
 c
 c MN solvation models -->
 c
@@ -167,7 +159,7 @@ c     Debug flag
      &     odebug = .true.
 c
 c     TDDFT gradient has not been computed successfully yet.
-      test_tddft_gradient = .false.
+      cneo_tddft_gradient = .false.
 c
 c     Make sure we have the excited states first
       call ga_sync
@@ -185,10 +177,17 @@ c
       call util_print_rtdb_load(rtdb,'tddft')
 c
 c     Print header
-      if (oroot) call tddft_grad_print_header(luout)
+      if (oroot) then
+         write(luout,*)
+         write(luout,*)
+         call util_print_centered(luout,
+     +        'NWChem CNEO-TDDFT Gradient Module',40, .true.)
+         write(luout,*)
+         write(luout,*)
+      endif
 c
 c     Parameter initialization
-      call test_tddft_grad_init(rtdb,ipol,tda,nat,
+      call cneo_tdgrad_init(rtdb,ipol,tda,nat,
      +  nao,nocc,nmo,nfc,nfv,naoc,nav,nov,fn_movecs,numfunc,
      +  xname,cname,xcname,xfac,cfac,lxfac,nlxfac,lcfac,
      +  nlcfac,xccomb,lhf,ldft,lhybrid,lhasdft,lhashf,
@@ -198,45 +197,20 @@ c     Parameter initialization
      +  osinglet,otriplet, ntotroots,ihdl_bfao,ihdl_geom,tol2e,
      +  solve_thresh,solve_maxit,solve_maxsub,
      +  fn_solve,solve_when,kfac,title,lhascd,
-     +  ihdl_bfn, nao_n, nmo_n, naoc_n, nav_n, nov_n)
-      print *, 'tdgrad:debug:bas:',ihdl_bfao,ihdl_bfn
+     +  ihdl_bfn, nao_n, nmo_n, naoc_n, nav_n, nov_n,
+     +  tol2e_cneo)
 c
 c     Cosmo initialization, if necessary
       cosmo_on = .false.
       if (rtdb_get(rtdb,'slv:cosmo',mt_log,1,cosmo_on)) then
        if(cosmo_on) then
-c
-c MN solvation models -->
-c
-c Tell hnd_coschg in src/property/cosmo.F that we have an excited-state
-c density (istep_cosmo_vem = 1) when it needs to know it (i.e., only when
-c a VEM calculation is called). After calling hnd_coschg via cosmo_initialize 
-c istep_cosmo_vem changes either to 2 (further iteration) or 
-c to 3 (exit the calculation upon convergence).
-c
-         istep_cosmo_vem = 0
-         if (do_cosmo_vem.ne.0) istep_cosmo_vem = 1
-         if (.not. rtdb_put
-     $   (rtdb,'cosmo:istep_cosmo_vem',mt_int,1,istep_cosmo_vem))
-     $   call errquit(
-     $ 'tddft_gradient: cannot put istep_cosmo_vem in rtdb',
-     $   0,rtdb_err)
-c
-c <-- MN solvation models
-c
-        call cosmo_initialize(rtdb,ihdl_geom,ihdl_bfao,.false.)
-        cosmo_phase = 2
-        if (.not. rtdb_put(rtdb,'cosmo_phase',mt_int,1,cosmo_phase))
-     $   call errquit('cosmo_input: put cosmo_phase failed',
-     $           911, RTDB_ERR)
+            call errquit(pname//'cosmo not implemented',0,0)
        endif
       endif
 c
 c     Integral initialization
-      ! call tddft_grad_init_ints(rtdb,ihdl_bfao,ihdl_geom,tol2e)
       call scf_get_fock_param(rtdb,tol2e)
       call cneo_tdgrad_intfile
-      print *, 'tdgrad:info:',nmo_n(1),naoc_n(1), nov_n(1)
 c
 c     Print calculation information
       call tddft_grad_print_info(luout,nroots,int_mb(iptr_roots),
@@ -300,6 +274,7 @@ c
 c     Compute the TDDFT energy for each root using the solution vectors
       if (oroot.and.odebug)
      &    write(luout,*)"call tddft_grad_compute_energy"
+      call cneo_schwarz_set(ihdl_bfao)
       call tddft_grad_compute_energy(rtdb,ihdl_geom,ihdl_bfao,tol2e,tda,
      +   ipol,nao,nfc,naoc,nocc,nav,nfv,ntotroots,
      +   dbl_mb(iptr_mo_e),g_mo,g_xpy,g_xmy,kfac,lhashf,otriplet,lhascd)
@@ -324,26 +299,24 @@ c     Assemble right hand side: R
      +     nao,nfc,naoc,nocc,nav,nfv,ntotroots,g_mo,g_xpy,g_xmy,g_tp,
      +     g_r,kfac,lhashf,otriplet,lhascd)
       if (oroot.and.odebug) write(luout,*) "done tddft_grad_compute_r"
-      print *, 'tdgrad:debug:r:'
-      call ga_print(g_r(1))
 
       call cneo_tdgrad_r_n(nuc_num,ihdl_geom,ihdl_bfao,ihdl_bfn,
      $      nao,naoc,nav,nocc,nfc,nfv,nao_n,naoc_n,nav_n,g_mo,g_mo_n,
-     $      g_tp,ntotroots,ipol,g_r_n)
+     $      g_tp,ntotroots,ipol,g_r_n,tol2e_cneo)
       call cneo_tdgrad_create_r_n(nuc_num,naoc_n,nav_n,ntotroots,g_z_n)
 c
-c     Solve the Z equation: (A+B)Z = -R
-c     Note: g_z has the solutions
+c     Solve the CNEO coupled (Z_e,Z_n) equation
+c     g_z, g_z_n have the solutions
       if (oroot.and.odebug) write(luout,*) "call cneo_tdgrad_solve"
 
       call cneo_tdgrad_solve(rtdb,ihdl_geom,ihdl_bfao,ipol,
      +      ntotroots,nao,nocc,naoc,nav,nfc,nfv,nmo,g_mo,iptr_mo_e,
      +      .false.,.false.,lhashf,otriplet,lhascd,tol2e,kfac,
+     +      solve_thresh,solve_maxsub,solve_maxit,
      +      ihdl_bfn,nao_n,naoc_n,nav_n,nmo_n,g_mo_n,iptr_mo_e_n,
-     +      g_r,g_r_n,g_z,g_z_n)
+     +      g_r,g_r_n,g_z,g_z_n,tol2e_cneo)
 
       if (oroot.and.odebug) write(luout,*) "done cneo_tdgrad_solve"
-      ! return
 c
 c     Deallocate right hand side: R
       if (oroot.and.odebug) write(luout,*) "call cneo_tdgrad_destroy_r"
@@ -368,7 +341,7 @@ c     W is the energy-weighted difference density matrix
      +     ipol,ntotroots,nfc,naoc,nocc,nav,nfv,nao,g_mo,g_tp,g_z,
      +     g_xpy,g_xmy,dbl_mb(iptr_mo_e),dbl_mb(iptr_root_e),g_w,
      +     kfac,lhashf,otriplet,lhascd,nuc_num,
-     +     ihdl_bfn, naoc_n,nav_n,nao_n,g_mo_n,g_z_n)
+     +     ihdl_bfn, naoc_n,nav_n,nao_n,g_mo_n,g_z_n,tol2e_cneo)
       if (oroot.and.odebug) write(luout,*) "done tddft_grad_compute_w"
 c
 c     Finalize integrals
@@ -383,7 +356,6 @@ c     Create gradients array
 c
 c     Compute the gradients
       if (oroot.and.odebug) write(luout,*) "call tddft_grad_compute_g"
-      print *, 'tdgrad:compute_g:ipol',ipol
       call cneo_tdgrad_compute_g(
      +  rtdb,ihdl_geom,ihdl_bfao,tda,nat,nao,
      +  nfc,naoc,nocc,nav,nfv,ipol,ntotroots,oskel,tol2e,g_mo,
@@ -416,34 +388,20 @@ c     Print gradients of the excited states of interest
       if (oroot.and.odebug) 
      &     write(luout,*) "call tddft_grad_print_result"
       if (ipol.eq.2) then
-        call tddft_grad_print_result(ntotroots,int_mb(iptr_roots),
-     +                             nat,ihdl_geom,g_g,1.0d0)
+        call cneo_tdgrad_print_result(ntotroots,int_mb(iptr_roots),
+     +                             nat,ihdl_geom,g_g)
       else
         if (osinglet) then
-          call tddft_grad_print_result(ntotroots,int_mb(iptr_sroots),
-     +                               nat,ihdl_geom,g_g,1.0d0)
+          call cneo_tdgrad_print_result(ntotroots,int_mb(iptr_sroots),
+     +                               nat,ihdl_geom,g_g)
         else if (otriplet) then
           call errquit(pname//'triplet not implemented',0,0)
-   !        call tddft_grad_print_result(ntotroots,int_mb(iptr_troots),
-   !   +                               nat,ihdl_geom,g_g,1.0d0)
         endif
       endif
       if (oroot.and.odebug) 
      &      write(luout,*) "done tddft_grad_print_result"
 c
-c MN solvation models -->
-c
  100  continue
-c
-c <-- MN solvation models
-c
-c     Store gradients
-   !    if (oroot.and.odebug)
-   !   &      write(luout,*)"call tddft_grad_store_gradient"
-   !    call tddft_grad_store_gradient(rtdb,nat,ntotroots,
-   !   +                         int_mb(iptr_sroots),g_g)
-   !    if (oroot.and.odebug)
-   !   &      write(luout,*)"done tddft_grad_store_gradient"
 c
 c     Deallocate gradients
       if (oroot.and.odebug)
@@ -455,8 +413,8 @@ c
 c     Finalize gradients
       if (oroot.and.odebug) 
      &      write(luout,*) "call tddft_grad_finalize"
-      call tddft_grad_finalize(nsroots,ihdl_sroots,ntroots,ihdl_troots,
-     +       nroots, ihdl_roots, ihdl_geom, ihdl_bfao)
+      call cneo_tdgrad_finalize(nsroots,ihdl_sroots,ntroots,ihdl_troots,
+     +       nroots,ihdl_roots,ihdl_geom,ihdl_bfao,nuc_num,ihdl_bfn)
       if (oroot.and.odebug) 
      &      write(luout,*) "done tddft_grad_finalize"
 c
@@ -473,7 +431,7 @@ c
 c     Clean up
       call ga_sync()
       call grid_cleanup(.true.)
-      test_tddft_gradient = .true.
+      cneo_tddft_gradient = .true.
 c
 c     Print end times and wrap up
       tddft_grad_cpu  = tddft_grad_cpu  + util_cpusec()

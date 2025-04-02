@@ -1,8 +1,12 @@
 c
-c     Initialize TDDFT gradient calculation
-c     HvD 4/2006, NG 11/2012
+c     Initialize CNEO-TDDFT gradient calculation
+c     Modified from tddft_grad_init.F
+c     Major changes on top of tddft_grad_init.F:
+c     1. replace geom/ao basis handles with cneo ones
+c     2. initialize nuclear params
+c     3. load stored tol2e for get_j_dm
 c
-      subroutine test_tddft_grad_init(rtdb,ipol,tda,nat,
+      subroutine cneo_tdgrad_init(rtdb,ipol,tda,nat,
      +   nao,nocc,nmo,nfc,nfv,naoc,nav,nov,fn_movecs,numfunc,
      +   xname,cname,xcname,xfac,cfac,lxfac,nlxfac,lcfac,
      +   nlcfac,xccomb,lhf,ldft,lhybrid,lhasdft,lhashf,
@@ -12,7 +16,8 @@ c
      +   osinglet,otriplet,ntotroots,ihdl_bfao,ihdl_geom,tol2e,
      +   solve_thresh,solve_maxit,solve_maxsub,
      +   fn_solve,solve_when,kfac,title,lhascd,
-     +   ihdl_bfn, nao_n, nmo_n, naoc_n, nav_n, nov_n)
+     +   ihdl_bfn, nao_n, nmo_n, naoc_n, nav_n, nov_n,
+     +   tol2e_cneo)
 c
       implicit none
 c
@@ -139,6 +144,7 @@ c
       integer nmo_n(max_quantum_nuc)
       integer naoc_n(max_quantum_nuc), nav_n(max_quantum_nuc)
       integer nov_n(max_quantum_nuc)
+      double precision tol2e_cneo
 c
 c     preliminaries: general parameters
       nao     = 0
@@ -163,7 +169,7 @@ c     preliminaries: general parameters
          nav_n(i) = 0
          nov_n(i) = 0
       enddo
-      pname = "cneo_tddft_grad_init: "
+      pname = "cneo_tdgrad_init: "
 c
 c     get the title 
       if (.not. rtdb_cget(rtdb, 'title', 1, title)) title = ' '
@@ -181,13 +187,11 @@ c     get the geometry
       if (.not. geom_destroy(ihdl_geom)) call errquit
      $   ('cneo_tdgrad_init:geom_destroy?',0,0)
       ihdl_geom = geom_cneo
-      print *, 'tdgrad:geom:',ihdl_geom
 c
 c     get the basis set
-      ! call tddft_basis(rtdb, ihdl_geom, ihdl_bfao, lhascd)
+c
       call cneo_tdbasis(rtdb,nuc_num,ihdl_geom,ihdl_bfao,
      $                                 ihdl_bfn(1:nuc_num))
-      print *, 'tdgrad:after tdbasis:',ihdl_geom,nuc_num, ihdl_bfn(2)
 c      if (.not.bas_create(ihdl_bfao,'ao basis'))
 c     +  call errquit(pname//'bas_create failed',0, BASIS_ERR)
 c      if (.not.bas_rtdb_load(rtdb,ihdl_geom,ihdl_bfao,'ao basis'))
@@ -202,6 +206,9 @@ c     +  call errquit(pname//'int_normalize failed',0, BASIS_ERR)
          nmo_n(i) = nao_n(i)
       enddo
       call cneo_int1er_init(rtdb,ihdl_geom,ihdl_bfn)
+
+      if (.not. rtdb_get(rtdb,'cneo_dft:tol2e',mt_dbl,1,tol2e_cneo))
+     +   call errquit(pname//'failed to read tol2e_cneo',0, RTDB_ERR)
 c
 c     get XC functionals
       if (.not.rtdb_get(rtdb,'dft:xfac',mt_dbl,numfunc,xfac))
@@ -405,6 +412,7 @@ c
         endif ! singlet
 c
         if (otriplet) then
+           call errquit(pname//'triplet not implemented',0,0)
            ntroots = 1  ! only one state at a time
            if (.not.ma_push_get(mt_int,ntroots,'triplet roots',
      +                         ihdl_troots,iptr_troots))
@@ -416,6 +424,7 @@ c
         endif ! triplet
 c
       else   ! unrestricted
+          call errquit(pname//'unrestricted not implemented',0,0)
           nroots = 1  ! only one state at a time
           if (.not.ma_push_get(mt_int,nroots,'roots',
      +                         ihdl_roots,iptr_roots))
@@ -449,7 +458,7 @@ c of solve_maxsub might not work efficiently.  I'd suggest using a
 c larger value for the default to aid in convergence.
 c
       if (.not.rtdb_get(rtdb,'tddft_grad:solve_maxsub',mt_int,1,
-     +                  solve_maxsub)) solve_maxsub=40
+     +                  solve_maxsub)) solve_maxsub=50
       if (.not.rtdb_get(rtdb,'tddft_grad:solve_maxit',mt_int,1,
      +                  solve_maxit)) solve_maxit=250
 c
@@ -611,25 +620,6 @@ c     to create nuclear basis, initialize ints, and schwarz_init
      $        call errquit('tdgrad: DFT MO vectors not defined',0,
      &       RTDB_ERR)
          call tddft_grad_load_mo(1,nao_n,movecs_in,e_n(1,i),g_mo_n(i))
-         print *, 'tdgrad:init:mo_n:'
-         call ga_print(g_mo_n(i))
-         print *, e_n(1:13,i)
-      enddo
-
-      end
-
-      subroutine cneo_tdgrad_destory_mo_n(nuc_num,g_mo)
-      implicit none 
-#include "errquit.fh"
-#include "mafdecls.fh"
-#include "global.fh"
-      integer nuc_num
-      integer g_mo(nuc_num)
-
-      integer i
-      do i=1,nuc_num
-         if(.not. ga_destroy(g_mo(i))) call errquit
-     +         ('cneo_tdgrad_destroy_mo:ga_destroy?',0,GA_ERR)
       enddo
 
       end

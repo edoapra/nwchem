@@ -10,11 +10,13 @@
 c
 c $Id$
 c
-c Set various parameters for TDDFT calculations, which are
-c passed as arguments to tddft_init.  Most are read from
-c runtime database and are originally set by NWDFT module.
-c See also dft_rdinput.F and dft_inpana.F.
-c Written by So Hirata, Feb 2002.
+c Modifed from tddft_init.F
+c
+c Set various parameters for CNEO-TDDFT calculations
+c
+c Major changes on top of tddft_init.F:
+c 1. replace geom and ao basis handles with cneo version
+c
 c
       implicit none
 #include "errquit.fh"
@@ -139,8 +141,7 @@ c ---------------------
 
       call cneo_nuc_init(rtdb,geom)
       call cneo_geom_init(rtdb,geom_cneo)
-c     TODO: output both geom and geom_cneo
-c           to scale the e-n interaction with charge
+
       if (.not. geom_destroy(geom)) call 
      $  errquit('cneo_td_init:destroy geom?',0,0)
       geom = geom_cneo
@@ -536,7 +537,7 @@ c Printing info
 c -------------
       if (nodezero.and.util_print('information',print_low)) then
         call util_print_centered
-     1  (LuOut,'NWChem TDDFT Module',40,.true.)
+     1  (LuOut,'NWChem CNEO-TDDFT Module',40,.true.)
         write(LuOut,*)
         write(LuOut,*)
         if (title.ne.' ') then

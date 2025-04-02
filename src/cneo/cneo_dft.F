@@ -206,7 +206,7 @@ c
 c
 c     check if we can get the grid from a file
 c         
-               if(.not.rtdb_get(rtdb,'cneo_dft:energy', mt_dbl,
+               if(.not.rtdb_get(rtdb,'cneo:energy', mt_dbl,
      &             1,energy)) call errquit(
      &             pname//'Failed getting converged energy',0,RTDB_ERR)
                if (iproc.eq.0 .and. oprint)then

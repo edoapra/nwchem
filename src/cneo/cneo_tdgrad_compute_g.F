@@ -1,39 +1,3 @@
-      subroutine cneo_tdgrad_finalize_ints(rtdb,nuc_num,bas_e,bas_n)
-      implicit none
-#include "errquit.fh"
-#include "mafdecls.fh"
-#include "rtdb.fh"
-      integer rtdb
-      integer nuc_num
-      integer bas_e
-      integer bas_n(nuc_num)
-
-      integer bases(nuc_num+1)
-      integer i
-      character*32 pname
-      integer calc_type
-      pname = 'cneo_tdgrad_finailize_ints: '
-
-      if (.not.rtdb_get(rtdb,'fock_xc:calc_type_save',mt_int,1,
-     +  calc_type)) 
-     + call errquit(pname//'failed to get calc_type_save',0,RTDB_ERR)
-      if (.not.rtdb_put(rtdb,'fock_xc:calc_type',mt_int,1,calc_type))
-     + call errquit(pname//'failed to reset calc_type',0,RTDB_ERR)
-      if (.not.rtdb_delete(rtdb,'fock_xc:calc_type_save')) 
-     + call errquit(pname//'failed to delete calc_type_save',0,RTDB_ERR)
-c
-      call fock_2e_tidy(rtdb)
-      call int_terminate()
-
-      bases(1) = bas_e
-      do i=1,nuc_num
-         bases(i+1) = bas_n(i)
-      enddo
-      call cneo_schwarz_tidy(nuc_num+1,bases)
-
-      end
-
-
       subroutine cneo_tdgrad_compute_g(rtdb,ihdl_geom,ihdl_bfao,tda,
      +  nat,nao,
      +  nfc,naoc,nocc,nav,nfv,ipol,nroots,oskel,tol2e,g_mo,
@@ -156,7 +120,6 @@ c     Functions:
 
       pname = 'cneo_tdgrad_compute_g: '
 
-      print *, pname//'ipol', ipol
       call tddft_grad_compute_g(rtdb,ihdl_geom,ihdl_bfao,tda,nat,
      +   nao,nfc,naoc,nocc,nav,nfv,ipol,nroots,oskel,tol2e,g_mo,
      +   g_p,g_wp,g_xpy,g_xmy,g_g,kfac,lhashf,otriplet)
@@ -409,8 +372,6 @@ c     Functions:
       if (.not. ma_push_get(mt_dbl, maxq, 'q4', l_q4, k_q4))
      $     call errquit(pname//'could not allocate q4',maxq, MA_ERR)
 
-      print *, pname, 'line 385'
-
       nprocs=ga_nnodes()
       do ir=1,nroots
          call dfill(lforce, 0.0D0, dbl_mb(k_force), 1)
@@ -601,25 +562,29 @@ c
      $        ('gradients: could not store gradients',1, RTDB_ERR)
 
          status = rtdb_parallel(.true.)
-      endif
+         endif
 
-      alo(1)=ir
-      ahi(1)=ir
-      alo(2)=1
-      ahi(2)=3
-      alo(2)=1
-      ahi(2)=nat
-      ldim(1)=1
-      ldim(2)=3
-      call nga_put(g_g,alo,ahi,dbl_mb(k_force),ldim)
+         alo(1)=ir
+         ahi(1)=ir
+         alo(2)=1
+         ahi(2)=3
+         alo(2)=1
+         ahi(2)=nat
+         ldim(1)=1
+         ldim(2)=3
+         call nga_put(g_g,alo,ahi,dbl_mb(k_force),ldim)
          
       enddo ! end nroot loop
  2200       format(A,A,A/,1000(3(1x,F12.6),/))
+
       if (.not. ma_verify_allocator_stuff())
      $     call errquit('grad: ma corrupt',0, MA_ERR)
 
       if (.not. ma_chop_stack(l_buf)) 
      $     call errquit('grad: failed chopping MA stack',0, MA_ERR)
+
+      call int_terminate()
+      call cneo_schwarz_tidy(nuc_num+1, bases)
 c
 c     destroy global arrays
 c

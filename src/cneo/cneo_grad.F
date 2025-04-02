@@ -1,4 +1,4 @@
-      subroutine cneo_dft_energy_gradient(rtdb)
+      logical function cneo_dft_energy_gradient(rtdb)
       implicit none 
 #include "errquit.fh"
 #include "mafdecls.fh"
@@ -31,7 +31,6 @@
       integer max_sh_bf, max_sh_bf_n, max_sh_bf_tmp
       logical status
 
-      ! integer bas1, bas2, nbf1, nbf2
       integer lsqatom_n, l_ndens, k_ndens, l_ndens2, k_ndens2
       integer g_ndens(max_quantum_nuc), g_dens
       integer nbf, nbf_n(max_quantum_nuc)
@@ -79,24 +78,61 @@
       double precision crd(3), q
       double precision tmp_charge
 
+      character*32 pname
+      character*256 title
 
-      status = cneo_dft_energy(rtdb)
-      status = rtdb_cput(rtdb,'task:theory', 1, 'dft')
+      pname = 'cneo_dft_grad: '
 
-      status = geom_create(geom,'geometry')
-      status = geom_rtdb_load(rtdb,geom,'geometry')
+      if (.not. cneo_dft_energy(rtdb)) call errquit
+     +      (pname//'cneo_dft_energy failed',0,0)
+
+      if (.not. rtdb_cget(rtdb, 'title', 1, title))
+     &     title = ' '
+
+      if (ga_nodeid() .eq. 0)then
+         if (util_print('information',print_default) )then
+            write(luout,*)
+            write(luout,*)
+            call util_print_centered(luout,
+     &          'NWChem CNEO-DFT Gradient Module',40,.true.)
+            write(luout,*)
+            write(luout,*)
+            if (title .ne. ' ')then
+               call util_print_centered(luout, title, 40, .false.)
+               write(luout,*)
+               write(luout,*)
+            endif
+
+            call util_flush(luout)
+
+         endif
+      endif
+
+      if (.not. geom_create(geom,'geometry')) call errquit
+     +      (pname//'geom_create failed',0,GEOM_ERR)
+      if (.not. geom_rtdb_load(rtdb,geom,'geometry')) call errquit
+     +      (pname//'geom_rtdb_load failed',0,GEOM_ERR)
       
       call cneo_nuc_init(rtdb,geom)
       call cneo_geom_init(rtdb,geom_cneo)
 
-      status = bas_create(basis,'ao basis')
-      status = bas_rtdb_load(rtdb,geom_cneo,basis,'ao basis')
-      status = int_normalize(rtdb,basis)
-      status = grad_cneo_elec(rtdb,geom_cneo,basis)
+      if (.not. bas_create(basis,'ao basis')) call errquit
+     +      (pname//'bas_create failed',0,BASIS_ERR)
+      if (.not. bas_rtdb_load(rtdb,geom_cneo,basis,'ao basis'))
+     +      call errquit(pname//'bas_rtdb_load failed',0,BASIS_ERR)
+      if (.not. int_normalize(rtdb,basis)) call errquit
+     +      (pname//'int_normalize failed',0,0)
+c
+c     Pure electron gradients
+c  
+      if (.not. grad_cneo_elec(rtdb,geom_cneo,basis)) call errquit
+     +      (pname//'grad_cneo_elec failed',0,0)
+c
       bases(1) = basis
       call cneo_bas_init(rtdb,geom_cneo,bases_nuc)
       do i=1,nuc_num
-         status = int_normalize(rtdb,bases_nuc(i))
+         if (.not. int_normalize(rtdb,bases_nuc(i))) call errquit
+     +         (pname//'int_normalize failed',0,0)
          bases(i+1) = bases_nuc(i)
       enddo
 
@@ -113,11 +149,21 @@
       if (.not. geom_ncent(geom,nat))
      $     call errquit('grad: could not get natoms',0, GEOM_ERR)
 
+      if (util_print('debug',print_debug) )then
+         if (.not. geom_print(geom_cneo)) 
+     &         call errquit('grad_dft: geom_print ?',0, GEOM_ERR)
+         do i=1,nuc_num+1
+            if (.not. bas_print(bases(i))) 
+     &            call errquit('grad_dft: bas_print ?',0, BASIS_ERR)
+         enddo 
+      endif
+
 
       call int_init(rtdb,nuc_num+1,bases(1:nuc_num+1))
       call cneo_schwarz_init(geom_cneo,nuc_num+1,bases)
       call int_terminate()
       call intd_init(rtdb, nuc_num+1, bases)
+
       if (.not. geom_ncent(geom_cneo,nat))
      $     call errquit('grad: could not get natoms',0, GEOM_ERR)
 
@@ -136,6 +182,8 @@
          if (max_at_bf_tmp .ge. max_at_bf_n) max_at_bf_n=max_at_bf_tmp
       enddo
 
+      if (.not. bas_nbf_cn_max(basis,max_sh_bf))
+     $     call errquit('grad: could not get max_at_bf',0, BASIS_ERR)
       max_sh_bf_n = 0
       do i=1,nuc_num
          if (.not. bas_nbf_cn_max(bases_nuc(i),max_sh_bf_tmp))
@@ -197,9 +245,6 @@
       if (.not. rtdb_get(rtdb, 'dft:gradient',mt_dbl,3*nat,
      $      dbl_mb(k_force))) call errquit
      $      ('cneo_grad: cannot load dft gradients',0,0)
-      write(luout,2200) 'loaded ',
-     $           'dft elec', ' gradient',
-     $           ((dbl_mb(k_force+i-1+3*(j-1)),i=1,3),j=1,nat)
 
       do i=1,nuc_num
          movecs_in = ' '
@@ -239,7 +284,9 @@
       call dfill(lforce, 0.0D0, dbl_mb(k_frc_nuc), 1)
       call dfill(lforce, 0.0D0, dbl_mb(k_frc_en), 1)
       call dfill(lforce, 0.0d0, dbl_mb(k_frc_nn), 1)
-
+c
+c     Nuclear hcore gradients
+c
       do i=1,nuc_num
          call cneo_schwarz_set(bases_nuc(i))
          call grad1n(i,nuc_num,nuc_cent,dbl_mb(k_buf), lbuf, 
@@ -354,7 +401,9 @@
      $     call errquit('grad:could not allocate list',4*maxq, MA_ERR)
       if (.not. ma_push_get(mt_dbl, maxq, 'q4', l_q4, k_q4))
      $     call errquit('grad:could not allocate q4',maxq, MA_ERR)
-
+c
+c     Elec - nuc interaction gradients
+c
       do i=1,nuc_num
          call grad12(
      $      dbl_mb(ld_e), dbl_mb(ld_n), dbl_mb(k_frc_en), blen,
@@ -374,7 +423,9 @@
      $      int_mb(k_bfmap_n(i)), int_mb(k_rbfmap_n(i)), 
      $      int_mb(k_bftoat_n(i)), int_mb(k_shbflo_n(i)), 
      $      int_mb(k_shbfhi_n(i)))
-
+c
+c     Nuc - nuc interaction gradients
+c
          do j=i+1,nuc_num
             call grad12(
      $         dbl_mb(ld_n), dbl_mb(ld_n2), dbl_mb(k_frc_nn),blen_n,
@@ -403,6 +454,8 @@
 
       if (ga_nodeid() .eq. 0) then
          status = rtdb_parallel(.false.)
+         write(luout,2200) 'loaded elec gradient',' ',' ',
+     $           ((dbl_mb(k_force+i-1+3*(j-1)),i=1,3),j=1,nat)
          do i=0, 3*nat-1
             dbl_mb(k_force+i) = dbl_mb(k_force+i) +
      $           dbl_mb(k_frc_nuc+i) + dbl_mb(k_frc_en+i) +
@@ -474,11 +527,13 @@ c
       if (.not. rtdb_put(rtdb,'charge',MT_DBL,1,tmp_charge))
      $   call errquit('cneo_dftgrad:restore tot charge',0,0)
 
+      cneo_dft_energy_gradient = .true.
 
       end
 
 
 c      Modified from grad1.F
+c      Gradients of nuclear hcore
 
       subroutine grad1n(idx, nuc_num, nuc_cent,
      $            H, lbuf, scr, lscr, ndens,
@@ -554,7 +609,7 @@ c
                   dE=0d0
                   do ip1=if1,il1
                      do ip2=if2,il2
-                        ! minus sigh for positive nuc charge?
+                        ! minus sigh for positive nuc charge
                         dE=dE-ndens(ip1,ip2) * H(ic)
                         ic = ic+1
                      enddo !ip2
@@ -570,6 +625,7 @@ c
       end
 
 c      Modified from grad2.F
+c      Gradients of two-body (two basis sets) Coulomb interactions
       subroutine grad12(d1_ij, d2_kl, frc, blen1, blen2,
      $         g_dens1, g_dens2, geom, bas1, bas2,
      $         nproc, nat, lscr, scr, leri, eri, labels,
@@ -588,11 +644,12 @@ c      Modified from grad2.F
 #include "util.fh"
 #include "bas.fh"
 
-      integer blen1, blen2
       double precision d1_ij(blen1,blen1),d2_kl(blen2,blen2)
-      double precision frc(3,nat)
+      double precision frc(3,nat)   ! [output] forces
+      integer blen1, blen2
+      integer geom                  ! [input] geometry handle
+      integer bas1, bas2            ! [input] two basis set handles
       integer g_dens1, g_dens2, g_force
-      integer geom, bas1, bas2
       integer nproc, nat, lscr, leri
       double precision scr(lscr), eri(3,4,leri)
       integer labels(leri,4)
@@ -601,34 +658,32 @@ c      Modified from grad2.F
       double precision q4(maxq)
       double precision tol2e
       integer nsh1, nsh2
-      logical oactive(2)
       integer nopen, nbf1, nbf2
       double precision jfac
 
-      ! copied from grad2.F
       double precision pdm2d(blen2,blen2,blen1,blen1) ! [scratch] AO 2-pdm
-      integer nshblocks1         ! [input] No. of shell blocks
-      integer shmap1(nsh1)        ! [input] Map from new to old shell order
-      integer shglo1(nshblocks1)  ! [input] First new shell in block
-      integer shghi1(nshblocks1)  ! [input] Last new shell in block
-      integer bfglo1(nshblocks1)  ! [input] First new basis func in block
-      integer bfghi1(nshblocks1)  ! [input] Last new basis func in block
-      integer bfmap1(nbf1)        ! [input] Map from new to old basis func order
-      integer rbfmap1(nbf1)       ! [input] Map from old to new basis func order
-      integer bftoat1(nbf1)       ! [input] Map from old basis func to atom
-      integer shbflo1(nsh1)       ! [input] First new bf in new shell
-      integer shbfhi1(nsh1)       ! [input] Last new bf in new shell
-      integer nshblocks2         ! [input] No. of shell blocks
-      integer shmap2(nsh2)        ! [input] Map from new to old shell order
-      integer shglo2(nshblocks2)  ! [input] First new shell in block
-      integer shghi2(nshblocks2)  ! [input] Last new shell in block
-      integer bfglo2(nshblocks2)  ! [input] First new basis func in block
-      integer bfghi2(nshblocks2)  ! [input] Last new basis func in block
-      integer bfmap2(nbf2)        ! [input] Map from new to old basis func order
-      integer rbfmap2(nbf2)       ! [input] Map from old to new basis func order
-      integer bftoat2(nbf2)       ! [input] Map from old basis func to atom
-      integer shbflo2(nsh2)       ! [input] First new bf in new shell
-      integer shbfhi2(nsh2)       ! [input] Last new bf in new shell
+      integer nshblocks1          ! [input] bas1: No. of shell blocks
+      integer shmap1(nsh1)        ! [input] bas1: Map from new to old shell order
+      integer shglo1(nshblocks1)  ! [input] bas1: First new shell in block
+      integer shghi1(nshblocks1)  ! [input] bas1: Last new shell in block
+      integer bfglo1(nshblocks1)  ! [input] bas1: First new basis func in block
+      integer bfghi1(nshblocks1)  ! [input] bas1: Last new basis func in block
+      integer bfmap1(nbf1)        ! [input] bas1: Map from new to old basis func order
+      integer rbfmap1(nbf1)       ! [input] bas1: Map from old to new basis func order
+      integer bftoat1(nbf1)       ! [input] bas1: Map from old basis func to atom
+      integer shbflo1(nsh1)       ! [input] bas1: First new bf in new shell
+      integer shbfhi1(nsh1)       ! [input] bas1: Last new bf in new shell
+      integer nshblocks2          ! [input] bas1: No. of shell blocks
+      integer shmap2(nsh2)        ! [input] bas2
+      integer shglo2(nshblocks2)  ! [input] bas2
+      integer shghi2(nshblocks2)  ! [input] bas2
+      integer bfglo2(nshblocks2)  ! [input] bas2
+      integer bfghi2(nshblocks2)  ! [input] bas2
+      integer bfmap2(nbf2)        ! [input] bas2
+      integer rbfmap2(nbf2)       ! [input] bas2
+      integer bftoat2(nbf2)       ! [input] bas2
+      integer shbflo2(nsh2)       ! [input] bas2
+      integer shbfhi2(nsh2)       ! [input] bas2
 C-------------------------local variables-----------------------------
       integer  next, nint, ijklblock
       double precision scale, q4max
@@ -654,16 +709,12 @@ C-------------------------local variables-----------------------------
       integer ibflo_prev, jbflo_prev, kbflo_prev, lbflo_prev ! for caching
       
       logical oij, okl, oikjl, ouhf, orohf, omcscf, omore, exso
-      logical intbd_init4c, test_intbd_2e4c, intbd_2e4c
-      external intbd_init4c, test_intbd_2e4c, intbd_2e4c
+      logical intbd_init4c, intbd_2e4c
+      external intbd_init4c, intbd_2e4c
 
-      logical oskel
       double precision dtmp(blen1,blen1)
       double precision pdmtmp(blen1)
       double precision coeff
-      oskel = .true.
-      oactive(1) = .true.
-      oactive(2) = .true.
 
       smax = schwarz_max()
       q4max = 8.0d0*(sym_number_ops(geom) + 1)*10000.0d0
@@ -870,9 +921,12 @@ c
 c     Modified from grad_dft.F
 c     To calculate elec gradient without the consideration of 
 c     quantum nuc.
-c     Redirect geom/ao_bas_han to geom_cneo/bas_e
-c     Remove geom_destroy/bas_destroy for use in cneo dft gradients
-
+c
+c   Major changes on top of grad_dft.F:
+c     1. set task:theory to dft (reset in the end)
+c     2. redirect geom/ao_bas_han to geom_cneo/bas_e
+c     3. remove geom_destroy/bas_destroy for use in cneo dft gradients
+ 
       logical function grad_cneo_elec(rtdb,geom_cneo,bas_e)
 *
 * $Id$
@@ -907,6 +961,14 @@ c
       logical converged, status
       integer bases(3), plevel
       character*80 theory
+
+      if (.not. rtdb_delete(rtdb,'task:theory')) call errquit
+     &      ('grad_cneo_elec:delete task:theory',0,0)
+      if (.not. rtdb_cput(rtdb,'task:theory',1,'dft')) call errquit
+     &      ('grad_cneo_elec:set task:theory to dft',0,0)
+      if (.not. rtdb_put(rtdb, 'gradients:use symmetry', mt_log, 1, 
+     $        .false.))call errquit
+     $        ('grad_cneo_elec: symmetry',1, RTDB_ERR)
 c
 c----------------------------------------------------------------------- 
 c
@@ -922,7 +984,7 @@ c
       if(theory .eq. 'dft')then 
          status = rtdb_get(rtdb, 'dft:converged', MT_LOG, 1, converged) 
       else if(theory .eq. 'sodft')then 
-         status = rtdb_get(rtdb, 'sodft:converged', MT_LOG,1,converged)
+         call errquit('grad_cneo_elec: sodft not supported',0,0)
       endif
       if (.not.( status .and. converged ))then
          if ((ga_nodeid() .eq. 0) 
@@ -931,7 +993,7 @@ c
      &                     converged
         endif
         call errquit(
-     &       'dft grad_dft: no converged DFT wavefunction available',
+     &       'grad_cneo_elec: no converged DFT wavefunction available',
      &     0, UNKNOWN_ERR)
       endif 
 c
@@ -993,14 +1055,9 @@ c
             write(luout,*)
             write(luout,*)
             call util_print_centered(luout,
-     &          'NWChem DFT Gradient Module',40,.true.)
+     &          'CNEO-DFT Gradient: Elec Gradient',40,.true.)
             write(luout,*)
             write(luout,*)
-            if (title .ne. ' ')then
-               call util_print_centered(luout, title, 40, .false.)
-               write(luout,*)
-               write(luout,*)
-            endif
 
             if (ipol .eq. 1)then
                write(luout,1) rcharge, 'closed shell'
@@ -1025,7 +1082,6 @@ c
 c     Compute the gradients arising from CD fit and XC
 c
       if(theory .eq. 'dft')call dft_gradients(rtdb)
-      if(theory .eq. 'sodft')call dft_gradients_so(rtdb)
 c
       call schwarz_tidy ()
 c
@@ -1046,7 +1102,6 @@ c
 c     Compute the rest of the gradients (1-e and 2-e)
 c
       if(theory .eq. 'dft')call grad_force(rtdb, ao_bas_han, geom)
-      if(theory .eq. 'sodft')call grad_force_so(rtdb, ao_bas_han, geom)
 c
       call dft_pstat_print
 c
@@ -1055,6 +1110,10 @@ c
       call ecce_print_module_exit ('dft','ok')
       call util_print_pop
       grad_cneo_elec = .true.
+      if (.not. rtdb_delete(rtdb,'task:theory')) call errquit
+     &      ('grad_cneo_elec:delete task:theory',0,0)
+      if (.not. rtdb_cput(rtdb,'task:theory',1,'cneo')) call errquit
+     &      ('grad_cneo_elec:reset task:theory to cneo',0,0)
 c
       return
       end

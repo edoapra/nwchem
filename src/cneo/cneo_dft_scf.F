@@ -1563,11 +1563,11 @@ c
      &   call errquit('dft_scf: failed to MO irreps in rtdb', 0,
      &       RTDB_ERR)
       endif
-      if (.not. rtdb_put(rtdb, 'cneo_dft:energy', MT_DBL, 
+      if (.not. rtdb_put(rtdb, 'cneo:energy', MT_DBL, 
      &   1, (Etnew+Enuc)))
      &   call errquit('dft_scf: failed to store energy in rtdb', 0,
      &       RTDB_ERR)
-      if (.not. rtdb_put(rtdb, 'cneo_dft:converged', MT_LOG,
+      if (.not. rtdb_put(rtdb, 'cneo:converged', MT_LOG,
      &   1, converged))
      &   call errquit('dft_scf: failed to store converged in rtdb', 0,
      &       RTDB_ERR)
