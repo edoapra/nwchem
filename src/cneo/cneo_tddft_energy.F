@@ -535,9 +535,9 @@ c
      1  l_occ,k_occ,l_irs,k_irs)
 c     Restore tot charge
       if (.not. rtdb_get(rtdb,'charge_real',MT_DBL,1,tmp_charge))
-     $   call errquit('cneo_nwdft:read tot charge',0,0)
+     $   call errquit('cneo_tddft_energy:read tot charge',0,0)
       if (.not. rtdb_put(rtdb,'charge',MT_DBL,1,tmp_charge))
-     $   call errquit('cneo_nwdft:restore tot charge',0,0)
+     $   call errquit('cneo_tddft_energy:restore tot charge',0,0)
 
       if ((algorithm.eq.1).or.(algorithm.eq.2)) then
         do i=1,ipol

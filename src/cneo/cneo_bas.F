@@ -1,6 +1,3 @@
-c
-c     Functions are modified from basis.F to process nuclear basis
-c
       subroutine cneo_bas_input(rtdb)
 c $Id$
       implicit none

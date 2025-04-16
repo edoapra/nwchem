@@ -116,10 +116,10 @@ c
       ltried_cgmin = .false.
 c
 c     initialize
-      if (.not. rtdb_put(rtdb, 'cneo_dft:energy', MT_DBL, 1, 0.d0))
+      if (.not. rtdb_put(rtdb, 'cneo:energy', MT_DBL, 1, 0.d0))
      &   call errquit('dft_scf: failed to store energy in rtdb', 0,
      &       RTDB_ERR)
-      if (.not. rtdb_put(rtdb, 'cneo_dft:converged', MT_LOG,1,.false.))
+      if (.not. rtdb_put(rtdb, 'cneo:converged', MT_LOG,1,.false.))
      &   call errquit('dft_scf: failed to store converged in rtdb', 0,
      &       RTDB_ERR)
 c

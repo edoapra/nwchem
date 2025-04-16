@@ -3,7 +3,7 @@
      $     idx1, idx2, ofock)
 c
 c     To calculate Coulomb matrix between two different
-c     basis sets
+c     basis sets; the input density matrix is for bas2
 c
 c     Note that this subroutine implicitly assumed that 
 c     the input density matrix is symmetric
@@ -79,6 +79,10 @@ c     the input density matrix is symmetric
       endif
 
       call util_file_name(tmp_filename,.true.,.false.,int2efilename)
+      if (util_print('int2efilename', print_debug)) then
+         write(6,*) 'get_j_dm: int2e filename', int2efilename
+         call util_flush(6)
+      endif
 
       tol2e_local = min(tol2e,1d-8)
 
@@ -89,6 +93,8 @@ c     the input density matrix is symmetric
          if (.not. int2e_file_open(int2efilename,0,0,tol2e,.false.))
      $         call errquit('cneo:eri_dm:open int2e file',0,0)
       end if
+
+      call cneo_reset_int2efile_print(print_debug) ! compress eaf file print
 
       status = int2e_file_rewind()
 
@@ -257,6 +263,8 @@ c
          if (.not. int2e_file_close(.false.))
      $         call errquit('cneo:get_j_dm: close file',0,0)
       endif
+
+      call cneo_reset_int2efile_print(print_default)  ! restore eaf file print level
 
       end
 
@@ -731,4 +739,15 @@ c
          end if
       end do
 c     
+      end
+
+      subroutine cneo_reset_int2efile_print(level)
+      implicit none 
+#include "util.fh"
+#include "cint2efile.fh"
+#include "global.fh"
+      integer level 
+
+      oinfo = util_print('int2einfo', level) .and. ga_nodeid().eq.0
+
       end

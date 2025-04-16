@@ -170,7 +170,13 @@ c
 c     == Gather input from all available resources e.g. input unit, ==
 c     == old checkpoint files, etc. ==
       call dft_rdinput(rtdb)
-      tol2e_cneo = min(1.0d-8,g_conv*1d-2)
+c
+c     This is the tol2e used in get_j_dm function
+c     Needs to be saved for consistent use in tddft grad module
+c     The default tol2e used in DFT (10d-8) is not small enough
+      tol2e_cneo = min(1.0d-9,10d0**(-itol2e))
+      if (.not. rtdb_put(rtdb,'cneo_dft:tol2e',mt_dbl,1,tol2e_cneo))
+     $   call errquit('cneo_dft:store tol2e',0,RTDB_ERR)
       if (.not. bas_destroy(AO_bas_han))
      $      call errquit('cneo_dft:bas_destroy?',0,0)
 

@@ -286,7 +286,6 @@ c
       call ecce_print_module_entry('dft')
       cneo_dft_scf = .false.
       ocosmo_got_gasphase = .false.
-      lmaxov_sv = lmaxov
       oprint = util_print('information', print_low)
       oprint_info = util_print('common', print_debug)
       oprint_parm = util_print('parameters', print_default)
@@ -1085,11 +1084,13 @@ c
         enddo
       endif
 cc AJL/End
-
+      call cneo_set_cdft('e')
       do ispin = 1, ipol
+         g_movecs0(ispin) = g_movecs(ispin)
          call dft_diagn(levelshifting,
      ,        nmo(ispin),ncanorg,
      .        g_focks(ispin),g_s,g_movecs(ispin),g_tmp,g_svecs,
+     ,        g_movecs0(ispin),
      ,        dbl_mb(k_eval(ispin)),svals,noc(ispin),
      ,        homo,lumo,toll_s,
      ,        oprint_intermediate_fock,oprint_time,
@@ -1156,6 +1157,7 @@ c
          call dft_diagn(levelshifting,
      ,         nmo_n,ncanorg,
      .         g_nfock(i),g_s_n(i),g_movecs_n(i),g_tmp_n,g_svecs_n(i),
+     ,         g_movecs_n(i),
      ,         dbl_mb(k_eval_n(i)),svals_n(sval_start),1,
      ,         homo,lumo,toll_s,
      ,         oprint_intermediate_fock,oprint_time,

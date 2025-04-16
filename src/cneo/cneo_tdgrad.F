@@ -413,8 +413,9 @@ c
 c     Finalize gradients
       if (oroot.and.odebug) 
      &      write(luout,*) "call tddft_grad_finalize"
-      call cneo_tdgrad_finalize(nsroots,ihdl_sroots,ntroots,ihdl_troots,
-     +       nroots,ihdl_roots,ihdl_geom,ihdl_bfao,nuc_num,ihdl_bfn)
+      call cneo_tdgrad_finalize(rtdb, nsroots,ihdl_sroots,ntroots,
+     +            ihdl_troots,nroots,ihdl_roots,
+     +            ihdl_geom,ihdl_bfao,nuc_num,ihdl_bfn)
       if (oroot.and.odebug) 
      &      write(luout,*) "done tddft_grad_finalize"
 c

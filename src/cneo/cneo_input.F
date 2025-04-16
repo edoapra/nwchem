@@ -21,7 +21,9 @@
       character*256 nuc_bas_name
       character*255 cdft_bas_input
 
-      quantum_nuc_idx = 0
+      do i=1,10
+         quantum_nuc_idx(i) = 0
+      end do
 
       oidx = .false.
       osmb = .false.
@@ -35,6 +37,7 @@
      $     call errquit('cdft_input: failed to read keyword',0,
      &       INPUT_ERR)
 
+
       if (inp_compare(.false.,'quantum_nuc',test)) then
  110     if (inp_f(tmp_idx)) then
             oidx = .true.
@@ -43,7 +46,6 @@
             go to 110
          else if (inp_a(quantum_nuc_smb)) then
             osmb = .true.
-            print *, quantum_nuc_smb
          else
             write(luout,*) 'CNEO: No quantum nucleus is defined.'
          end if

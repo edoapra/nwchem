@@ -1,0 +1,18 @@
+#PB4-P basis
+basis "H_PB4P" SPHERICAL
+#basis SET: (4s,3p) -> (4s,3p)
+H    S
+    1.957   1.000
+H    S
+    8.734   1.000
+H    S
+    16.010  1.000
+H    S
+    31.997  1.000
+H    P
+    9.438   1.000
+H    P
+    13.795  1.000
+H    P
+    24.028  1.000
+end

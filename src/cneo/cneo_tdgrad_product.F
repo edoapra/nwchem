@@ -1,4 +1,4 @@
-subroutine cneo_tdgrad_solve_product(acc,g_x,g_Ax)
+      subroutine cneo_tdgrad_solve_product(acc,g_x,g_Ax)
       implicit none 
 #include "errquit.fh"
 #include "mafdecls.fh"

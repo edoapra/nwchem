@@ -302,7 +302,7 @@ c
 
       call gen_reciprocal(g_inv,dbl_mb(kval),nsing)
 
-      if (.not.ga_duplicate(g_v,g_tmp,'pseudoinverse:tmp')) call 
+      if (.not.ga_duplicate(g_vt,g_tmp,'pseudoinverse:tmp')) call 
      $      errquit('ga_duplicate?',0,0)
       call ga_dgemm('t','n',n,nsing,nsing,1.0d0,g_vt,g_inv,0d0,g_tmp)
       call ga_dgemm('n','t',n,m,nsing,1.0d0,g_tmp,g_u,0d0,g_s)

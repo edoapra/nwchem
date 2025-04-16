@@ -1,4 +1,4 @@
-      subroutine cneo_tdgrad_finalize(nsroots,ihdl_sroots,
+      subroutine cneo_tdgrad_finalize(rtdb,nsroots,ihdl_sroots,
      +          ntroots,ihdl_troots,nroots, ihdl_roots,
      +          ihdl_geom, ihdl_bfao, 
      +          nuc_num, ihdl_bfn)
@@ -9,7 +9,9 @@ c
 #include "geom.fh"
 #include "bas.fh"
 #include "errquit.fh"
+#include "rtdb.fh"
 c
+      integer rtdb
       integer nsroots     ! the number of singlet roots
       integer ihdl_sroots ! the memory handle for the singlet roots
       integer ntroots     ! the number of triplet roots
@@ -22,6 +24,7 @@ c
 
       integer nuc_num 
       integer ihdl_bfn(nuc_num)  ! the nuclear basis set handles
+      double precision tmp_charge
 c
       character*32 pname
       integer i
@@ -36,6 +39,11 @@ c
       enddo
 
       call cneo_int1er_tidy
+c     Restore tot charge
+      if (.not. rtdb_get(rtdb,'charge_real',MT_DBL,1,tmp_charge))
+     $   call errquit(pname//'read tot charge',0,RTDB_ERR)
+      if (.not. rtdb_put(rtdb,'charge',MT_DBL,1,tmp_charge))
+     $   call errquit(pname//'restore tot charge',0,RTDB_ERR)
 
       end
       

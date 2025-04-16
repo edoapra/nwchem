@@ -9,7 +9,7 @@ c
       integer g_diis(mxhist)
       integer g_err
       double precision pulay((mxhist+1)*(mxhist+2)/2)
-      Integer nhist(2), icall
+      Integer nhist(ipol), icall
 c***********************************************************************
 c
 c     subroutine diis

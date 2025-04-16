@@ -24,7 +24,7 @@ c
       double precision mult(nconstr),mult_diis(nconstr,mxhist)
       integer g_diis(mxhist)
       double precision svals(*), svals_n(*)
-      integer nhist(2), icall(*)
+      integer nhist(2+max_quantum_nuc), icall(*)
       integer geom, AO_bas_han
       ! double precision derr(2+max_quantum_nuc) ! Diis error norm [output]
       double precision derr(*)

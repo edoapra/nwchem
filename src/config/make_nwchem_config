@@ -21,14 +21,14 @@ KNOWN_MODULE_SUBDIRS = NWints atomscf ddscf develop gradients moints nwdft \
         property solvation nwpw fft rimp2_grad python argos analyz diana nwmd cafe space \
         drdy vscf uccsdt qmmm rism qmd etrans tce geninterface bq mm cons\
         perfm dntmc smd nbo dangchang leps ccca lucia dimqm rdmft fcidump\
-        gwmol xtb nwc_columbus bsemol
+        gwmol xtb nwc_columbus bsemol cneo
 
 # These are the libraries for the high-level modules.  They should be
 # specified in an order that will link correctly, but that shouldn't
 # be too hard to come up with.  These should be platform-independent.
 
 KNOWN_MODULE_LIBS = -ltest -lccsd -llucia -lmcscf -lselci -lmp2 -lmoints \
-                    -lstepper -ldriver -loptim -lplnwv -lnwdft -lgradients \
+                    -lstepper -ldriver -loptim -lplnwv -lcneo -lnwdft -lgradients \
                     -lcphf -lscfaux -lesp -lddscf -ldangchang -lleps -lguess -lhessian \
                     -lvib -lnwcutil -lrimp2g -lrimp2 -lproperty -lsolvation -lnwints -lnwc_columbus \
 		    -largos -lprepar -lnwmd -lnwpw -lofpw -lpaw -lpspw -lband -lnwpwlib \
@@ -80,7 +80,7 @@ EXP_qm  = NWints atomscf ddscf gradients moints nwdft rimp2 hessian bq cons \
           gwmol bsemol
 EXP_smallqm  = NWints atomscf ddscf gradients moints nwdft rimp2 hessian bq cons \
           optim stepper driver vib qmd mcscf property solvation dplot \
-           mp2_grad esp etrans vscf nwmd dimqm gwmol bsemol
+           mp2_grad esp etrans vscf nwmd dimqm gwmol bsemol cneo
 EXP_smallqmmm  = NWints atomscf ddscf gradients moints nwdft rimp2 hessian bq cons \
           optim stepper driver vib qmd mcscf property solvation dplot \
            mp2_grad esp etrans vscf nwmd qmmm prepar analyz dimqm gwmol bsemol
@@ -162,6 +162,8 @@ MODULES := $(patsubst mcscf,mcscf mp2_grad moints ddscf,$(MODULES) )
 MODULES := $(patsubst moints,moints ddscf NWints,$(MODULES) )
 MODULES := $(patsubst cphf,cphf ddscf,$(MODULES) )
 MODULES := $(patsubst scfaux,scfaux ddscf,$(MODULES) )
+
+MODULES := $(patsubst cneo,cneo nwdft ddscf gradients NWints,$(MODULES) )
 
 #MODULES := $(patsubst nwdft,nwdft ddscf gradients NWints property cphf hessian nwxc,$(MODULES) )
 MODULES := $(patsubst nwdft,nwdft ddscf gradients NWints property cphf hessian,$(MODULES) )
@@ -278,6 +280,7 @@ MOD_LIBS := $(patsubst gwmol,-lgwmol,$(MOD_LIBS) )
 MOD_LIBS := $(patsubst bsemol,-lbsemol,$(MOD_LIBS) )
 MOD_LIBS := $(patsubst xtb,-lnwxtb,$(MOD_LIBS) )
 MOD_LIBS := $(patsubst nwc_columbus,-lnwc_columbus,$(MOD_LIBS) )
+MOD_LIBS := $(patsubst cneo,-lcneo,$(MOD_LIBS) )
 MOD_LIBS := $(strip $(MOD_LIBS))
 
 #-----------------------------------------------------------------------------
@@ -344,6 +347,7 @@ STUBROUTINES := $(patsubst gwmol, gw_input gwmol, $(STUBROUTINES) )
 STUBROUTINES := $(patsubst bsemol, bse_input bsemol, $(STUBROUTINES) )
 STUBROUTINES := $(patsubst xtb, xtb_input xtb_energy xtb_energy_gradient, $(STUBROUTINES) )
 STUBROUTINES := $(patsubst nwc_columbus, sifcfg sifwh sodft_aoints, $(STUBROUTINES) )
+STUBROUTINES := $(patsubst cneo, cneo_input cneo_dft_energy cneo_tddft_energy cneo_dft_energy_gradient cneo_tddft_gradient, $(STUBROUTINES) )
 STUBROUTINES := $(strip $(STUBROUTINES))
 STUBROUTINES := $(sort $(STUBROUTINES))
 

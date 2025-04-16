@@ -1,5 +1,6 @@
       subroutine cneo_nuc_init(rtdb, geom)
       implicit none
+#include "errquit.fh"
 #include "nwc_const.fh"
 #include "geomP.fh"
 #include "geom.fh"
@@ -148,7 +149,7 @@ c  update mass and charge
       bases_nuc = -999
       do i=1,nuc_num
          iatom = nuc_cent(i)
-         write(6,*), 'cneo_bas_init: building basis for ',iatom
+         write(6,*), 'cneo_bas_init: building basis for atom',iatom
          if (.not. bas_create(bases_nuc(i), 'nuc basis'))
      $      call errquit('cneo init: bas create',0,0)
          call cneo_bas_load(rtdb,geom_cneo,bases_nuc(i),'nuc basis',
