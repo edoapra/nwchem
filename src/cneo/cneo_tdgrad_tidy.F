@@ -81,23 +81,6 @@ c
       call cneo_schwarz_tidy(nuc_num+1,bases)
 
       end
-
-      subroutine cneo_tdgrad_destory_mo_n(nuc_num,g_mo)
-      implicit none 
-#include "errquit.fh"
-#include "mafdecls.fh"
-#include "global.fh"
-      integer nuc_num
-      integer g_mo(nuc_num)
-
-      integer i
-      do i=1,nuc_num
-         if(.not. ga_destroy(g_mo(i))) call errquit
-     +         ('cneo_tdgrad_destroy_mo:ga_destroy?',0,GA_ERR)
-      enddo
-
-      end
-
 c
 c     Prints the resulting gradients for each of the excited states of interest.
 c     

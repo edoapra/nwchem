@@ -57,35 +57,6 @@ c     To create R_n=Q^n_{ia}
       enddo
 
       end
-
-      subroutine cneo_tdgrad_destroy_r_n(nuc_num,g_r)
-c
-c     This is directly copied from subroutine tddft_grad_destroy_r
-c     The only changes are
-c        1. ipol -> nuc_num
-c        2. g_r(2) -> g_r(nuc_num)
-c
-      implicit none
-c
-#include "mafdecls.fh"
-#include "errquit.fh"
-#include "global.fh"
-c
-      integer nuc_num 
-      integer g_r(nuc_num)
-c
-c     Local
-c
-      integer i ! just a counter
-c
-      do i = 1, nuc_num
-        if (.not.ga_destroy(g_r(i))) call errquit(
-     +         'tddft_grad_destroy_r: failed to destroy g_r',
-     +         0, GA_ERR)
-      enddo
-c
-      end
-
 c
 c     Coulomb interaction response matrix in MO1 basis from 
 c     input matrix in MO2 basis

@@ -70,15 +70,33 @@
       call cneo_disassamble(ctdg_nroots,nuc_num,g_x,ctdg_e_size,
      $         ctdg_n_size,g_x_e,g_x_n,g_tdg)
 
-c  ========= Start elec part:H^{+}[Ze]+orbital energy+H_en[Zn]=======
-c     The first part of electronic part is copied from 
-c     nwdft/lr_tddft_grad/tddft_grad_solve_product.F
-c     In principle, this can be done by calling subroutine 
-c     tddft_grad_solve_product with g_x_e as input.
-c     But the common file tddft_grad_solve_common.fh is a 
-c     local common file and it's not straightforward to call
+c  ========= Start elec part: H^{+}[Ze]+orbital energy+H_en[Zn]=======
 c
-c     1. g_x 2D MO -> g_x_3d_mo (both e and n)
+c     1. calculate H^{+}[Ze]+orbital energy (pure electronic part)
+c
+      call tddft_grad_solve_product(acc, g_x_e, g_Ax_e)
+c
+c     2. 2D g_Ax_e -> g_Ax_3d_mo
+c
+      call tddft_grad_create_r(ctdg_ipol,ctdg_naoc,ctdg_nav,ctdg_nroots,
+     +     g_Ax_3d_mo)
+      call ga_zero(g_Ax_3d_mo)
+      do ip = 1, ctdg_ipol
+        do ir = 1, ctdg_nroots
+          alo(1) = ir
+          ahi(1) = ir
+          alo(2) = 1
+          ahi(2) = ctdg_naoc(ip)
+          alo(3) = 1
+          ahi(3) = ctdg_nav(ip)
+          klo = (ip-1)*(ctdg_naoc(1)*ctdg_nav(1))+1
+          col = ir
+          call tddft_grad_vec_to_mat(g_Ax_3d_mo(ip),alo,ahi,
+     $               g_Ax_e,klo,col)
+        enddo
+      enddo
+c
+c     3. g_x 2D MO -> g_x_3d_mo (both e and n)
 c
       call tddft_grad_create_r(ctdg_ipol,ctdg_naoc,ctdg_nav,ctdg_nroots,
      +                         g_x_3d_mo)
@@ -111,67 +129,8 @@ c
      $                  g_x_n(i),1,ir)
          enddo
       enddo
-c
-c     2. g_x_3d_mo -> g_x_3d_ao
-c
-      idim(1) = ctdg_nroots*ctdg_ipol
-      idim(2) = ctdg_nao
-      idim(3) = ctdg_nao
-      ichnk(1) = ctdg_nroots*ctdg_ipol
-      ichnk(2) = -1
-      ichnk(3) = -1
-      if (.not.nga_create(mt_dbl,3,idim,'g_x_3d_ao',ichnk,g_x_3d_ao))
-     +    call errquit(pname//'failed to create g_x_3d_ao',0,GA_ERR)
-      call ga_zero(g_x_3d_ao)
-      call tddft_grad_trans_mo2ao(ctdg_ipol,ctdg_nao,ctdg_nfc,ctdg_naoc,
-     +     ctdg_nocc,ctdg_nav,ctdg_nfv,ctdg_nroots,
-     +     1.0d0,0.0d0,"ib",ctdg_g_mo,g_x_3d_mo,"ib",g_x_3d_ao)
-c
-c     3. compute (A+B)g_x currently we have to compute (A-B)g_x as well
-c        although we do not want it.
-c
-      if (.not.nga_create(mt_dbl,3,idim,'vec (A+B)X',ichnk,g_Ax_3d_ao))
-     +    call errquit(pname//'failed to create g_Ax_3d_ao',0,GA_ERR)
-c
-      if (.not.ctdg_tda) then
-        if (.not.nga_create(mt_dbl,3,idim,'vec (A-B)X',ichnk,g_ambt))
-     +      call errquit(pname//'failed to create g_ambt',0,GA_ERR)
-      endif
-      call ga_zero(g_Ax_3d_ao)
-      call tddft_nga_cont(ctdg_rtdb,ctdg_geom,ctdg_bfao,g_x_3d_ao,
-     +     g_Ax_3d_ao,g_ambt,ctdg_nao,ctdg_ipol,ctdg_tol2e,ctdg_tda,
-     +     ctdg_oskel,ctdg_kfac,ctdg_lhashf,ctdg_triplet,ctdg_nroots,
-     +     iwhich,ctdg_lhascd)
-      if (.not.ctdg_tda) then
-        if (.not.ga_destroy(g_ambt))
-     +      call errquit(pname//'failed to destroy g_ambt',0,GA_ERR)
-      endif
-c
-c     4. Destroy g_x_3d_ao
-c
-      if (.not.ga_destroy(g_x_3d_ao)) 
-     +   call errquit(pname//'failed to destroy g_x_3d_ao',0,GA_ERR)
-c
-c     5. Transform g_Ax_3d_ao -> g_Ax_3d_mo
-c
-      call tddft_grad_create_r(ctdg_ipol,ctdg_naoc,ctdg_nav,ctdg_nroots,
-     +     g_Ax_3d_mo)
-      ! call ga_zero(g_Ax_3d_mo)
-      call tddft_grad_trans_ao2mo(ctdg_ipol,ctdg_nao,ctdg_nfc,ctdg_naoc,
-     +     ctdg_nocc,ctdg_nav,ctdg_nfv,ctdg_nroots,1.0d0,0.0d0,"ib",
-     +     ctdg_g_mo,g_Ax_3d_ao,g_Ax_3d_mo,"ib")
-c
-c     6. Destroy g_Ax_3d_ao
-c
-      if (.not.ga_destroy(g_Ax_3d_ao)) 
-     +   call errquit(pname//'failed to destroy g_Ax_3d_ao',0,GA_ERR)
-c
-c     7. Add orbital energy difference term
-c
-      call tddft_grad_epsilon(g_x_3d_mo,g_Ax_3d_mo,ctdg_ipol,
-     +     ctdg_nroots,ctdg_nao,ctdg_nocc,ctdg_nfc,dbl_mb(ctdg_e_mo))
 c     
-c     8. add en term: H_en[Z_n]
+c     4. add en term: H_en[Z_n]
 c  
       do ip=1,ctdg_ipol
          do i=1,nuc_num
@@ -185,7 +144,7 @@ c
          enddo
       enddo
 c
-c     9. Transform g_Ax_3d_mo -> g_Ax 2D MO
+c     5. Transform g_Ax_3d_mo -> g_Ax 2D MO
 c
       do ip = 1, ctdg_ipol
         do ir = 1, ctdg_nroots
@@ -202,9 +161,9 @@ c
         enddo
       enddo
 
-c  ========= Start nuc part:orbital energy+H_ne[Ze]+H_nn[Zn]=======
+c  ========= Start nuc part: orbital energy+H_ne[Ze]+H_nn[Zn]=======
 c
-c     10. calculate g_Ax_n: add orbital contribution
+c     6. calculate g_Ax_n: add orbital contribution
       call cneo_tdgrad_create_r_n(nuc_num,ctdg_naoc_n,ctdg_nav_n,
      $         ctdg_nroots,g_Ax_n_mo)
       offset_e = 0
@@ -216,7 +175,7 @@ c     10. calculate g_Ax_n: add orbital contribution
          offset_e = offset_e+ctdg_nao_n(i)
       enddo
 c     
-c     11. add ne and nn response to g_Ax_n_mo
+c     7. add ne and nn response to g_Ax_n_mo
 c
       do i=1,nuc_num
          do ip=1,ctdg_ipol
@@ -243,7 +202,7 @@ c
          enddo
       enddo
 
-c     12. add 2g.r to g_Ax_n_mo
+c     8. add 2g.r to g_Ax_n_mo
 c    
       do i=1,nuc_num
          do j=1,ctdg_nav_n(i)
@@ -270,7 +229,7 @@ c
          enddo
       enddo
 c
-c     13. Transform g_Ax_n_mo -> g_Ax_n 2D MO
+c     9. Transform g_Ax_n_mo -> g_Ax_n 2D MO
 c
       do ip = 1, nuc_num
         do ir = 1, ctdg_nroots
@@ -287,7 +246,7 @@ c
         enddo
       enddo
 
-c     14. Calculate g_Ax_g
+c     10. Calculate g_Ax_g
 c         Yg       = \sum{ia} R(i)_{ia}      Zn(i)_{ia}
 c        g_Ax_g(i)        g_int1e_r_vo(i)     g_x_n_3D(i) 
 c        (3,nroot)        (3,nocc,nvir)     (nroot,nocc,nvir)
@@ -313,16 +272,16 @@ c        (3,nroot)        (3,nocc,nvir)     (nroot,nocc,nvir)
          enddo ! end loop x,y,z
       enddo ! end loop nuc_num
 c
-c     15. Assemble g_Ax_e,g_Ax_n,g_Ax_g to g_Ax
+c     11. Assemble g_Ax_e,g_Ax_n,g_Ax_g to g_Ax
 c
       call cneo_assamble(ctdg_nroots,nuc_num,g_Ax_e,g_Ax_n,g_Ax_g,
      +      ctdg_e_size,ctdg_n_size,g_Ax)
 
-c     16. Destroy local arrays
+c     12. Destroy local arrays
       call tddft_grad_destroy_r(ctdg_ipol,g_Ax_3d_mo)
       call tddft_grad_destroy_r(ctdg_ipol,g_x_3d_mo)
-      call cneo_tdgrad_destroy_r_n(nuc_num,g_x_3d_n)
-      call cneo_tdgrad_destroy_r_n(nuc_num,g_Ax_n_mo)
+      call tddft_grad_destroy_r(nuc_num,g_x_3d_n)
+      call tddft_grad_destroy_r(nuc_num,g_Ax_n_mo)
       status = .true.
       status = status .and. ga_destroy(g_x_e)
       status = status .and. ga_destroy(g_Ax_e)
@@ -419,7 +378,7 @@ c     but the g_x in cneo_tdgrad_solve_product only has asymmetric ov block.
 c     Therefore, the input g_x (nocc, nvir) needs to be transfered to
 c
 c           | 0       Xia/2 |
-c           |                 |  where t(A) is the transpose of A.
+c           |               |  where t(A) is the transpose of A.
 c           | t(Xia/2)  0   |
 c     
 c     cneo_tdgrad_en_response is then called to get the Coulomb response

@@ -1,7 +1,7 @@
 c
 c     ------------------------------------------------------------------
 c     Main routine for calculating the gradients of the CNEO-TDDFT
-c     (under frozen nuclear orbital assumption)excitation energies 
+c     (under frozen nuclear orbital assumption) excitation energies 
 c     with respect to nuclear coordinates.
 c
 c     Workflow modified from tddft_gradient.F, with most of the functions
@@ -321,7 +321,7 @@ c
 c     Deallocate right hand side: R
       if (oroot.and.odebug) write(luout,*) "call cneo_tdgrad_destroy_r"
       call tddft_grad_destroy_r(ipol,g_r)
-      call cneo_tdgrad_destroy_r_n(nuc_num,g_r_n)
+      call tddft_grad_destroy_r(nuc_num,g_r_n)
       if (oroot.and.odebug) write(luout,*) "done cneo_tdgrad_destroy_r"
 c
 c     Compute the relaxed density matrix: P=T+Z
@@ -367,11 +367,11 @@ c     Deallocate arrays
       if (oroot.and.odebug) write(luout,*) "call deallocate arrays"
       call tddft_grad_destroy_tp(ipol,g_w)
       call tddft_grad_destroy_r(ipol,g_z)
-      call cneo_tdgrad_destroy_r_n(nuc_num,g_z_n)
+      call tddft_grad_destroy_r(nuc_num,g_z_n)
       call tddft_grad_destroy_tp(ipol,g_tp)
       call tddft_grad_destroy_xy(tda,ipol,g_xpy,g_xmy)
       call tddft_grad_destroy_mo(ipol,g_mo)
-      call cneo_tdgrad_destory_mo_n(nuc_num,g_mo_n)
+      call tddft_grad_destroy_mo(nuc_num,g_mo_n)
       call tddft_grad_destroy_root_e(ihdl_root_e)
       call tddft_grad_destroy_e(ihdl_mo_e_n)
       call tddft_grad_destroy_e(ihdl_mo_e)

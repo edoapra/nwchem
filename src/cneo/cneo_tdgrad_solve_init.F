@@ -89,6 +89,8 @@
      +            nao_n,naoc_n,nav_n,ctdg_g_int1er_ao,
      +            ctdg_g_int1er_ov)
 
+	   call tdgrad_solve_set
+
       end
 
       subroutine cneo_tdgrad_int1er_ov(nuc_num,g_int1e_r,g_mo,
@@ -135,6 +137,42 @@
       enddo
 
       end
+
+      subroutine tdgrad_solve_set
+		implicit none 
+#include "ccneo_tdgrad_solve.fh"
+#include "tddft_grad_solve_common.fh"
+
+		tdg_tol2e = ctdg_tol2e
+		tdg_kfac = ctdg_kfac
+		tdg_rtdb = ctdg_rtdb
+		tdg_geom = ctdg_geom
+		tdg_bfao = ctdg_bfao
+		tdg_ipol = ctdg_ipol
+		tdg_nroots = ctdg_nroots
+		tdg_nao = ctdg_nao
+		tdg_nocc(1) = ctdg_nocc(1)
+		tdg_nocc(2) = ctdg_nocc(2)
+		tdg_naoc(1) = ctdg_naoc(1)
+		tdg_naoc(2) = ctdg_naoc(2)
+		tdg_nav(1)  = ctdg_nav(1)
+		tdg_nav(2)  = ctdg_nav(2)
+		tdg_nfc(1)  = ctdg_nfc(1)
+		tdg_nfc(2)  = ctdg_nfc(2)
+		tdg_nfv(1)  = ctdg_nfv(1)
+		tdg_nfv(2)  = ctdg_nfv(2)
+		tdg_nmo(1)  = ctdg_nmo(1)
+		tdg_nmo(2)  = ctdg_nmo(2)
+		tdg_g_mo(1) = ctdg_g_mo(1)
+		tdg_g_mo(2) = ctdg_g_mo(2)
+		tdg_e_mo    = ctdg_e_mo
+		tdg_tda     = ctdg_tda
+		tdg_oskel   = ctdg_oskel
+		tdg_lhashf  = ctdg_lhashf
+		tdg_triplet = ctdg_triplet
+		tdg_lhascd  = ctdg_lhascd
+
+		end
 
       subroutine cneo_tdgrad_solve_tidy
       implicit none

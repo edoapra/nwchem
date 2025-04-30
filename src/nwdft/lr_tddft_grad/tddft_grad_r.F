@@ -53,7 +53,7 @@ c
 #include "global.fh"
 c
       integer ipol    ! =1 (restricted), =2 (unrestricted)
-      integer g_r(2)  ! global array handle for (X+Y)
+      integer g_r(ipol)  ! global array handle for (X+Y)
 c
 c     Local
 c

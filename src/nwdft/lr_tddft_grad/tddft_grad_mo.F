@@ -47,7 +47,7 @@ c
 c     Input:
 c
       integer ipol      ! =1 (restricted), =2 (unrestricted)
-      integer g_mo(2)   ! global array handles for the MOs
+      integer g_mo(ipol)   ! global array handles for the MOs
 c
 c     Local:
 c
