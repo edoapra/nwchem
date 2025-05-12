@@ -3911,14 +3911,14 @@ ifdef USE_MPI
     else ifdef BUILD_MPICH
         NW_CORE_SUBDIRS += libext
         PATH := $(NWCHEM_TOP)/src/libext/bin:$(PATH)
-        NWMPI_INCLUDE = $(shell PATH=$(NWCHEM_TOP)/src/libext/bin:$(PATH) $(NWCHEM_TOP)/src/tools/guess-mpidefs --mpi_include)
-        NWMPI_LIB     = $(shell PATH=$(NWCHEM_TOP)/src/libext/bin:$(PATH)  $(NWCHEM_TOP)/src/tools/guess-mpidefs --mpi_lib)
-        NWLIBMPI      = $(shell PATH=$(NWCHEM_TOP)/src/libext/bin:$(PATH) $(NWCHEM_TOP)/src/tools/guess-mpidefs --libmpi)
-	NWLIBMPI      += $(shell pkg-config --libs-only-L hwloc 2> /dev/null)
+        NWMPI_INCLUDE := $(shell PATH=$(NWCHEM_TOP)/src/libext/bin:$(PATH) $(NWCHEM_TOP)/src/tools/guess-mpidefs --mpi_include)
+        NWMPI_LIB     := $(shell PATH=$(NWCHEM_TOP)/src/libext/bin:$(PATH)  $(NWCHEM_TOP)/src/tools/guess-mpidefs --mpi_lib)
+        NWLIBMPI      := $(shell PATH=$(NWCHEM_TOP)/src/libext/bin:$(PATH) $(NWCHEM_TOP)/src/tools/guess-mpidefs --libmpi)
+	NWLIBMPI      := $(NWLIBMPI) $(shell pkg-config --libs-only-L hwloc 2> /dev/null)
         ifeq ($(NWCHEM_TARGET),MACX64)
            GOT_BREW := $(shell command -v brew 2> /dev/null)
            ifdef GOT_BREW
-	       NWLIBMPI	+= -L$(shell brew --prefix)/lib
+	       NWLIBMPI	:= $(NWLIBMPI) -L$(shell brew --prefix)/lib
            endif
 	endif
     else ifdef FORCE_MPI_ENV
