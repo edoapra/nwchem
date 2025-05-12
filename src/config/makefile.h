@@ -2170,7 +2170,7 @@ ifneq ($(TARGET),LINUX)
             DEFINES  +=-DMPICH_NO_ATTR_TYPE_TAGS
 	    DEFINES  += -DNOIO -DEAFHACK
 #	    LDOPTIONS +=-Wl,-rpath=/usr/local/lib/gcc7
-            LDOPTIONS += $(shell mpif90  -show 2>&1 |cut -d " " -f 2) 
+            LDOPTIONS := $(LDOPTIONS) $(shell mpif90  -show 2>&1 |cut -d " " -f 2) 
             ARFLAGS = rU
         endif
 
@@ -3615,8 +3615,8 @@ ifdef BUILD_PLUMED
     LD_LIBRARY_PATH := $(NWCHEM_TOP)/src/libext/lib:$(LD_LIBRARY_PATH)
     DEFINES += -DUSE_PLUMED
     PLUMED_HOME=$(NWCHEM_TOP)/src/libext
-    PLUMED_DYNAMIC_LIBS = $(shell test -x $(NWCHEM_TOP)/src/libext/bin/plumed && $(NWCHEM_TOP)/src/libext/bin/plumed info --configuration|grep DYNAMIC_LIBS| cut -c 14-)
-    PLUMED_HASMPI = $(shell test -x $(NWCHEM_TOP)/src/libext/bin/plumed && $(NWCHEM_TOP)/src/libext/bin/plumed info --configuration|grep program_can_run_mpi|cut -c 21-21)
+    PLUMED_DYNAMIC_LIBS := $(shell test -x $(NWCHEM_TOP)/src/libext/bin/plumed && $(NWCHEM_TOP)/src/libext/bin/plumed info --configuration|grep DYNAMIC_LIBS| cut -c 14-)
+    PLUMED_HASMPI := $(shell test -x $(NWCHEM_TOP)/src/libext/bin/plumed && $(NWCHEM_TOP)/src/libext/bin/plumed info --configuration|grep program_can_run_mpi|cut -c 21-21)
 endif
 ifdef USE_PLUMED
     DEFINES += -DUSE_PLUMED
