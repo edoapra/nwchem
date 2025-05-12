@@ -3748,11 +3748,11 @@ endif
 #case guard against case when tools have not been compiled yet
 #  ifeq ("$(wildcard ${GA_PATH}/bin/ga-config)","")
 #  else
-COMM_LIBS=  $(shell ${GA_PATH}/bin/ga-config --network_ldflags)
-COMM_LIBS +=  $(shell ${GA_PATH}/bin/ga-config --network_libs)
+COMM_LIBS :=  $(shell ${GA_PATH}/bin/ga-config --network_ldflags)
+COMM_LIBS :=  $(COMM_LIBS) $(shell ${GA_PATH}/bin/ga-config --network_libs)
 #comex bit
 #COMM_LIBS +=  $(shell [ -e ${NWCHEM_TOP}/src/tools/build/comex/config.h ] && grep LIBS\ = ${NWCHEM_TOP}/src/tools/build/comex/Makefile|grep -v _LIBS| cut -b 8-) -lpthread
-COMM_LIBS += $(shell [ -e ${GA_PATH}/bin/comex-config ] && ${GA_PATH}/bin/comex-config --libs) -lpthread
+COMM_LIBS := $(COMM_LIBS) $(shell [ -e ${GA_PATH}/bin/comex-config ] && ${GA_PATH}/bin/comex-config --libs) -lpthread
 ifdef COMM_LIBS 
     CORE_LIBS += $(COMM_LIBS) 
 endif 
