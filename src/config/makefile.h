@@ -230,7 +230,7 @@ else
 	INCPATH :=  $(word $(words $(GA_CPPFLAGS)),$(GA_CPPFLAGS))
 
         ifdef EXTERNAL_GA_PATH
-	  INCPATH += -I$(shell $(NWCHEM_TOP)/src/tools/guess-mpidefs --mpi_include)
+	  INCPATH := $(INCPATH) -I$(shell $(NWCHEM_TOP)/src/tools/guess-mpidefs --mpi_include)
         endif
     endif
 endif
