@@ -140,6 +140,7 @@ c  update mass and charge
 #include "rtdb.fh"
 #include "nwc_const.fh"
 #include "ccneo.fh"
+#include "global.fh"
 
       integer rtdb, geom_cneo
       integer bases_nuc(max_quantum_nuc)
@@ -149,7 +150,9 @@ c  update mass and charge
       bases_nuc = -999
       do i=1,nuc_num
          iatom = nuc_cent(i)
-         write(6,*), 'cneo_bas_init: building basis for atom',iatom
+         if (ga_nodeid().eq.0) then
+            write(6,*), 'cneo_bas_init: building basis for atom',iatom
+         endif
          if (.not. bas_create(bases_nuc(i), 'nuc basis'))
      $      call errquit('cneo init: bas create',0,0)
          call cneo_bas_load(rtdb,geom_cneo,bases_nuc(i),'nuc basis',

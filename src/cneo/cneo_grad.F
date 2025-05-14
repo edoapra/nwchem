@@ -9,6 +9,7 @@
 #include "bas.fh"
 #include "rtdb.fh"
 #include "stdio.fh"
+#include "msgids.fh"
 #include "util.fh"
       integer rtdb
       logical cneo_dft_energy
@@ -451,6 +452,11 @@ c
          enddo ! j loop for nn energy grad
       enddo ! i loop for en energy grad
 
+      call ga_sync()
+      call ga_dgop(msg_grad_nuc, dbl_mb(k_frc_en), 3*nat, '+')
+      call ga_dgop(msg_grad_nuc, dbl_mb(k_frc_nn), 3*nat, '+')
+      call ga_sync()
+
 
       if (ga_nodeid() .eq. 0) then
          status = rtdb_parallel(.false.)
@@ -725,8 +731,7 @@ C-------------------------local variables-----------------------------
       kbflo_prev = -1
       lbflo_prev = -1
 
-      task_size = nshblocks1*nshblocks2
-      task_size = task_size*(task_size+1)/2
+      task_size = nshblocks1*(nshblocks1+1)*nshblocks2*(nshblocks2+1)/4
       task_size = max(1,task_size/(20*nproc))
 
       ijklblock = 0

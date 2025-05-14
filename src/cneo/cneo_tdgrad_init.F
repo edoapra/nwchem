@@ -245,7 +245,6 @@ c
 c     get calculation settings: ipol, nocc, nmo, tol2e
       if (.not.rtdb_get(rtdb,'dft:ipol',mt_int,1,ipol))
      +  call errquit(pname//'failed to read ipol',0, RTDB_ERR)
-      print *, 'tdgrad:debug:init:ipol',ipol
       if (.not.rtdb_get(rtdb,'dft:noc',mt_int,2,nocc))
      +  call errquit(pname//'failed to read nocc',0, RTDB_ERR)
       if (.not.rtdb_cget(rtdb,'dft:output vectors',1,fn_movecs))

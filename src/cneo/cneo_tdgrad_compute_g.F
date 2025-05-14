@@ -11,6 +11,7 @@
 #include "stdio.fh"
 #include "util.fh"
 #include "rtdb.fh"
+#include "msgids.fh"
       integer rtdb      ! the runtime database handle
       integer ihdl_geom ! the geometry handle
       integer ihdl_bfao ! the basis set handleA
@@ -485,7 +486,7 @@ c
      $      int_mb(k_bfmap_n(i)), int_mb(k_rbfmap_n(i)), 
      $      int_mb(k_bftoat_n(i)), int_mb(k_shbflo_n(i)), 
      $      int_mb(k_shbfhi_n(i)))
-         enddo
+         enddo ! end nuc_num
 c
 c     6. calculate nn grad
 c        \sum Zn1 grad(n1|n2) Dn2      n1 != n2
@@ -535,8 +536,13 @@ c
 
  100           continue
 
-            enddo ! end j
-         enddo ! end i
+            enddo ! end j: nuc_num
+         enddo ! end i: nuc_num
+
+         call ga_sync()
+         call ga_dgop(msg_grad_nuc, dbl_mb(k_frc_en), 3*nat, '+')
+         call ga_dgop(msg_grad_nuc, dbl_mb(k_frc_nn), 3*nat, '+')
+         call ga_sync()
 
          if (ga_nodeid() .eq. 0) then
          status = rtdb_parallel(.false.)

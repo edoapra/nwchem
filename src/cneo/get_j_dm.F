@@ -456,9 +456,9 @@ cedo         integ_acc = 1d-15 ! Not used
       
       nproc = ga_nnodes()
 
-      next = 0
+      next = nxtask(nproc, chunk)
 
-      current = next
+      current = 0
       nq = 0
 c
       nqraw = 0
@@ -534,14 +534,14 @@ c
                if (oreadfile) then ! Semi-direct
                   continue
                else
-                  ! next = nxtask(nproc,chunk)
-                  next = next + 1
+                  next = nxtask(nproc,chunk)
                   ntreq = ntreq + 1
                endif
             end if
             current = current + 1
          end do                 ! Next IJ type
       end do                    ! Next IJKL type
+      next = nxtask(-nproc,1)
 
       call ga_sync()
       end
