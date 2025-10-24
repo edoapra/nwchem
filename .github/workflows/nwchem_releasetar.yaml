@@ -28,10 +28,16 @@ jobs:
     steps:
       - name: check if tag exists
         run: |
-          echo "checking if tag" ${{ github.event.inputs.branch }} "exists"
-          git ls-remote --exit-code --tags \
+          echo "checking if branch" ${{ github.event.inputs.branch }} "exists"
+          if ! git ls-remote --exit-code --heads \
           https://github.com/$GITHUB_REPOSITORY_OWNER/nwchem \
-          ${{ github.event.inputs.branch }}
+          refs/heads/${{ github.event.inputs.branch }}
+          then
+              echo branch is not there
+              exit 1
+          else
+              echo branch is there
+          fi
       - name: install pkg
         run: |
           sudo apt-get install -y curl make perl bash bzip2 tar gzip openmpi-bin
