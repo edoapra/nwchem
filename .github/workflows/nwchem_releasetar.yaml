@@ -36,7 +36,6 @@ jobs:
           echo "checking if branch" ${{ github.event.inputs.branch }} "exists"
           ls -lart
           env
-          cd nwchem*
           if ! git ls-remote --exit-code --heads \
           origin \
           refs/heads/${{ github.event.inputs.branch }}
@@ -47,6 +46,7 @@ jobs:
           else
               echo branch is there
           fi
+          cd $HOME
       - name: install pkg
         run: |
           sudo apt-get install -y curl make perl bash bzip2 tar gzip openmpi-bin
