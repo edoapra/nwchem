@@ -29,7 +29,9 @@ jobs:
       - name: check if tag exists
         run: |
           echo "checking if tag" ${{ github.event.inputs.branch }} "exists"
-          git ls-remote --exit-code --tags origin  ${{ github.event.inputs.branch }}
+          git ls-remote --exit-code --tags \
+          https://github.com/$GITHUB_REPOSITORY_OWNER/nwchem/$GITHUB_REF_NAME \
+          ${{ github.event.inputs.branch }}
       - name: install pkg
         run: |
           sudo apt-get install -y curl make perl bash bzip2 tar gzip openmpi-bin
