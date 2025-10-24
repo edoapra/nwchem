@@ -26,6 +26,10 @@ jobs:
   do_tar:
     runs-on: ubuntu-latest
     steps:
+      - name: check if tag exists
+        run: |
+          echo "checking if tag" ${{ github.event.inputs.branch }} "exists"
+          git ls-remote --exit-code --tags origin  ${{ github.event.inputs.branch }}
       - name: install pkg
         run: |
           sudo apt-get install -y curl make perl bash bzip2 tar gzip openmpi-bin
