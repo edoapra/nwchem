@@ -34,7 +34,9 @@ jobs:
       - name: check if tag exists
         run: |
           echo "checking if branch" ${{ github.event.inputs.branch }} "exists"
-          cd nwchem
+          ls -lart
+          env
+          cd nwchem*
           if ! git ls-remote --exit-code --heads \
           origin \
           refs/heads/${{ github.event.inputs.branch }}
