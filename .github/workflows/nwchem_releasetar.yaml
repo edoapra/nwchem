@@ -35,6 +35,7 @@ jobs:
           then
               echo branch is not there
               git clone -b master https://github.com/$GITHUB_REPOSITORY_OWNER/nwchem
+              cd nwchem
               git checkout -b ${{ github.event.inputs.branch }}
               git push origin  ${{ github.event.inputs.branch }}
           else
