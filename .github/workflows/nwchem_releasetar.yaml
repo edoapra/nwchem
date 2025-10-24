@@ -30,11 +30,11 @@ jobs:
         run: |
           echo "checking if branch" ${{ github.event.inputs.branch }} "exists"
           if ! git ls-remote --exit-code --heads \
-          https://github.com/$GITHUB_REPOSITORY_OWNER/nwchem \
+          git@github.com:$GITHUB_REPOSITORY_OWNER/nwchem.git \
           refs/heads/${{ github.event.inputs.branch }}
           then
               echo branch is not there
-              git clone -b master https://github.com/$GITHUB_REPOSITORY_OWNER/nwchem
+              git clone -b master git@github.com:$GITHUB_REPOSITORY_OWNER/nwchem.git
               cd nwchem
               git checkout -b ${{ github.event.inputs.branch }}
               git push origin  ${{ github.event.inputs.branch }}
