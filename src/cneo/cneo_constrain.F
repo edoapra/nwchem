@@ -20,15 +20,18 @@
       double precision One
       parameter (One=1.0d0)
 
-      if (.not. ga_create(MT_DBL,3,1,'cneo_constrain:f_multiplier',
-     $        32, 32, g_f)) call errquit('cneo_constrain:ga_create',
-     &       0,GA_ERR)
+!DMR: This is only a 3D-vector, there is no need to use a global array
 
-      call ga_zero(g_f)
-      call ga_put(g_f, 1,3,1,1,f_cneo(1,idx),3)
+!      if (.not. ga_create(MT_DBL,3,1,'cneo_constrain:f_multiplier',
+!     $        32, 32, g_f)) call errquit('cneo_constrain:ga_create',
+!     &       0,GA_ERR)
+!      call ga_zero(g_f)
+!      call ga_put(g_f, 1,3,1,1,f_cneo(1,idx),3)
+
+      f_cneo(1:3, idx) = 0d0    
       call pos_ana_set(idx, nbf_n, bas_n(idx))
-      call util_Newton_solve(g_f,position_analysis,
-     $            1.0d-9,10,converged_solve)
+      call util_Newton_solve(f_cneo(1,idx), position_analysis,
+     $            1.0d-9, 10, converged_solve)
 
       call cneo_fock_constrain(g_f,g_int1e_r(1,idx),g_fock_add(idx))
 
@@ -96,7 +99,7 @@
       call int_1e_ga(bas_solve, bas_solve, g_over_n, 
      $                                 'overlap', .false. )
 
-      call ga_diag(g_fock_local, g_over_n, g_mo, eval)
+      call ga_diag_seq(g_fock_local, g_over_n, g_mo, eval)
 
       if (.not. ga_create(MT_DBL,nbf_solve,nbf_solve,'pos_ana:dens',
      $     0, 0, g_ndens)) call

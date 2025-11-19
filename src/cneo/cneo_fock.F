@@ -67,20 +67,34 @@
 
       integer rtdb,i, iatom
       integer g_edens
+      integer me
 
       integer g_nhcore, g_nfock, g_over, g_tmp
       integer ga_create_atom_blocked
       external ga_create_atom_blocked
 
+!DMR: Get the node id
+      me = ga_nodeid()
+
+!DMR: If this is a single atom, this array will be allocated
+!     on a single rank
       g_nfock = ga_create_atom_blocked(geom_cneo, bas_n(i), 
      $            'Temp:n:fock')
-      if (.not. ga_create(MT_DBL,nbf_n,nbf_n,'cneo_vecs_guess_n:over',
-     $     0, 0, g_over)) call
-     $     errquit('cneo_vecs_guess_n: ga failed for over', 0, GA_ERR)
 
-      if (.not. ga_create(MT_DBL,nbf_n,nbf_n,'cneo_vecs_guess_n:tmp',
-     $     0, 0, g_tmp)) call
-     $     errquit('cneo_vecs_guess_n: ga failed for tmp', 0, GA_ERR)
+!DMR: This might result in too much fragmentation
+!      if (.not. ga_create(MT_DBL,nbf_n,nbf_n,'cneo_vecs_guess_n:over',
+!     $     0, 0, g_over)) call
+!     $     errquit('cneo_vecs_guess_n: ga failed for over', 0, GA_ERR)
+      if(.not.ga_duplicate(g_nfock, g_over, "cneo_vecs_guess_n: over"))
+     $  call errquit("cneo_vecs_guess_nuc: failed to create array",89,
+     $                GA_ERR) 
+
+!      if (.not. ga_create(MT_DBL,nbf_n,nbf_n,'cneo_vecs_guess_n:tmp',
+!     $     0, 0, g_tmp)) call
+!     $     errquit('cneo_vecs_guess_n: ga failed for tmp', 0, GA_ERR)
+      if(.not.ga_duplicate(g_nfock, g_tmp, "cneo_vecs_guess_n: over"))
+     $  call errquit("cneo_vecs_guess_nuc: failed to create array",96,
+     $                GA_ERR) 
 
       call ga_zero(g_nfock)
       call get_j_dm(geom_cneo, bas_n(i), bas_e, -1.0d0, tol2e_cneo,
@@ -93,7 +107,14 @@
       call ga_zero(g_over)
       call int_1e_ga(bas_n(i), bas_n(i), g_over, 'overlap', .false.)
 
-      call ga_diag(g_nfock, g_over, g_tmp, dbl_mb(k_eval_n(i)))
+!DMR: This function is deprecated
+!      call ga_diag(g_nfock, g_over, g_tmp, dbl_mb(k_eval_n(i)))
+
+!DMR: Since each nulcear Fock matrix should be rather
+!     small, there is no need to use parallel eigensolvers.
+      call ga_diag_seq(g_nfock, g_over, g_tmp, dbl_mb(k_eval_n(i)))
+         
+!
       call ga_copy(g_tmp, g_movecs_n(i))
 
       if (.not. ga_destroy(g_tmp)) call errquit
