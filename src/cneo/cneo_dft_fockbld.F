@@ -128,15 +128,16 @@ cc AJL/End
       double precision ecore_n, e_en, e_nn
       integer g_tmp_n
 
-      if (.not. (owritefile .or. oreadfile)) then
-         ofirst_local = .true.
-         owritefile = .true.
-         oreadfile = .false.
-      else
-         ofirst_local = .false.
-         owritefile = .false.
-         oreadfile = .true.
-      endif
+      ! DMR: Going to deactive this for now
+c      if (.not. (owritefile .or. oreadfile)) then
+c         ofirst_local = .true.
+c         owritefile = .true.
+c         oreadfile = .false.
+c      else
+c         ofirst_local = .false.
+c         owritefile = .false.
+c         oreadfile = .true.
+c      endif
 c
       do_cosmo_smd = .false.
       do_cosmo_vem = 0
@@ -227,10 +228,11 @@ c     == Copy Fock matrix to individual components for spin ECPs ==
       e_en = 0d0
       do i=1,nuc_num
          call ga_zero(g_fock)
-         if (ofirst_local) then
-            oreadfile = .false.
-            owritefile = .true.
-         end if
+         ! DMR: Direct Mixed Coulomb integrals
+!         if (ofirst_local) then
+!            oreadfile = .false.
+!            owritefile = .true.
+!         end if
          call get_j_dm(geom,bas_e,bas_n(i),-1.0d0,tol2e_cneo,.false.,
      $         g_ndens(i),g_fock,'enints',i,0,.true.)
 
@@ -239,22 +241,23 @@ c     == Copy Fock matrix to individual components for spin ECPs ==
          call ga_dadd(1d0,g_fock,1d0,g_focks(1),g_focks(1))
       enddo
 
-      call util_file_name('aoints',.true.,.false.,int2efilename)
-      if (ofirst_local) then
-         oreopen_local = .false.
-         owritefile = .true.
-         oreadfile = .false.
-      else
-         oreopen_local = .true.
-         owritefile = .false.
-         oreadfile = .true.
-      end if
+      ! DMR: Direct Mixed Coulomb Integrals
+!      call util_file_name('aoints',.true.,.false.,int2efilename)
+!      if (ofirst_local) then
+!         oreopen_local = .false.
+!         owritefile = .true.
+!         oreadfile = .false.
+!      else
+!         oreopen_local = .true.
+!         owritefile = .false.
+!         oreadfile = .true.
+!      end if
 
-      if (.not. int2e_file_open(int2efilename,0,0,tol2e_cneo,
-     $      oreopen_local))
-     &      call errquit('cneo_fock: open aoints failed',0,0)
+!      if (.not. int2e_file_open(int2efilename,0,0,tol2e_cneo,
+!     $      oreopen_local))
+!     &      call errquit('cneo_fock: open aoints failed',0,0)
       call cneo_schwarz_set(ao_bas_han)
-      call cneo_reset_int2efile_print(print_debug)
+!      call cneo_reset_int2efile_print(print_debug)
 c
 c     if requested separate calculation of bq-electron energy (MV)
 c     ----------------------------------------------------------- 
@@ -512,10 +515,11 @@ c
 
          do j=1,nuc_num
             if (j.ne.i) then
-               if (ofirst_local .and. (j.gt.i)) then
-                  oreadfile = .false.
-                  owritefile = .true.
-               end if
+               !DMR: Direct NN integrals
+!               if (ofirst_local .and. (j.gt.i)) then
+!                  oreadfile = .false.
+!                  owritefile = .true.
+!               end if
                call ga_zero(g_tmp_n)
                call get_j_dm(geom,bas_n(i),bas_n(j),1.0d0,
      $                  tol2e_cneo,.false.,g_ndens(j),g_tmp_n,'nnints',

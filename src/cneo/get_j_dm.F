@@ -49,54 +49,20 @@ c     the input density matrix is symmetric
       character*5 tmp_idx1,tmp_idx2 
       character*20 tmp_filename
 
+      integer me, ilo, ihi, jlo, jhi, kfock_local, ld, off1, off2, jbf 
+      logical oreadfile_save, owritefile_save
+
+      ! Default to direct calculations for mixed integrals
+      oreadfile_save = oreadfile
+      owritefile_save = owritefile
+
+      oreadfile = .false.
+      owritefile = .false.
+
       write(tmp_idx1, '(I0)') idx1
       write(tmp_idx2, '(I0)') idx2
-      if (inttype .eq. 'aoints') then
-         write(6,*) 'warning: 2e4c int under lower symmetry'
-         call util_file_name('aoints',.true.,.false.,int2efilename)
-      else if (inttype .eq. 'neints') then
-         if (ofock) then
-            if (.not. oreadfile)
-     $         call errquit('cneo:get_j_dm: init enints first',0,0)
-            tmp_filename = 'enints'//trim(tmp_idx1)
-         else 
-            tmp_filename = 'neints'//trim(tmp_idx1)
-         endif
-      else if (inttype .eq. 'enints') then
-         tmp_filename = 'enints'//trim(tmp_idx1)
-      else if (inttype .eq. 'nnints') then
-         if (idx1 .lt. idx2) then
-            tmp_filename = 'nnints'//trim(tmp_idx1)//trim(tmp_idx2)
-         else if (idx1 .gt. idx2) then
-            if (.not. oreadfile)
-     $            call errquit('get_j_dm: init nnints',0,0)
-            tmp_filename = 'nnints'//trim(tmp_idx2)//trim(tmp_idx1)
-         else 
-            call errquit('get_j_dm: same idx1, idx2?',0,0)
-         endif
-      else
-         call errquit('cneo:get_j_dm: int type not supported',0,0)
-      endif
-
-      call util_file_name(tmp_filename,.true.,.false.,int2efilename)
-      if (util_print('int2efilename', print_debug)) then
-         write(6,*) 'get_j_dm: int2e filename', int2efilename
-         call util_flush(6)
-      endif
 
       tol2e_local = min(tol2e,1d-8)
-
-      if (oreadfile) then
-         if (.not. int2e_file_open(int2efilename,0,0,tol2e,.true.))
-     $         call errquit('cneo:eri_dm:open int2e file',0,0)
-      else
-         if (.not. int2e_file_open(int2efilename,0,0,tol2e,.false.))
-     $         call errquit('cneo:eri_dm:open int2e file',0,0)
-      end if
-
-      call cneo_reset_int2efile_print(print_debug) ! compress eaf file print
-
-      status = int2e_file_rewind()
 
       status = status .and. bas_numbf(bas1,nbf1)
       status = status .and. bas_numbf(bas2,nbf2)
@@ -180,15 +146,9 @@ c     For bas2
 
       call ga_sync()
       if (ga_nodeid() .eq. 0) then
-         status = ma_push_get(MT_DBL, nbf2*nbf2, 
-     $     'get_j_dm: density tmp', l_dens_tmp, k_dens_tmp)
          if (.not. status) call errquit('cneo:fock:tmp dens',0,0)
          call ga_get(g_dens, 1, nbf2, 1, nbf2, 
-     $           dbl_mb(k_dens_tmp), nbf2)
-         call scf_dens_reorder(1, nbf2,
-     $        dbl_mb(k_dens_tmp), dbl_mb(k_dens))
-         if(.not. ma_pop_stack(l_dens_tmp))
-     $         call errquit('cneo:fock:free tmp dens',0,0)
+     $           dbl_mb(k_dens), nbf2)
       end if
 
       call ga_sync()
@@ -213,7 +173,6 @@ c
      $             jfac, tol2e_local, dbl_mb(k_dens), 
      $             dbl_mb(k_fock), inttype, idx1, idx2)
       else
-
          call fock_en_rep(geom, bas1,bas2, nbf1,nbf2, nsh1,nsh2,
      $     natom, jfac, tol2e_local, oskel,
      $     dbl_mb(k_dens), dbl_mb(k_fock), dbl_mb(k_rdens),
@@ -226,9 +185,20 @@ c
       call ga_sync()
       call ga_dgop(374, dbl_mb(k_fock), nbf1*nbf1, '+')
       call ga_sync()
-      
-      call ga_put(g_fock, 1, nbf1, 1, nbf1,
-     $         dbl_mb(k_fock),nbf1)
+
+      ! DMR: Update local block of Fock matrix
+      me = ga_nodeid()
+      call ga_distribution(g_fock, me, ilo, ihi, jlo, jhi)
+      if(ihi.ge.ilo) then
+         call ga_access(g_fock, ilo, ihi, jlo, jhi, kfock_local, ld)
+         do jbf=jlo,jhi
+            off1 = nbf1*(jbf-1) + ilo - 1
+            off2 = ld*(jbf-jlo)
+            call dcopy(ld, dbl_mb(k_fock+off1), 1, 
+     $                     dbl_mb(kfock_local+off2), 1)
+         enddo
+         call ga_release_update(g_fock, ilo, ihi, jlo, jhi)
+      endif
       
       status = ma_pop_stack(l_pinfo2)
       status = ma_pop_stack(l_ps2) .and. status
@@ -256,15 +226,8 @@ c
          oreadfile = .true.
       end if
 
-      if (ofock) then
-         if (.not. int2e_file_close(.true.))
-     $         call errquit('cneo:get_j_dm: close file',0,0)
-      else
-         if (.not. int2e_file_close(.false.))
-     $         call errquit('cneo:get_j_dm: close file',0,0)
-      endif
-
-      call cneo_reset_int2efile_print(print_default)  ! restore eaf file print level
+      oreadfile = oreadfile_save
+      owritefile = owritefile_save
 
       end
 
@@ -347,10 +310,12 @@ c
       dnops = 1
       nops = 1
 
-      if (.not. int2e_set_bf_range(
-     $      1,nbf1,1,nbf1,1,nbf2,1,nbf2)) call errquit
-     $      ('fock_en_rep: set range failed',0,0)
-      incomplete = -1
+      if(owritefile) then
+        if (.not. int2e_set_bf_range(
+     $        1,nbf1,1,nbf1,1,nbf2,1,nbf2)) call errquit
+     $        ('fock_en_rep: set range failed',0,0)
+        incomplete = -1
+      endif
 
       if (.not. geom_ncent_unique(geom, natom_unique)) call errquit
      $     ('fock_en_rep: bad geom handle?',0, GEOM_ERR)
@@ -416,6 +381,7 @@ cedo         integ_acc = 1d-15 ! Not used
       ntp = 10
       nshpair1 = nsh1*(nsh1+1)/2
       nshpair2 = nsh2*(nsh2+1)/2
+      !DMR: CHECK
       if (ga_nnodes() .gt. 1) then
          max_p = nshpair1*nshpair2
          max_p = max_p/sqrt(dble(ntp)*ga_nnodes())
@@ -477,7 +443,7 @@ c
             odotask = next.eq.current
             if (odotask) then
 c
-               call int2e_file_record_position()
+               if (owritefile) call int2e_file_record_position()
                do ij = pinfo1(1,ijt), pinfo1(2,ijt)
                   ish = plist1(1,ij)
                   jsh = plist1(2,ij)
@@ -660,15 +626,17 @@ c
 c     
 c     Cache integrals if desired
 c     
-         if (.not. int2e_file_write(neri,
+         if(owritefile) then 
+            if (.not. int2e_file_write(neri,
      $           int_mb(k_i), int_mb(k_j), int_mb(k_k), int_mb(k_l),
      $           dbl_mb(k_eri))) then
-            call int2e_file_reposition_truncate()
-            owritefile = .false.
-            incomplete = current
-            call ga_sync()
-         else
-            neri_cached = neri_done
+               call int2e_file_reposition_truncate()
+               owritefile = .false.
+               incomplete = current
+               call ga_sync()
+            else
+               neri_cached = neri_done
+            endif
          endif
 c     
 c     
