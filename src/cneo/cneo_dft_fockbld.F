@@ -524,10 +524,7 @@ c
                e_nn = e_nn+ga_ddot(g_tmp_n, g_ndens(i))
             endif
          enddo
-         call hcore_nuc(geom, bas_n(i), g_nhcore, iatom)
-         call ga_dadd(1d0, g_nhcore, 1d0, g_nfock(i), g_nfock(i))
-         if (.not. ga_destroy(g_nhcore)) call errquit
-     $         ('fockbld:ga_destroy?',0,0)
+         call ga_dadd(1d0, g_core_n(i), 1d0, g_nfock(i), g_nfock(i))
          ecore_n = ecore_n+ga_ddot(g_nfock(i), g_ndens(i))
          call ga_copy(g_nfock(i),g_fock0(i))
          call cneo_solve_constrain(i)

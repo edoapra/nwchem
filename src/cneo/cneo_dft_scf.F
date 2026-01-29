@@ -267,6 +267,8 @@ C     RTDB flag for printing out all matrices
       character*256 movecs_out_n
       character*5 str_i
 
+      integer l_ctmp1, k_ctmp1
+
 c     == initialize DIIS call counter ==
       icall = 0
 c
@@ -880,16 +882,22 @@ c
      &          call errquit('dft_scf: error creating ga',0,GA_ERR)
       enddo
 
+      write(*,*) nbf_n
+      if(.not.ma_push_get(mt_dbl, 3*nbf_n**2, 'cneo_tmp1', l_ctmp1, 
+     $   k_ctmp1)) call errquit('allocation failed',0, MA_ERR)
       do i=1,nuc_num
          iatom = nuc_cent(i)
          g_ndens(i) = ga_create_atom_blocked(geom,bas_n(i),'n:dens')
          call ga_zero(g_ndens(i))
-         call cneo_vecs_guess_nuc(rtdb,i,iatom,g_dens(1))
+         call cneo_vecs_guess_nuc(rtdb,i,iatom,g_dens(1),
+     $                            dbl_mb(k_ctmp1),nbf_n)
          g_nfock(i)=ga_create_atom_blocked(geom,bas_n(i),
      $                        'cneo:n:fock')
          call rohf_dens(g_movecs_n(i),nbf_n,1,0, g_ndens(i),g_odens)
          call ga_dscal(g_ndens(i), 5.0d-1)
       enddo
+      if(.not.ma_chop_stack(l_ctmp1))
+     $   call errquit("deallocation failed", 0, MA_ERR)
       if (.not. ga_duplicate(g_nfock(1), g_tmp_n, 'tmp n matrix'))
      &  call errquit('dft_scf:failed duplicate',g_nfock(1), GA_ERR)
 c
@@ -1151,23 +1159,30 @@ c
          endif      
       enddo                     ! end big loop over ispin
       call cneo_set_cdft('n')
+      if(.not.ma_push_get(mt_dbl, 3*nbf_n**2, 'cneo_tmp1', l_ctmp1, 
+     $   k_ctmp1)) call errquit('allocation failed',0, MA_ERR)
       do i=1,nuc_num
+         call cneo_diag_wrapper(g_nfock(i), g_ortho_n(i), g_movecs_n(i),
+     $                           dbl_mb(k_ctmp1), dbl_mb(k_eval_n(i)), 
+     $                           nbf_n)
          
-         sval_start = (i-1)*nbf_n+1
-         call dft_diagn(levelshifting,
-     ,         nmo_n,ncanorg,
-     .         g_nfock(i),g_s_n(i),g_movecs_n(i),g_tmp_n,g_svecs_n(i),
-     ,         g_movecs_n(i),
-     ,         dbl_mb(k_eval_n(i)),svals_n(sval_start),1,
-     ,         homo,lumo,toll_s,
-     ,         oprint_intermediate_fock,oprint_time,
+c         sval_start = (i-1)*nbf_n+1
+c         call dft_diagn(levelshifting,
+c     ,         nmo_n,ncanorg,
+c     .         g_nfock(i),g_s_n(i),g_movecs_n(i),g_tmp_n,g_svecs_n(i),
+c     ,         g_movecs_n(i),
+c     ,         dbl_mb(k_eval_n(i)),svals_n(sval_start),1,
+c     ,         homo,lumo,toll_s,
+c     ,         oprint_intermediate_fock,oprint_time,
 c
 c MN solvation models -->
 c
-     ,        oprint_conv_details,istep_cosmo_vem)
+c     ,        oprint_conv_details,istep_cosmo_vem)
 
          call ga_copy(g_ndens(i), g_ndenso(i))
       enddo
+      if(.not.ma_chop_stack(l_ctmp1))
+     $  call errquit('deallocation failed', 0, MA_ERR)
       call cneo_set_cdft('e')
 
       call ga_sync

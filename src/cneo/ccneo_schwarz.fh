@@ -1,11 +1,12 @@
-      double precision sch_maxs  ! Maximum value of any entry
 C$Id$
-      integer nb_per_is          ! No. of bytes per integer
-      integer l_cshs, k_cshs      ! MA handle & index to shell array
-      integer l_cats, k_cats      ! MA handle & index to atom array
       integer max_nbf
-      parameter (max_nbf=nw_max_nbf)
+      parameter(max_nbf=nw_max_nbf)
 
-      common /ccneo_schwarz/ sch_maxs(max_nbf), nb_per_is(max_nbf), 
-     $   l_cshs(max_nbf), k_cshs(max_nbf), 
-     $   l_cats(max_nbf), k_cats(max_nbf)
+      double precision sch_maxs(max_nbf)  ! Maximum value of any entry
+      integer nb_per_is(max_nbf)          ! No. of bytes per integer
+      integer l_cshs(max_nbf), k_cshs(max_nbf)      ! MA handle & index to shell array
+      integer l_cats(max_nbf), k_cats(max_nbf)      ! MA handle & index to atom array
+
+      common /ccneo_schwarz/ sch_maxs, nb_per_is, 
+     $   l_cshs, k_cshs, 
+     $   l_cats, k_cats

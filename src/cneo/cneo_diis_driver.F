@@ -18,7 +18,8 @@ c
       integer nbf_n, nbf_e, nbf
       integer g_focks(2), g_nfock(max_quantum_nuc)
       integer g_dens(2), g_ndens(max_quantum_nuc)
-      integer g_tmp, g_tmp_n, g_tmp_local
+      integer g_tmp, g_tmp_n, g_tmp_local, g_s12m_n, g_s12p_n
+      integer g_s12m_a, g_s12p_a
       integer g_svecs, g_svecs_n(max_quantum_nuc)
       integer nconstr
       double precision mult(nconstr),mult_diis(nconstr,mxhist)
@@ -195,7 +196,7 @@ c
       g_tmp_local = g_tmps(ispin)
 
       if (odftps) call pstat_on(ps_bld12)
-      if(.not.keeps) then
+      if((ispin.le.ipol) .and. (.not.keeps)) then
 c
 c     get S^(-1/2)
 c
@@ -207,23 +208,42 @@ c
          if (.not. ga_duplicate(g_diis(i), g_s12p, 'gs12p'))
      &        call errquit('diis_driver: error creating ga',0,GA_ERR)
 
-         if (ispin .gt. ipol) then
+         call diis_bld12(toll_s, svals, g_svecs, g_s12m, 
+     $                                                g_tmp_local,2)
+         call diis_bld12(toll_s, svals, g_svecs, g_s12p,g_tmp2,3)
+      endif
+
+      if(ispin.gt.ipol) then
+c
+c     get S^(-1/2)
+c
+         if (.not. ga_duplicate(g_diis(i), g_s12m_n, 'gs12m'))
+     &        call errquit('diis_driver: error creating ga',0,GA_ERR)
+c
+c     get S^(+1/2)
+c
+         if (.not. ga_duplicate(g_diis(i), g_s12p_n, 'gs12p'))
+     &        call errquit('diis_driver: error creating ga',0,GA_ERR)
+
             inuc = ispin-ipol
             call cneo_set_cdft('n')
             svals_start = ((ispin-ipol)-1)*nbf_n+1
-            call ga_zero(g_s12m)
-            call ga_zero(g_s12p)
-            call diis_bld12(1.0d-9,svals_n(svals_start),
-     $                       g_svecs_n(inuc),g_s12m,g_tmp_local,2)
-            call diis_bld12(1.0d-9,svals_n(svals_start),
-     $                       g_svecs_n(inuc), g_s12p,g_tmp2,3)
+            call cneo_blds12(g_svecs_n(inuc), svals_n(svals_start),
+     $                       g_s12m_n, nbf_n, 1)
+            call cneo_blds12(g_svecs_n(inuc), svals_n(svals_start),
+     $                       g_s12p_n, nbf_n, 2) 
+c            call ga_zero(g_s12m)
+c            call ga_zero(g_s12p)
+c            call diis_bld12(1.0d-9,svals_n(svals_start),
+c     $                       g_svecs_n(inuc),g_s12m,g_tmp_local,2)
+c            call diis_bld12(1.0d-9,svals_n(svals_start),
+c     $                       g_svecs_n(inuc), g_s12p,g_tmp2,3)
             call cneo_set_cdft('e')
-         else
-            call diis_bld12(toll_s, svals, g_svecs, g_s12m, 
-     $                                                g_tmp_local,2)
-            call diis_bld12(toll_s, svals, g_svecs, g_s12p,g_tmp2,3)
-         endif
+      else
+        g_s12m_n = g_s12m
+        g_s12p_n = g_s12p
       endif
+
       if (odftps) call pstat_off(ps_bld12)
 c
 c     Mat mult: F * S^(-1/2)
@@ -231,10 +251,10 @@ c
       nbf = nbfs(ispin)
       if (odftps) call pstat_on(ps_dgemm)
       call ga_dgemm('N','N',nbf,nbf,nbf,one,g_focks_en(ispin),
-     .     g_s12m,zero,g_tmp1)
+     .     g_s12m_n,zero,g_tmp1)
       if (odftps) call pstat_off(ps_dgemm)
-      if(.not.keeps) then
-         if (.not. ga_destroy(g_s12m)) call errquit
+      if((ispin.gt.ipol) .or. (.not.keeps)) then
+         if (.not. ga_destroy(g_s12m_n)) call errquit
      &        ('diis_driver: could not destroy g_s12m', 0, GA_ERR)
       endif
 
@@ -242,10 +262,10 @@ c
 c     Mat mult: S^(+1/2) * D
 c
       if (odftps) call pstat_on(ps_dgemm)
-      call ga_dgemm('N','N',nbf,nbf,nbf,one,g_s12p,g_dens_en(ispin),
+      call ga_dgemm('T','N',nbf,nbf,nbf,one,g_s12p_n,g_dens_en(ispin),
      ,     zero,g_tmp2)
       if (odftps) call pstat_off(ps_dgemm)
-      if(.not.keeps) then
+      if((ispin.gt.ipol).or.(.not.keeps)) then
          if (.not. ga_destroy(g_s12p)) call errquit
      &        ('diis_driver: could not destroy g_s12p', 0, GA_ERR)
       endif

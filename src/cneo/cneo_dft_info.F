@@ -20,6 +20,8 @@
       double precision nuclear_charge
       integer len_occ
       integer i
+      integer ga_create_atom_blocked
+      external ga_create_atom_blocked
 
       bas_e = basisin
       bas_n = basin_cneo
@@ -27,29 +29,32 @@
 
       if (.not. bas_numbf(bas_e,nbf_e)) call errquit
      $      ('cneo_dft_init:bas_e',0,0)
-      if (.not. bas_numbf(bas_n(1),nbf_n)) call errquit
-     $      ('cneo_dft_init:bas_n',0,0)
-      nmo_n = nbf_n
 
       do i=1,nuc_num
-         if (.not. ga_create(MT_DBL, nbf_n, nmo_n, 'cneo_dft: n_MOs',
-     $        32, 32, g_movecs_n(i))) call errquit('cneo_init: MOs', 0,
+        if (.not. bas_numbf(bas_n(i),nbf_n)) call errquit
+     $          ('cneo_dft_init:bas_n',0,0)
+        nmo_n = nbf_n
+
+        ! DMR: These are single-atom arrays, might become too partitioned?
+        if (.not. ga_create(MT_DBL, nbf_n, nmo_n, 'cneo_dft: n_MOs',
+     $        nbf_n, 32, g_movecs_n(i))) 
+     $       call errquit('cneo_init: MOs', 0, GA_ERR)
+        if (.not. ga_create(MT_DBL, nbf_n, nmo_n, 'cneo_dft: fock0',
+     $        nbf_n, 32, g_fock0(i))) call errquit('cneo_init: fock0',0,
      &       GA_ERR)
-         if (.not. ga_create(MT_DBL, nbf_n, nmo_n, 'cneo_dft: fock0',
-     $        32, 32, g_fock0(i))) call errquit('cneo_init: fock0', 0,
-     &       GA_ERR)
-         if (.not. ga_create(MT_DBL, nbf_n,nmo_n,'cneo_dft:fock_add',
-     $        32, 32, g_fock_add(i))) call errquit('cneo_init: fock0',
-     &        0,GA_ERR)
+        if (.not. ga_create(MT_DBL, nbf_n,nmo_n,'cneo_dft:fock_add',
+     $        nbf_n, 32, g_fock_add(i))) 
+     $        call errquit('cneo_init: fock0', 0, GA_ERR)
       enddo
 
-      len_occ = nmo_n
       do i=1,nuc_num
-         if (.not. ma_push_get(mt_dbl,len_occ,'cneo_dft: mo evals n',
+        len_occ = nbf_n
+
+        if (.not. ma_push_get(mt_dbl,len_occ,'cneo_dft: mo evals n',
      $     l_eval_n(i), k_eval_n(i))) call errquit
      $     ('cneo_init: insufficient memory?', len_occ, MA_ERR)
 c     
-         if (.not. ma_push_get(mt_dbl,len_occ,'cneo_dft: mo occ n',
+        if (.not. ma_push_get(mt_dbl,len_occ,'cneo_dft: mo occ n',
      $     l_occ_n(i), k_occ_n(i))) call errquit
      $     ('cneo_init: insufficient memory?', len_occ, MA_ERR)
       enddo
@@ -77,7 +82,6 @@ c
      +      (pname//'could not destroy n fock0',0,GA_ERR)
          if (.not. ga_destroy(g_fock_add(i))) call errquit
      +      (pname//'could not destroy n fock_add',0,GA_ERR)
-
          if (.not. ma_pop_stack(l_occ_n(i))) call errquit
      +      (pname//'could not deallocate n occ',0,MA_ERR)
          if (.not. ma_pop_stack(l_eval_n(i))) call errquit

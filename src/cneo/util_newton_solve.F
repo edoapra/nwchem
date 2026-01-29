@@ -1,74 +1,45 @@
-      subroutine build_Jacobian(g_x,xlen,g_J,residual,delta,oreverse)
+      subroutine build_Jacobian(x, xlen, J, residual, delta, oreverse)
       implicit none 
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
 #include "util.fh"
 
-      integer g_x, g_J, xlen
+      integer xlen
+      double precision x(xlen)
       external residual
       double precision delta
       logical oreverse
 
-      double precision acc
-      integer typex, xrow, xcol
-      integer g_y, g_y1, g_x1
-      double precision x(xlen), y(xlen), J(xlen,xlen)
+      double precision y(xlen), J(xlen,xlen)
       double precision x1(xlen),y1(xlen)
       integer i,ii
-      logical status
       double precision dx
 
-      call ga_get(g_x, 1,xlen,1,1, x,1)
-      if (.not. ga_duplicate(g_x, g_y, 'tmp:y')) call errquit
-     $      ('build:ga_duplicate?',0,0)
-      if (.not. ga_duplicate(g_x, g_x1, 'tmp:x1')) call errquit
-     $      ('build:ga_duplicate?',0,0)
-      if (.not. ga_duplicate(g_x, g_y1, 'tmp:y1')) call errquit
-     $      ('build:ga_duplicate?',0,0)
-
-      call residual(acc,g_x,g_y)
-      call ga_get(g_y,1,xlen,1,1,y,1)
-
+      call residual(x, y, xlen)
       do i=1,xlen
-         x1 = x
-         dx = sign(delta,y(i))
+         x1(:) = x(:)
+         dx = sign(delta, y(i))
          if (oreverse) dx = -dx
          x1(i) = x1(i) + dx
-         call ga_zero(g_x1)
-         call ga_put(g_x1,1,xlen,1,1,x1,1)
-         call ga_zero(g_y1)
-         call residual(acc,g_x1,g_y1)
-         call ga_get(g_y1,1,xlen,1,1,y1,1)
-         do ii=1,xlen
-            J(ii,i) = (y1(ii)-y(ii))/dx
-         enddo
+         call residual(x1, y1, xlen)
+         J(:,i) = (y1(:) - y(:))/dx
       enddo
-
-      call ga_put(g_J,1,xlen,1,xlen,J,xlen)
-
-      status = .true.
-      status = status .and. ga_destroy(g_y)
-      status = status .and. ga_destroy(g_y1)
-      status = status .and. ga_destroy(g_x1)
-      if (.not. status) call errquit('build_jacobian:ga_destroy?',0,0)
-
 
       end
 
-      subroutine ga_inverse_3(g_a, g_s, det,osvd)
+      subroutine inverse_3(matrix, inv_matrix, det, osvd)
       implicit none 
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
+#include "stdio.fh"
 
-      integer g_a, g_s
       double precision matrix(3,3), inv_matrix(3,3)
       double precision det
       logical osvd
       integer i,j
 
-      call ga_get(g_a,1,3,1,3,matrix,3)
       det = matrix(1, 1) * (matrix(2, 2) * matrix(3, 3) - 
      $                           matrix(2, 3) * matrix(3, 2))
      $    - matrix(1, 2) * (matrix(2, 1) * matrix(3, 3) - 
@@ -96,18 +67,12 @@
      $                           matrix(1, 2) * matrix(2, 1)
 
       if (abs(det).ge.1.0d-8)  then
-         do i=1,3
-            do j=1,3
-               inv_matrix(i,j) = inv_matrix(i,j)/det
-            enddo
-         enddo
-         call ga_put(g_s, 1,3,1,3,inv_matrix,3)
+         inv_matrix(:,:) = inv_matrix(:,:)/det
       else if (osvd) then
-         write(6,*) 'Calling pseudoinverse...'
-         call pseudoinverse(g_a,g_s)
+         write(luout, *) 'Calling pseudoinverse...'
+         call pseudoinverse(matrix, inv_matrix)
       else
-         write(6,*) 'small determinant:',det
-         call ga_put(g_s, 1,3,1,3,inv_matrix,3)
+         write(luout,*) 'small determinant:',det
       endif
       end
 
@@ -115,137 +80,99 @@
 c     Modified from Zehua Chen's implementation on CP2K    
 c     https://github.com/zc62/cp2k/blob/cneo/src/qs_cneo_methods.F  
 
-      subroutine util_Newton_solve(g_x,residual,
-     $            tol,maxiter,converged)
+      subroutine util_Newton_solve(x, xlen, residual, tol, maxiter, 
+     $                             converged)
       implicit none 
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
+#include "stdio.fh"
 
-      integer g_x
-      integer xlen
+      integer xlen, maxiter
+      logical converged
+      double precision x(xlen)
+
       external residual
-      integer maxiter
       double precision tol
 
-      integer typex,xrow,xcol
-      integer g_y,g_y1,g_J,g_inv,g_J1
-      integer g_dx, g_x1
+      integer typex, xrow, xcol
       double precision dx_norm,step
       double precision g0,g1,g0p
 
-      double precision acc, rmax, det, rmax1
-      integer iter,i
-      logical converged, status
+      double precision rmax, det, rmax1
+      integer iter,i,ii
+      logical status
 
-      integer g_list(15),ilist
-
+      double precision J(xlen, xlen), J1(xlen, xlen), Jinv(xlen, xlen) 
+      double precision y(xlen), y1(xlen), x1(xlen), dx(xlen)
       double precision one,mone,zero
       parameter (one=1.0d0)
       parameter (mone=-1.0d0)
       parameter (zero=0.0d0)
 
-      ilist=1
+      if (xlen.ne.3) call errquit('newton_solve:not implemented',0,0)
 
-      call ga_inquire(g_x,typex,xrow,xcol)
-      if ((xcol.ne.1)) call errquit
-     $      ('Newton_solve:input g_x shape not supported',0,0)
-      xlen = xrow
-
-      if(.not. ga_create(mt_dbl,xlen,xlen,'Newton:J',32,32,g_J))
-     $      call errquit('newton_solve:ga_create?',0,0)
-      call ga_zero(g_J)
-      g_list(ilist) = g_J
-      ilist = ilist+1
-      if(.not. ga_duplicate(g_J,g_J1,'Newton:J_tmp')) call errquit
-     $      ('Newton_solve:ga_duplicate?',0,0)
-      call ga_zero(g_J1)
-      g_list(ilist) = g_J1
-      ilist = ilist+1
-
-      if(.not. ga_duplicate(g_J,g_inv,'Newton:J_inv')) call errquit
-     $      ('Newton_solve:ga_duplicate?',0,0)
-      call ga_zero(g_inv)
-      g_list(ilist) = g_inv
-      ilist = ilist+1
-
-      if(.not. ga_duplicate(g_x,g_y,'Newton:y')) call errquit
-     $      ('Newton_solve:ga_duplicate?',0,0)
-      call ga_zero(g_y)
-      g_list(ilist) = g_y
-      ilist = ilist+1
-
-      if(.not. ga_duplicate(g_x,g_x1,'Newton:y')) call errquit
-     $      ('Newton_solve:ga_duplicate?',0,0)
-      call ga_zero(g_x1)
-      g_list(ilist) = g_x1
-      ilist = ilist+1
-
-      if(.not. ga_duplicate(g_x,g_y1,'Newton:y1')) call errquit
-     $      ('Newton_solve:ga_duplicate?',0,0)
-      call ga_zero(g_y1)
-      g_list(ilist) = g_y1
-      ilist = ilist+1
-
-      if(.not. ga_duplicate(g_x,g_dx,'Newton:y1')) call errquit
-     $      ('Newton_solve:ga_duplicate?',0,0)
-      call ga_zero(g_dx)
-      g_list(ilist) = g_dx
-
+      ! Initialize
+      J(:,:) = 0d0
+      J1(:,:) = 0d0
+      Jinv(:,:) = 0d0
+      y(:) = 0d0
+      y1(:) = 0d0
+      x1(:) = 0d0
+      dx(:) = 0d0
+      
       do iter=1,maxiter
-         call residual(acc,g_x,g_y)
-         call ga_maxelt(g_y,rmax)
+         call residual(x, y, xlen)
+         rmax = maxval(abs(y(:)))
          if (rmax .le. tol) then
             converged = .true.
             goto 999
          endif
-         call ga_zero(g_J)
-         call ga_zero(g_inv)
-         if (iter.eq.1) then
-            ! try if zero guess is better
-            call ga_zero(g_x1)
-            call residual(acc,g_x1,g_y1)
-            call ga_maxelt(g_y1,rmax1)
-            if (rmax1 .lt. rmax) then
-               call ga_copy(g_x1,g_x)
-               call ga_copy(g_y1,g_y)
-            endif
-         endif
 
-         call build_Jacobian(g_x,xlen,g_J,residual,1.0d-3,.false.)
-         if (xlen.ne.3) call errquit
-     $               ('newton_solve:not implemented',0,0)
-         call ga_inverse_3(g_J,g_inv,det,.false.)
+c         if (iter.eq.1) then
+c            ! try if zero guess is better
+c            call residual(x1, y1, xlen)
+c            rmax1 = maxval(abs(y1(:)))
+c            if (rmax1 .lt. rmax) then
+c               x(:) = x1(:)
+c               y(:) = y1(:)
+c               rmax = rmax1
+c            endif
+c         endif
+
+         call build_Jacobian(x, xlen, J, residual, 1.0d-3, .false.)
+         call inverse_3(J, Jinv, det, .false.)
          if (abs(det).lt.1.0d-8) then
-            call build_Jacobian(g_x,xlen,g_J1,residual,1.0d-3,.true.)
-            call ga_dadd(one,g_J,one,g_J1,g_J)
-            call ga_dscal(g_J,5.0d-1)
-            call ga_inverse_3(g_J,g_inv,det,.true.)
+            call build_Jacobian(x, xlen, J1, residual, 1.0d-3, .true.)
+            J(:,:) = 0.5d0*(J1(:,:) + J(:,:))
+            call inverse_3(J, Jinv, det, .true.)
          endif
 
-         call ga_zero(g_dx)
+         dx(:) = 0d0
+         do ii=1,xlen
+            dx(:) = dx(:) - Jinv(:,ii) * y(ii)
+         enddo
+         dx_norm = dsqrt(dot_product(dx, dx))
+         g0 = dsqrt(dot_product(y, y))
 
-         call ga_dgemm('n','n',xlen,1,xlen,mone,g_inv,g_y,zero,g_dx)
-         dx_norm = sqrt(ga_ddot(g_dx,g_dx))
-         g0 = sqrt(ga_ddot(g_y,g_y))
-         call ga_copy(g_x,g_x1)
-         call ga_copy(g_y,g_y1)
-         call ga_dadd(one,g_x,one,g_dx,g_x)
-         call residual(acc,g_x,g_y)
-         g1 = sqrt(ga_ddot(g_y,g_y))
+         x1(:) = x(:)
+         y1(:) = y(:)
+         x(:) = x(:) + dx(:)
+
+         call residual(x, y, xlen)
+         g1 = dsqrt(dot_product(y, y))
 
          ! line search
          step = one
-
  10      if (g1 .ge. g0) then
             if (step.lt.1.0d-2) then
                goto 99
             endif
             g0p = -g0/(step*dx_norm)
             step = step*max(-g0p/(2.0d0*(g1-g0-g0p)),1.0d-1)
-            call ga_dadd(one,g_x1,step,g_dx,g_x)
-            call residual(acc,g_x,g_y)
-            g1 = sqrt(ga_ddot(g_y,g_y))
+            x(:) = x1(:) + step*dx(:)
+            call residual(x, y, xlen)
+            g1 = dsqrt(dot_product(y,y))
             goto 10
          endif
 
@@ -256,93 +183,52 @@ c     https://github.com/zc62/cp2k/blob/cneo/src/qs_cneo_methods.F
  999  continue
 
       if (.not.converged) then
-         write(6,*) 'Warning:newton_solve failed to converge'
+         write(luout,*) 'Warning:newton_solve failed to converge'
       endif
-
-      status = .true.
-      do i=ilist,1,-1
-         status = status .and. ga_destroy(g_list(i))
-      enddo
-      if (.not.status) call errquit('newton_solve:ga_destroy?',0,0)
 
       end
 
-      subroutine pseudoinverse(g_a,g_s)
+      subroutine pseudoinverse(matrix, inv_matrix)
       implicit none 
 #include "errquit.fh"
 #include "mafdecls.fh"
 #include "global.fh"
-      integer g_a    ![input]
-      integer g_s    ![output]
+#include "stdio.fh"
+      double precision matrix(3,3), inv_matrix(3,3)
+
 
       integer type,m,n,nsing
       integer g_u,g_vt,lval,kval
       integer g_test,g_v,g_inv
       integer g_tmp
       logical status
+      double precision evals(3)
+      double precision work1(3,3), work2(3,3)
+      integer info, ival
+      double precision threshold
+      parameter threshold = 1d-8
 
 c
 c     Function not tested yet: currently didn't see pseudoinverse being called
 c
+      work1(:,:) = matrix(:,:)
+      call dsyev('v', 'u', 3, work1, 3, evals, work2, 9, info)
+      if(info.ne.0)
+     $    call errquit('pseudoinverse: dsyev failed',info,0) 
 
-      call ga_inquire(g_a,type,m,n)
-      nsing = min(n,m)
-      if (.not. ga_create(mt_dbl,m,nsing,'pseudoinverse:u',32,32,g_u))
-     $      call errquit('ga_create?',0,0)
-      if (.not. ga_create(mt_dbl,m,m,'pseudoinverse:test',32,32,g_test))
-     $      call errquit('ga_create?',0,0)
-      if (.not. ga_create(mt_dbl,nsing,n,'pseudoinverse:vt',32,32,g_vt))
-     $      call errquit('ga_create?',0,0)
-      if (.not. ga_create(mt_dbl,nsing,nsing,'pseudoinverse:val',
-     $      32,32,g_inv)) call errquit('ga_create?',0,0)
-      if (.not.ma_push_get(mt_dbl,nsing,'pseudoinverse:vals',
-     $      lval,kval)) call errquit('ma_push_get?',0,0)
-
-      call ga_svd_seq(g_a,g_u,g_vt,dbl_mb(kval))
-
-      call gen_reciprocal(g_inv,dbl_mb(kval),nsing)
-
-      if (.not.ga_duplicate(g_vt,g_tmp,'pseudoinverse:tmp')) call 
-     $      errquit('ga_duplicate?',0,0)
-      call ga_dgemm('t','n',n,nsing,nsing,1.0d0,g_vt,g_inv,0d0,g_tmp)
-      call ga_dgemm('n','t',n,m,nsing,1.0d0,g_tmp,g_u,0d0,g_s)
-
-      call ga_dgemm('n','n',m,m,n,1.0d0,g_a,g_s,0d0,g_test)
-      print *, 'debug:pseudoinverse:test:'
-      call ga_print(g_test)
-
-      status = .true.
-      status = status .and. ga_destroy(g_u)
-      status = status .and. ga_destroy(g_test)
-      status = status .and. ga_destroy(g_vt)
-      status = status .and. ga_destroy(g_inv)
-      status = status .and. ma_pop_stack(lval)
-      if (.not. status) call errquit
-     $      ('pseudoinverse:deallocate?',0,0)
-
-      end 
-
-      subroutine gen_reciprocal(g_a,vals,nelem)
-      implicit none 
-#include "errquit.fh"
-#include "mafdecls.fh"
-#include "global.fh"
-
-      integer g_a
-      double precision vals(*)
-      integer nelem
-      double precision reciprocal(nelem,nelem)
-
-      integer i
-      reciprocal = 0d0
-      do i=1,nelem
-         reciprocal(i,i) = 1.0d0/vals(i)
+      do ival=1, 3
+        if(abs(evals(ival)).gt.1d-8) then
+          work2(:,ival) = work1(:,ival)/evals(ival)
+        else
+          work2(:,ival) = 0d0
+        endif 
       enddo
 
-      call ga_put(g_a,1,nelem,1,nelem,reciprocal,nelem)
+      call dgemm('n','t',3,3,3,1d0,work1,3,work2,3,0d0,inv_matrix,3)
+      call dgemm('n','n',3,3,3,1d0,matrix,3,inv_matrix,3,0d0,work1,3)
+      write(luout,*) 'debug:pseudoinverse:test:'
+      do ival=1, 3
+        write(luout, "(3(F12.8))") work1(ival, :)
+      enddo
 
-      end
-
-
-      
-      
+      end 

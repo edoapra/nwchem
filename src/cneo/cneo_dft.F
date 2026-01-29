@@ -20,32 +20,38 @@
 
       cneo_dft_energy = .false.
 
-      status = geom_create(geom,'geometry')
-      status = geom_rtdb_load(rtdb,geom,'geometry')
+      status = geom_create(geom, 'geometry')
+      status = geom_rtdb_load(rtdb, geom, 'geometry')
       
-      call cneo_nuc_init(rtdb,geom)
-      call cneo_geom_init(rtdb,geom_cneo)
+      call cneo_nuc_init(rtdb, geom)
+      call cneo_geom_init(rtdb, geom_cneo)
 
-      status = bas_create(basis,'ao basis')
+      status = bas_create(basis, 'ao basis')
       status = bas_rtdb_load(rtdb,geom_cneo,basis,'ao basis')
       status = int_normalize(rtdb,basis)
       bases(1) = basis
-      call cneo_bas_init(rtdb,geom_cneo,bases_nuc)
+      call cneo_bas_init(rtdb, geom_cneo, bases_nuc)
       do i=1,nuc_num
          status = int_normalize(rtdb,bases_nuc(i))
          bases(i+1) = bases_nuc(i)
       enddo
 
-      call int_init(rtdb,nuc_num+1,bases(1:nuc_num+1))
-      call cneo_int1er_init(rtdb,geom_cneo,bases_nuc)
-      call cneo_dft_init(rtdb,geom_cneo,basis,bases_nuc)
-      call cneo_schwarz_init(geom_cneo,nuc_num+1,bases)
+      call int_init(rtdb, nuc_num+1, bases)
+      write(*,*) "HERE1"
+      call cneo_int1er_init(rtdb, geom_cneo, bases_nuc)
+      write(*,*) "HERE2"
+      call cneo_dft_init(rtdb, geom_cneo, basis, bases_nuc)
+      write(*,*) "HERE3"
+      call cneo_schwarz_init(geom_cneo, nuc_num+1, bases)
+      write(*,*) "HERE4"
 
       if(.not. rtdb_cput(rtdb,'dft:theory', 1, 'dft')) call errquit
      +      ('cneo_dft_energy: could not put dft:theory',0,0)
+     
       cneo_dft_energy = cneo_nwdft(rtdb)
+
       call cneo_int1er_tidy
-      call cneo_schwarz_tidy(nuc_num+1,bases)
+      call cneo_schwarz_tidy(nuc_num+1, bases)
       call cneo_dft_tidy
       call grid_cleanup(.true.)
       if (.not. geom_destroy(geom)) call errquit

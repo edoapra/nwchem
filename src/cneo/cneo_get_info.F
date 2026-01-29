@@ -110,8 +110,10 @@ c  update mass and charge
          if ((iatom.le.0) .or. (iatom .gt. nat))
      $         call errquit('cneo_geom_init:invalid nuc index',0,0)
          tmp_charge = tmp_charge-charge(iatom,geom_cneo)
+
          geom_mass(iatom,geom_cneo) = geom_mass(iatom,geom_cneo)
      $             -charge(iatom,geom_cneo)*masselec/mass_au
+
          charge(iatom,geom_cneo) = 0.0d0
       enddo
 
@@ -130,7 +132,7 @@ c  update mass and charge
       
       end
 
-      subroutine cneo_bas_init(rtdb,geom_cneo,bases_nuc)
+      subroutine cneo_bas_init(rtdb, geom_cneo, bases_nuc)
       implicit none
 
 #include "errquit.fh"
@@ -146,17 +148,19 @@ c  update mass and charge
       integer bases_nuc(max_quantum_nuc)
       logical status
       integer i, iatom
+      character(len=5) txt
 
       bases_nuc = -999
       do i=1,nuc_num
          iatom = nuc_cent(i)
+         write(txt, "(I0)") i
          if (ga_nodeid().eq.0) then
-            write(6,*), 'cneo_bas_init: building basis for atom',iatom
+          write(luout,*),'cneo_bas_init: building basis for atom',iatom
          endif
          if (.not. bas_create(bases_nuc(i), 'nuc basis'))
      $      call errquit('cneo init: bas create',0,0)
-         call cneo_bas_load(rtdb,geom_cneo,bases_nuc(i),'nuc basis',
-     $                                       iatom)
+         call cneo_bas_load(rtdb,geom_cneo, bases_nuc(i),
+     $         'nuc basis', iatom)
       enddo
 
       end
@@ -172,17 +176,14 @@ c  update mass and charge
 #include "global.fh"
 #include "bas.fh"
 #include "ccneo.fh"
+#include "ccneo_dft.fh"
 #include "ccneo_constrain.fh"
 #include "util.fh"
 
       integer rtdb
       integer geom
       integer bases(nuc_num), basis
-      integer iatom,i,j
-      double precision center(3)
-      integer g_dens, nbf
-      double precision moments(4)
-      integer g_int(3)
+      integer iatom, i, j, nbf
       integer ga_create_atom_blocked
       external ga_create_atom_blocked
       character*5 str_i
@@ -193,19 +194,27 @@ c  update mass and charge
          str_i = ' '
          write(str_i,'(I0)') i
 
-         call dcopy(3,coords(1,iatom,geom),1,exp_pos(1,i),1)
-         call dcopy(3, exp_pos(1,i),1,center(1),1)
+         exp_pos(:,i) = coords(:,iatom,geom)
+         f_cneo(:,i) = 0d0
 
-         g_int1e_r(1,i)=ga_create_atom_blocked(geom,basis,
+         g_int1e_r(1,i)=ga_create_atom_blocked(geom, basis,
      $      'cneo:int1er:x'//trim(str_i))
          g_int1e_r(2,i)=ga_create_atom_blocked(geom,basis,
      $      'cneo:int1er:y'//trim(str_i))
          g_int1e_r(3,i)=ga_create_atom_blocked(geom,basis,
      $      'cneo:int1er:z'//trim(str_i))
+         g_overlap_n(i) = ga_create_atom_blocked(geom, basis, 
+     $      'overlap'//trim(str_i))
+         g_ortho_n(i) = ga_create_atom_blocked(geom, basis, 
+     $      'ortho'//trim(str_i))
+         g_core_n(i) = ga_create_atom_blocked(geom, basis, 
+     $      'core'//trim(str_i))
 
-         call int1e_r_ao(basis, center, g_int1e_r(1,i))
+         call int1e_r_ao(basis, exp_pos(1,i), g_int1e_r(1,i), 
+     $                   g_overlap_n(i))
 
       enddo
+
       if (util_print('cneo_int1er', print_debug)) then
          do i=1,nuc_num
             do j=1,3
@@ -222,6 +231,7 @@ c  update mass and charge
 #include "global.fh"
 #include "nwc_const.fh"
 #include "ccneo.fh"
+#include "ccneo_dft.fh"
 #include "ccneo_constrain.fh"
 
       integer i,j
@@ -234,11 +244,17 @@ c  update mass and charge
             if(.not. ga_destroy(g_int1e_r(j,i))) call errquit
      +         (pname//'could not destroy int1er',0,GA_ERR)
          enddo
+         if(.not. ga_destroy(g_overlap_n(i))) call errquit
+     +         (pname//'could not destroy int1er',0,GA_ERR)
+         if(.not. ga_destroy(g_ortho_n(i))) call errquit
+     +         (pname//'could not destroy int1er',0,GA_ERR)
+         if(.not. ga_destroy(g_core_n(i))) call errquit
+     +         (pname//'could not destroy int1er',0,GA_ERR)
       enddo
 
       end
 
-      subroutine int1e_r_ao(basis,center,g_int)
+      subroutine int1e_r_ao(basis, center, g_int, g_s)
       implicit none 
 #include "errquit.fh"
 #include "mafdecls.fh"
@@ -251,17 +267,11 @@ c  update mass and charge
       integer g_s
       integer i
 
-      if (.not. ga_duplicate(g_int(1),g_s,'int1e:tmp_ovlp'))
-     $      call errquit('int1e_r_ao:create ovlp')
       call ga_zero(g_s)
-      call int_1e_ga(basis,basis,g_s,'overlap',.false.)
-
+      call int_1e_ga(basis, basis, g_s, 'overlap',.false.)
       call int_dip_ga(basis,basis,g_int(1),g_int(2),g_int(3))
       do i=1,3
-         call ga_dadd(1.0d0,g_int(i),-center(i),g_s,g_int(i))
+         call ga_dadd(1.0d0, g_int(i), -center(i), g_s, g_int(i))
       enddo
-
-      if (.not. ga_destroy(g_s)) call errquit
-     $      ('int1e_r_ao:ga_destroy?',0,0)
 
       end

@@ -126,18 +126,9 @@ c
 c     == SCALAPACK related ==
 c
 #ifdef SCALAPACK
-#if defined(PARALLEL_DIAG)
       call slexit
       call slexit2
-      if (.not. rtdb_cget(rtdb, 'dft:scaladiag',1,yev))
-#ifdef USE_PDSYEVR__
-     &     yev='r'
-#else
-     &     yev='d'
-#endif
-      if (.not. rtdb_get(rtdb, 'dft:scalanb',mt_int,1,nb))
-     &     nb=0
-#endif
+      call dft_utilscal(rtdb)
 #endif
 c
 c     == Trash junk that may have remained in restart calcs ==
@@ -264,20 +255,20 @@ c
 
       if(atmblk) then
          g_s = ga_create_atom_blocked(geom, AO_bas_han, 'AO ovl')
-         do i=1, nuc_num
-            g_s_n(i) = ga_create_atom_blocked(geom,bas_n(i),'nuc ovl')
-            call ga_zero(g_s_n(i))
-         enddo
+!         do i=1, nuc_num
+!            g_s_n(i) = ga_create_atom_blocked(geom,bas_n(i),'nuc ovl')
+!            call ga_zero(g_s_n(i))
+!         enddo
       else
          if (.not. ga_create(mt_dbl, nbf_ao, nbf_ao, 'AO ovl',
      &        0, 0, g_s))
      &        call errquit(pname//'Error creating ga',0,GA_ERR)
-         do i=1,nuc_num
-            if (.not. ga_create(mt_dbl, nbf_n, nbf_n, 'nuc ovl',
-     &                                 0, 0, g_s_n(i)))
-     &        call errquit(pname//'Error creating ga',0,GA_ERR)
-            call ga_zero(g_s_n(i))
-         enddo
+!         do i=1,nuc_num
+!            if (.not. ga_create(mt_dbl, nbf_n, nbf_n, 'nuc ovl',
+!     &                                 0, 0, g_s_n(i)))
+!     &        call errquit(pname//'Error creating ga',0,GA_ERR)
+!            call ga_zero(g_s_n(i))
+!         enddo
       endif
       call ga_zero(g_s)
       if (.not.MA_Push_Get(MT_Dbl, nbf_ao, 'ovl eig vals', lsvals, 
@@ -294,9 +285,9 @@ c
      &       MA_ERR)
          call dfill(nbf_n*nuc_num, 0.0d0, dbl_mb(isvals_n), 1)
 
-      do i=1,nuc_num
-         call int_1e_ga(bas_n(i),bas_n(i),g_s_n(i),'overlap',.false.)
-      enddo
+!      do i=1,nuc_num
+!         call int_1e_ga(bas_n(i),bas_n(i),g_s_n(i),'overlap',.false.)
+!      enddo
 c     
 c     
 c     orthog BS
@@ -307,7 +298,6 @@ c
      &     call errquit(pname//'Error creating ga',0,GA_ERR)
       call ga_zero(g_svecs)
       if (odftps) call pstat_on(ps_diag)
-#if defined(PARALLEL_DIAG)
 #ifdef SCALAPACK
 c     we need all eigenvectors for the overlap matrix,
          yev0=yev
@@ -315,9 +305,8 @@ c     we need all eigenvectors for the overlap matrix,
          idum=0
          call dft_scaleig(g_s, g_svecs, Dbl_MB(isvals), idum)
          yev=yev0
-#else
+#elif defined(PEIGS)
       call ga_diag_std(g_s, g_svecs, Dbl_MB(isvals))
-#endif
 #else 
       call ga_diag_std_seq(g_s, g_svecs, Dbl_MB(isvals))
 #endif
@@ -325,29 +314,29 @@ c     we need all eigenvectors for the overlap matrix,
 
       sval_shift = 0
       do i=1,nuc_num
-         if (.not. ga_duplicate(g_s_n(i), g_svecs_n(i),
+         if (.not. ga_duplicate(g_overlap_n(i), g_svecs_n(i),
      $                                 'nuc ovl eig vecs'))
      &     call errquit(pname//'Error creating ga',0,GA_ERR)
          call ga_zero(g_svecs_n(i))
          if (odftps) call pstat_on(ps_diag)
-#if defined(PARALLEL_DIAG)
 #ifdef SCALAPACK
 c     we need all eigenvectors for the overlap matrix,
-            yev0=yev
-            if(yev.eq.'m')  yev='r'
-            idum=0
-            call dft_scaleig(g_s_n(i), g_svecs_n(i), 
-     $                        Dbl_MB(isvals_n+sval_shift), idum)
-            yev=yev0
-#else
-         call ga_diag_std(g_s_n(i),g_svecs_n(i),
-     $                           Dbl_MB(isvals_n+sval_shift))
-#endif
+         yev0=yev
+         if(yev.eq.'m')  yev='r'
+         idum=0
+         call dft_scaleig(g_overlap_n(i), g_svecs_n(i), 
+     $                    Dbl_MB(isvals_n+sval_shift), idum)
+         yev=yev0
+#elif defined(PEIGS)
+      call ga_diag_std(g_overlap_n(i), g_svecs_n(i), 
+     $                    Dbl_MB(isvals_n+sval_shift))
 #else 
-         call ga_diag_std_seq(g_s_n(i), g_svecs_n(i), 
-     $                           Dbl_MB(isvals_n+sval_shift))
+      call ga_diag_std_seq(g_overlap_n(i), g_svecs_n(i), 
+     $                    Dbl_MB(isvals_n+sval_shift))
 #endif
          if (odftps) call pstat_off(ps_diag)
+         call cneo_blds12(g_svecs_n(i), dbl_mb(isvals_n+sval_shift),
+     $                    g_ortho_n(i), nbf_n, 1)
          sval_shift = sval_shift + nbf_n
       enddo
 c     
@@ -390,7 +379,7 @@ c
       call ga_zero(g_fock)
       g_vxc(1) = g_fock
 c
-      lkeeps=.false.
+c      lkeeps=.false.
 c
 c     == Set orbital overlap tolerance ==
       call util_tolls(rtdb,.false.,toll_s,n_dep,dbl_mb(isvals),nbf_ao)
