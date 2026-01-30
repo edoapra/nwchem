@@ -356,7 +356,19 @@ c     Force use of nw ints for CAM calculations
      &        call errquit(rtdb_errmsg,0, RTDB_ERR)
       endif
       
+      if(cdfit) then
+c
+c     texas breaks when AO_spherical and CD_cartesian
+c
+         if((bas_is_spherical(ao_bas_han).and.
+     N        (.not.bas_is_spherical(cd_bas_han))).or.
+     O        (.not.bas_is_spherical(ao_bas_han).and.
+     N        bas_is_spherical(cd_bas_han)))
+     T        call int_app_set_no_texas(rtdb)
+      endif
+
       call int_init(rtdb, i3, bases)
+
       if(cdfit) then
          if (.not. int_norm_2c(rtdb,cd_bas_han))
      &        call errquit('nwdft: int_norm_2c failed', 208, BASIS_ERR)

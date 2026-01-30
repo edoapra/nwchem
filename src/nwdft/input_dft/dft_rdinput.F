@@ -1174,12 +1174,6 @@ c
      &      call errquit('rdinput: basis set error:', 86, BASIS_ERR)
          if (.not. rtdb_put(rtdb, 'dft:cdfit', mt_log, 1, .true.))
      &      call errquit('rdinput: failed put_rtdb:', 99, RTDB_ERR)
-c
-c     texas breaks when AO_spherical and CD_cartesian
-c
-         if(bas_is_spherical(AO_bas_han).and.
-     N        (.not.bas_is_spherical(CD_bas_han))) 
-     T        call int_app_set_no_texas(rtdb)
 
       else
          if (.not. bas_destroy(CD_bas_han))
