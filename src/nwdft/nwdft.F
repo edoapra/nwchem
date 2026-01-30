@@ -148,8 +148,8 @@ cc AJL/End
 
       logical rt_tddft
       external rt_tddft
-      logical xc_hascam,int_forcenwints
-      external xc_hascam,int_forcenwints
+      logical xc_hascam,int_forcenwints,int_norm_2c
+      external xc_hascam,int_forcenwints,int_norm_2c
       character*24 rtdb_errmsg
 c     
       pname = "nwdft:"
@@ -357,6 +357,11 @@ c     Force use of nw ints for CAM calculations
       endif
       
       call int_init(rtdb, i3, bases)
+      if(cdfit) then
+         if (.not. int_norm_2c(rtdb,cd_bas_han))
+     &        call errquit('nwdft: int_norm_2c failed', 208, BASIS_ERR)
+      endif
+
 c
       call print_integrals(bases, oskel) ! print integrals, if needed
 c
