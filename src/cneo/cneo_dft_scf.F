@@ -888,7 +888,6 @@ c
      &          call errquit('dft_scf: error creating ga',0,GA_ERR)
       enddo
 
-      write(*,*) nbf_n
       if(.not.ma_push_get(mt_dbl, 3*nbf_n**2, 'cneo_tmp1', l_ctmp1, 
      $   k_ctmp1)) call errquit('allocation failed',0, MA_ERR)
       do i=1,nuc_num
@@ -1710,7 +1709,10 @@ c     computation of moments
 c
       if (natoms .gt. 1) then
          if(oprintinertia)call geom_momint(geom)
-         call dft_mpole(rtdb, ao_bas_han, ipol, g_dens(1), g_dens(2))
+         ! This call misses the quantum nuclear contributions
+c        call dft_mpole(rtdb, ao_bas_han, ipol, g_dens(1), g_dens(2))
+         call cneo_mpoles(rtdb, ao_bas_han, ipol, g_dens(1), g_dens(2), 
+     $                   bas_n, g_ndens)
       endif
 c     
 c     print stolen for uhf.F

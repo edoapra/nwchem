@@ -14,7 +14,8 @@
 		cneo_tdgrad_product.o 	    cneo_tdgrad_response.o \
 		cneo_tdgrad_solve_init.o    cneo_tdgrad_solve.o \
 		cneo_tdgrad_tidy.o          cneo_tdgrad.o \
-		get_j_dm.o 			util_newton_solve.o
+		get_j_dm.o 			util_newton_solve.o \
+		cneo_mpoles.o
 
   OBJ_OPTIMIZE = \
 		cneo_diis_driver.o  \
