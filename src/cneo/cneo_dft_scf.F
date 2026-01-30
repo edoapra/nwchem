@@ -1759,7 +1759,7 @@ c
 c
       if (.not.ma_chop_stack(l_ir))
      &   call errquit('dft_scf: cannot chop stack',98, MA_ERR)
-c     
+c
       if (ipol.gt.1)then
          if (.not. ga_destroy(g_fockt)) call errquit
      &      ('dft_scf: could not destroy g_fockt', 0, GA_ERR)
@@ -1817,7 +1817,6 @@ C
      $     lsave_mats = .false.
       if (lsave_mats) call dft_save_mats (g_dens)
 
-      
       if (.not. ga_destroy(g_tmp)) call errquit
      &   ('dft_scf: could not destroy g_tmp', 0, GA_ERR)
       if (.not. ga_destroy(g_tmp_n)) call errquit

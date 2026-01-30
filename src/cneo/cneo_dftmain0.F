@@ -462,8 +462,8 @@ c
      &   (pname//'Could not destroy g_svecs', 0, GA_ERR)
 
       do i=1,nuc_num
-         if (.not.ga_destroy(g_s_n(i))) call errquit
-     +      (pname//'could not destroy g_s_n',0,GA_ERR)
+c         if (.not.ga_destroy(g_s_n(i))) call errquit
+c     +      (pname//'could not destroy g_s_n',0,GA_ERR)
          if (.not.ga_destroy(g_svecs_n(i))) call errquit
      +      (pname//'could not destroy g_svecs_n',0,GA_ERR)
       enddo
@@ -471,7 +471,6 @@ c
 c
       if (.not.ma_chop_stack(lsvals))
      &  call errquit(pname//'Cannot chop stack lsvals', 12, MA_ERR)
-
 c
       return
       end
