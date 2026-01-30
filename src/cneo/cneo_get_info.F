@@ -132,6 +132,43 @@ c  update mass and charge
       
       end
 
+      subroutine cneo_charge_util(geom_cneo, geom_orig, cneo2orig)
+#include "errquit.fh"
+#include "mafdecls.fh"
+#include "global.fh"
+#include "nwc_const.fh"
+#include "geom.fh"
+#include "rtdb.fh"
+#include "geomP.fh"
+#include "util.fh"
+#include "stdio.fh"
+#include "inp.fh"
+#include "ccneo.fh"
+      integer geom_cneo, geom_orig
+      logical cneo2orig
+      integer i, iatom
+      double precision erep_save
+
+      if(cneo2orig) then
+        erep_save = erep(geom_cneo)
+        erep(geom_cneo) = erep(geom_orig)
+        erep(geom_orig) = erep_save
+        do i=1,nuc_num
+          iatom = nuc_cent(i)
+          charge(iatom, geom_cneo) = charge(iatom, geom_orig)
+        enddo
+      else
+        erep_save = erep(geom_cneo)
+        erep(geom_cneo) = erep(geom_orig)
+        erep(geom_orig) = erep_save
+        do i=1,nuc_num
+          iatom = nuc_cent(i)
+          charge(iatom, geom_cneo) = 0d0
+        enddo
+      endif
+
+      end 
+
       subroutine cneo_bas_init(rtdb, geom_cneo, bases_nuc)
       implicit none
 

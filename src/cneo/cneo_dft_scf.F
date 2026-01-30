@@ -669,6 +669,9 @@ c     == better have static ldb at high node counts ==
      ,     mt_log,1,staticguess)) staticguess=.false.
       if(staticguess) llldb=util_statldb(.true.,rtdb)
       movecs_in_org=movecs_in
+
+      call cneo_charge_util(geom, geom_orig, .true.)
+
       call scf_vectors_guess(rtdb, tol2e_sleazy, geom, ao_bas_han, 
      &                       basis_trans, movecs_in, movecs_out, 
      &                       movecs_guess, scftype, nclosed, nopen, 
@@ -676,6 +679,9 @@ c     == better have static ldb at high node counts ==
      &                       k_ir, g_gmovecs, g_dens, vecs_or_dens, 
      &                       'dft', title, oskel, oadapt, 
      &                       .true.) 
+
+      call cneo_charge_util(geom, geom_orig, .false.)
+
 c     check if movecs read has failed
       if(movecs_in_org.ne.movecs_in) then
          if(ga_nodeid().eq.0) then

@@ -4,14 +4,14 @@
       integer g_ortho_n(max_quantum_nuc)
       integer g_overlap_n(max_quantum_nuc)
       integer g_movecs_n(max_quantum_nuc)
-      integer bas_e, bas_n(max_quantum_nuc), geom_cneo
+      integer bas_e, bas_n(max_quantum_nuc), geom_cneo, geom_orig
       integer l_eval_n(max_quantum_nuc), k_eval_n(max_quantum_nuc)
       integer l_occ_n(max_quantum_nuc), k_occ_n(max_quantum_nuc)
       double precision tol2e_cneo
       common/ccneo_dft/
      $     nbf_e, nbf_n, nmo_n,
      $     g_core_n, g_ortho_n, g_overlap_n, g_movecs_n, 
-     $     bas_e, bas_n, geom_cneo,
+     $     bas_e, bas_n, geom_cneo, geom_orig,
      $     l_eval_n, k_eval_n,
      $     l_occ_n, k_occ_n,
      $     tol2e_cneo

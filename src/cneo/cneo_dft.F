@@ -37,13 +37,9 @@
       enddo
 
       call int_init(rtdb, nuc_num+1, bases)
-      write(*,*) "HERE1"
       call cneo_int1er_init(rtdb, geom_cneo, bases_nuc)
-      write(*,*) "HERE2"
       call cneo_dft_init(rtdb, geom_cneo, basis, bases_nuc)
-      write(*,*) "HERE3"
       call cneo_schwarz_init(geom_cneo, nuc_num+1, bases)
-      write(*,*) "HERE4"
 
       if(.not. rtdb_cput(rtdb,'dft:theory', 1, 'dft')) call errquit
      +      ('cneo_dft_energy: could not put dft:theory',0,0)
@@ -269,6 +265,7 @@ c     == Build the grid ==
 c
 c     == Analyze set parameters for consistency ==
       geom0 = geom
+      geom_orig = geom
       geom = geom_cneo
 
       call dft_inpana(rtdb)
