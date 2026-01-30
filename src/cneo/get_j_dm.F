@@ -64,6 +64,7 @@ c     the input density matrix is symmetric
 
       tol2e_local = min(tol2e,1d-8)
 
+      status = .true.
       status = status .and. bas_numbf(bas1,nbf1)
       status = status .and. bas_numbf(bas2,nbf2)
       status = status .and. bas_numcont(bas1,nsh1)
