@@ -266,7 +266,7 @@ c
      ,     zero,g_tmp2)
       if (odftps) call pstat_off(ps_dgemm)
       if((ispin.gt.ipol).or.(.not.keeps)) then
-         if (.not. ga_destroy(g_s12p)) call errquit
+         if (.not. ga_destroy(g_s12p_n)) call errquit
      &        ('diis_driver: could not destroy g_s12p', 0, GA_ERR)
       endif
 c
@@ -312,12 +312,14 @@ c
      &            ipol+nuc_num,g_focks_en, g_diis, nconstr,
      $            mult,mult_diis)
 
-
-      do i=1,nuc_num
-         call ga_dadd(1.0d0,g_nfock(i),-1.0d0,g_fock_add(i),g_fock0(i))
-         call cneo_solve_constrain(i)
-         call ga_dadd(1.0d0,g_fock0(i),1.0d0,g_fock_add(i),g_nfock(i))
-      enddo
+c DMR: Is this additional loop really needed? At convergence, 
+c      satisfaction of the constraint equations is guaranteed
+c
+c      do i=1,nuc_num
+c         call ga_dadd(1.0d0,g_nfock(i),-1.0d0,g_fock_add(i),g_fock0(i))
+c         call cneo_solve_constrain(i)
+c         call ga_dadd(1.0d0,g_fock0(i),1.0d0,g_fock_add(i),g_nfock(i))
+c      enddo
 c
       if (.not.ma_pop_stack(lfwght))
      &   call errquit('diis_driver: cannot pop stack',0, MA_ERR)

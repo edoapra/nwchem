@@ -46,7 +46,7 @@
             go to 110
          else if (inp_a(quantum_nuc_smb)) then
             osmb = .true.
-         else
+         else if (i.lt.1) then
             write(luout,*) 'CNEO: No quantum nucleus is defined.'
          end if
 

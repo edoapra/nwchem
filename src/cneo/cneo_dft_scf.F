@@ -888,7 +888,7 @@ c
      &          call errquit('dft_scf: error creating ga',0,GA_ERR)
       enddo
 
-      if(.not.ma_push_get(mt_dbl, 3*nbf_n**2, 'cneo_tmp1', l_ctmp1, 
+      if(.not.ma_push_get(mt_dbl, 4*nbf_n**2, 'cneo_tmp1', l_ctmp1, 
      $   k_ctmp1)) call errquit('allocation failed',0, MA_ERR)
       do i=1,nuc_num
          iatom = nuc_cent(i)
@@ -1164,7 +1164,7 @@ c
          endif      
       enddo                     ! end big loop over ispin
       call cneo_set_cdft('n')
-      if(.not.ma_push_get(mt_dbl, 3*nbf_n**2, 'cneo_tmp1', l_ctmp1, 
+      if(.not.ma_push_get(mt_dbl, 4*nbf_n**2, 'cneo_tmp1', l_ctmp1, 
      $   k_ctmp1)) call errquit('allocation failed',0, MA_ERR)
       do i=1,nuc_num
          call cneo_diag_wrapper(g_nfock(i), g_ortho_n(i), g_movecs_n(i),

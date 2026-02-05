@@ -379,7 +379,7 @@ c
       call ga_zero(g_fock)
       g_vxc(1) = g_fock
 c
-c      lkeeps=.false.
+      lkeeps=.false. ! Uncomment, otherwise leads to undefined behavior
 c
 c     == Set orbital overlap tolerance ==
       call util_tolls(rtdb,.false.,toll_s,n_dep,dbl_mb(isvals),nbf_ao)
