@@ -10,7 +10,7 @@ source ../libext_utils/cmake.sh
 cd $myscalapwd
 
 if [[ -z "${MPIF90}" ]]; then
-if [[ "$FC" = "ftn"  ]] ; then
+if [[ "$FC" = "_ftn"  ]] ; then
     MPIF90="ftn"
     MPICC="cc"
 else
@@ -70,7 +70,7 @@ if [[ ! -z "${BUILD_MPICH}" ]]; then
     fi
     echo LDFLAGS for hwloc is $LDFLAGS
 fi
-if [[ "$FC" = "ftn"  ]] || [[ ! -z "$USE_CMAKE_MASTER" ]] ; then
+if [[ ! -z "$USE_CMAKE_MASTER" ]] ; then
     get_cmake_master
 else
 if [[ -z "${CMAKE}" ]]; then
