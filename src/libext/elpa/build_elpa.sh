@@ -18,9 +18,10 @@ echo %%%%%%% debug make failures
 arch=`uname -m`
 source ../libext_utils/getfiles_utils.sh
 get_elpa
+if [ $? -ne 0 ]; then echo "elpa download failed" ; exit 1 ;  fi
 # version set in ../libext_utils/getfiles_utils.sh
 echo mpif90 is `which mpif90`
-tar xzvf elpa-*.tar.gz && rm elpa-*.tar.gz
+tar xzf elpa-*.tar.gz && rm elpa-*.tar.gz
 ln -sf elpa-* elpa
 cd elpa
 rm -f check_thread_affinity.patch
