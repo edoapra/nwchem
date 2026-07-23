@@ -124,10 +124,18 @@ if [[ "${USE_HWOPT}" == "n" ]]; then
 else
     enable_xhost_flag=ON
 fi
-python3 -m venv vpytest
-source vpytest/bin/activate
-python -m pip install --upgrade pip pytest
-python -m pip list
+if command -v pytest >/dev/null 2>&1; then
+    echo "pytest is installed."
+    pytest --version
+else
+    echo "Installing pytest" >&2
+    python3 -m venv --without-pip venv
+    source venv/bin/activate
+    curl -O https://bootstrap.pypa.io/get-pip.py
+    python3 get-pip.py
+    python -m pip install --upgrade pytest
+    pytest --version
+fi
 $CMAKE -E env CFLAGS="$cflags" LDFLAGS="$ldflags" FCFLAGS="$fcflags" FFLAGS="$fcflags" \
 $CMAKE  -DCMAKE_INSTALL_PREFIX=${NWCHEM_TOP}/src/libext/libxc/install -DCMAKE_C_COMPILER=$CC -DENABLE_FORTRAN=ON -DCMAKE_Fortran_COMPILER=$FC -DDISABLE_KXC=OFF \
 -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=OFF \
