@@ -132,6 +132,8 @@ np_small=$(get_limit $np 32)
 let "myexit+=$?"
 ./runtests.mpi.unix procs $np_small pspw_SiC
 let "myexit+=$?"
+./runtests.mpi.unix procs $np_small pspw_qmmm
+let "myexit+=$?"
 ./runtests.mpi.unix procs $np pspw_blyp_h2o
 let "myexit+=$?"
 ./runtests.mpi.unix procs $np pspw_revpbe_h2o
