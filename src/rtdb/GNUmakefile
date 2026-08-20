@@ -24,20 +24,8 @@ endif
 
        TEST_LIBS = $(LIBRARY) $(LIBS) 
 
-#define this to use HDBM ... otherwise DB will be used
-#                            DB is broken-ish on 64 bit machines
-        USE_HDBM = 1
-
-ifdef USE_HDBM
      LIB_DEFINES = -DUSE_HDBM
          SUBDIRS = hdbm
-else
-# BEGIN_WIN32_IGNORE
-    LIB_INCLUDES = -I./db
-     LIB_DEFINES = -DUSE_DB
-         SUBDIRS = db
-# END_WIN32_IGNORE
-endif
 
 include ../config/makelib.h
 
