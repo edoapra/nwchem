@@ -116,7 +116,8 @@ c
       character*(*) name      ! [output] full filename
       integer nodgs           ! [input] no. of digits for prefix
 c
-      character*(nw_max_path_len) dir, tmp
+      character*(nw_max_path_len) dir, tmp1
+      character*(nw_max_path_lenxtra) tmp
       integer ltmp, ldir, me
       logical util_file_parse_dir
       external util_file_parse_dir
@@ -473,7 +474,7 @@ C$Id$
       logical ocontinue          ! [output]
 c
       character*(nw_max_path_len) ecce_file_name
-      character*(nw_max_path_len) a_temporary_file
+      character*1024 a_temporary_file
       logical status, odirective, echo
       logical bad_permanent_dir, bad_scratch_dir
       logical already
@@ -820,7 +821,7 @@ c
       character*8 fstype
       integer l1megabyte,i_k,l_k,nuse_fail,nattpt,
      ,     availmax
-      character*255 dirscr
+      character*(nw_max_path_len) dirscr
       parameter(l1megabyte=2*1000000)
       logical util_file_parse_dir,oprint,io_node,junkhere
       integer ppn
@@ -987,7 +988,8 @@ c
       logical oparallel       ! [input] true=append .nodeid
       character*(*) name      ! [output] full filename
 c
-      character*(nw_max_path_len) dir, tmp
+      character*(nw_max_path_len) dir, tmp1
+      character*(nw_max_path_lenxtra) tmp
       integer ltmp, ldir, me
       logical util_file_parse_dir
       external util_file_parse_dir
