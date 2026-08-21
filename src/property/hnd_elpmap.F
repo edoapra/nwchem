@@ -16,6 +16,7 @@ c
 #include "cosmo.fh"
 #include "bas.fh"
 #include "msgids.fh"
+#include "util_maxlength.fh"
 c
       integer rtdb      ! [Input] rtdb        
       integer basis     ! [Input] Basis set
@@ -27,7 +28,7 @@ c
       integer l_xyzpt, k_xyzpt, l_zanpt, k_zanpt, l_epot, k_epot
       integer nefc, l_efcc, k_efcc, l_efcz, k_efcz
       integer g_dens(3),ndens,nclosed(2),nopen(2),nvirt(2)
-      character*3 scftyp
+      character*20 scftyp
       double precision xp, yp, zp, xn, yn, zn, zan
       double precision elpotn
       double precision rr
@@ -58,8 +59,8 @@ c
       integer un_grid,avail_ma
       integer npasses,i_pass
       integer iptr,nprp_pass,ngrid(3)
-      character*255 cube_name
-      character*255 dmat_file
+      character*MAXLENGTH cube_name
+      character*MAXLENGTH dmat_file
 c
 c
 c     Initialize integrals
