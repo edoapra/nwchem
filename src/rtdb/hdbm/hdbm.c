@@ -343,10 +343,11 @@ static int hdbm_load(hdbm db, FILE *file)
 	(void) fprintf(stderr, "hdbm_load: cookie missing ... not a database\n");
 	return 0;
     }
-
     /* Determine file size once, used to sanity-check record sizes */
+    long current_pos = ftell(file);
     (void) hdbm_fseek(file, 0L, SEEK_END);
     file_size = ftell(file);
+    fseek(file, current_pos, SEEK_SET); 
 
     /* Now simply keep reading until we hit end of file */
     
