@@ -220,7 +220,7 @@ c
 c
 c     ----- collect and output results of all points -----
 c
-      if (ga_nodeid().gt.0) goto 300
+c      if (ga_nodeid().gt.0) goto 300
 c
 c     ----- calculate electrostatic potential -----
 c
@@ -230,9 +230,9 @@ c
 c
 c
         if(dobq) then
-          write(luout,9992)
+          if (ga_nodeid().eq.0) write(luout,9992)
         else
-          write(luout,9997)
+          if (ga_nodeid().eq.0)write(luout,9997)
         end if
       end if
       do 230  iat=1,nprp_pass
@@ -278,7 +278,7 @@ c
                yn = dbl_mb(k_efcc+3*(i-1)+1) - yp
                zn = dbl_mb(k_efcc+3*(i-1)+2) - zp
                rr =  sqrt(xn*xn + yn*yn + zn*zn)
-               if (rr.lt.1.0d-3) then
+               if (ga_nodeid().eq.0.and.rr.lt.1.0d-3) then
                   write(luout,9993) xp,yp,zp,i
                   go to 220
                endif
@@ -314,6 +314,7 @@ c        -----------------------------------------------------
          end if
          end if
 c
+         if(ga_nodeid().eq.0) then
          if(do_points) then
            symbol = "pt"
            if(dobq) then
@@ -331,6 +332,7 @@ c
              write(luout,9995) iat,symbol,xp,yp,zp,elpotn,
      &                         dbl_mb(k_epot+iat-1)
            end if
+         end if
          end if
          end if
 c
