@@ -1132,33 +1132,26 @@ c      scratch_dir, parallel
       end
       subroutine util_fsync(fname)
       implicit none
+#include "errquit.fh"
       character*(*),intent(in) :: fname
 c
-      integer iunit
-      integer*4 fd_in,code
-      integer ga_nodeid
-      external ga_nodeid
+      integer*4 code
 c
 #if !defined(CYGNUS) && !defined(WIN32)
       interface
-         function fsync (fd) bind(c,name="fsync")
-         use iso_c_binding, only: c_int
-         integer(c_int), value :: fd
-         integer(c_int) :: fsync
-         end function fsync
+         function c_fsync_by_name(fname)
+     C        bind(c, name="c_fsync_by_name")
+         use iso_c_binding, only: c_char, c_int
+         character(kind=c_char), intent(in) :: fname(*)
+         integer(c_int) :: c_fsync_by_name
+         end function c_fsync_by_name
       end interface
-#endif
-      iunit=10
-      open (iunit,file=fname)
-      call util_flush(iunit)
-#if !defined(CYGNUS) && !defined(WIN32)
-#if defined(GFORTRAN) && !defined(USE_FLANG) && !defined(__llvm__) && !defined(___PGLLVM__)
-      fd_in=fnum(iunit)
-c     Flush and sync
-      code=fsync(fd_in)
+c
+c     append null character to pass the string to C
+c
+      code=c_fsync_by_name(trim(fname) // char(0))
       if(code.ne.0) call
-     c     errquit("Error calling FSYNC",ga_nodeid(),0)
-#endif
+     c     errquit("util_fsync: error",code,UERR)
 #endif
       return
       end
