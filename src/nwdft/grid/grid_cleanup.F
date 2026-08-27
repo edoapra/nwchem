@@ -21,10 +21,8 @@ c
 c
       if(.not.xc_gotxc().or.(.not.file_opened)) return
 c
-      if(.not.largenode) then
-         if(.not.grid_file_close(okeep)) call
+      if(.not.grid_file_close(okeep)) call
      .        errquit(' grclup: file_close failed',0, DISK_ERR)
-      endif
       file_opened=.false.
 
 c

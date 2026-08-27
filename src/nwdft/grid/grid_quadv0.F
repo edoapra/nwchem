@@ -197,8 +197,6 @@ c
       irdelchi_atom = 0
 c
       npol = (ipol*(ipol+1))/2
-      if (.not.rtdb_get(rtdb,'dft:largenode', mt_log, 1, largenode))
-     &     largenode=.false.
       call nga_inquire(g_dens(1), type, ndim, dims)
       if(ga_nodeid().eq.0.and.oprint) then
          write(luout,*) ' ndim ',ndim

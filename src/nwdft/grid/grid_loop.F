@@ -4,7 +4,7 @@ c
       subroutine grid_loop(dogradient,
      ,     nops,
      ,     oprint,grad,g_dens,
-     ,     dosympts,sub4,largenode,grid_written,
+     ,     dosympts,sub4,grid_written,
      ,     ncoef_max,natoms,
      ,     nqtot,iniz, ifin, rho, delrho, 
      &     hess, qwght, qxyz, xyz,iscr,nscr,
@@ -50,7 +50,7 @@ cc AJL/End
 #include "errquit.fh"
       logical dogradient
       integer nops
-      logical dosympts,sub4,oprint,largenode
+      logical dosympts,sub4,oprint
       logical grid_written
       integer iqat(*) ! [scr]
       integer g_dens(*),ncoef_max,natoms
@@ -360,7 +360,6 @@ c     Write last buffer of grid pts and close file
 c
       nq = 1
       n_tot_tasks = 0 ! sets nctr to 0; writes last buf and returns #tasks
-      if(largenode) return
       grid_written = grid_file_write(nq, n_tot_tasks, rad, aqbuf,0)
 c
       return

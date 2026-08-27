@@ -125,8 +125,7 @@ c
 c     now pack this aqbuf into the write buffer 
 c     (write and update task counter as needed)
 c     
-         if(.not.largenode)
-     .        grid_written = grid_file_write(nq, ictr, 
+         grid_written = grid_file_write(nq, ictr, 
      ,        rad_write, aqbuf,  ncu)
          
       endif

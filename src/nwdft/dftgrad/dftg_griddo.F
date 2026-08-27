@@ -205,7 +205,7 @@ cdebug      write(*,*) 'cd_coef', cd_coef(1:nbf_cd)
       call grid_loop(.true.,
      ,     nops,
      ,     oprint,grad,g_dens,
-     ,     dosympts,sub4,largenode,grid_written,
+     ,     dosympts,sub4,grid_written,
      ,     ncoef_max,natoms,
      ,     nqtot,iniz, ifin, rho, delrho, 
      &     hess, qwght, qxyz, xyz,iscr,nscr,

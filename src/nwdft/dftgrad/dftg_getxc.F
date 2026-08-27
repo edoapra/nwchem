@@ -95,7 +95,7 @@ c
       endif
 c
 c        Compute via direct numerical quadrature.
-         if(.not.grid_written.and.(.not.largenode)) then
+         if(.not.grid_written) then
 c
 c        check if we can get the grid from a file
 c         
