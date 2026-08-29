@@ -53,7 +53,6 @@ c
       integer ntot_sub ! cumulative nsubb
       integer cur_cub ! current cube
       logical grid_written
-      logical largenode ! set by user
       logical oreopen ! true in only grad calculations (see dftg_getxc)
 c
 c
@@ -101,8 +100,7 @@ c     logicals
      $     oasyncio,
      $     oiopending,
      $     aioreq,
-     $     oreopen,
-     $     largenode
+     $     oreopen
 c     doubles
 c     .     radsub
 c

@@ -338,8 +338,8 @@ c
 c
 c     dont use disk for gridpts
 c
-      if(.not.rtdb_put(rtdb,'dft:largenode',mt_log,1,.true.))
-     &   call errquit('grid_inp: rtdb_put failed', 1660, RTDB_ERR)
+      call errquit('grid_inp: nodisk option is gone', ind,
+     &       INPUT_ERR)
 c
       goto 10
  1999 continue

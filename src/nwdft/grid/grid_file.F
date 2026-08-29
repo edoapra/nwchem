@@ -110,7 +110,6 @@ c     If the file is in the scratch directory then use the piece
 c     of it available for this process, otherwise use all that
 c     is available from eaf_stat.
 c
-            if(.not.largenode) then
             call util_directory_name(scratchdir, .true., ga_nodeid())
             sdlen = inp_strlen(scratchdir)
             if (scratchdir(1:sdlen) .eq. actualname(1:sdlen)) then
@@ -127,26 +126,6 @@ c
                    call errquit
      $              ('grid_file_open:unable to stat available disk',0,
      &       DISK_ERR)
-                endif
-             endif
-             endif
-c     
-c     dont use disk if less than  1MB available
-c
-             if(availkb.le.1024d0.or.largenode) then
-c
-c     dont use disk for grid pts
-c     
-                if (do_zora) then
-                  if (ga_nodeid().eq.0) then
-                    write(*,*)'WARNING: ZORA *MUST* have gridpts file '
-     &                      //'Good luck!'
-                  endif
-                  largenode=.false.
-                else
-                  largenode=.true.
-                  grid_file_open=.true.
-                  return
                 endif
              endif
             max_file_rec = nint((0.95*1024.0d0*availkb) / 

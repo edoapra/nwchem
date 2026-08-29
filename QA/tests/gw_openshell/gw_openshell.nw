@@ -26,7 +26,7 @@ dft
  mult 2
  xc pbe0
  direct
- grid fine nodisk
+ grid fine
  tolerances accCoul 12
  convergence energy 1d-8
  noprint "final vectors analysis"

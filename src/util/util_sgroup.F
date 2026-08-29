@@ -163,8 +163,6 @@ c
 c     dont use disk for gridpts, etc. in DFT
 c     We never turn this back on
 c
-      if(.not.rtdb_put(rtdb,'dft:largenode',mt_log,1,.true.))
-     &   call errquit('util_sggo: rtdb_put nodisk failed',1,RTDB_ERR)
       if (.not. rtdb_put(rtdb, 'dft:noio', mt_int, 1, 1))
      &   call errquit('util_sggo: rtdb_put noio failed',1,RTDB_ERR)
       if(.not.rtdb_put(rtdb,'dft:xcreplicated',mt_log,1,.false.))

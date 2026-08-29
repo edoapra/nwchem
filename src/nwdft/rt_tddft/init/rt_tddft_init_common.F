@@ -115,10 +115,6 @@ C     Disable *all* disk I/O for DFT routines (default behavior).
 C
       if (params%nodisk) then
          
-C     (dont use disk for gridpts)
-         if(.not.rtdb_put(params%rtdb,'dft:largenode',mt_log,1,.true.))
-     $        call errquit(pname//"rtdb_put largenode failed",
-     $        0, RTDB_ERR)
          
 
 C     (direct)

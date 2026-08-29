@@ -27,7 +27,6 @@ end
 
 dft
  direct
- grid nodisk
  tolerances acccoul 12
  noprint "final vectors analysis"
  xc xpbe96 0.55 hfexch 0.45 cpbe96 1.0

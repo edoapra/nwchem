@@ -19,7 +19,6 @@ dft
   iterations 200
   noio
   direct
-  GRID nodisk
 end
 
 cosmo

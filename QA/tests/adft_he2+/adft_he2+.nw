@@ -81,7 +81,6 @@ task dft gradient
 title "XC BOP "
 dft
 XC bop
-grid nodisk
 end
 
 task dft gradient

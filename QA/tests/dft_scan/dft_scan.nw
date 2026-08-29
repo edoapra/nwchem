@@ -21,7 +21,7 @@ end
 dft
  noio
  xc scan
- grid xfine nodisk
+ grid xfine
  vectors atomic
 end
 task dft
@@ -31,7 +31,7 @@ dft
   mult 1
   odft
   xc scan
-  grid xfine nodisk
+  grid xfine
   vectors atomic
 end
 task dft
@@ -41,7 +41,7 @@ dft
   mult 3
   odft
   xc scan
-  grid xfine nodisk
+  grid xfine
   vectors atomic
 end
 task dft
