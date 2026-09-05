@@ -1,0 +1,136 @@
+name: NWChem_CI_tahoma
+
+on:
+  repository_dispatch:
+    types: [backend_automation]
+  workflow_dispatch:
+    inputs:
+      repository_username:
+        type: string
+        required: false
+        default: 'nwchemgit'
+      branch:
+        type: string
+        required: false
+        default: 'master'
+jobs:
+  build_workflow:
+    uses: edoapra/nwchem/.github/workflows/update_main.yml@main
+    secrets:
+      inherit
+  build_singularity:
+    needs: [build_workflow]
+    uses: edoapra/nwchem-singularity/.github/workflows/apptainer_action.ifx.yml@master
+    with:
+      repository_username: ${{ inputs.repository_username }}
+      branch: ${{ inputs.branch}}
+    secrets:
+      inherit
+  test_on_tahoma:
+    needs: [build_singularity]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: /bin/bash -eo pipefail {0}
+    timeout-minutes: 2880
+    continue-on-error: true
+    strategy:
+      matrix:
+        os:
+          - [self-hosted, centos7]
+        branch:
+          - hotfix/release-7-3-0
+          - ${{ inputs.branch}}
+        sing_image:
+          - ompi41x.ifx
+          - ompi41x
+      fail-fast: false
+    env:
+        USE_LIBXC: 1
+        COMEX_MAX_NB_OUTSTANDING: 8
+        APPTAINERENV_NWCHEM_BASIS_LIBRARY: /cluster/apps/nwchem/nwchem/src/basis/libraries/
+        APPTAINERENV_SCRATCH_DIR: /big_scratch
+        MPIRUN_NPOPT: -n
+        NWCHEM_EXECUTABLE: "apptainer -q exec /big_scratch/nwchems.img nwchem "
+        BRANCHM:  ${{ matrix.branch }}
+        MYUSERNAMEM: ${{ inputs.repository_username }}
+    steps:
+      - name: echo date
+        run: |
+           echo 'current date is: '$(date)
+           echo 'Pacific TZ current date: ' $(TZ='America/Los_Angeles' date)
+      - name: check if branch is empty
+        run: |
+          if [ -n "${BRANCHM}" ]; then
+            export BRANCH=$BRANCHM
+            echo "BRANCH is set to matrix value " $BRANCH
+          else
+            echo "BRANCH is NOT set"
+            export BRANCH=master
+            echo "BRANCH is now set to " $BRANCH
+          fi
+          echo "branch=$BRANCH" >> $GITHUB_ENV
+      - name: check if myusername is empty
+        run: |
+          if [ -n "${MYUSERNAMEM}" ]; then
+            export MYUSERNAME=$MYUSERNAMEM
+            echo "MYUSERNAME is set to matrix value " $MYUSERNAME
+          else
+            echo "MYUSERNAME is NOT set"
+            export MYUSERNAME=nwchemgit
+            echo "MYUSERNAME is now set to " $MYUSERNAME
+          fi
+          echo "myusername=$MYUSERNAME" >> $GITHUB_ENV
+      - name: echo env
+        run: |
+          env
+      - name: nwchem version tag
+        run: |
+          if [[ ${{ env.branch }} ==  master ]]; then
+            echo "nwversion=dev" >> $GITHUB_ENV
+          elif [[ ${{ env.branch }} ==  'hotfix/release-7-3-0' ]]; then
+            echo "nwversion=730" >> $GITHUB_ENV
+          else
+            echo "nwversion=${{ env.branch }}" >> $GITHUB_ENV
+          fi
+      - name:  dir name
+        run: |
+          echo "dirname=nwchem-${{ env.nwversion }}${{ github.nwversion }}.${{ github.run_id }}.${{ github.run_number }}.${{ matrix.sing_image }}" >> $GITHUB_ENV
+      - name: Checkout QA code
+        run: |
+          pwd
+          cd ..
+          rm  -rf ${{ env.dirname }} ${{ env.myusername }}-nwchem-*
+          wget -q https://github.com/${{ env.myusername }}/nwchem/tarball/${{ env.branch }} -O - | tar -xz --exclude=src --exclude=contrib --exclude=web --exclude=examples --exclude=doc --exclude=travis --exclude="nwxc*"  --exclude="chem-library-tests"
+          ls -lart    
+          mv ${{ env.myusername }}-nwchem-* ${{ env.dirname }}
+          ls -lr ${{ env.dirname }}/QA
+      - name: load singularity image
+        run: |
+          export https_proxy=http://proxy.emsl.pnl.gov:3128
+          srun -N $SLURM_NNODES -n $SLURM_NNODES rm -f ./nwchems_`id -u`.img || true
+          apptainer pull -F --name ./nwchems_`id -u`.img oras://ghcr.io/edoapra/nwchem/nwchem-${{ env.nwversion }}.${{ matrix.sing_image }}:latest
+          srun -N $SLURM_NNODES -n $SLURM_NNODES /bin/cp ./nwchems_`id -u`.img /big_scratch/nwchems.img
+      - name: run qa tests
+        run: |
+          cd ../${{ env.dirname }}/QA
+          export https_proxy=http://proxy.emsl.pnl.gov:3128
+          export MPIRUN_PATH=`which srun`
+          MYNN=$(( $SLURM_NNODES*$SLURM_NTASKS_PER_NODE ))
+          echo MYNN is $MYNN
+          (echo ${{ env.nwversion }}.${{ matrix.sing_image }}; ./doqmtests.mpi  $MYNN flaky ; echo ${{ env.nwversion }}.${{ matrix.sing_image }}) | /bin/tee >(/bin/ts "%d%b%Y %H:%M:%S" > ../../../../${{ env.nwversion }}.${{ matrix.sing_image }}.doqmtests.mpi.log.` /bin/date +%b%d%Y_%H:%M`)
+      - name: stop slurm job
+        run: |
+          pwd
+          sleep 10s
+          env|egrep SLUR
+          mytest=test_$SLURM_JOBID.sh
+          echo mytest is $mytest
+          rm -f $mytest
+          cat <<EOF > /home/edo/$mytest
+          #/bin/bash
+          #scancel -f --signal=TERM -v $SLURM_JOBID
+          scancel -v $SLURM_JOBID
+          EOF
+          chmod +x /home/edo/$mytest
+        
