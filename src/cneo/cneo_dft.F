@@ -49,7 +49,7 @@
       call cneo_int1er_tidy
       call cneo_schwarz_tidy(nuc_num+1, bases)
       call cneo_dft_tidy
-      call grid_cleanup(.true.)
+c      call grid_cleanup(.true.)
       if (.not. geom_destroy(geom)) call errquit
      $   ('cneo_dft:geom_destroy?',0,0)
 
@@ -99,7 +99,7 @@ c
       integer igok
       character*80 theory
       logical lrt_tddft
-      character*32 pname
+      character*9 pname
       integer nclosed, nopen
 c
       integer natoms
@@ -223,7 +223,12 @@ c
                endif
                converged = .true.
                cneo_nwdft = .true.
-               if (.not. lrt_tddft) goto 1101
+               if (.not. lrt_tddft) then
+                  geom0 = geom
+                  geom_orig = geom
+                  geom = geom_cneo
+                  goto 1101
+               endif
             endif
          endif
       endif
@@ -326,15 +331,20 @@ c      if( FD_bas_han.eq.-99999 ) frozemb_fde = .false.
 
 cc AJL/END
 c
-      status = .true.
-      status = status .and. bas_destroy(ao_bas_han)
-      status = status .and. geom_destroy(geom)
-      status = status .and. geom_destroy(geom0)
+      if(.not.bas_destroy(ao_bas_han)) call
+     e     errquit(pname//'cannot bas_destroy',
+     a     ao_bas_han,BASIS_ERR)
+      if(.not.geom_destroy(geom0)) call 
+     e     errquit(pname//'cannot geom_destroy geom',
+     a     geom,GEOM_ERR)
+      if(.not.geom_destroy(geom)) call 
+     e     errquit(pname//'cannot geom_destroy geom0',
+     a     geom0,GEOM_ERR)
       do i=1,nuc_num
-         status = status .and. bas_destroy(bas_n(i))
+         if(.not.bas_destroy(bas_n(i))) call
+     e     errquit(pname//'cannot bas_destroy n',
+     a     i,BASIS_ERR)
       enddo
-      if (.not. status) call errquit
-     $      ('cneo_nwdft:destroying geom and basis handles')
 
 c     == Restore charge ==
       if (.not. rtdb_get(rtdb,'charge_real',MT_DBL,1,tmp_charge))
