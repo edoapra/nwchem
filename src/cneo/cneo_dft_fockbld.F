@@ -104,12 +104,6 @@ c
       integer do_cosmo_vem
       logical do_cosmo_smd
 c
-c DIM/QM variables
-c
-      double precision g_vdim
-      double precision Edim
-      logical ldimqm, dimqm_go,use_dimqm
-c
 cc AJL/Begin/SPIN ECPs
       integer ecp_channels
 cc AJL/Begin/FDE 
@@ -123,29 +117,17 @@ cc AJL/End
       double precision t0
       integer g_adft(2), g_nfock(max_quantum_nuc),g_nhcore
       logical ofirst_local, oreopen_local
-      logical int2e_file_open, int2e_file_close
+      logical int2e_file_open, int2e_file_close, ldirect
       external int2e_file_open, int2e_file_close
       double precision ecore_n, e_en, e_nn
       integer g_tmp_n
 
-      ! DMR: Going to deactive this for now
-c      if (.not. (owritefile .or. oreadfile)) then
-c         ofirst_local = .true.
-c         owritefile = .true.
-c         oreadfile = .false.
-c      else
-c         ofirst_local = .false.
-c         owritefile = .false.
-c         oreadfile = .true.
-c      endif
 c
       do_cosmo_smd = .false.
       do_cosmo_vem = 0
       gcds = 0.D0
 c
 c
-      ldimqm=.false.
-      dimqm_go=.false.
 c     =========================================================================
 
       me=ga_nodeid()
@@ -224,6 +206,22 @@ cc    Read this value from rtdb vvvv
 c     == Copy Fock matrix to individual components for spin ECPs ==
       call ga_copy(g_fock, g_focks(1))
       if (ecp_channels.gt.1) call ga_copy(g_fock, g_focks(2))
+      filesize=0
+      memsize=0
+      if (rtdb_get(rtdb, 'dft:direct', mt_log, 1, ldirect)) then
+         if(ldirect)  then
+            if (.not. rtdb_put(rtdb, 'dft:direct',mt_log,1,ldirect))
+     &           call errquit('dftmain0d: rtdb_put failed',400,RTDB_ERR)
+            if (.not. rtdb_put(rtdb,'int2e:filesize',mt_int,1,-1))
+     $           call errquit('dftmain0d: failed to store filesize',401,
+     &           RTDB_ERR)
+            if (.not. rtdb_put(rtdb,'int2e:memsize',mt_int,1,-1))
+     $           call errquit('dftmain0d: failed to store filesize',402,
+     &           RTDB_ERR)
+            filesize = -1
+            memsize  = -1
+         endif
+      endif
 
       e_en = 0d0
       do i=1,nuc_num
@@ -241,23 +239,7 @@ c     == Copy Fock matrix to individual components for spin ECPs ==
          call ga_dadd(1d0,g_fock,1d0,g_focks(1),g_focks(1))
       enddo
 
-      ! DMR: Direct Mixed Coulomb Integrals
-!      call util_file_name('aoints',.true.,.false.,int2efilename)
-!      if (ofirst_local) then
-!         oreopen_local = .false.
-!         owritefile = .true.
-!         oreadfile = .false.
-!      else
-!         oreopen_local = .true.
-!         owritefile = .false.
-!         oreadfile = .true.
-!      end if
-
-!      if (.not. int2e_file_open(int2efilename,0,0,tol2e_cneo,
-!     $      oreopen_local))
-!     &      call errquit('cneo_fock: open aoints failed',0,0)
       call cneo_schwarz_set(ao_bas_han)
-!      call cneo_reset_int2efile_print(print_debug)
 c
 c     if requested separate calculation of bq-electron energy (MV)
 c     ----------------------------------------------------------- 
@@ -347,23 +329,6 @@ c
      &      call errquit('dft_scf: cannot pop stack',0, MA_ERR)
       endif
 c
-c     DIM/QM JEM
-c     Calculate DIM potential and energy
-c     We calculate the DIM potential at each point from the total density
-c     This potential is used to perturb both alpha and beta spins, so only
-c     one call to dim_grid_quadv0 is needed
-      if (ldimqm .and. dimqm_go) then
-        if(.not.ga_duplicate(g_vxc(1), g_vdim, 'dim:1'))
-     $    call errquit("dft_fockbld: can't create dim:1", 99, GA_ERR)
-        call ga_zero(g_vdim)
-        call dim_grid_quadv0(rtdb, g_vdim)
-c        call ga_dadd(1.d0, g_vxc(1), 1.d0, g_fock, g_fock)
-        Edim = ga_ddot(g_dens(1), g_vdim)
-        if(ipol > 1) then
-          Edim = Edim + ga_ddot(g_dens(2), g_vdim)
-        end if
-        call ga_sync()
-      end if
 c      
       if (CDFIT)then
          call errquit('cneo_dft_fockbld:unsupported',0,0)
@@ -437,50 +402,18 @@ c  Jorge Garza/Begin
           Exc(1) = Exc(1) + totsic
         end if
       end if
-c  Jorge Garza/End
-c
-cc AJL/Begin/SPIN ECPs
-cc     == Copy Fock matrix to individual components ==
-c      call ga_copy(g_fock, g_focks(1))
-c      if (ipol.gt.1) 
-c     &     call ga_copy(g_fock, g_focks(2))
-cc AJL/End
 c
 c     == Add exchange-correlation to the Fock matrix ==       
       call ga_dadd(1.d0, g_vxc(1), 1.d0, g_focks(1), g_focks(1))
       if (ipol.gt.1) 
      &     call ga_dadd(1.d0, g_vxc(2), 1.d0, g_focks(2), g_focks(2))
 
-c jbecca START - damnit, quit taking this out
-C
-C     Compute -D.E contribution due to external applied electric field
-C     (if dft:efield is stored in rtdb).  Note that we can potentially
-C     apply different fields to the alpha and beta spins this way.
-C
-C
-
-c
-c     DIM/QM JEM
-c     Add DIM potential to the Fock matrix
-      if (ldimqm .and. dimqm_go) then
-c  jbecca START: scaling potential here to test some stuff.
-c              originally 1.d0
-        call ga_dadd(1.d0, g_vdim, 1.d0, g_focks(1), g_focks(1))
-c       DIM potential is from total density, so same for both alpha and beta
-        if (ipol.gt.1)
-     &    call ga_dadd(1.d0, g_vdim, 1.d0, g_focks(2), g_focks(2))
-        if (.not. ga_destroy(g_vdim))
-     &    call errquit("destroy vdim failed", 9, GA_ERR)
-      end if
 
 
       if (oprint_time)
      &     call dft_tstamp(' End of parallel region. ')
 c     
       if (odftps) call pstat_off(ps_fockb)
-      if (.not. int2e_file_close(.true.))
-     $       call errquit('cneo:get_j_dm: close file',0,0)
-      call cneo_reset_int2efile_print(print_default)
 c
 cc AJL/Begin/SPIN ECPs (Debug)
 c      if(util_print('Intermediate Fock Matrix', print_debug)) then
