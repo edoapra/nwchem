@@ -960,9 +960,12 @@ c
       external int_normalize
       logical int_norm_2c
       external int_norm_2c
+      integer cneo_get_geomorig
+      external cneo_get_geomorig
 c
       integer rtdb              ! [input] database handle
       integer nbases
+      integer geom_orig
       logical converged, status
       integer bases(3), plevel
       character*80 theory
@@ -1086,7 +1089,10 @@ c
 c
 c     Compute the gradients arising from CD fit and XC
 c
+      geom_orig=cneo_get_geomorig()
+      call cneo_charge_util(geom, geom_orig, .true.)
       if(theory .eq. 'dft')call dft_gradients(rtdb)
+      call cneo_charge_util(geom, geom_orig, .false.)
 c
       call schwarz_tidy ()
 c
@@ -1271,3 +1277,12 @@ c
      $         ('cneo_grad_dens:ga_destroy?',0,0)
 
       end
+      integer function cneo_get_geomorig()
+      implicit none
+#include "nwc_const.fh"
+#include "ccneo.fh"
+#include "ccneo_dft.fh"
+      cneo_get_geomorig=geom_orig
+      return
+      end
+ 
