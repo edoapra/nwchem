@@ -3,6 +3,8 @@
      +  nfc,naoc,nocc,nav,nfv,ipol,nroots,oskel,tol2e,g_mo,
      +  g_p,g_wp,g_xpy,g_xmy,g_g,kfac,lhashf,otriplet,
      +  nuc_num,nuc_cent,ihdl_bfn,nao_n,naoc_n,nav_n,g_mo_n,g_z_n)
+
+      use, intrinsic :: ieee_arithmetic
       implicit none 
 #include "errquit.fh"
 #include "mafdecls.fh"
@@ -173,6 +175,7 @@ c     Functions:
          if (.not. nga_create
      +            (mt_dbl,3,idim,pname//'g_z_mo',ichnk,g_z_mo(i)))
      +            call errquit(pname//'allocate g_z_mo',0,GA_ERR)
+         call ga_zero(g_z_mo(i))
          do ir=1,nroots
             alo(1)=ir
             ahi(1)=ir
@@ -413,7 +416,6 @@ c
 c     4. Calculate nuclear hcore grad \sum hcore (Dn+Zn)
 c
          do i=1,nuc_num
-            call ga_zero(g_tmp_n(i))
             call ga_add(1.0d0, g_z_n_ao(i),1.0d0,g_dao_n(i),g_tmp_n(i))
             call cneo_schwarz_set(ihdl_bfn(i))
             call grad1n(i,nuc_num,nuc_cent,dbl_mb(k_buf), lbuf, 
@@ -432,7 +434,7 @@ c
             if (ipol.eq.2) call ga_add(1d0,g_tmp,1d0,g_dao(2),g_tmp)
             call ga_reorder(g_tmp, .true., int_mb(k_rbfmap),
      $        .true., int_mb(k_rbfmap))
-            call ga_zero(g_tmp_n(i))
+            !call ga_zero(g_tmp_n(i))
             call ga_copy(g_dao_n(i),g_tmp_n(i))
             call ga_reorder(g_tmp_n(i), .true., int_mb(k_rbfmap_n(i)),
      $        .true., int_mb(k_rbfmap_n(i)))
@@ -458,13 +460,13 @@ c
 c
 c     5.2 \sum Zn grad(n|e) De
 c
-            call ga_zero(g_tmp)
+            !call ga_zero(g_tmp)
             call ga_copy(g_dao(1),g_tmp)
             if (ipol.eq.2) call ga_add(1.0d0,g_dao(2),
      +                                 1.0d0,g_tmp,g_tmp)
             call ga_reorder(g_tmp, .true., int_mb(k_rbfmap),
      $        .true., int_mb(k_rbfmap))
-            call ga_zero(g_tmp_n(i))
+            !call ga_zero(g_tmp_n(i))
             call ga_copy(g_z_n_ao(i),g_tmp_n(i))
             call ga_reorder(g_tmp_n(i), .true., int_mb(k_rbfmap_n(i)),
      $        .true., int_mb(k_rbfmap_n(i)))
@@ -496,18 +498,17 @@ c           \sum (Zn1+Dn1) grad(n1|n2) Dn2   n1 < n2
 c           \sum Zn1 grad(n1|n2) Dn2         n1 > n2
 c
          do i=1,nuc_num
+            call ga_copy(g_z_n_ao(i),g_tmp_n(i))            
+            call ga_reorder(g_tmp_n(i),.true.,int_mb(k_rbfmap_n(i)),
+     $        .true., int_mb(k_rbfmap_n(i)))
             do j=1,nuc_num
-               call ga_zero(g_tmp_n(i))
-               call ga_copy(g_z_n_ao(i),g_tmp_n(i))
-               if (j.gt.i) then
+               if(j.eq.i) then
                   call ga_add(1.0d0,g_z_n_ao(i),
      +                        1.0d0,g_dao_n(i),g_tmp_n(i))
-               else if (j.eq.i) then
-                  goto 100
+                call ga_reorder(g_tmp_n(i),.true.,int_mb(k_rbfmap_n(i)),
+     $                            .true., int_mb(k_rbfmap_n(i)))
+                  cycle
                endif
-               call ga_reorder(g_tmp_n(i),.true.,int_mb(k_rbfmap_n(i)),
-     $        .true., int_mb(k_rbfmap_n(i)))
-               call ga_zero(g_tmp_n(j))
                call ga_copy(g_dao_n(j),g_tmp_n(j))
                call ga_reorder(g_tmp_n(j),.true.,int_mb(k_rbfmap_n(j)),
      $        .true., int_mb(k_rbfmap_n(j)))
@@ -539,10 +540,8 @@ c
             enddo ! end j: nuc_num
          enddo ! end i: nuc_num
 
-         call ga_sync()
          call ga_dgop(msg_grad_nuc, dbl_mb(k_frc_en), 3*nat, '+')
          call ga_dgop(msg_grad_nuc, dbl_mb(k_frc_nn), 3*nat, '+')
-         call ga_sync()
 
          if (ga_nodeid() .eq. 0) then
          status = rtdb_parallel(.false.)
@@ -574,8 +573,8 @@ c
          ahi(1)=ir
          alo(2)=1
          ahi(2)=3
-         alo(2)=1
-         ahi(2)=nat
+         alo(3)=1
+         ahi(3)=nat
          ldim(1)=1
          ldim(2)=3
          call nga_put(g_g,alo,ahi,dbl_mb(k_force),ldim)
