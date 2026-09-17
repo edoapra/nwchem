@@ -50,7 +50,7 @@
       iwhich =0
       if (.not. ga_create(mt_dbl,ctdg_e_size,ctdg_nroots,
      $         pname//'g_x_e',32,32,g_x_e)) call errquit
-     $         (pname//'ga_create?',0,0)
+     $     (pname//'ga_create?',0,0)
       if (.not. ga_duplicate(g_x_e,g_Ax_e,pname//'g_Ax_e'))
      $      call errquit(pname//'create g_Ax_e',0,0)
       do i=1,nuc_num
@@ -58,7 +58,7 @@
      $         pname//'g_x_n',32,32,g_x_n(i))) call errquit
      $         (pname//'ga_create?',0,0)
          if (.not. ga_duplicate(g_x_n(i),g_Ax_n(i),pname//'g_Ax_n'))
-     $      call errquit(pname//'create g_Ax_n',0,0)
+     $        call errquit(pname//'create g_Ax_n',0,0)
 
          if (.not. ga_create(mt_dbl,3,ctdg_nroots,
      $         pname//'g_tdg',32,32,g_tdg(i))) call errquit
@@ -66,7 +66,14 @@
          if (.not. ga_duplicate(g_tdg(i),g_Ax_g(i),pname//'g_Ax_g'))
      $      call errquit(pname//'create g_Ax_g',0,0)
       enddo
-
+      call ga_zero(g_x_e)
+      call ga_zero(g_Ax_e)
+      do i=1,nuc_num
+         call ga_zero(g_tdg(i))
+         call ga_zero(g_Ax_g(i))
+         call ga_zero(g_x_n(i))
+         call ga_zero(g_Ax_n(i))
+      enddo
       call cneo_disassamble(ctdg_nroots,nuc_num,g_x,ctdg_e_size,
      $         ctdg_n_size,g_x_e,g_x_n,g_tdg)
 
@@ -80,8 +87,8 @@ c     2. 2D g_Ax_e -> g_Ax_3d_mo
 c
       call tddft_grad_create_r(ctdg_ipol,ctdg_naoc,ctdg_nav,ctdg_nroots,
      +     g_Ax_3d_mo)
-      call ga_zero(g_Ax_3d_mo)
       do ip = 1, ctdg_ipol
+         call ga_zero(g_Ax_3d_mo(ip))
         do ir = 1, ctdg_nroots
           alo(1) = ir
           ahi(1) = ir
@@ -101,6 +108,7 @@ c
       call tddft_grad_create_r(ctdg_ipol,ctdg_naoc,ctdg_nav,ctdg_nroots,
      +                         g_x_3d_mo)
       do ip = 1, ctdg_ipol
+         call ga_zero(g_x_3d_mo(ip))
         do ir = 1, ctdg_nroots
           alo(1) = ir
           ahi(1) = ir
@@ -416,8 +424,7 @@ c
       ichnk(3)= -1
       if (.not. nga_create(mt_dbl,3,idim,'vectors full mo',ichnk,
      +   g_moin_tmp))
-     +   call errquit(pname//'failed to create g_tuv',0,GA_ERR)
-
+     +     call errquit(pname//'failed to create g_tuv',0,GA_ERR)
       call ga_zero(g_moin_tmp)
       alo(1) = 1
       ahi(1) = nroot
