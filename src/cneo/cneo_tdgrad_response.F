@@ -54,6 +54,7 @@ c     To create R_n=Q^n_{ia}
 
       do i=1,nuc_num
          call tddft_grad_create_r(1,naoc(i),nav(i),nroot,g_r(i))
+         call ga_zero(g_r(i))
       enddo
 
       end
@@ -122,15 +123,13 @@ c     Local variables
       ig=1
       g_list(ig) = g_tuv
       call ga_zero(g_tuv)
-
       do ib=1,nblocksin
          call tddft_grad_trans_mo2ao(1,nao2,nfc2,naoc2,nocc2,nav2,
      +     nfv2,nroot,1.0d0,1.0d0,blocksin(ib),g_mo2,g_moin,"pq",g_tuv)
       enddo
-      
       if (.not.ga_create(mt_dbl,nao2,nao2,'vectors Tuv_2D',32, 32,
      +   g_tuv2))
-     +   call errquit(pname//'failed to create g_tuv',0,GA_ERR)
+     +   call errquit(pname//'failed to create g_tuv2d',0,GA_ERR)
       ig=ig+1
       g_list(ig) = g_tuv2
 
