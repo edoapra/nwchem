@@ -23,7 +23,8 @@
 
       LIBRARY =	libcneo.a
 
-    USES_BLAS = get_j_dm.F   cneo_fock_file.F   cneo_tdgrad_compute_w.F   cneo_tdgrad_compute_g.F   cneo_grad.F
+    USES_BLAS = get_j_dm.F   cneo_fock_file.F   cneo_tdgrad_compute_w.F   cneo_tdgrad_compute_g.F   cneo_grad.F \
+                cneo_constrain.F util_newton_solve.F 
 
 LIB_DEFINES = 
 
