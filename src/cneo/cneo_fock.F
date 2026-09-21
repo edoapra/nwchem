@@ -23,8 +23,7 @@
       scale = geom_mass(iatom,geom)*mass_au/masselec
       call ga_zero(g_nhcore)
       call int_1e_ga(bas_nuc, bas_nuc, g_nhcore, 'kinetic',.false.)
-      ! The kinetic energy component does not change sign between electrons and nuclei
-      call ga_dscal(g_nhcore,1.0d0/scale)
+      call ga_dscal(g_nhcore, -1.0d0/scale)
       call int_1e_ga(bas_nuc, bas_nuc,g_nhcore, 'potential',.false.)
       call ga_dscal(g_nhcore, -1.0d0)
 

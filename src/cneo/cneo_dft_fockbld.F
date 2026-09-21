@@ -283,7 +283,9 @@ c
 c       call ga_sync()   
       else
 
-        Ecore = ga_ddot(g_dens(1), g_focks(1))
+c     Removing electron-nuclear interaction as it will be accounted for
+c     separately
+        Ecore = ga_ddot(g_dens(1), g_focks(1)) - e_en
 c        write(6,*)'Ecore(1:T):',ga_ddot(g_dens(1), g_focks(1)) 
  
       endif
@@ -462,7 +464,8 @@ c
             endif
          enddo
          call ga_dadd(1d0, g_core_n(i), 1d0, g_nfock(i), g_nfock(i))
-         ecore_n = ecore_n+ga_ddot(g_nfock(i), g_ndens(i))
+c         ecore_n = ecore_n+ga_ddot(g_nfock(i), g_ndens(i))
+         ecore_n = ecore_n + ga_ddot(g_core_n(i), g_ndens(i))
          call ga_copy(g_nfock(i),g_fock0(i))
          call cneo_solve_constrain(i)
          call ga_dadd(1d0,g_fock0(i),1d0,g_fock_add(i),g_nfock(i))

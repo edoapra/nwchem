@@ -1028,18 +1028,18 @@ c
       if (nExc.eq.1)then
 c  jbecca START: adding in eelec here
          Etnew = Ecore + Ecoul + Exc(1) + Edisp + eelec
-     $                      + ecore_n - e_en - 0.5*e_nn
+     $                      + ecore_n + e_en + 0.5*e_nn
       else
 c  jbecca START adding in eelec here
          Etnew = Ecore + Ecoul + Exc(1) + Exc(2) + Edisp + eelec
-     $                      + ecore_n - e_en- 0.5*e_nn
+     $                      + ecore_n + e_en + 0.5*e_nn
       endif
 c
       if (oprint_conv_details.and.me.eq.0)then
          write(LuOut,*)'Etnew, Ecore, Ecoul, Exc(1), Exc(2), Totsic: ',
      &                  Etnew, Ecore, Ecoul, Exc(1), Exc(2), Totsic
          write(LuOut,*)'   Ecore_n, Enn, Een: ',
-     &                     ecore_n, e_nn, e_en
+     &                     ecore_n, 0.5*e_nn, e_en
       endif
 c
 c
@@ -1382,10 +1382,10 @@ c
       if (nExc.eq.1)then
 c  jbecca START: adding in eelec here for field int. 
         Etnew = Ecore + Ecoul + Exc(1) + tdots + Edisp + eelec
-     $                   + ecore_n - e_en - 0.5*e_nn
+     $                   + ecore_n + e_en + 0.5*e_nn
       else
         Etnew = Ecore + Ecoul + Exc(1) + Exc(2) + tdots + Edisp + eelec
-     $                   + ecore_n - e_en - 0.5*e_nn
+     $                   + ecore_n + e_en + 0.5*e_nn
       endif
 c
 c
@@ -1422,6 +1422,7 @@ c
      &                      exc(1),
      &                      ecore_n,
      &                      e_en, 
+     &                      0.5d0*e_nn,     
      &                      enuc
          else
           write(LuOut,223)etnew+enuc, 
@@ -1430,7 +1431,8 @@ c
      &                      exc(1), 
      &                      exc(2), 
      &                      ecore_n,
-     &                      e_en, 
+     &                      e_en,
+     &                      0.5d0*e_nn,     
      &                      enuc
          end if
          write(luout,2222) rho_n
@@ -1912,8 +1914,9 @@ c
      &     '         One electron energy =', f22.12/
      &     '              Coulomb energy =', f22.12/
      &     '       Exchange-Corr. energy =', f22.12/
-     &     '          Quantum nuc energy =', f22.12/
+     &     '     Quantum nuc core energy =', f22.12/
      &     'Quantum nuc-elec rep. energy =', f22.12/
+     &     ' Quantum nuc-nuc rep. energy =', f22.12/
      &     '    Nuclear repulsion energy =', f22.12/)
 c
  223  format(//
@@ -1922,8 +1925,9 @@ c
      &     '              Coulomb energy =', f22.12/
      &     '             Exchange energy =', f22.12/
      &     '          Correlation energy =', f22.12/
-     &     '          Quantum nuc energy =', f22.12/
+     &     '     Quantum nuc core energy =', f22.12/
      &     'Quantum nuc-elec rep. energy =', f22.12/
+     &     ' Quantum nuc-nuc rep. energy =', f22.12/
      &     '    Nuclear repulsion energy =', f22.12/)
  224  format('    Dispersion correction =', f22.12/)
  225  format('             COSMO energy =', f22.12/)
