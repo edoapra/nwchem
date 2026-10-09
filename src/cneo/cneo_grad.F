@@ -37,7 +37,7 @@
       integer nbf, nbf_n(max_quantum_nuc)
       integer nsh, nsh_n(max_quantum_nuc)
       character*5 str_i
-      integer nopen, nclosed
+      integer nopen, nclosed, noc(2)
       integer iat, lsqa
       character*8 scftype
 
@@ -264,16 +264,29 @@ c
       if (.not. rtdb_cget(rtdb, 'dft:input vectors', 1, movecs_in))
      $        call errquit('gradients: DFT MO vectors not defined',0,
      &       RTDB_ERR)
-      if (.not. rtdb_get(rtdb, 'scf:nopen', mt_int, 1, nopen))
-     $        nopen = 0
-      if (.not. rtdb_get(rtdb, 'scf:nclosed', mt_int, 1, nclosed))
-     $        call errquit('gradients: get of nclosed? ', 0, RTDB_ERR)
       if (.not. rtdb_cget(rtdb, 'dft:scftype', 1, scftype))
      &        call errquit('gradients: scftype not defined',0,
      &       RTDB_ERR)
+      if (.not. rtdb_get(rtdb, 'dft:noc', mt_int, 2, noc))
+     &        call errquit('gradients: rtdb_get of noc failed', 0,
+     &       RTDB_ERR)
+      if (scftype.eq.'RHF') then
+         nclosed = noc(1)
+         nopen   = 0
+      elseif (scftype.eq.'ROHF') then
+         nclosed = min(noc(1),noc(2))
+         nopen   = abs(noc(1) - noc(2))
+      elseif (scftype.eq.'UHF') then
+         nclosed = min(noc(1),noc(2))
+         nopen   = abs(noc(1) - noc(2))
+      else
+         call errquit("grad_force: invalid scftype",0,UERR)
+      endif
+
 
       g_dens = ga_create_atom_blocked(geom_cneo, basis, 
      $        'density matrix')
+
       call cneo_dens_from_file(movecs_in,geom_cneo,basis,
      $                    g_dens,nbf,nclosed,nopen,scftype)
 
