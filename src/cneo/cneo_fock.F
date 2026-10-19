@@ -1,4 +1,4 @@
-      subroutine hcore_nuc(geom, bas_nuc, g_nhcore,iatom)
+      subroutine cneo_hcore_nuc(geom, bas_nuc, g_nhcore,iatom)
       implicit none
 #include "errquit.fh"
 #include "nwc_const.fh"
@@ -19,7 +19,8 @@
       external ga_create_atom_blocked
       mass_au = 1.0d-3/avogadro
 
-      g_nhcore = ga_create_atom_blocked(geom,bas_nuc,'cneo:n:hcore')
+c     g_nhcore = ga_create_atom_blocked(geom,bas_nuc,'cneo:n:hcore')
+      call ga_check_handle(g_nhcore, 'cneo_hcore_nuc: g_hncore')
       scale = geom_mass(iatom,geom)*mass_au/masselec
       call ga_zero(g_nhcore)
       call int_1e_ga(bas_nuc, bas_nuc, g_nhcore, 'kinetic',.false.)
@@ -58,7 +59,7 @@
       call ga_zero(g_nfock)
       call get_j_dm(geom_cneo, bas_n(i), bas_e, -1.0d0, tol2e_cneo,
      $       .false., g_edens, g_nfock, 'neints', i,0,.false.)
-      call hcore_nuc(geom_cneo, bas_n(i), g_core_n(i), iatom)
+      call cneo_hcore_nuc(geom_cneo, bas_n(i), g_core_n(i), iatom)
       call ga_dadd(1.0d0, g_core_n(i), 1.0d0, g_nfock, g_nfock)
       if (util_print('cneo_vec_nuc', print_debug)) 
      $         call ga_print(g_nfock)
