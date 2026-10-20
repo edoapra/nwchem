@@ -78,6 +78,8 @@
       character*16 tag
       double precision crd(3), q
       double precision tmp_charge
+      double precision tol2e_cneo,cneo_grad_tol2e
+      external cneo_grad_tol2e
 
       character*32 pname
       character*256 title
@@ -293,6 +295,7 @@ c
       if (.not. ma_push_get(mt_dbl, blen**2*blen_n**2, 'pdm2d',
      $     l_pdm12, k_pdm12)) call errquit
      $     ('gradient:failed allocating pdm2d',blen**4, MA_ERR)
+      call dfill(blen**2*blen_n**2, 0.0D0, dbl_mb(k_pdm12), 1)
 
       nproc = ga_nnodes()
       call dfill(lforce, 0.0D0, dbl_mb(k_frc_nuc), 1)
@@ -415,6 +418,7 @@ c
      $     call errquit('grad:could not allocate list',4*maxq, MA_ERR)
       if (.not. ma_push_get(mt_dbl, maxq, 'q4', l_q4, k_q4))
      $     call errquit('grad:could not allocate q4',maxq, MA_ERR)
+      tol2e_cneo=cneo_grad_tol2e()
 c
 c     Elec - nuc interaction gradients
 c
@@ -424,7 +428,7 @@ c
      $      blen_n, g_dens, g_ndens(i), geom_cneo, basis, bases_nuc(i),
      $      nproc, nat, lscratch, dbl_mb(k_scr), lbuf/12,dbl_mb(k_buf),
      $      int_mb(k_labels), maxq, int_mb(k_list), dbl_mb(k_q4),
-     $      1.0d-9, nsh, nsh_n(i), nopen, nbf, nbf_n(i),
+     $      tol2e_cneo, nsh, nsh_n(i), nopen, nbf, nbf_n(i),
      $      -1.0d0, nshblocks,
      $      int_mb(k_shmap), int_mb(k_shglo), int_mb(k_shghi), 
      $      int_mb(k_bfglo), int_mb(k_bfghi), 
@@ -1298,4 +1302,9 @@ c
       cneo_get_geomorig=geom_orig
       return
       end
- 
+      double precision function cneo_grad_tol2e()
+      implicit none
+#include "cdft.fh"
+      cneo_grad_tol2e=10.0d0**(-itol2e)
+      return
+      end
