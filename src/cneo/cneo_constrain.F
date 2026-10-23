@@ -29,9 +29,10 @@
       call pos_ana_set(idx, bas_n(idx))
 
       ! Allocate memory
-      if(.not.ma_push_get(mt_dbl, 8*nbf_solve**2, 'cneo_solve: work',
-     $                    l_work, k_work))
-     $   call errquit("allocation failed", 0, MA_ERR)
+      if(ga_nodeid().eq.0) then
+      status=ma_push_get(mt_dbl, 8*nbf_solve**2, 'cneo_solve: work',
+     $        l_work, k_work)
+      if(status) then
       k_r1       = k_work
       k_r2       = k_r1 + nbf_solve**2
       k_r3       = k_r2 + nbf_solve**2
@@ -64,9 +65,14 @@
       call ga_put(g_fock_add(idx),1,nbf_solve,1,nbf_solve,
      $            dbl_mb(k_fock), nbf_solve)
 
-      if(.not.ma_chop_stack(l_work))
-     $  call errquit('cneo_solve: deallocation failed', 0, MA_ERR)
-
+      status=ma_chop_stack(l_work)
+      endif
+      endif
+      call ga_brdcst(123, status, ma_sizeof(mt_log,1,mt_byte),0)
+      if(.not.status)
+     $  call errquit('cneo_solve_c: newton solv failed', 0, MA_ERR)
+      call ga_sync()
+      call ga_brdcst(373,converged_solve,ma_sizeof(mt_log,1,mt_byte),0)
       end
       
       
