@@ -305,6 +305,8 @@ c
       integer nxtask
       external nxtask
 
+      odonea = .false.
+
       next = 1
       incomplete_top = 0
 
