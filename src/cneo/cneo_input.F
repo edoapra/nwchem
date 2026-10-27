@@ -7,17 +7,17 @@
 #include "case.fh"
 #include "nwc_const.fh"
 #include "stdio.fh"
+#include "ccneo.fh"
       integer rtdb
       logical s
       character*256 test
       double precision tmp_idx
       integer quantum_nuc_idx(nw_max_atom) ! indices for quantum nuclei
-      character*2 quantum_nuc_smb
       logical oidx
       logical osmb
       character*256 tmp,tmp1
       integer k
-      integer i,nuc_num
+      integer i
       character*256 nuc_bas_name
       character*255 cdft_bas_input
 

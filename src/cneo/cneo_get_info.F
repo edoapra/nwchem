@@ -6,6 +6,7 @@
 #include "geom.fh"
 #include "rtdb.fh"
 #include "case.fh"
+#include "global.fh"
 #include "mafdecls.fh"
 #include "inp.fh"
 #include "ccneo.fh"
@@ -15,7 +16,6 @@
       integer geom  ![input]
       character*255 tmp
       character tmp_smb
-      character quantum_nuc_smb
       integer nat
       logical status
       integer i,ii,k
@@ -55,8 +55,10 @@
      +         errquit('cneo_nuc_init:save idx?',0,RTDB_ERR)
           go to 120
         else
-          write(6,*) 'Warning: no quantum idx/symbol defined'
-          write(6,*) 'Hydrogen atoms are set by default'
+          if(ga_nodeid().eq.0) then
+             write(6,*) 'Warning: no quantum idx/symbol defined'
+             write(6,*) 'Hydrogen atoms are set by default'
+          endif
           quantum_nuc_smb = 'H'
           go to 110
         end if
