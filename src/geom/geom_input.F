@@ -458,7 +458,8 @@ c
 c     
             is_atom = geom_tag_to_element(tags(ncenter+1), symbol,
      $           element, atn)
-            if ((.not. is_atom) .and. symbol.ne.'bq') 
+            if ((.not. is_atom) .and. symbol.ne.'bq'.and.
+     A           symbol.ne.'nuc') 
      $           call errquit
      &           ('geom_input:center is neither atom nor bq',0,
      &       INPUT_ERR)
@@ -3222,7 +3223,7 @@ C
       DIMENSION VARCHR(MAXWRD,MAXVAR)
       character*8 zvarname(*) ! Name of Z matrix variables
       double precision zvarsign(*) ! Attached signs
-      DIMENSION ATLBL1(105),ATLBL2(105),ATLBL3(105),ATLBL4(105)
+      DIMENSION ATLBL1(106),ATLBL2(106),ATLBL3(106),ATLBL4(106)
       DIMENSION BLK(80)
       DIMENSION GH(4)
       DIMENSION ERRMSG(3)
@@ -3274,7 +3275,7 @@ C
      7             'LU','HF','TA','W ','RE','OS','IR','PT','AU','HG',
      8             'TL','PB','BI','PO','AT','RN','FR','RA','AC','TH',
      9             'PA','U ','NP','PU','AM','CM','BK','CF','ES','FM',
-     1             'MD','NO','LR','X ','BQ'/
+     1             'MD','NO','LR','X ','BQ','NUC'/
       DATA ATLBL2 /'h ','he','li','be','b ','c ','n ','o ','f ','ne',
      1             'na','mg','al','si','p ','s ','cl','ar','k ','ca',
      2             'sc','ti','v ','cr','mn','fe','co','ni','cu','zn',
@@ -3285,7 +3286,7 @@ C
      7             'lu','hf','ta','w ','re','os','ir','pt','au','hg',
      8             'tl','pb','bi','po','at','rn','fr','ra','ac','th',
      9             'pa','u ','np','pu','am','cm','bk','cf','es','fm',
-     1             'md','no','lr','x ','bq'/
+     1             'md','no','lr','x ','bq','nuc'/
       DATA ATLBL3 /'H ','He','Li','Be','B ','C ','N ','O ','F ','Ne',
      1             'Na','Mg','Al','Si','P ','S ','Cl','Ar','K ','Ca',
      2             'Sc','Ti','V ','Cr','Mn','Fe','Co','Ni','Cu','Zn',
@@ -3296,7 +3297,7 @@ C
      7             'Lu','Hf','Ta','W ','Re','Os','Ir','Pt','Au','Hg',
      8             'Tl','Pb','Bi','Po','At','Rn','Fr','Ra','Ac','Th',
      9             'Pa','U ','Np','Pu','Am','Cm','Bk','Cf','Es','Fm',
-     1             'Md','No','Lr','X ','Bq'/
+     1             'Md','No','Lr','X ','Bq','Nuc'/
       DATA ATLBL4 /'h ','hE','lI','bE','b ','c ','n ','o ','f ','nE',
      1             'nA','mG','aL','sI','p ','s ','cL','aR','k ','cA',
      2             'sC','tI','v ','cR','mN','fE','cO','nI','cU','zN',
@@ -3307,7 +3308,7 @@ C
      7             'lU','hF','tA','w ','rE','oS','iR','pT','aU','hG',
      8             'tL','pB','bI','pO','aT','rN','fR','rA','aC','tH',
      9             'pA','u ','nP','pU','aM','cM','bK','cF','eS','fM',
-     1             'mD','nO','lR','x ','bQ'/
+     1             'mD','nO','lR','x ','bQ','nuC'/
 C
       DATA BIOSYM /'!BIOSYM archive 3'/
       DATA BIOEND /'end  '/

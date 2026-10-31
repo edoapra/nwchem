@@ -3292,6 +3292,8 @@ c
             ttag = tag(2:)
          else if (inp_compare(.false., tag(1:2), 'bq')) then
             ttag = tag(3:)
+         else if (inp_compare(.false., tag(1:2), 'nuc')) then
+            ttag = tag(4:)
          else
             return              ! Nothing recognizable
          endif
@@ -3344,14 +3346,18 @@ c
       character*(*) symbol      !< [Output] the chemical symbol, e.g. He
       character*(*) element     !< [Output] the element, e.g. Helium
       integer atn               !< [Output] the nuclear charge, e.g. 2
+      logical cneo_ctr
+      logical geom_tag_to_element_0
+      external geom_tag_to_element_0
 c
 c     attempt to figure out which element a tag refers to
 c     and return the symbol, name and atomic no.
 c
       integer lbuf, ind
-      character*16 buf
+      character*16 buf,tag0
 
       geom_tag_to_element = .false.
+      cneo_ctr=.false.
 c
 c     eliminate conventions that refer to centers used for
 c     computation purposes .. just bq and x for now
@@ -3361,6 +3367,66 @@ c
       if (lbuf .eq. 0) return
 c
       call inp_lcase(buf)
+c
+c     strip nuc from tag
+c
+      if(buf(1:3) . eq. 'nuc') then
+         cneo_ctr=.true.
+         tag0=buf(4:inp_strlen(buf))
+      else
+         tag0=tag
+      endif
+      if(.not.geom_tag_to_element_0(tag0, symbol, element, atn)) then
+         geom_tag_to_element=.false.
+         return
+      endif
+      if(cneo_ctr) then
+         write(6,*)' nuc symbol ',symbol(1:inp_strlen(symbol))
+#if 0         
+         if(.not.rtdb_cput(rtdb,'cneo:quantum_nuc:symbol',1,
+     S        symbol(1:inp_strlen(symbol)))) call errquit
+     C        (' failed to store cneo symbol',0,0)
+#endif         
+      endif
+      geom_tag_to_element=.true.
+      return
+      end
+      logical function geom_tag_to_element_0(tag, symbol, element, atn)
+      implicit none
+#include "inp.fh"
+#include "nwc_const.fh"
+#include "geomP.fh"
+#include "periodic.fh"
+      character*16 tag          !< [Input] the tag, e.g. He232
+      character*(*) symbol      !< [Output] the chemical symbol, e.g. He
+      character*(*) element     !< [Output] the element, e.g. Helium
+      integer atn               !< [Output] the nuclear charge, e.g. 2
+      logical cneo_ctr
+c
+c     attempt to figure out which element a tag refers to
+c     and return the symbol, name and atomic no.
+c
+      integer lbuf, ind
+      character*16 buf
+
+      geom_tag_to_element_0 = .false.
+      cneo_ctr=.false.
+c
+c     eliminate conventions that refer to centers used for
+c     computation purposes .. just bq and x for now
+c
+      buf = tag
+      lbuf = inp_strlen(buf)
+      if (lbuf .eq. 0) return
+c
+      call inp_lcase(buf)
+c
+c     strip nuc from tag
+c
+      if(buf(1:3) . eq. 'nuc') then
+         cneo_ctr=.true.
+c     figure out quantum_nuc_smb in the next bits
+      endif
       if (buf(1:2) .eq. 'bq' .or. 
      $     ((buf(1:1).eq.'x') .and. (buf(2:2).ne.'e'))) then ! X but not Xe
          element = 'point charge' ! Note that false is returned
@@ -3379,7 +3445,7 @@ c
             symbol  = symbols(ind)
             element = elements(ind)
             atn     = ind
-            geom_tag_to_element = .true.
+            geom_tag_to_element_0 = .true.
             return
           endif
         enddo
@@ -3395,7 +3461,7 @@ c
             symbol  = symbols(ind)
             element = elements(ind)
             atn     = ind
-            geom_tag_to_element = .true.
+            geom_tag_to_element_0 = .true.
             return
          end if
       end if
@@ -3408,7 +3474,7 @@ c
             symbol  = symbols(ind)
             element = elements(ind)
             atn     = ind
-            geom_tag_to_element = .true.
+            geom_tag_to_element_0 = .true.
             return
          end if
       end if
@@ -3420,7 +3486,7 @@ c
          symbol  = symbols(ind)
          element = elements(ind)
          atn     = ind
-         geom_tag_to_element = .true.
+         geom_tag_to_element_0 = .true.
          return
       end if
 c
@@ -3432,7 +3498,7 @@ c     e.g.: recognize 'jnk' as 'nitrogen'
          symbol  = symbols(ind)
          element = elements(ind)
          atn     = ind
-         geom_tag_to_element = .true.
+         geom_tag_to_element_0 = .true.
          return
       end if
 #endif

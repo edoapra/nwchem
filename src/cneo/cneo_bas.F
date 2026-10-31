@@ -538,7 +538,7 @@ c::functions
 
       integer nuc_num
       character*256 tmp
-      integer quantum_nuc(2)
+      integer quantum_nuc(2),iptr
 c
 #include "bas_ibs_sfn.fh"
 c
@@ -644,7 +644,6 @@ c
 *before match_tags:          endif
 *before match_tags:00101   continue
           if (i .eq. iatom) then
-
             if (bas_match_tags(tags(i,geom),basisin,j)) then
                 int_mb(mb_ibs_ce2uce(i,basis)) = j
                 foundit = .true.
@@ -652,11 +651,18 @@ c
                 goto 00102
             endif
             if (.not. foundit .and. .not. (ecpORso .or. relbas)) then
-                if (geom_tag_to_element(tags(i,geom), symbol, element,
-     $            atn)) then
+c               
+c     strip 'nuc' string if present
+c
+               iptr=1
+!     call inp_lcase(tags)
+               if(tags(i,geom)(1:3).eq.'nuc') iptr=4
+               write(6,*) '@ tags ',tags(i,geom)(iptr:),symbol
+               if (geom_tag_to_element(tags(i,geom)(iptr:),
+     $          symbol, element, atn)) then
                   if (ga_nodeid().eq.0)
      &              write(LuOut,10) 
-     &              tags(i,geom)(1:inp_strlen(tags(i,geom))),
+     &              tags(i,geom)(iptr:inp_strlen(tags(i,geom))),
      &              element(1:inp_strlen(element)),
      &              bs_name(basis)(1:len_bs_name(basis))
  10              format(/' ERROR: geometry tag ',a,' (',a,
@@ -668,7 +674,7 @@ c
      &              ('bas_geobas_build: basis/geometry mismatch', 0,
      &           BASIS_ERR)
                 else
-                  tag12 = tags(i,geom)(1:2)
+                  tag12 = tags(i,geom)(iptr:iptr+1)
                   is_bq = inp_compare(.false.,'bq',tag12) .or.
      $               (inp_compare(.false.,'X',tags(i,geom)(1:1)) .and. 
      $               (.not. inp_compare(.false.,'e',tags(i,geom)(2:2))))

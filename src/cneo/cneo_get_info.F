@@ -21,20 +21,26 @@
       integer i,ii,k
 
       status = geom_ncent(geom,nat)
+      write(6,*) ga_nodeid(),' @ beg of cneo_nuc_init'
+      call cneo_readg(geom,rtdb)
       tmp = 'cneo:quantum_nuc:'
       k = inp_strlen(tmp)+1
-
+      
       tmp(k:) = ' '
       tmp(k:) = 'nuc_num'
+      write(6,*) '@tmp1 ',tmp
       if (rtdb_get(rtdb,tmp,mt_int,1,nuc_num)) then
+         write(6,*) '@ nuc_num detected'
         tmp(k:) = ' '
         tmp(k:) = 'idx'
+        write(6,*) '@tmp2 ',tmp
         if(.not.rtdb_get(rtdb,tmp,mt_int,nuc_num,nuc_cent)) call 
      +      errquit('cneo_nuc_init:can not load nuc_cent',0,RTDB_ERR)
       else
         tmp(k:) = ' '
         tmp(k:) = 'symbol'
         if (rtdb_cget(rtdb,tmp,1,quantum_nuc_smb)) then
+         write(6,*) '@ symbol detected=',quantum_nuc_smb
  110      ii = 0
           nuc_cent = 0
           do 100 i=1,nat
@@ -314,3 +320,64 @@ c  update mass and charge
       enddo
 
       end
+      subroutine cneo_readg(geom,rtdb)
+      implicit none
+      integer geom,rtdb
+#include "geom.fh" 
+#include "rtdb.fh" 
+#include "inp.fh" 
+#include "mafdecls.fh"
+#include "errquit.fh"
+#include "nwc_const.fh"
+#include "ccneo.fh" 
+c     loop over atoms and detect 'nuc' label
+      integer i,ncenters
+      character*16 tag,tag0
+      integer atn
+      character*4 symbol
+      character*32 element
+      double precision coord(3), chg
+      integer l_nuc_cent(max_quantum_nuc)
+      character*10 pname
+      integer l_nuc_num
+      pname='cneo_readg'
+c
+      if(.not.geom_ncent(geom,ncenters)) call
+     c     errquit(pname//': geom_ncent failed ',0,GEOM_ERR)
+      l_nuc_num=0
+      do i=1,ncenters
+         if (.not. geom_cent_get(geom, i, tag, 
+     &        coord, chg))call errquit
+     &        (pname//': geom_cent_get failed', 0, GEOM_ERR)
+         if(tag(1:3) . eq. 'nuc') then
+            tag0=tag(4:inp_strlen(tag))
+            if(.not.geom_tag_to_element(tag0, symbol, element, atn))
+     c           call errquit(pname//
+     p           ': geom_tag_to_element failed',0,GEOM_ERR)
+#if 0            
+       write(6,*)' @ storing rtdb_get', 'cneo:quantum_nuc:symbol',
+     W       symbol(1:inp_strlen(symbol))
+            if(.not.rtdb_cput(rtdb,'cneo:quantum_nuc:symbol',1,
+     S           symbol(1:inp_strlen(symbol)))) call errquit
+     C      (' failed to store cneo symbol',0,RTDB_ERR)
+#endif            
+            l_nuc_num=l_nuc_num+1
+            l_nuc_cent(l_nuc_num)=i
+         endif
+      enddo
+      write(6,*) ' @ l_nuc_num ',l_nuc_num,l_nuc_cent(1),
+     ,     l_nuc_cent(2)
+      if(l_nuc_num.gt.0) then
+         if (.not.rtdb_put(rtdb,'cneo:quantum_nuc:nuc_num',
+     R        mt_int,1,l_nuc_num)) 
+     c        call errquit(pname//
+     p           ': rtdb_put failed',0,GEOM_ERR)
+         if (.not.rtdb_put(rtdb,'cneo:quantum_nuc:idx',
+     R        mt_int,l_nuc_num,l_nuc_cent)) 
+     c        call errquit(pname//
+     p           ': rtdb_put failed',0,GEOM_ERR)
+        
+            endif
+      return
+      end
+
